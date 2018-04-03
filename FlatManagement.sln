@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatManagement.Bll", "FlatM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatManagement.Dto", "FlatManagement.Dto\FlatManagement.Dto.csproj", "{AEAD599D-965B-416D-A037-6B3E1E6C3E9B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04_Test", "04_Test", "{44259E5A-DDEE-44C6-97F0-8D02072324FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatManagement.Dal.Test", "FlatManagement.Dal.Test\FlatManagement.Dal.Test.csproj", "{7AE812E9-6AE7-49F4-918F-7F6160B3204E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +71,10 @@ Global
 		{AEAD599D-965B-416D-A037-6B3E1E6C3E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEAD599D-965B-416D-A037-6B3E1E6C3E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEAD599D-965B-416D-A037-6B3E1E6C3E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AE812E9-6AE7-49F4-918F-7F6160B3204E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AE812E9-6AE7-49F4-918F-7F6160B3204E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AE812E9-6AE7-49F4-918F-7F6160B3204E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AE812E9-6AE7-49F4-918F-7F6160B3204E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +88,7 @@ Global
 		{4442A64C-4DA9-4C8F-B1BE-EAEFA046FFA7} = {DEA3E171-1B43-4A31-8ECE-C4155514D8F6}
 		{D3CCD9B4-94FE-4A3B-B1DD-AB8A1ED9FA04} = {DEA3E171-1B43-4A31-8ECE-C4155514D8F6}
 		{AEAD599D-965B-416D-A037-6B3E1E6C3E9B} = {DEA3E171-1B43-4A31-8ECE-C4155514D8F6}
+		{7AE812E9-6AE7-49F4-918F-7F6160B3204E} = {44259E5A-DDEE-44C6-97F0-8D02072324FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6C69657-FB01-4D5A-8F3E-AFD7CC15C572}
