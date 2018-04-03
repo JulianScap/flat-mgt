@@ -9,7 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlatManagement.WebApi", "Fl
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9BA8395D-51EA-4BD7-B5DB-4C4987B87DC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatManagement.Web", "FlatManagement.Web\FlatManagement.Web.csproj", "{094A1AD5-C7E7-47D7-BEC6-8FB7847DD576}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlatManagement.Web", "FlatManagement.Web\FlatManagement.Web.csproj", "{094A1AD5-C7E7-47D7-BEC6-8FB7847DD576}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatManagement.Common", "FlatManagement.Common\FlatManagement.Common.csproj", "{E87AC780-6BD8-4C5A-B3D0-7261592B29BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05_FrontEnd", "05_FrontEnd", "{7F0C163F-EFF7-4C32-9D8B-E58798851604}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00_DB", "00_DB", "{E700EE9A-6384-4E37-8BF3-6C3FB7495CE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01_BackEnd", "01_BackEnd", "{DEA3E171-1B43-4A31-8ECE-C4155514D8F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatManagement.Dal", "FlatManagement.Dal\FlatManagement.Dal.csproj", "{4442A64C-4DA9-4C8F-B1BE-EAEFA046FFA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,9 +45,24 @@ Global
 		{094A1AD5-C7E7-47D7-BEC6-8FB7847DD576}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{094A1AD5-C7E7-47D7-BEC6-8FB7847DD576}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{094A1AD5-C7E7-47D7-BEC6-8FB7847DD576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E87AC780-6BD8-4C5A-B3D0-7261592B29BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E87AC780-6BD8-4C5A-B3D0-7261592B29BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E87AC780-6BD8-4C5A-B3D0-7261592B29BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E87AC780-6BD8-4C5A-B3D0-7261592B29BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4442A64C-4DA9-4C8F-B1BE-EAEFA046FFA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4442A64C-4DA9-4C8F-B1BE-EAEFA046FFA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4442A64C-4DA9-4C8F-B1BE-EAEFA046FFA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4442A64C-4DA9-4C8F-B1BE-EAEFA046FFA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19D7EC0F-6B90-4702-A07E-009BC915F3BA} = {E700EE9A-6384-4E37-8BF3-6C3FB7495CE0}
+		{6FB77D69-57F4-4F24-99E5-17F7F6388824} = {7F0C163F-EFF7-4C32-9D8B-E58798851604}
+		{094A1AD5-C7E7-47D7-BEC6-8FB7847DD576} = {7F0C163F-EFF7-4C32-9D8B-E58798851604}
+		{E87AC780-6BD8-4C5A-B3D0-7261592B29BE} = {DEA3E171-1B43-4A31-8ECE-C4155514D8F6}
+		{4442A64C-4DA9-4C8F-B1BE-EAEFA046FFA7} = {DEA3E171-1B43-4A31-8ECE-C4155514D8F6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A6C69657-FB01-4D5A-8F3E-AFD7CC15C572}
