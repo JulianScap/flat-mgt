@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FlatManagement.Database", "FlatManagement.Database\FlatManagement.Database.sqlproj", "{19D7EC0F-6B90-4702-A07E-009BC915F3BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatManagement.WebApi", "FlatManagement.WebApi\FlatManagement.WebApi.csproj", "{6FB77D69-57F4-4F24-99E5-17F7F6388824}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9BA8395D-51EA-4BD7-B5DB-4C4987B87DC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +21,14 @@ Global
 		{19D7EC0F-6B90-4702-A07E-009BC915F3BA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{19D7EC0F-6B90-4702-A07E-009BC915F3BA}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{19D7EC0F-6B90-4702-A07E-009BC915F3BA}.Release|Any CPU.Deploy.0 = Debug|Any CPU
+		{6FB77D69-57F4-4F24-99E5-17F7F6388824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FB77D69-57F4-4F24-99E5-17F7F6388824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FB77D69-57F4-4F24-99E5-17F7F6388824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FB77D69-57F4-4F24-99E5-17F7F6388824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BA8395D-51EA-4BD7-B5DB-4C4987B87DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA8395D-51EA-4BD7-B5DB-4C4987B87DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA8395D-51EA-4BD7-B5DB-4C4987B87DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BA8395D-51EA-4BD7-B5DB-4C4987B87DC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

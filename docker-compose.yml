@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  flatmanagement.webapi:
+    image: flatmanagementwebapi
+    build:
+      context: .
+      dockerfile: FlatManagement.WebApi\Dockerfile
