@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: FlatManagement.WebApi\Dockerfile
+
+  flatmanagement.web:
+    image: flatmanagementweb
+    build:
+      context: .
+      dockerfile: FlatManagement.Web\Dockerfile
+
