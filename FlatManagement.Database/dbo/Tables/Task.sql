@@ -1,5 +1,10 @@
 ﻿CREATE TABLE [dbo].[Task] (
-    [TaskId] INT IDENTITY (1, 1) NOT NULL,
-    CONSTRAINT [PK_Task] PRIMARY KEY CLUSTERED ([TaskId] ASC)
+	[TaskId] INT IDENTITY (1, 1) NOT NULL,
+	[Name] NVARCHAR (100) NOT NULL,
+	[Description] NVARCHAR (1000) NOT NULL,
+	[DateStart] DATE NULL,
+	[PeriodTypeId] INT NULL, 
+	CONSTRAINT [PK_Task] PRIMARY KEY CLUSTERED ([TaskId] ASC),
+	CONSTRAINT [FK_Task_PeriodType] FOREIGN KEY ([PeriodTypeId]) REFERENCES ref.PeriodType ([PeriodTypeId])
 );
 

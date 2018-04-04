@@ -110,6 +110,8 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="OtherScripts" />
+    <Folder Include="ref" />
+    <Folder Include="ref\Tables" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Flat.sql">
@@ -132,9 +134,12 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="ref\Tables\PeriodType.sql" />
+    <Build Include="ref\ref.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OtherScripts\InitialDraft.sql" />
+    <None Include="OtherScripts\DropAll.sql" />
     <None Include="SqlSchemaCompare.scmp" />
+    <None Include="OtherScripts\InitData.sql" />
   </ItemGroup>
 </Project>
