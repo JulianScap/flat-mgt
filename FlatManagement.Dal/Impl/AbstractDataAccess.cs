@@ -24,14 +24,14 @@ namespace FlatManagement.Dal.Impl
 
 		public TList GetAll()
 		{
-			object results = GetMany(Operation.GetAll);
-			return new TList();
+			return GetMany(Operation.GetAll);
 		}
 
-		protected virtual TList GetMany(Operation operation)
+		protected virtual TList GetMany(Operation operation, string methodName = null)
 		{
 			TList result = new TList();
-			string procedureName = GetStoredProcedureName(operation);
+
+			string procedureName = GetStoredProcedureName(operation, methodName);
 			using (SqlConnection connection = GetConnection())
 			using (SqlCommand command = GetStoredProcedureCommand(procedureName, connection))
 			{
@@ -82,9 +82,16 @@ namespace FlatManagement.Dal.Impl
 			// TODO si j'ai pas la flemme
 		}
 
-		protected virtual string GetStoredProcedureName(Operation operation)
+		protected virtual string GetStoredProcedureName(Operation operation, string name)
 		{
-			return tListTypeName + "_" + operation.ToString();
+			if (operation == Operation.Custom)
+			{
+				return tListTypeName + "_" + name;
+			}
+			else
+			{
+				return tListTypeName + "_" + operation.ToString();
+			}
 		}
 
 		protected virtual SqlConnection GetConnection()
@@ -96,5 +103,6 @@ namespace FlatManagement.Dal.Impl
 	public enum Operation
 	{
 		GetAll,
+		Custom,
 	}
 }
