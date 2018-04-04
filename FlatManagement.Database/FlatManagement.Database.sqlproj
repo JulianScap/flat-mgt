@@ -112,6 +112,7 @@
     <Folder Include="OtherScripts" />
     <Folder Include="ref" />
     <Folder Include="ref\Tables" />
+    <Folder Include="dbo\Stored Procedure" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Flat.sql">
@@ -136,6 +137,7 @@
     </Build>
     <Build Include="ref\Tables\PeriodType.sql" />
     <Build Include="ref\Schema.sql" />
+    <Build Include="dbo\Stored Procedure\PeriodType_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />
