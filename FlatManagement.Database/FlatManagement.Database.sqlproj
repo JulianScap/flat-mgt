@@ -135,7 +135,7 @@
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
     <Build Include="ref\Tables\PeriodType.sql" />
-    <Build Include="ref\ref.sql" />
+    <Build Include="ref\Schema.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />
