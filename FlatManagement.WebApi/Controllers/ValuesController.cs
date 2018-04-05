@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
+using FlatManagement.WebApi.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.WebApi.Controllers
 {
-	[Route("api/[controller]")]
-	public class ValuesController : Controller
+	public class ValuesController : ApiBaseController
 	{
+		public ValuesController(IConfiguration configuration) : base(configuration)
+		{
+		}
+
 		// GET api/values
 		[HttpGet]
 		public IEnumerable<string> Get()
