@@ -27,10 +27,10 @@ namespace FlatManagement.Dal.Impl
 
 		public TList GetAll()
 		{
-			return GetMany(Operation.GetAll);
+			return GetMany(OperationEnum.GetAll);
 		}
 
-		protected virtual TList GetMany(Operation operation, string methodName = null)
+		protected virtual TList GetMany(OperationEnum operation, string methodName = null)
 		{
 			TList result = new TList();
 
@@ -42,7 +42,7 @@ namespace FlatManagement.Dal.Impl
 			return result;
 		}
 
-		protected ConnectionInfoContainer GetConnectionInfoContainer(Operation operation, string methodName = null)
+		protected ConnectionInfoContainer GetConnectionInfoContainer(OperationEnum operation, string methodName = null)
 		{
 			ConnectionInfoContainer result = new ConnectionInfoContainer();
 
@@ -88,7 +88,7 @@ namespace FlatManagement.Dal.Impl
 			return lastReadResult;
 		}
 
-		private void AssignIfNeeded(TList list, SqlDataReader reader, int index)
+		protected virtual void AssignIfNeeded(TList list, SqlDataReader reader, int index)
 		{
 			if (!reader.IsDBNull(index))
 			{
@@ -107,9 +107,9 @@ namespace FlatManagement.Dal.Impl
 			};
 		}
 
-		protected virtual string GetStoredProcedureName(Operation operation, string name)
+		protected virtual string GetStoredProcedureName(OperationEnum operation, string name)
 		{
-			if (operation == Operation.Custom)
+			if (operation == OperationEnum.Custom)
 			{
 				return tListTypeName + "_" + name;
 			}
@@ -123,11 +123,5 @@ namespace FlatManagement.Dal.Impl
 		{
 			return new SqlConnection("Server=(local);Database=FlatManagement;User Id=fm_user;Password=fm_user;");
 		}
-	}
-
-	public enum Operation
-	{
-		GetAll,
-		Custom,
 	}
 }
