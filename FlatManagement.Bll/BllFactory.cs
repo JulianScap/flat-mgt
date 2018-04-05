@@ -1,23 +1,22 @@
 ﻿using System;
 using FlatManagement.Common;
 using FlatManagement.Common.Exceptions;
-using FlatManagement.Dal.Interface;
 
-namespace FlatManagement.Dal
+namespace FlatManagement.Bll
 {
-	public class DalFactory : BaseFactory
-	{
+	public class BllFactory : BaseFactory
+    {
 		#region Lazy Singleton
 		private class LazySingleton
 		{
-			public static readonly DalFactory instance;
+			public static readonly BllFactory instance;
 			static LazySingleton()
 			{
-				instance = new DalFactory();
+				instance = new BllFactory();
 			}
 		}
 
-		public static DalFactory Instance
+		public static BllFactory Instance
 		{
 			get
 			{
@@ -26,12 +25,11 @@ namespace FlatManagement.Dal
 		}
 		#endregion
 
-		private const string LayerName = "DAL";
+		private const string LayerName = "BLL";
 
-		public TDal Get<TDal>(params object[] parameters)
-			where TDal : IDataAccess
+		public TBll Get<TBll>(params object[] parameters)
 		{
-			Type interfaceType = typeof(TDal);
+			Type interfaceType = typeof(TBll);
 #if DEBUG
 			if (!interfaceType.IsInterface)
 			{
@@ -45,7 +43,7 @@ namespace FlatManagement.Dal
 				throw new ImplementationNotFoundException(interfaceType, LayerName);
 			}
 
-			return (TDal)Activator.CreateInstance(implementationType, parameters);
+			return (TBll)Activator.CreateInstance(implementationType, parameters);
 		}
 	}
 }

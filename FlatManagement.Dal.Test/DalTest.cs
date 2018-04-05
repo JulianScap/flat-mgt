@@ -3,7 +3,7 @@ using Xunit;
 
 namespace FlatManagement.Dal.Test
 {
-	public class UnitTest1
+	public class DalTest
 	{
 		[Fact]
 		public void Test1()
