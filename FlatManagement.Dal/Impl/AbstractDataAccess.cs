@@ -1,7 +1,10 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
 using FlatManagement.Common.Dto;
+using FlatManagement.Common.Extensions;
+using FlatManagement.Common.Logging;
 using FlatManagement.Dal.Interface;
 
 namespace FlatManagement.Dal.Impl
@@ -31,31 +34,58 @@ namespace FlatManagement.Dal.Impl
 		{
 			TList result = new TList();
 
-			string procedureName = GetStoredProcedureName(operation, methodName);
-			using (SqlConnection connection = GetConnection())
-			using (SqlCommand command = GetStoredProcedureCommand(procedureName, connection))
+			using (ConnectionInfoContainer cic = GetConnectionInfoContainer(operation, methodName))
 			{
-				connection.Open();
-				SetPagingParameters(command);
-				using (SqlDataReader reader = command.ExecuteReader())
-				{
-					Fill(result, reader);
-				}
+				Fill(result, cic.Reader);
 			}
 
 			return result;
 		}
 
-		protected virtual void Fill(TList list, SqlDataReader reader)
+		protected ConnectionInfoContainer GetConnectionInfoContainer(Operation operation, string methodName = null)
 		{
-			while (reader.Read())
+			ConnectionInfoContainer result = new ConnectionInfoContainer();
+
+			string procedureName = GetStoredProcedureName(operation, methodName);
+
+			try
+			{
+				result.Connection = GetConnection();
+				result.Command = GetStoredProcedureCommand(procedureName, result.Connection);
+				result.Connection.Open();
+				result.Reader = result.Command.ExecuteReader();
+				return result;
+			}
+			catch (Exception ex)
+			{
+				LogStuff.Log(ex);
+				result.SafeDispose();
+				throw;
+			}
+		}
+
+		protected virtual bool Fill(TList list, SqlDataReader reader, int? count = null)
+		{
+			bool lastReadResult = false;
+			int recordsProcessed = 0;
+			int recordsMax = count ?? Int32.MaxValue;
+
+			lastReadResult = reader.Read();
+
+			while (lastReadResult && recordsProcessed < recordsMax)
 			{
 				list.New();
 				for (int i = 0; i < reader.FieldCount; i++)
 				{
 					AssignIfNeeded(list, reader, i);
 				}
+
+				recordsProcessed += 1;
+
+				lastReadResult = reader.Read();
 			}
+
+			return lastReadResult;
 		}
 
 		private void AssignIfNeeded(TList list, SqlDataReader reader, int index)
@@ -75,11 +105,6 @@ namespace FlatManagement.Dal.Impl
 			{
 				CommandType = CommandType.StoredProcedure
 			};
-		}
-
-		protected virtual void SetPagingParameters(SqlCommand command)
-		{
-			// TODO si j'ai pas la flemme
 		}
 
 		protected virtual string GetStoredProcedureName(Operation operation, string name)
