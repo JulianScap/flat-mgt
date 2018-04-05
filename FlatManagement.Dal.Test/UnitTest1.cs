@@ -9,7 +9,7 @@ namespace FlatManagement.Dal.Test
 		[Fact]
 		public void Test1()
 		{
-			IPeriodTypeDataAccess da = new PeriodTypeDataAccess();
+			IPeriodTypeDataAccess da = DalFactory.Instance.Get<IPeriodTypeDataAccess>();
 			da.GetAll();
 		}
 	}
