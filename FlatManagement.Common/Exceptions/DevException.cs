@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if DEBUG
+using System;
 
 namespace FlatManagement.Common.Exceptions
 {
@@ -13,3 +14,4 @@ namespace FlatManagement.Common.Exceptions
 		  System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 	}
 }
+#endif

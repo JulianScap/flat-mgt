@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using FlatManagement.Common.Exceptions;
 using FlatManagement.Dal.Interface;
@@ -7,6 +8,7 @@ namespace FlatManagement.Dal
 {
 	public class DalFactory
 	{
+		#region Lazy Singleton
 		private class LazySingleton
 		{
 			public static readonly DalFactory instance;
@@ -23,19 +25,44 @@ namespace FlatManagement.Dal
 				return LazySingleton.instance;
 			}
 		}
+		#endregion
+
+		private Dictionary<string, Type> typesByName;
+
+		public DalFactory()
+		{
+			typesByName = new Dictionary<string, Type>();
+		}
 
 		public T Get<T>(params object[] parameters)
 			where T : IDataAccess
 		{
+			Type interfaceType = typeof(T);
 #if DEBUG
-			if (!typeof(T).IsInterface)
+			if (!interfaceType.IsInterface)
 			{
 				throw new DevException("This should be an interface");
 			}
 #endif
+			Type implementationType = null;
 
+			if (!typesByName.TryGetValue(interfaceType.FullName, out implementationType))
+			{
+				implementationType = GetImplementationType(interfaceType);
+				typesByName.Add(interfaceType.FullName, implementationType);
+			}
+
+			if (implementationType == null)
+			{
+				throw new ImplementationNotFoundException(interfaceType, "DAL");
+			}
+
+			return (T)Activator.CreateInstance(implementationType, parameters);
+		}
+
+		private Type GetImplementationType(Type interfaceType)
+		{
 			Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-			Type t = null;
 
 			foreach (var type in types)
 			{
@@ -43,14 +70,12 @@ namespace FlatManagement.Dal
 				{
 					continue;
 				}
-				if (typeof(T).IsAssignableFrom(type))
+				else if (interfaceType.IsAssignableFrom(type))
 				{
-					t = type;
-					break;
+					return type;
 				}
 			}
-
-			return (T)Activator.CreateInstance(t, parameters);
+			return null;
 		}
 	}
 }
