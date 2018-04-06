@@ -10,7 +10,7 @@ namespace FlatManagement.Common.Dto
 		public abstract void New();
 	}
 
-	public abstract class AbstractDtoList<TDto> : AbstractDtoList, IDtoList<TDto>, IEnumerable<TDto>
+	public abstract class AbstractDtoList<TDto> : AbstractDtoList, IDtoList<TDto>, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
 		where TDto : new()
 	{
 		private List<TDto> items;
@@ -56,6 +56,8 @@ namespace FlatManagement.Common.Dto
 		{
 			get { return items[index]; }
 		}
+
+		public int Count { get { return items.Count; } }
 
 		#region IEnumerable
 		IEnumerator<TDto> IEnumerable<TDto>.GetEnumerator()

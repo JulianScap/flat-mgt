@@ -10,7 +10,7 @@ namespace FlatManagement.Dal.Test
 		public void Test1()
 		{
 			IPeriodTypeModel ptm = BllFactory.Instance.Get<IPeriodTypeModel>();
-			//ptm.GetAll();
+			ptm.GetAll();
 		}
 	}
 }

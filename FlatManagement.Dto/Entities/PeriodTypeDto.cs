@@ -4,11 +4,11 @@ using FlatManagement.Dto.Interface;
 
 namespace FlatManagement.Dto.Entities
 {
-	public partial class SinglePeriodType : AbstractDto<int>, IPeriodType
+	public partial class PeriodTypeDto : AbstractDto<int>, IPeriodType
 	{
-		public SinglePeriodType() { }
+		public PeriodTypeDto() { }
 
-		public SinglePeriodType(PeriodTypeEnum periodTypeEnum)
+		public PeriodTypeDto(PeriodTypeEnum periodTypeEnum)
 		{
 			this.PeriodTypeId = (int)periodTypeEnum;
 			this.Name = periodTypeEnum.ToString();

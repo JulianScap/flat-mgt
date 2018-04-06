@@ -5,7 +5,7 @@ using System.Reflection;
 namespace FlatManagement.Common
 {
 	public abstract class BaseFactory
-    {
+	{
 		protected Dictionary<string, Type> typesByName;
 		private Assembly executingAssembly;
 
@@ -27,11 +27,9 @@ namespace FlatManagement.Common
 
 			if (!this.typesByName.TryGetValue(interfaceType.FullName, out implementationType))
 			{
-				implementationType = GetImplementationType(interfaceType);
+				implementationType = GetImplementationTypeFromAssembly(interfaceType);
+				this.typesByName.Add(interfaceType.FullName, implementationType);
 			}
-
-			implementationType = GetImplementationTypeFromAssembly(interfaceType);
-			this.typesByName.Add(interfaceType.FullName, implementationType);
 
 			return implementationType;
 		}

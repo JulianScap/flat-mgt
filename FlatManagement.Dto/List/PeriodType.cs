@@ -4,7 +4,7 @@ using FlatManagement.Dto.Interface;
 
 namespace FlatManagement.Dto.List
 {
-	public class PeriodType : AbstractDtoList<SinglePeriodType>, IPeriodType
+	public class PeriodType : AbstractDtoList<PeriodTypeDto>, IPeriodType
 	{
 		public int PeriodTypeId
 		{
