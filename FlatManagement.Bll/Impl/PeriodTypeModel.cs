@@ -8,12 +8,7 @@ namespace FlatManagement.Bll.Impl
 {
 	class PeriodTypeModel : AbstractModel<PeriodType, PeriodTypeDto>, IPeriodTypeModel
 	{
-		public PeriodTypeModel()
-		{
-			Items = new PeriodType();
-		}
-
-		protected override IDataAccess<PeriodType> GetDal(params object[] args)
+		protected override IDataAccess<PeriodTypeDto> GetDal(params object[] args)
 		{
 			return DalFactory.Instance.Get<IPeriodTypeDataAccess>();
 		}

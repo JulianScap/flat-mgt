@@ -13,7 +13,7 @@ namespace FlatManagement.Common.Dto
 	public abstract class AbstractDtoList<TDto> : AbstractDtoList, IDtoList<TDto>, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
 		where TDto : new()
 	{
-		private List<TDto> items;
+		private readonly List<TDto> items;
 		protected int index;
 
 		public AbstractDtoList()
@@ -57,7 +57,19 @@ namespace FlatManagement.Common.Dto
 			get { return items[index]; }
 		}
 
+		#region List<T> delegates
 		public int Count { get { return items.Count; } }
+
+		public void Clear()
+		{
+			items.Clear();
+		}
+
+		public void AddRange(IEnumerable<TDto> collection)
+		{
+			items.AddRange(collection);
+		}
+		#endregion
 
 		#region IEnumerable
 		IEnumerator<TDto> IEnumerable<TDto>.GetEnumerator()

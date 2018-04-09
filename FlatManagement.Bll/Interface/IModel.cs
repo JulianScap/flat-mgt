@@ -7,8 +7,8 @@ namespace FlatManagement.Bll.Interface
 		void GetAll();
 	}
 
-	public interface IModel<TList> : IModel
-		where TList : IDtoList, new()
+	public interface IModel<TList, TDto> : IModel
+		where TList : IDtoList<TDto>, new()
 	{
 	}
 }

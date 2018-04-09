@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
@@ -14,7 +15,7 @@ namespace FlatManagement.Dal.Impl
 
 	}
 
-	public abstract class AbstractDataAccess<TList, TDto> : AbstractDataAccess, IDataAccess<TList>
+	public abstract class AbstractDataAccess<TList, TDto> : AbstractDataAccess, IDataAccess<TDto>
 		where TDto : new()
 		where TList : AbstractDtoList<TDto>, new()
 	{
@@ -25,14 +26,14 @@ namespace FlatManagement.Dal.Impl
 			tListTypeName = typeof(TList).Name;
 		}
 
-		public TList GetAll()
+		public IEnumerable<TDto> GetAll()
 		{
 			return GetMany(OperationEnum.GetAll);
 		}
 
-		protected virtual TList GetMany(OperationEnum operation, string methodName = null)
+		protected virtual IEnumerable<TDto> GetMany(OperationEnum operation, string methodName = null)
 		{
-			TList result = new TList();
+			List<TDto> result = new List<TDto>();
 
 			using (ConnectionInfoContainer cic = GetConnectionInfoContainer(operation, methodName))
 			{
@@ -64,7 +65,7 @@ namespace FlatManagement.Dal.Impl
 			}
 		}
 
-		protected virtual bool Fill(TList list, SqlDataReader reader, int? count = null)
+		protected virtual bool Fill(List<TDto> list, SqlDataReader reader, int? count = null)
 		{
 			bool lastReadResult = false;
 			int recordsProcessed = 0;
@@ -74,12 +75,13 @@ namespace FlatManagement.Dal.Impl
 
 			while (lastReadResult && recordsProcessed < recordsMax)
 			{
-				list.New();
+				TDto newItem = new TDto();
 				for (int i = 0; i < reader.FieldCount; i++)
 				{
-					AssignIfNeeded(list, reader, i);
+					AssignIfNeeded(newItem, reader, i);
 				}
 
+				list.Add(newItem);
 				recordsProcessed += 1;
 
 				lastReadResult = reader.Read();
@@ -88,14 +90,14 @@ namespace FlatManagement.Dal.Impl
 			return lastReadResult;
 		}
 
-		protected virtual void AssignIfNeeded(TList list, SqlDataReader reader, int index)
+		protected virtual void AssignIfNeeded(TDto item, SqlDataReader reader, int index)
 		{
 			if (!reader.IsDBNull(index))
 			{
 				object value = reader.GetValue(index);
 				string columnName = reader.GetName(index);
-				PropertyInfo pi = typeof(TList).GetProperty(columnName);
-				pi.SetValue(list, value);
+				PropertyInfo pi = typeof(TDto).GetProperty(columnName);
+				pi.SetValue(item, value);
 			}
 		}
 

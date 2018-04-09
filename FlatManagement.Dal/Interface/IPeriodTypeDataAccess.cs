@@ -1,8 +1,8 @@
-﻿using FlatManagement.Dto.List;
+﻿using FlatManagement.Dto.Entities;
 
 namespace FlatManagement.Dal.Interface
 {
-	public interface IPeriodTypeDataAccess : IDataAccess<PeriodType>
+	public interface IPeriodTypeDataAccess : IDataAccess<PeriodTypeDto>
 	{
 	}
 }

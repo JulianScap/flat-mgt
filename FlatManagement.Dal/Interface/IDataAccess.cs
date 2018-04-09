@@ -1,12 +1,14 @@
-﻿namespace FlatManagement.Dal.Interface
+﻿using System.Collections.Generic;
+
+namespace FlatManagement.Dal.Interface
 {
 	public interface IDataAccess
 	{
 
 	}
 
-	public interface IDataAccess<TList> : IDataAccess
+	public interface IDataAccess<TDto> : IDataAccess
 	{
-		TList GetAll();
+		IEnumerable<TDto> GetAll();
 	}
 }
