@@ -3,14 +3,7 @@ using System.Collections.Generic;
 
 namespace FlatManagement.Common.Dto
 {
-	public abstract class AbstractDtoList : IDtoList
-	{
-		public abstract void Start();
-		public abstract bool Next();
-		public abstract void New();
-	}
-
-	public abstract class AbstractDtoList<TDto> : AbstractDtoList, IDtoList<TDto>, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
+	public abstract class AbstractDtoList<TDto> : IDtoList<TDto>, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
 		where TDto : new()
 	{
 		private readonly List<TDto> items;
@@ -22,12 +15,12 @@ namespace FlatManagement.Common.Dto
 			items = new List<TDto>();
 		}
 
-		public override void Start()
+		public virtual void Start()
 		{
 			index = 0;
 		}
 
-		public override bool Next()
+		public virtual bool Next()
 		{
 			index += 1;
 			if (index < items.Count)
@@ -41,7 +34,7 @@ namespace FlatManagement.Common.Dto
 			}
 		}
 
-		public override void New()
+		public virtual void New()
 		{
 			items.Add(GetNewDto());
 			index = items.Count - 1;
@@ -52,9 +45,23 @@ namespace FlatManagement.Common.Dto
 			return new TDto();
 		}
 
-		protected virtual TDto Current
+		public virtual TDto Current
 		{
 			get { return items[index]; }
+		}
+
+		public void Insert(TDto item)
+		{
+			items.Insert(index, item);
+		}
+
+		public void Remove()
+		{
+			items.RemoveAt(index);
+			if (index >= items.Count)
+			{
+				index = items.Count - 1;
+			}
 		}
 
 		#region List<T> delegates

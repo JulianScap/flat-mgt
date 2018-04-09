@@ -8,9 +8,12 @@ namespace FlatManagement.Common.Dto
 		void Start();
 		bool Next();
 		void New();
+		void Remove();
 	}
 
 	public interface IDtoList<TDto> : IDtoList, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
 	{
+		TDto Current { get; }
+		void Insert(TDto item);
 	}
 }
