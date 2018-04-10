@@ -2,15 +2,28 @@
 using FlatManagement.Dal;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
-using FlatManagement.Dto.List;
 
 namespace FlatManagement.Bll.Impl
 {
-	class PeriodTypeModel : AbstractModel<PeriodType, PeriodTypeDto>, IPeriodTypeModel
+	class PeriodTypeModel : AbstractModel<PeriodType>, IPeriodTypeModel
 	{
-		protected override IDataAccess<PeriodTypeDto> GetDal(params object[] args)
+		protected override IDataAccess<PeriodType> GetDal(params object[] args)
 		{
 			return DalFactory.Instance.Get<IPeriodTypeDataAccess>();
 		}
+
+		#region IPeriodType members
+		public int PeriodTypeId
+		{
+			get { return Current.PeriodTypeId; }
+			set { Current.PeriodTypeId = value; }
+		}
+
+		public string Name
+		{
+			get { return Current.Name; }
+			set { Current.Name = value; }
+		}
+		#endregion
 	}
 }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.WebApi.Controllers.Base
 {
+	[Produces("application/json")]
 	[Route("api/[controller]")]
 	public class ApiBaseController : Controller
 	{

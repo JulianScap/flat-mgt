@@ -2,7 +2,7 @@
 
 namespace FlatManagement.Dal.Interface
 {
-	public interface IPeriodTypeDataAccess : IDataAccess<PeriodTypeDto>
+	public interface IPeriodTypeDataAccess : IDataAccess<PeriodType>
 	{
 	}
 }

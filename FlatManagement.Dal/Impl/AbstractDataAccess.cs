@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
-using FlatManagement.Common.Dto;
 using FlatManagement.Common.Extensions;
 using FlatManagement.Common.Logging;
 using FlatManagement.Dal.Interface;
@@ -15,15 +14,14 @@ namespace FlatManagement.Dal.Impl
 
 	}
 
-	public abstract class AbstractDataAccess<TList, TDto> : AbstractDataAccess, IDataAccess<TDto>
+	public abstract class AbstractDataAccess<TDto> : AbstractDataAccess, IDataAccess<TDto>
 		where TDto : new()
-		where TList : AbstractDtoList<TDto>, new()
 	{
 		private static readonly string tListTypeName;
 
 		static AbstractDataAccess()
 		{
-			tListTypeName = typeof(TList).Name;
+			tListTypeName = typeof(TDto).Name;
 		}
 
 		public IEnumerable<TDto> GetAll()

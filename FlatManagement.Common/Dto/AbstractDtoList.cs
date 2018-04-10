@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace FlatManagement.Common.Dto
 {
+	[DebuggerDisplay("Count: {Count}")]
 	public abstract class AbstractDtoList<TDto> : IDtoList<TDto>, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
 		where TDto : new()
 	{
@@ -50,12 +52,12 @@ namespace FlatManagement.Common.Dto
 			get { return items[index]; }
 		}
 
-		public void Insert(TDto item)
+		public virtual void Insert(TDto item)
 		{
 			items.Insert(index, item);
 		}
 
-		public void Remove()
+		public virtual void Remove()
 		{
 			items.RemoveAt(index);
 			if (index >= items.Count)
@@ -65,14 +67,14 @@ namespace FlatManagement.Common.Dto
 		}
 
 		#region List<T> delegates
-		public int Count { get { return items.Count; } }
+		public virtual int Count { get { return items.Count; } }
 
-		public void Clear()
+		public virtual void Clear()
 		{
 			items.Clear();
 		}
 
-		public void AddRange(IEnumerable<TDto> collection)
+		public virtual void AddRange(IEnumerable<TDto> collection)
 		{
 			items.AddRange(collection);
 		}

@@ -1,14 +1,16 @@
-﻿using FlatManagement.Common.Dto;
+﻿using System.Diagnostics;
+using FlatManagement.Common.Dto;
 using FlatManagement.Dto.Enums;
 using FlatManagement.Dto.Interface;
 
 namespace FlatManagement.Dto.Entities
 {
-	public partial class PeriodTypeDto : AbstractDto<int>, IPeriodType
+	[DebuggerDisplay("PeriodType({PeriodTypeId}::{Name})")]
+	public partial class PeriodType : AbstractDto<int>, IPeriodType
 	{
-		public PeriodTypeDto() { }
+		public PeriodType() { }
 
-		public PeriodTypeDto(PeriodTypeEnum periodTypeEnum)
+		public PeriodType(PeriodTypeEnum periodTypeEnum)
 		{
 			this.PeriodTypeId = (int)periodTypeEnum;
 			this.Name = periodTypeEnum.ToString();

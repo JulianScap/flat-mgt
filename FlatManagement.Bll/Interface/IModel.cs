@@ -1,14 +1,11 @@
-﻿using FlatManagement.Common.Dto;
-
-namespace FlatManagement.Bll.Interface
+﻿namespace FlatManagement.Bll.Interface
 {
 	public interface IModel
 	{
 		void GetAll();
 	}
 
-	public interface IModel<TList, TDto> : IModel
-		where TList : IDtoList<TDto>, new()
+	public interface IModel<TDto> : IModel
 	{
 	}
 }

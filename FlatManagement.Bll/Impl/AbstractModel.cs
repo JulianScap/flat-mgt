@@ -6,8 +6,7 @@ using FlatManagement.Dal.Interface;
 
 namespace FlatManagement.Bll.Impl
 {
-	internal abstract class AbstractModel<TList, TDto> : AbstractDtoList<TDto>, IModel<TList, TDto>
-		where TList : IDtoList<TDto>, new()
+	internal abstract class AbstractModel<TDto> : AbstractDtoList<TDto>, IModel<TDto>
 		where TDto : new()
 	{
 		protected abstract IDataAccess<TDto> GetDal(params object[] args);
