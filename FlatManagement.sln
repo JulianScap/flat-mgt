@@ -27,9 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlatManagement.Dto", "FlatM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04_Test", "04_Test", "{44259E5A-DDEE-44C6-97F0-8D02072324FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlatManagement.Dal.Test", "FlatManagement.Dal.Test\FlatManagement.Dal.Test.csproj", "{7AE812E9-6AE7-49F4-918F-7F6160B3204E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlatManagement.Test", "FlatManagement.Test\FlatManagement.Test.csproj", "{7AE812E9-6AE7-49F4-918F-7F6160B3204E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatManagement.Web", "FlatManagement.Web\FlatManagement.Web.csproj", "{3C6DC2A4-08BF-4B43-ACA3-77C5B61144B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlatManagement.Web", "FlatManagement.Web\FlatManagement.Web.csproj", "{3C6DC2A4-08BF-4B43-ACA3-77C5B61144B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

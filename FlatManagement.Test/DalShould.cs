@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using FlatManagement.Dal.Interface;
+using FlatManagement.Dto.Entities;
 using Xunit;
 
 namespace FlatManagement.Dal.Test
@@ -9,7 +11,8 @@ namespace FlatManagement.Dal.Test
 		public void Test1()
 		{
 			IPeriodTypeDataAccess da = DalFactory.Instance.Get<IPeriodTypeDataAccess>();
-			da.GetAll();
+			IEnumerable<PeriodType> result = da.GetAll();
+			Assert.NotEmpty(result);
 		}
 	}
 }
