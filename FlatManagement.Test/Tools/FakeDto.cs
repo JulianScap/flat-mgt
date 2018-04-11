@@ -1,7 +1,7 @@
 ﻿using System;
 using FlatManagement.Common.Dto;
 
-namespace FlatManagement.Test.DalTestTools
+namespace FlatManagement.Test.Tools
 {
 	public interface IFakeDto : IDto
 	{

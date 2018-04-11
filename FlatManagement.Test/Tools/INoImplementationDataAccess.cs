@@ -1,6 +1,6 @@
 ﻿using FlatManagement.Dal.Interface;
 
-namespace FlatManagement.Test.DalTestTools
+namespace FlatManagement.Test.Tools
 {
 	interface INoImplementationDataAccess : IDataAccess<FakeDto>
 	{

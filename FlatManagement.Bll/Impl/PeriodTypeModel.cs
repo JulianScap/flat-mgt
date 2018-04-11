@@ -5,7 +5,7 @@ using FlatManagement.Dto.Entities;
 
 namespace FlatManagement.Bll.Impl
 {
-	class PeriodTypeModel : AbstractModel<PeriodType>, IPeriodTypeModel
+	internal class PeriodTypeModel : AbstractModel<PeriodType>, IPeriodTypeModel
 	{
 		protected override IDataAccess<PeriodType> GetDal(params object[] args)
 		{

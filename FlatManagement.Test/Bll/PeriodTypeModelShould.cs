@@ -1,16 +1,19 @@
 ﻿using FlatManagement.Bll;
+using FlatManagement.Bll.Impl;
 using FlatManagement.Bll.Interface;
 using Xunit;
 
 namespace FlatManagement.Test.BllTestTools
 {
-	public class BusinessLogicLayerShould
+	public class PeriodTypeModelShould
 	{
 		[Fact]
-		public void Test1()
+		public void ReturnAValidModelObject()
 		{
 			IPeriodTypeModel ptm = BllFactory.Instance.Get<IPeriodTypeModel>();
-			ptm.GetAll();
+
+			Assert.NotNull(ptm);
+			Assert.IsType<PeriodTypeModel>(ptm);
 		}
 	}
 }

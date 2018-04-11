@@ -1,7 +1,6 @@
 using FlatManagement.Common.Exceptions;
 using FlatManagement.Dal;
-using FlatManagement.Dal.Impl;
-using FlatManagement.Dal.Interface;
+using FlatManagement.Test.Tools;
 using Xunit;
 
 namespace FlatManagement.Test.DalTestTools
@@ -16,15 +15,6 @@ namespace FlatManagement.Test.DalTestTools
 
 			Assert.NotNull(firstInstance);
 			Assert.Same(firstInstance, secondInstance);
-		}
-
-		[Fact]
-		public void ReturnAValidDataAccessObject()
-		{
-			IPeriodTypeDataAccess da = DalFactory.Instance.Get<IPeriodTypeDataAccess>();
-
-			Assert.NotNull(da);
-			Assert.IsType<PeriodTypeDataAccess>(da);
 		}
 
 		[Fact]
