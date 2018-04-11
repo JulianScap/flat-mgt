@@ -3,7 +3,7 @@ using FlatManagement.Dal;
 using FlatManagement.Test.Tools;
 using Xunit;
 
-namespace FlatManagement.Test.DalTestTools
+namespace FlatManagement.Test.Dal
 {
 	public class DataAccessLayerShould
 	{

@@ -3,7 +3,7 @@ using FlatManagement.Bll.Impl;
 using FlatManagement.Bll.Interface;
 using Xunit;
 
-namespace FlatManagement.Test.BllTestTools
+namespace FlatManagement.Test.Bll
 {
 	public class PeriodTypeModelShould
 	{

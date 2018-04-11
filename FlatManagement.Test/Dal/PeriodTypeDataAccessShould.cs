@@ -6,7 +6,7 @@ using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
 using Xunit;
 
-namespace FlatManagement.Test.DalTestTools
+namespace FlatManagement.Test.Dal
 {
 	public class PeriodTypeDataAccessShould
 	{
