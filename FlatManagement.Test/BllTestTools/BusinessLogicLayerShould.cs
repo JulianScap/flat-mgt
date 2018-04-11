@@ -2,9 +2,9 @@
 using FlatManagement.Bll.Interface;
 using Xunit;
 
-namespace FlatManagement.Dal.Test
+namespace FlatManagement.Test.BllTestTools
 {
-	public class BllTest
+	public class BusinessLogicLayerShould
 	{
 		[Fact]
 		public void Test1()

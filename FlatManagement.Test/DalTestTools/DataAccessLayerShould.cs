@@ -1,12 +1,12 @@
 using FlatManagement.Common.Exceptions;
+using FlatManagement.Dal;
 using FlatManagement.Dal.Impl;
 using FlatManagement.Dal.Interface;
-using FlatManagement.Test.DalTestTools;
 using Xunit;
 
-namespace FlatManagement.Dal.Test
+namespace FlatManagement.Test.DalTestTools
 {
-	public class DalShould
+	public class DataAccessLayerShould
 	{
 		[Fact]
 		public void HasASingleton()

@@ -4,5 +4,5 @@ namespace FlatManagement.Test.DalTestTools
 {
 	interface INoImplementationDataAccess : IDataAccess<FakeDto>
 	{
-    }
+	}
 }
