@@ -9,6 +9,16 @@ namespace FlatManagement.Dal.Test
 	public class DalShould
 	{
 		[Fact]
+		public void HasASingleton()
+		{
+			DalFactory firstInstance = DalFactory.Instance;
+			DalFactory secondInstance = DalFactory.Instance;
+
+			Assert.NotNull(firstInstance);
+			Assert.Same(firstInstance, secondInstance);
+		}
+
+		[Fact]
 		public void ReturnAValidDataAccessObject()
 		{
 			IPeriodTypeDataAccess da = DalFactory.Instance.Get<IPeriodTypeDataAccess>();
