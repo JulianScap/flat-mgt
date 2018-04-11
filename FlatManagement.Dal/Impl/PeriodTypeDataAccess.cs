@@ -3,7 +3,7 @@ using FlatManagement.Dto.Entities;
 
 namespace FlatManagement.Dal.Impl
 {
-	class PeriodTypeDataAccess : AbstractDataAccess<PeriodType>, IPeriodTypeDataAccess
+	internal class PeriodTypeDataAccess : AbstractDataAccess<PeriodType>, IPeriodTypeDataAccess
 	{
 	}
 }
