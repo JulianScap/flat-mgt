@@ -7,13 +7,12 @@ using FlatManagement.Dal.Interface;
 namespace FlatManagement.Bll.Impl
 {
 	internal abstract class AbstractModel<TDto> : AbstractDtoList<TDto>, IModel<TDto>
-		where TDto : new()
+		where TDto : class, new()
 	{
 		protected abstract IDataAccess<TDto> GetDal(params object[] args);
 
 		public AbstractModel()
 		{
-			base.Clear();
 		}
 
 		public void GetAll()

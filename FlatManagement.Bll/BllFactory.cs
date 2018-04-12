@@ -1,11 +1,12 @@
 ﻿using System;
+using FlatManagement.Bll.Interface;
 using FlatManagement.Common;
 using FlatManagement.Common.Exceptions;
 
 namespace FlatManagement.Bll
 {
 	public class BllFactory : BaseFactory
-    {
+	{
 		#region Lazy Singleton
 		private class LazySingleton
 		{
@@ -28,6 +29,7 @@ namespace FlatManagement.Bll
 		private const string LayerName = "BLL";
 
 		public TBll Get<TBll>(params object[] parameters)
+			where TBll : IModel
 		{
 			Type interfaceType = typeof(TBll);
 #if DEBUG

@@ -9,12 +9,7 @@ using FlatManagement.Dal.Interface;
 
 namespace FlatManagement.Dal.Impl
 {
-	public abstract class AbstractDataAccess : IDataAccess
-	{
-
-	}
-
-	public abstract class AbstractDataAccess<TDto> : AbstractDataAccess, IDataAccess<TDto>
+	public abstract class AbstractDataAccess<TDto> : IDataAccess<TDto>
 		where TDto : new()
 	{
 		private static readonly string tListTypeName;

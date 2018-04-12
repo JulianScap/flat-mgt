@@ -1,11 +1,9 @@
 ﻿namespace FlatManagement.Bll.Interface
 {
-	public interface IModel
-	{
-		void GetAll();
-	}
+	public interface IModel { }
 
 	public interface IModel<TDto> : IModel
 	{
+		void GetAll();
 	}
 }

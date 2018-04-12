@@ -2,10 +2,7 @@
 
 namespace FlatManagement.Dal.Interface
 {
-	public interface IDataAccess
-	{
-
-	}
+	public interface IDataAccess { }
 
 	public interface IDataAccess<TDto> : IDataAccess
 	{
