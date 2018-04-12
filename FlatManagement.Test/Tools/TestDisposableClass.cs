@@ -2,11 +2,12 @@
 
 namespace FlatManagement.Test.Tools
 {
-	public class TestDisposableClass : IDisposable
+	public class ThrowOnDispose<TException> : IDisposable
+		where TException : Exception, new()
 	{
 		public void Dispose()
 		{
-			throw new TestDisposableException();
+			throw new TException();
 		}
 	}
 }

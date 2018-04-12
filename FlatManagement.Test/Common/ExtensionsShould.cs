@@ -19,7 +19,7 @@ namespace FlatManagement.Test.Common
 		[Fact]
 		public void NotRaiseExceptionOnSafeDispose()
 		{
-			IDisposable disposable = new TestDisposableClass();
+			IDisposable disposable = new ThrowOnDispose<TestDisposableException>();
 			disposable.SafeDispose();
 			// no Assert needed
 		}
