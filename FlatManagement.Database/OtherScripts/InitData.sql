@@ -8,3 +8,5 @@ INSERT INTO ref.PeriodType (PeriodTypeId, [Name]) VALUES (7, 'Annually');
 INSERT INTO ref.PeriodType (PeriodTypeId, [Name]) VALUES (8, 'Always');
 INSERT INTO ref.PeriodType (PeriodTypeId, [Name]) VALUES (9, 'Rarely');
 INSERT INTO ref.PeriodType (PeriodTypeId, [Name]) VALUES (10, 'Seasonally');
+
+INSERT INTO dbo.Flat ([Name], [Address]) VALUES ('4E', '4E MacAulay Street, 1012 Eden Terrace');
