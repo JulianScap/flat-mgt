@@ -11,19 +11,5 @@ namespace FlatManagement.Bll.Impl
 		{
 			return DalFactory.Instance.Get<IPeriodTypeDataAccess>();
 		}
-
-		#region IPeriodType members
-		public int PeriodTypeId
-		{
-			get { return Current.PeriodTypeId; }
-			set { Current.PeriodTypeId = value; }
-		}
-
-		public string Name
-		{
-			get { return Current.Name; }
-			set { Current.Name = value; }
-		}
-		#endregion
 	}
 }

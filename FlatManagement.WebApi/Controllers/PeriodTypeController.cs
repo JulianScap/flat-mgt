@@ -8,7 +8,8 @@ namespace FlatManagement.WebApi.Controllers
 {
 	public class PeriodTypeController : ApiBaseController
 	{
-		public PeriodTypeController(IConfiguration configuration) : base(configuration)
+		public PeriodTypeController(IConfiguration configuration)
+			: base(configuration)
 		{
 		}
 
@@ -16,7 +17,19 @@ namespace FlatManagement.WebApi.Controllers
 		public object Get()
 		{
 			IPeriodTypeModel ipt = BllFactory.Instance.Get<IPeriodTypeModel>();
+
 			ipt.GetAll();
+
+			return ipt;
+		}
+
+		[HttpGet("{id}")]
+		public object Get(int id)
+		{
+			IPeriodTypeModel ipt = BllFactory.Instance.Get<IPeriodTypeModel>();
+
+			ipt.GetAll();
+			ipt.RemoveAll(x => x.PeriodTypeId != id);
 
 			return ipt;
 		}
