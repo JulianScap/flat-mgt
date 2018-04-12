@@ -8,7 +8,7 @@ namespace FlatManagement.Common.Dto
 	{
 	}
 
-	public interface IDtoList<TDto> : IDtoList, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
+	public interface IDtoList<TDto> : IDtoList, IReadOnlyList<TDto>, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
 	{
 		int RemoveAll(Predicate<TDto> predicate);
 	}

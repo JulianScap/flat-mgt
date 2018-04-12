@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace FlatManagement.Common.Dto
 {
 	[DebuggerDisplay("Count: {Count}")]
-	public abstract class AbstractDtoList<TDto> : IDtoList<TDto>, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
+	public abstract class AbstractDtoList<TDto> : IDtoList<TDto>, IReadOnlyList<TDto>, IReadOnlyCollection<TDto>, IEnumerable<TDto>, IEnumerable
 		where TDto : new()
 	{
 		protected readonly List<TDto> items;
@@ -16,13 +16,10 @@ namespace FlatManagement.Common.Dto
 			items = new List<TDto>();
 		}
 
-		protected virtual TDto GetNewDto()
-		{
-			return new TDto();
-		}
-
 		#region List<T> delegates
 		public virtual int Count { get { return items.Count; } }
+
+		public TDto this[int index] { get { return items[index]; } }
 
 		public virtual void Clear()
 		{
