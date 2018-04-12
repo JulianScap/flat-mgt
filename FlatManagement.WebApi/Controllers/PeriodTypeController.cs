@@ -14,7 +14,7 @@ namespace FlatManagement.WebApi.Controllers
 		}
 
 		[HttpGet]
-		public object Get()
+		public IPeriodTypeModel Get()
 		{
 			IPeriodTypeModel ipt = BllFactory.Instance.Get<IPeriodTypeModel>();
 
@@ -24,7 +24,7 @@ namespace FlatManagement.WebApi.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public object Get(int id)
+		public IPeriodTypeModel Get(int id)
 		{
 			IPeriodTypeModel ipt = BllFactory.Instance.Get<IPeriodTypeModel>();
 
