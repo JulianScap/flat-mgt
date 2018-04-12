@@ -2,7 +2,6 @@
 using FlatManagement.Bll;
 using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Exceptions;
-using FlatManagement.Dto.Entities;
 using FlatManagement.Test.Tools;
 using Xunit;
 
