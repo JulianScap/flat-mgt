@@ -3,7 +3,7 @@ using FlatManagement.Common.Logging;
 
 namespace FlatManagement.Common.Extensions
 {
-	public static class Disposable
+	public static class DisposableExtentions
 	{
 		public static void SafeDispose(this IDisposable that)
 		{
