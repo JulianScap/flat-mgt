@@ -20,7 +20,7 @@ namespace FlatManagement.Test.Dal
 		}
 
 		[Fact]
-		public void ReturnTableData()
+		public void ReturnAllRows()
 		{
 			IPeriodTypeDataAccess da = DalFactory.Instance.Get<IPeriodTypeDataAccess>();
 			IEnumerable<PeriodType> items = da.GetAll();
