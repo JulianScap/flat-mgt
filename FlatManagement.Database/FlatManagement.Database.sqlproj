@@ -114,6 +114,8 @@
     <Folder Include="ref\Tables" />
     <Folder Include="dbo\Stored Procedure" />
     <Folder Include="Security\" />
+    <Folder Include="dbo\Stored Procedure\Flat" />
+    <Folder Include="dbo\Stored Procedure\PeriodType" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Flat.sql">
@@ -138,9 +140,13 @@
     </Build>
     <Build Include="ref\Tables\PeriodType.sql" />
     <Build Include="ref\Schema.sql" />
-    <Build Include="dbo\Stored Procedure\PeriodType_GetAll.sql" />
     <Build Include="Security\fm_user.sql" />
     <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Stored Procedure\Flat\Flat_Update.sql" />
+    <Build Include="dbo\Stored Procedure\Flat\Flat_GetAll.sql" />
+    <Build Include="dbo\Stored Procedure\Flat\Flat_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Flat\Flat_Insert.sql" />
+    <Build Include="dbo\Stored Procedure\PeriodType\PeriodType_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />

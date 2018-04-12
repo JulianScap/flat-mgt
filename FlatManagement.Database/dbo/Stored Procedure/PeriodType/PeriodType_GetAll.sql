@@ -10,6 +10,6 @@ END
 
 GO
 GRANT EXECUTE
-    ON OBJECT::[dbo].[PeriodType_GetAll] TO [fm_user]
-    AS [dbo];
+	ON OBJECT::[dbo].[PeriodType_GetAll] TO [fm_user]
+	AS [dbo];
 
