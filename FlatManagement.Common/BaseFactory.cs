@@ -21,7 +21,13 @@ namespace FlatManagement.Common
 			this.executingAssembly = executingAssembly;
 		}
 
-		protected Type GetImplementationType(Type interfaceType)
+		protected virtual Type GetImplementationType<TInterface>()
+		{
+			Type interfaceType = typeof(TInterface);
+			return GetImplementationType(interfaceType);
+		}
+
+		protected virtual Type GetImplementationType(Type interfaceType)
 		{
 			Type implementationType = null;
 
@@ -33,6 +39,7 @@ namespace FlatManagement.Common
 
 			return implementationType;
 		}
+
 
 		private Type GetImplementationTypeFromAssembly(Type interfaceType)
 		{

@@ -2,6 +2,7 @@
 using FlatManagement.Bll.Interface;
 using FlatManagement.Common;
 using FlatManagement.Common.Exceptions;
+using Newtonsoft.Json;
 
 namespace FlatManagement.Bll
 {
@@ -31,7 +32,27 @@ namespace FlatManagement.Bll
 		public TBll Get<TBll>(params object[] parameters)
 			where TBll : IModel
 		{
-			Type interfaceType = typeof(TBll);
+			Type implementationType = GetImplementationType<TBll>();
+
+			return (TBll)Activator.CreateInstance(implementationType, parameters);
+		}
+
+		public TBll Deserialize<TBll>(string jsonObject)
+			where TBll : IModel
+		{
+			Type implementationType = GetImplementationType<TBll>();
+
+			return (TBll)JsonConvert.DeserializeObject(jsonObject, implementationType);
+		}
+
+		public string Serialise<TBll>(TBll item)
+			where TBll : IModel
+		{
+			return JsonConvert.SerializeObject(item);
+		}
+
+		protected override Type GetImplementationType(Type interfaceType)
+		{
 #if DEBUG
 			if (!interfaceType.IsInterface)
 			{
@@ -45,7 +66,7 @@ namespace FlatManagement.Bll
 				throw new ImplementationNotFoundException(interfaceType, LayerName);
 			}
 
-			return (TBll)Activator.CreateInstance(implementationType, parameters);
+			return implementationType;
 		}
 	}
 }

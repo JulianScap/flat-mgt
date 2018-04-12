@@ -1,12 +1,13 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using FlatManagement.Common.Dto;
+using FlatManagement.Common.Validation;
 using FlatManagement.Dto.Enums;
-using FlatManagement.Dto.Interface;
 
 namespace FlatManagement.Dto.Entities
 {
 	[DebuggerDisplay("PeriodType({PeriodTypeId}::{Name})")]
-	public partial class PeriodType : AbstractDto<int>, IPeriodType
+	public partial class PeriodType : AbstractDto<int>, IEquatable<PeriodType>
 	{
 		public PeriodType() { }
 
@@ -22,6 +23,34 @@ namespace FlatManagement.Dto.Entities
 		public override int GetId()
 		{
 			return this.PeriodTypeId;
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is PeriodType pt)
+			{
+				return Equals(pt);
+			}
+
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return HashCode.Compute(this.Name, this.PeriodTypeId);
+		}
+
+		public bool Equals(PeriodType other)
+		{
+			if (other == null)
+			{
+				return false;
+			}
+			else
+			{
+				return this.Name == other.Name
+					&& this.PeriodTypeId == other.PeriodTypeId;
+			}
 		}
 	}
 }
