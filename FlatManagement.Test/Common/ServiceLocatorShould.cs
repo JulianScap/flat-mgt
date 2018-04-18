@@ -1,4 +1,5 @@
-﻿using FlatManagement.Common.Services;
+﻿using FlatManagement.Common.Exceptions;
+using FlatManagement.Common.Services;
 using FlatManagement.Test.Tools;
 using Microsoft.Extensions.Configuration;
 using Xunit;
@@ -7,15 +8,12 @@ namespace FlatManagement.Test.Common
 {
 	public class ServiceLocatorShould : TestBase
 	{
-		public override IConfiguration GetConfiguration(string fileName = "appsettings.json")
-		{
-			return base.GetConfiguration("Configurations\\Services.json");
-		}
+		public const string ServiceConfiguration = "Configurations\\Services.json";
 
 		[Fact]
 		public void InitialiseProperly()
 		{
-			IConfiguration configuration = GetConfiguration();
+			IConfiguration configuration = GetConfiguration(ServiceConfiguration);
 			ServiceLocator.Instance.SetConfiguration(configuration);
 			ServiceLocator.Instance.Initialise();
 		}
@@ -23,7 +21,7 @@ namespace FlatManagement.Test.Common
 		[Fact]
 		public void ReturnANewInstanceProperly()
 		{
-			IConfiguration configuration = GetConfiguration();
+			IConfiguration configuration = GetConfiguration(ServiceConfiguration);
 			ServiceLocator.Instance.SetConfiguration(configuration);
 
 			ITestLocatorInterface result = ServiceLocator.Instance.GetService<ITestLocatorInterface>();
@@ -31,6 +29,7 @@ namespace FlatManagement.Test.Common
 
 			Assert.NotNull(result);
 			Assert.NotNull(result2);
+
 			Assert.IsType<TestLocatorClass>(result);
 			Assert.IsType<TestLocatorClass>(result2);
 
@@ -40,7 +39,7 @@ namespace FlatManagement.Test.Common
 		[Fact]
 		public void ReturnSingleton()
 		{
-			IConfiguration configuration = GetConfiguration();
+			IConfiguration configuration = GetConfiguration(ServiceConfiguration);
 			ServiceLocator.Instance.SetConfiguration(configuration);
 
 			ITestLocatorInterface2 result = ServiceLocator.Instance.GetService<ITestLocatorInterface2>();
@@ -53,6 +52,12 @@ namespace FlatManagement.Test.Common
 			Assert.IsType<TestLocatorClass>(result2);
 
 			Assert.Same(result, result2);
+		}
+
+		[Fact]
+		public void ThrowIfNoImplementationCanBeFound()
+		{
+			Assert.Throws<ServiceNotFoundException>(() => ServiceLocator.Instance.GetService<INoImplementationModel>());
 		}
 	}
 }
