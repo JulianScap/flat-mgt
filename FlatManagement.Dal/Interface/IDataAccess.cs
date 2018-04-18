@@ -8,5 +8,6 @@ namespace FlatManagement.Dal.Interface
 	{
 		IEnumerable<TDto> GetAll();
 		TDto GetById(params object[] ids);
+		void Update(TDto item);
 	}
 }

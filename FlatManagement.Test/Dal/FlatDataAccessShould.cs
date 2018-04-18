@@ -35,5 +35,36 @@ namespace FlatManagement.Test.Dal
 
 			Assert.NotNull(flat);
 		}
+
+		[Fact]
+		public void BeAbleToUpdateAFlat()
+		{
+			IFlatDataAccess da = DalFactory.Instance.Get<IFlatDataAccess>();
+			Flat flat = da.GetById(22);
+
+			if (flat.Address == "4E MacAulay Street")
+			{
+				flat.Address = "19A Mount Eden Road";
+			}
+			else
+			{
+				flat.Address = "4E MacAulay Street";
+			}
+
+			if (flat.Name == "4E")
+			{
+				flat.Name = "19A";
+			}
+			else
+			{
+				flat.Name = "4E";
+			}
+
+			da.Update(flat);
+
+			Flat hydratedFlat = da.GetById(22);
+
+			Assert.Equal(flat, hydratedFlat);
+		}
 	}
 }

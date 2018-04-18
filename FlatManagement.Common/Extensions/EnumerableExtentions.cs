@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FlatManagement.Common.Extensions
@@ -7,7 +8,32 @@ namespace FlatManagement.Common.Extensions
 	{
 		public static bool IsEmpty<T>(this IEnumerable<T> that)
 		{
+			if (that == null)
+			{
+				throw new ArgumentNullException("that");
+			}
+
 			return !that.Any();
+		}
+
+		public static IEnumerable<T> Merge<T>(this IEnumerable<T> that, params IEnumerable<T>[] collections)
+		{
+			if (that == null)
+			{
+				throw new ArgumentNullException("that");
+			}
+
+			List<T> result = new List<T>(that);
+
+			foreach (var collection in collections)
+			{
+				if (collection != null)
+				{
+					result.AddRange(collection);
+				}
+			}
+
+			return result;
 		}
 	}
 }

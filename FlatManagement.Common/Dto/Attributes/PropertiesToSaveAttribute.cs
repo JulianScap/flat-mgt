@@ -3,13 +3,13 @@
 namespace FlatManagement.Common.Dto.Attributes
 {
 	[AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-	public class IdPropertyNameAttribute : Attribute
+	public class PropertiesToSaveAttribute : Attribute
 	{
-		private readonly string[] ids;
+		private readonly string[] fields;
 
-		public IdPropertyNameAttribute(params string[] ids)
+		public PropertiesToSaveAttribute(params string[] fields)
 		{
-			this.ids = ids;
+			this.fields = fields;
 		}
 
 		public static string[] Get<T>()
@@ -19,13 +19,13 @@ namespace FlatManagement.Common.Dto.Attributes
 
 		public static string[] Get(Type type)
 		{
-			var attribute = GetCustomAttribute(type, typeof(IdPropertyNameAttribute)) as IdPropertyNameAttribute;
+			var attribute = GetCustomAttribute(type, typeof(PropertiesToSaveAttribute)) as PropertiesToSaveAttribute;
 			if (attribute == null)
 			{
 				return new string[0];
 			} else
 			{
-				return attribute.ids;
+				return attribute.fields;
 			}
 		}
 	}

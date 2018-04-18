@@ -5,5 +5,6 @@
 		GetAll,
 		GetById,
 		Custom,
+		Update,
 	}
 }

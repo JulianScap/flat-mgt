@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -15,11 +16,14 @@ namespace FlatManagement.Dal.Impl
 	public abstract class AbstractDataAccess<TDto> : IDataAccess<TDto>
 		where TDto : new()
 	{
+		private const string IdFieldName = "new_id";
 		private static readonly string tListTypeName;
+		private static readonly IDictionary<string, PropertyInfo> properties;
 
 		static AbstractDataAccess()
 		{
 			tListTypeName = typeof(TDto).Name;
+			properties = new ConcurrentDictionary<string, PropertyInfo>();
 		}
 
 		public IEnumerable<TDto> GetAll()
@@ -54,6 +58,34 @@ namespace FlatManagement.Dal.Impl
 			}
 
 			return result.First();
+		}
+
+		protected virtual int Insert(OperationEnum operation, Parameter[] parameters, string methodName = null)
+		{
+			using (ConnectionInfoContainer cic = GetConnectionInfoContainer(operation, methodName))
+			{
+				AddParameters(cic, parameters);
+				AddNewIdParameter(cic);
+				cic.Connection.Open();
+				cic.Command.ExecuteScalar();
+				return (int)cic.Command.Parameters[IdFieldName].Value;
+			}
+		}
+
+		protected virtual void Update(OperationEnum operation, Parameter[] parameters, string methodName = null)
+		{
+			using (ConnectionInfoContainer cic = GetConnectionInfoContainer(operation, methodName))
+			{
+				AddParameters(cic, parameters);
+				cic.Connection.Open();
+				cic.Command.ExecuteScalar();
+			}
+		}
+
+		private void AddNewIdParameter(ConnectionInfoContainer cic)
+		{
+			SqlParameter parameter = cic.Command.Parameters.Add(IdFieldName, SqlDbType.Int);
+			parameter.Direction = ParameterDirection.Output;
 		}
 
 		private void AddParameters(ConnectionInfoContainer cic, Parameter[] parameters)
@@ -115,9 +147,22 @@ namespace FlatManagement.Dal.Impl
 			{
 				object value = reader.GetValue(index);
 				string columnName = reader.GetName(index);
-				PropertyInfo pi = typeof(TDto).GetProperty(columnName);
+				PropertyInfo pi = GetProperty(columnName);
 				pi.SetValue(item, value);
 			}
+		}
+
+		private PropertyInfo GetProperty(string columnName)
+		{
+			PropertyInfo result = null;
+
+			if (!properties.TryGetValue(columnName, out result))
+			{
+				result = typeof(TDto).GetProperty(columnName);
+				properties.TryAdd(columnName, result);
+			}
+
+			return result;
 		}
 
 		protected virtual SqlCommand GetStoredProcedureCommand(string procedureName, SqlConnection connection)
@@ -128,11 +173,11 @@ namespace FlatManagement.Dal.Impl
 			};
 		}
 
-		protected virtual string GetStoredProcedureName(OperationEnum operation, string name)
+		protected virtual string GetStoredProcedureName(OperationEnum operation, string name = null)
 		{
 			if (operation == OperationEnum.Custom)
 			{
-				return tListTypeName + "_" + name;
+				return tListTypeName + "_Custom_" + name;
 			}
 			else
 			{
@@ -153,7 +198,7 @@ namespace FlatManagement.Dal.Impl
 
 		private TDto GetById(Type tdtoType, params object[] ids)
 		{
-			string[] idPropertyNames = IdPropertyNameAttribute.GetIdPropertyName(tdtoType);
+			string[] idPropertyNames = IdPropertyNameAttribute.Get(tdtoType);
 			Parameter[] parameters = BuildIdParameters(idPropertyNames, ids);
 			return GetSingle(OperationEnum.GetById, parameters);
 		}
@@ -170,6 +215,36 @@ namespace FlatManagement.Dal.Impl
 			for (int i = 0; i < result.Length; i++)
 			{
 				result[i] = new Parameter(idPropertyNames[i], ids[i]);
+			}
+
+			return result;
+		}
+
+		public void Update(TDto item)
+		{
+			const bool update = true;
+			Parameter[] parameters = BuildParametersFromDto(item, update);
+			Update(OperationEnum.Update, parameters);
+		}
+
+		private Parameter[] BuildParametersFromDto(TDto item, bool update)
+		{
+			string[] propertiesToSave = PropertiesToSaveAttribute.Get<TDto>();
+
+			if (update)
+			{
+				string[] idPropertyNames = IdPropertyNameAttribute.Get<TDto>();
+				propertiesToSave = propertiesToSave.Merge(idPropertyNames).ToArray();
+			}
+
+			Parameter[] result = new Parameter[propertiesToSave.Length];
+
+			for (int i = 0; i < result.Length; i++)
+			{
+				PropertyInfo pi = GetProperty(propertiesToSave[i]);
+				object value = pi.GetValue(item);
+
+				result[i] = new Parameter(propertiesToSave[i], value);
 			}
 
 			return result;

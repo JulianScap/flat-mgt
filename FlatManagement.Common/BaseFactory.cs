@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -6,18 +7,18 @@ namespace FlatManagement.Common
 {
 	public abstract class BaseFactory
 	{
-		protected Dictionary<string, Type> typesByName;
+		protected IDictionary<string, Type> typesByName;
 		private Assembly executingAssembly;
 
 		public BaseFactory()
 		{
-			this.typesByName = new Dictionary<string, Type>();
+			this.typesByName = new ConcurrentDictionary<string, Type>();
 			this.executingAssembly = Assembly.GetCallingAssembly();
 		}
 
 		public BaseFactory(Assembly executingAssembly)
 		{
-			this.typesByName = new Dictionary<string, Type>();
+			this.typesByName = new ConcurrentDictionary<string, Type>();
 			this.executingAssembly = executingAssembly;
 		}
 
@@ -34,7 +35,7 @@ namespace FlatManagement.Common
 			if (!this.typesByName.TryGetValue(interfaceType.FullName, out implementationType))
 			{
 				implementationType = GetImplementationTypeFromAssembly(interfaceType);
-				this.typesByName[interfaceType.FullName] = implementationType;
+				this.typesByName.TryAdd(interfaceType.FullName, implementationType);
 			}
 
 			return implementationType;
