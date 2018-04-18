@@ -8,12 +8,21 @@ namespace FlatManagement.Test.Common
 {
 	public class ServiceLocatorShould : TestBase
 	{
-		public const string ServiceConfiguration = "Configurations\\Services.json";
+		[Fact]
+		public void BeASingleton()
+		{
+			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
+			ServiceLocator firstInstance = ServiceLocator.Instance;
+			ServiceLocator secondInstance = ServiceLocator.Instance;
+
+			Assert.NotNull(firstInstance);
+			Assert.Same(firstInstance, secondInstance);
+		}
 
 		[Fact]
 		public void InitialiseProperly()
 		{
-			IConfiguration configuration = GetConfiguration(ServiceConfiguration);
+			IConfiguration configuration = GetConfiguration();
 			ServiceLocator.Instance.SetConfiguration(configuration);
 			ServiceLocator.Instance.Initialise();
 		}
@@ -21,7 +30,7 @@ namespace FlatManagement.Test.Common
 		[Fact]
 		public void ReturnANewInstanceProperly()
 		{
-			IConfiguration configuration = GetConfiguration(ServiceConfiguration);
+			IConfiguration configuration = GetConfiguration();
 			ServiceLocator.Instance.SetConfiguration(configuration);
 
 			ITestLocatorInterface result = ServiceLocator.Instance.GetService<ITestLocatorInterface>();
@@ -39,7 +48,7 @@ namespace FlatManagement.Test.Common
 		[Fact]
 		public void ReturnSingleton()
 		{
-			IConfiguration configuration = GetConfiguration(ServiceConfiguration);
+			IConfiguration configuration = GetConfiguration();
 			ServiceLocator.Instance.SetConfiguration(configuration);
 
 			ITestLocatorInterface2 result = ServiceLocator.Instance.GetService<ITestLocatorInterface2>();

@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using FlatManagement.Dal;
+using FlatManagement.Common.Services;
 using FlatManagement.Dal.Impl;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
+using FlatManagement.Test.Tools;
 using Xunit;
 
 namespace FlatManagement.Test.Dal
 {
-	public class PeriodTypeDataAccessShould
+	public class PeriodTypeDataAccessShould : TestBase
 	{
 		[Fact]
 		public void ReturnAValidDataAccessObject()
 		{
-			IPeriodTypeDataAccess da = DalFactory.Instance.Get<IPeriodTypeDataAccess>();
+			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
+			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
 
 			Assert.NotNull(da);
 			Assert.IsType<PeriodTypeDataAccess>(da);
@@ -22,7 +24,8 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void ReturnAllRows()
 		{
-			IPeriodTypeDataAccess da = DalFactory.Instance.Get<IPeriodTypeDataAccess>();
+			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
+			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
 			IEnumerable<PeriodType> items = da.GetAll();
 
 			Assert.NotEmpty(items);

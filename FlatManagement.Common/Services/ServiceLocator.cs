@@ -73,9 +73,19 @@ namespace FlatManagement.Common.Services
 			{
 				if (service.Mode == ServiceMode.Singleton)
 				{
-					service.Instance = Activator.CreateInstance(service.ImplementationType, configuration);
+					service.Instance = CreateInstance(service.ImplementationType);
 				}
 			}
+		}
+
+		private object CreateInstance(Type implementationType)
+		{
+			return Activator.CreateInstance(
+						implementationType,
+						BindingFlags.CreateInstance | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+						binder: null,
+						args: new object[] { configuration },
+						culture: null);
 		}
 
 		private void EnsureInitialised()
@@ -114,7 +124,7 @@ namespace FlatManagement.Common.Services
 			switch (service.Mode)
 			{
 				case ServiceMode.NewInstance:
-					result = (T)Activator.CreateInstance(service.ImplementationType, configuration);
+					result = (T)CreateInstance(service.ImplementationType);
 					break;
 				case ServiceMode.Singleton:
 					result = (T)service.Instance;

@@ -10,6 +10,21 @@
 				"Interface": "FlatManagement.Test.Tools.ITestLocatorInterface2, FlatManagement.Test",
 				"Mode": "Singleton",
 				"ImplementationType": "FlatManagement.Test.Tools.TestLocatorClass, FlatManagement.Test"
+			},
+			{
+				"Interface": "FlatManagement.Dal.Interface.IFlatDataAccess, FlatManagement.Dal",
+				"Mode": "Singleton",
+				"ImplementationType": "FlatManagement.Dal.Impl.FlatDataAccess, FlatManagement.Dal"
+			},
+			{
+				"Interface": "FlatManagement.Dal.Interface.IPeriodTypeDataAccess, FlatManagement.Dal",
+				"Mode": "Singleton",
+				"ImplementationType": "FlatManagement.Dal.Impl.PeriodTypeDataAccess, FlatManagement.Dal"
+			},
+			{
+				"Interface": "FlatManagement.Bll.Interface.IPeriodTypeModel, FlatManagement.Bll",
+				"Mode": "NewInstance",
+				"ImplementationType": "FlatManagement.Bll.Impl.PeriodTypeModel, FlatManagement.Bll"
 			}
 		]
 	}

@@ -1,5 +1,5 @@
-﻿using FlatManagement.Bll;
-using FlatManagement.Bll.Interface;
+﻿using FlatManagement.Bll.Interface;
+using FlatManagement.Common.Services;
 using FlatManagement.WebApi.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +16,7 @@ namespace FlatManagement.WebApi.Controllers
 		[HttpGet]
 		public IPeriodTypeModel Get()
 		{
-			IPeriodTypeModel ipt = BllFactory.Instance.Get<IPeriodTypeModel>();
+			IPeriodTypeModel ipt = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
 
 			ipt.GetAll();
 
@@ -26,7 +26,7 @@ namespace FlatManagement.WebApi.Controllers
 		[HttpGet("{id}")]
 		public IPeriodTypeModel Get(int id)
 		{
-			IPeriodTypeModel ipt = BllFactory.Instance.Get<IPeriodTypeModel>();
+			IPeriodTypeModel ipt = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
 
 			ipt.GetAll();
 			ipt.RemoveAll(x => x.PeriodTypeId != id);

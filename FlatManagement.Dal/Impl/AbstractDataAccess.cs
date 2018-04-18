@@ -10,6 +10,7 @@ using FlatManagement.Common.Exceptions;
 using FlatManagement.Common.Extensions;
 using FlatManagement.Common.Logging;
 using FlatManagement.Dal.Interface;
+using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Dal.Impl
 {
@@ -19,11 +20,17 @@ namespace FlatManagement.Dal.Impl
 		private const string IdFieldName = "new_id";
 		private static readonly string tListTypeName;
 		private static readonly ConcurrentDictionary<string, PropertyInfo> properties;
+		private IConfiguration configuration;
 
 		static AbstractDataAccess()
 		{
 			tListTypeName = typeof(TDto).Name;
 			properties = new ConcurrentDictionary<string, PropertyInfo>();
+		}
+
+		protected AbstractDataAccess(IConfiguration configuration)
+		{
+			this.configuration = configuration;
 		}
 
 		public IEnumerable<TDto> GetAll()

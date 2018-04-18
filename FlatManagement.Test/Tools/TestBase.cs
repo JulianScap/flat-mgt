@@ -4,10 +4,13 @@ namespace FlatManagement.Test.Tools
 {
 	public class TestBase
 	{
-		public virtual IConfiguration GetConfiguration(string fileName = "appsettings.json")
+		public IConfiguration GetConfiguration()
 		{
 			ConfigurationBuilder builder = new ConfigurationBuilder();
-			builder.AddJsonFile(fileName);
+
+			builder.AddJsonFile("Configurations\\appsettings.json");
+			builder.AddJsonFile("Configurations\\Services.json");
+
 			return builder.Build();
 		}
 	}

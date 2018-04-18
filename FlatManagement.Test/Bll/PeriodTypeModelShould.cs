@@ -1,16 +1,18 @@
-﻿using FlatManagement.Bll;
-using FlatManagement.Bll.Impl;
+﻿using FlatManagement.Bll.Impl;
 using FlatManagement.Bll.Interface;
+using FlatManagement.Common.Services;
+using FlatManagement.Test.Tools;
 using Xunit;
 
 namespace FlatManagement.Test.Bll
 {
-	public class PeriodTypeModelShould
+	public class PeriodTypeModelShould : TestBase
 	{
 		[Fact]
 		public void ReturnAValidModelObject()
 		{
-			IPeriodTypeModel ptm = BllFactory.Instance.Get<IPeriodTypeModel>();
+			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
+			IPeriodTypeModel ptm = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
 
 			Assert.NotNull(ptm);
 			Assert.IsType<PeriodTypeModel>(ptm);

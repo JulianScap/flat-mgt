@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
-using FlatManagement.Dal;
+using FlatManagement.Common.Services;
 using FlatManagement.Dal.Impl;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
+using FlatManagement.Test.Tools;
 using Xunit;
 
 namespace FlatManagement.Test.Dal
 {
-	public class FlatDataAccessShould
+	public class FlatDataAccessShould : TestBase
 	{
 		[Fact]
 		public void ReturnAValidDataAccessObject()
 		{
-			IFlatDataAccess da = DalFactory.Instance.Get<IFlatDataAccess>();
+			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
+			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
 
 			Assert.NotNull(da);
 			Assert.IsType<FlatDataAccess>(da);
@@ -21,7 +23,8 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToReturnAllTheTableContent()
 		{
-			IFlatDataAccess da = DalFactory.Instance.Get<IFlatDataAccess>();
+			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
+			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
 			IEnumerable<Flat> flats = da.GetAll();
 
 			Assert.NotEmpty(flats);
@@ -30,7 +33,8 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToReturnASingleFlatById()
 		{
-			IFlatDataAccess da = DalFactory.Instance.Get<IFlatDataAccess>();
+			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
+			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
 			Flat flat = da.GetById(22);
 
 			Assert.NotNull(flat);
@@ -39,7 +43,8 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToUpdateAFlat()
 		{
-			IFlatDataAccess da = DalFactory.Instance.Get<IFlatDataAccess>();
+			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
+			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
 			Flat flat = da.GetById(22);
 
 			if (flat.Address == "4E MacAulay Street")

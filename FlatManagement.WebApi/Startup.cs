@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FlatManagement.Common.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,7 @@ namespace FlatManagement.WebApi
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+			ServiceLocator.Instance.SetConfiguration(configuration);
 		}
 
 		public IConfiguration Configuration { get; }
