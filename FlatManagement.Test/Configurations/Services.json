@@ -1,0 +1,16 @@
+﻿{
+	"Services": {
+		"Service": [
+			{
+				"Interface": "FlatManagement.Test.Tools.ITestLocatorInterface, FlatManagement.Test",
+				"Mode": "NewInstance",
+				"ImplementationType": "FlatManagement.Test.Tools.TestLocatorClass, FlatManagement.Test"
+			},
+			{
+				"Interface": "FlatManagement.Test.Tools.ITestLocatorInterface2, FlatManagement.Test",
+				"Mode": "Singleton",
+				"ImplementationType": "FlatManagement.Test.Tools.TestLocatorClass, FlatManagement.Test"
+			}
+		]
+	}
+}

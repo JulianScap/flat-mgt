@@ -2,7 +2,7 @@
 
 namespace FlatManagement.Test.Tools
 {
-	class TestLocatorClass : ITestLocatorInterface
+	class TestLocatorClass : ITestLocatorInterface, ITestLocatorInterface2
 	{
 		public TestLocatorClass(IConfiguration configuration)
 		{
