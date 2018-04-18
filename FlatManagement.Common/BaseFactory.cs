@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace FlatManagement.Common
 {
 	public abstract class BaseFactory
 	{
-		protected IDictionary<string, Type> typesByName;
+		protected ConcurrentDictionary<string, Type> typesByName;
 		private Assembly executingAssembly;
 
 		public BaseFactory()

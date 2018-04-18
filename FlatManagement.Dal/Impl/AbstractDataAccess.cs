@@ -18,7 +18,7 @@ namespace FlatManagement.Dal.Impl
 	{
 		private const string IdFieldName = "new_id";
 		private static readonly string tListTypeName;
-		private static readonly IDictionary<string, PropertyInfo> properties;
+		private static readonly ConcurrentDictionary<string, PropertyInfo> properties;
 
 		static AbstractDataAccess()
 		{
