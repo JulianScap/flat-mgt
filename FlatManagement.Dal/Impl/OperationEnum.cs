@@ -3,6 +3,7 @@
 	public enum OperationEnum
 	{
 		GetAll,
+		GetById,
 		Custom,
 	}
 }

@@ -26,5 +26,14 @@ namespace FlatManagement.Test.Dal
 
 			Assert.NotEmpty(flats);
 		}
+
+		[Fact]
+		public void BeAbleToReturnASingleFlatById()
+		{
+			IFlatDataAccess da = DalFactory.Instance.Get<IFlatDataAccess>();
+			Flat flat = da.GetById(22);
+
+			Assert.NotNull(flat);
+		}
 	}
 }

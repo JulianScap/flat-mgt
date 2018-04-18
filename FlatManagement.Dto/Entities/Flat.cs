@@ -1,7 +1,9 @@
 ﻿using FlatManagement.Common.Dto;
+using FlatManagement.Common.Dto.Attributes;
 
 namespace FlatManagement.Dto.Entities
 {
+	[IdPropertyName("FlatId")]
 	public partial class Flat : AbstractDto<int>
 	{
 		public int FlatId { get; set; }
