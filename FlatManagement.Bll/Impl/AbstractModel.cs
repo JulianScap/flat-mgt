@@ -10,14 +10,19 @@ namespace FlatManagement.Bll.Impl
 	internal abstract class AbstractModel<TDto> : AbstractDtoList<TDto>, IModel<TDto>
 		where TDto : class, new()
 	{
-		private IConfiguration configuration;
+		public IConfiguration Configuration { get; set; }
+
+		protected AbstractModel()
+		{
+
+		}
 
 		protected AbstractModel(IConfiguration configuration)
 		{
-			this.configuration = configuration;
+			this.Configuration = configuration;
 		}
 
-		protected abstract IDataAccess<TDto> GetDal(params object[] args);
+		protected abstract IDataAccess<TDto> GetDal();
 
 		public void GetAll()
 		{

@@ -8,12 +8,17 @@ namespace FlatManagement.Bll.Impl
 {
 	internal class PeriodTypeModel : AbstractModel<PeriodType>, IPeriodTypeModel
 	{
+		public PeriodTypeModel()
+		{
+
+		}
+
 		public PeriodTypeModel(IConfiguration configuration) : base(configuration)
 		{
 
 		}
 
-		protected override IDataAccess<PeriodType> GetDal(params object[] args)
+		protected override IDataAccess<PeriodType> GetDal()
 		{
 			return ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
 		}
