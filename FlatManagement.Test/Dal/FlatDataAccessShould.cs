@@ -13,7 +13,6 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void ReturnAValidDataAccessObject()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
 
 			Assert.NotNull(da);
@@ -23,7 +22,6 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToReturnAllTheTableContent()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
 			IEnumerable<Flat> flats = da.GetAll();
 
@@ -33,7 +31,6 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToReturnASingleFlatById()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
 			Flat flat = da.GetById(22);
 
@@ -43,7 +40,6 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToUpdateAFlat()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
 			Flat flat = da.GetById(22);
 

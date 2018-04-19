@@ -11,7 +11,6 @@ namespace FlatManagement.Test.Bll
 		[Fact]
 		public void ReturnAValidModelObject()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IPeriodTypeModel ptm = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
 
 			Assert.NotNull(ptm);

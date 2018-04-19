@@ -9,11 +9,9 @@ namespace FlatManagement.Test.Bll
 {
 	public class BusinessLogicLayerShould : TestBase
 	{
-		
 		[Fact]
 		public void SerializeEmptyModels()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IPeriodTypeModel model = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
 
 			string serializedModel = ModelSerialiser.Instance.Serialise(model);
@@ -23,7 +21,6 @@ namespace FlatManagement.Test.Bll
 		[Fact]
 		public void DeserializeEmptyModels()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IPeriodTypeModel model = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
 			string serializedModel = ModelSerialiser.Instance.Serialise(model);
 			IPeriodTypeModel derializedModel = ModelSerialiser.Instance.Deserialize<IPeriodTypeModel>(serializedModel);
@@ -34,7 +31,6 @@ namespace FlatManagement.Test.Bll
 		[Fact]
 		public void SerializeModels()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IPeriodTypeModel model = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
 			model.GetAll();
 
@@ -45,7 +41,6 @@ namespace FlatManagement.Test.Bll
 		[Fact]
 		public void DeserializeModels()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IPeriodTypeModel model = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
 			model.GetAll();
 

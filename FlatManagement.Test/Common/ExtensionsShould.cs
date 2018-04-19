@@ -6,7 +6,7 @@ using Xunit;
 
 namespace FlatManagement.Test.Common
 {
-	public class ExtensionsShould
+	public class ExtensionsShould : TestBase
 	{
 		[Fact]
 		public void DisposeNullObjectWithoutErrors()

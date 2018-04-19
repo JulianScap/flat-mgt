@@ -1,9 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FlatManagement.Common.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Test.Tools
 {
 	public class TestBase
 	{
+		public TestBase()
+		{
+			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
+		}
+
 		public IConfiguration GetConfiguration()
 		{
 			ConfigurationBuilder builder = new ConfigurationBuilder();

@@ -14,7 +14,6 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void ReturnAValidDataAccessObject()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
 
 			Assert.NotNull(da);
@@ -24,7 +23,6 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void ReturnAllRows()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
 			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
 			IEnumerable<PeriodType> items = da.GetAll();
 
