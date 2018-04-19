@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using FlatManagement.Common.Dto;
-using FlatManagement.Common.Dto.Attributes;
 using FlatManagement.Common.Validation;
 
 namespace FlatManagement.Dto.Entities
 {
-	[IdPropertyName("FlatId")]
-	[PropertiesToSave("Name", "Address")]
 	[DebuggerDisplay("Flat({FlatId}::{Name})")]
 	public partial class Flat : AbstractDto<int>, IEquatable<Flat>
 	{
@@ -48,5 +45,13 @@ namespace FlatManagement.Dto.Entities
 					&& this.FlatId == other.FlatId;
 			}
 		}
+
+		public readonly string[] ids = new string[] { "FlatId" };
+		public readonly string[] fields = new string[] { "Name", "Address" };
+		public readonly string[] allFields = new string[] { "FlatId", "Name", "Address" };
+
+		public override string[] IdFieldNames { get => ids; }
+		public override string[] FieldNames { get => fields; }
+		public override string[] AllFieldNames { get => allFields; }
 	}
 }

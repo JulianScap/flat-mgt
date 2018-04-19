@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using FlatManagement.Common.Dto.Attributes;
+using FlatManagement.Common.Dto;
 using FlatManagement.Common.Exceptions;
 using FlatManagement.Common.Extensions;
 using FlatManagement.Common.Logging;
@@ -15,7 +15,7 @@ using Microsoft.Extensions.Configuration;
 namespace FlatManagement.Dal.Impl
 {
 	public abstract class AbstractDataAccess<TDto> : IDataAccess<TDto>
-		where TDto : new()
+		where TDto : IDto, new()
 	{
 		private const string IdFieldName = "new_id";
 		private static readonly string tListTypeName;
@@ -199,13 +199,7 @@ namespace FlatManagement.Dal.Impl
 
 		public TDto GetById(params object[] ids)
 		{
-			Type tdtoType = typeof(TDto);
-			return GetById(tdtoType, ids);
-		}
-
-		private TDto GetById(Type tdtoType, params object[] ids)
-		{
-			string[] idPropertyNames = IdPropertyNameAttribute.Get(tdtoType);
+			string[] idPropertyNames = new TDto().IdFieldNames;
 			Parameter[] parameters = BuildIdParameters(idPropertyNames, ids);
 			return GetSingle(OperationEnum.GetById, parameters);
 		}
@@ -236,12 +230,11 @@ namespace FlatManagement.Dal.Impl
 
 		private Parameter[] BuildParametersFromDto(TDto item, bool update)
 		{
-			string[] propertiesToSave = PropertiesToSaveAttribute.Get<TDto>();
+			string[] propertiesToSave = item.FieldNames;
 
 			if (update)
 			{
-				string[] idPropertyNames = IdPropertyNameAttribute.Get<TDto>();
-				propertiesToSave = propertiesToSave.Merge(idPropertyNames).ToArray();
+				propertiesToSave = propertiesToSave.Merge(item.IdFieldNames).ToArray();
 			}
 
 			Parameter[] result = new Parameter[propertiesToSave.Length];

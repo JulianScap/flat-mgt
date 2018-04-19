@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace FlatManagement.Common.Dto
 {
 	public interface IDtoList<TDto> : ICollection<TDto>, IEnumerable<TDto>, IEnumerable, IList<TDto>, IReadOnlyCollection<TDto>, IReadOnlyList<TDto>, ICollection, IList
-		where TDto : class, new()
+		where TDto : IDto, new()
 	{
 		int RemoveAll(Predicate<TDto> predicate);
 		new int Count { get; }

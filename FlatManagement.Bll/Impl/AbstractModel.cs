@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 namespace FlatManagement.Bll.Impl
 {
 	internal abstract class AbstractModel<TDto> : AbstractDtoList<TDto>, IModel<TDto>
-		where TDto : class, new()
+		where TDto : IDto, new()
 	{
 		public IConfiguration Configuration { get; set; }
 

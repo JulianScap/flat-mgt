@@ -1,10 +1,11 @@
 ﻿using System;
 using FlatManagement.Common.Dto;
+using FlatManagement.Common.Validation;
 using FlatManagement.Dto.Enums;
 
 namespace FlatManagement.Dto.Entities
 {
-	public partial class Task : AbstractDto<int>
+	public partial class Task : AbstractDto<int>, IEquatable<Task>
 	{
 		public int TaskId { get; set; }
 		public string Name { get; set; }
@@ -43,5 +44,44 @@ namespace FlatManagement.Dto.Entities
 		{
 			return this.TaskId;
 		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj is PeriodType pt)
+			{
+				return Equals(pt);
+			}
+
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return HashCode.Compute(this.TaskId, this.Name, this.Description, this.DateStart, this.PeriodTypeId);
+		}
+
+		public bool Equals(Task other)
+		{
+			if (other == null)
+			{
+				return false;
+			}
+			else
+			{
+				return this.TaskId == other.TaskId
+					&& this.Name == other.Name
+					&& this.Description == other.Description
+					&& this.DateStart == other.DateStart
+					&& this.PeriodTypeId == other.PeriodTypeId;
+			}
+		}
+
+		public readonly string[] ids = new string[] { "TaskId" };
+		public readonly string[] fields = new string[] { "Name", "Description", "DateStart", "PeriodTypeId" };
+		public readonly string[] allFields = new string[] { "TaskId", "Name", "Description", "DateStart", "PeriodTypeId" };
+
+		public override string[] IdFieldNames { get => ids; }
+		public override string[] FieldNames { get => fields; }
+		public override string[] AllFieldNames { get => allFields; }
 	}
 }

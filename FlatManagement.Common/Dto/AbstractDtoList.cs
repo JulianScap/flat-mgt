@@ -8,7 +8,7 @@ namespace FlatManagement.Common.Dto
 {
 	[DebuggerDisplay("Count: {Count}")]
 	public abstract class AbstractDtoList<TDto> : IDtoList<TDto>, ICollection<TDto>, IEnumerable<TDto>, IEnumerable, IList<TDto>, IReadOnlyCollection<TDto>, IReadOnlyList<TDto>, ICollection, IList
-		where TDto : class, new()
+		where TDto : IDto, new()
 	{
 		protected readonly List<TDto> items;
 

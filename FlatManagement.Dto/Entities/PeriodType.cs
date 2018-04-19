@@ -52,5 +52,13 @@ namespace FlatManagement.Dto.Entities
 					&& this.PeriodTypeId == other.PeriodTypeId;
 			}
 		}
+
+		public readonly string[] ids = new string[] { "PeriodTypeId" };
+		public readonly string[] fields = new string[] { "Name" };
+		public readonly string[] allFields = new string[] { "PeriodTypeId", "Name" };
+
+		public override string[] IdFieldNames { get => ids; }
+		public override string[] FieldNames { get => fields; }
+		public override string[] AllFieldNames { get => allFields; }
 	}
 }
