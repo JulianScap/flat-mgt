@@ -1,4 +1,5 @@
-﻿using FlatManagement.Dal.Interface;
+﻿using FlatManagement.Dal.Tools;
+using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
 using Microsoft.Extensions.Configuration;
 

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace FlatManagement.Dal.Impl
+namespace FlatManagement.Dal.Tools
 {
 	[DebuggerDisplay("{FieldName}: {Value}")]
 	public class Parameter

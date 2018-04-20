@@ -16,7 +16,7 @@ namespace FlatManagement.Common.Extensions
 			return !that.Any();
 		}
 
-		public static IEnumerable<T> Merge<T>(this IEnumerable<T> that, params IEnumerable<T>[] collections)
+		public static IEnumerable<T> MergeWith<T>(this IEnumerable<T> that, params IEnumerable<T>[] collections)
 		{
 			if (that == null)
 			{

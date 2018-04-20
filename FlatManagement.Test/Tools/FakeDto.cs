@@ -11,7 +11,7 @@ namespace FlatManagement.Test.Tools
 	public class FakeDto : AbstractDto<int>, IFakeDto
 	{
 		public override string[] IdFieldNames { get; }
-		public override string[] FieldNames { get; }
+		public override string[] DataFieldNames { get; }
 		public override string[] AllFieldNames { get; }
 
 		public override int GetId()

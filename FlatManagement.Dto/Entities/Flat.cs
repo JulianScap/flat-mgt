@@ -51,7 +51,7 @@ namespace FlatManagement.Dto.Entities
 		public readonly string[] allFields = new string[] { "FlatId", "Name", "Address" };
 
 		public override string[] IdFieldNames { get => ids; }
-		public override string[] FieldNames { get => fields; }
+		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
 	}
 }
