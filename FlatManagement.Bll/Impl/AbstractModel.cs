@@ -24,7 +24,7 @@ namespace FlatManagement.Bll.Impl
 
 		protected abstract IDataAccess<TDto> GetDal();
 
-		public void GetAll()
+		public virtual void GetAll()
 		{
 			IDataAccess<TDto> dal = GetDal();
 			IEnumerable<TDto> allItems = dal.GetAll();
@@ -33,7 +33,7 @@ namespace FlatManagement.Bll.Impl
 			base.AddRange(allItems.ToList());
 		}
 
-		public void PersistAll()
+		public virtual void PersistAll()
 		{
 			IDataAccess<TDto> dal = GetDal();
 
@@ -50,12 +50,17 @@ namespace FlatManagement.Bll.Impl
 			}
 		}
 
-		public void GetById(params object[] ids)
+		public virtual void GetById(params object[] ids)
 		{
 			IDataAccess<TDto> dal = GetDal();
 			TDto item = dal.GetById(ids);
 			base.Clear();
 			base.Add(item);
+		}
+
+		public virtual TDto NewInstance()
+		{
+			return new TDto();
 		}
 	}
 }

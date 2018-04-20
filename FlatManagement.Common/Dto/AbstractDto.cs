@@ -38,7 +38,7 @@ namespace FlatManagement.Common.Dto
 		public override bool IsPersisted {
 			get
 			{
-				return EqualityComparer<TId>.Default.Equals(GetId(), default(TId));
+				return !EqualityComparer<TId>.Default.Equals(GetId(), default(TId));
 			}
 		}
 	}

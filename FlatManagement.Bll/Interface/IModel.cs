@@ -5,12 +5,13 @@ namespace FlatManagement.Bll.Interface
 	public interface IModel
 	{
 		IConfiguration Configuration { set; }
+		void GetAll();
+		void PersistAll();
+		void GetById(params object[] ids);
 	}
 
 	public interface IModel<TDto> : IModel
 	{
-		void GetAll();
-		void PersistAll();
-		void GetById(params object[] ids);
+		TDto NewInstance();
 	}
 }
