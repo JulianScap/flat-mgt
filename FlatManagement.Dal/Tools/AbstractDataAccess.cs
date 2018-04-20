@@ -47,7 +47,7 @@ namespace FlatManagement.Dal.Tools
 		public virtual void Update(TDto item)
 		{
 			DatacallsHandler handler = new DatacallsHandler(configuration);
-			string command = GetStoredProcedureName(OperationEnum.Insert);
+			string command = GetStoredProcedureName(OperationEnum.Update);
 			Parameter[] parameters = ParametersBuilder.BuildParametersFromDto(item, update: true);
 			handler.Execute(command, parameters);
 		}

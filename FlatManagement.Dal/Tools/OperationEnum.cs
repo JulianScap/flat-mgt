@@ -5,6 +5,7 @@
 		GetAll,
 		GetById,
 		Custom,
+		Update,
 		Insert,
 	}
 }
