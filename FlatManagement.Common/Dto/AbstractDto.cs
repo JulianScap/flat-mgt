@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace FlatManagement.Common.Dto
 {
@@ -8,6 +9,7 @@ namespace FlatManagement.Common.Dto
 		public abstract string[] DataFieldNames { get; }
 		public abstract string[] AllFieldNames { get; }
 		public abstract TypeEnum[] IdFieldTypes { get; }
+		public abstract bool IsPersisted { get; }
 
 		public virtual object GetFieldValue(string fieldName)
 		{
@@ -28,10 +30,16 @@ namespace FlatManagement.Common.Dto
 	}
 
 	public abstract class AbstractDto<TId> : AbstractDto, IDto<TId>
-		where TId : struct
 	{
 		public AbstractDto() { }
 
 		public abstract TId GetId();
+
+		public override bool IsPersisted {
+			get
+			{
+				return EqualityComparer<TId>.Default.Equals(GetId(), default(TId));
+			}
+		}
 	}
 }

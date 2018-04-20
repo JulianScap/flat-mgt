@@ -10,5 +10,6 @@ namespace FlatManagement.Bll.Interface
 	public interface IModel<TDto> : IModel
 	{
 		void GetAll();
+		void PersistAll();
 	}
 }

@@ -17,13 +17,14 @@
 
 		TypeEnum[] IdFieldTypes { get; }
 
+		bool IsPersisted { get; }
+
 		object GetFieldValue(string fieldName);
 
 		void SetFieldValue(string fieldName, object value);
 	}
 
 	public interface IDto<TId> : IDto
-		where TId : struct
 	{
 		TId GetId();
 	}

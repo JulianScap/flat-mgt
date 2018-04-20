@@ -32,5 +32,22 @@ namespace FlatManagement.Bll.Impl
 			base.Clear();
 			base.AddRange(allItems.ToList());
 		}
+
+		public void PersistAll()
+		{
+			IDataAccess<TDto> dal = GetDal();
+
+			foreach (TDto item in this)
+			{
+				if (item.IsPersisted)
+				{
+					dal.Update(item);
+				}
+				else
+				{
+					dal.Insert(item);
+				}
+			}
+		}
 	}
 }
