@@ -6,21 +6,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.WebApi.Controllers
 {
-	public class PeriodTypeController : ApiBaseController
+	public class PeriodTypeController : ApiBaseController<IPeriodTypeModel>
 	{
 		public PeriodTypeController(IConfiguration configuration)
 			: base(configuration)
 		{
-		}
-
-		[HttpGet]
-		public IPeriodTypeModel Get()
-		{
-			IPeriodTypeModel ipt = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
-
-			ipt.GetAll();
-
-			return ipt;
 		}
 
 		[HttpGet("{id}")]
