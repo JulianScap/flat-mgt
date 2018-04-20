@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace FlatManagement.Common.Dto
 {
 	public abstract class AbstractDto : IDto
 	{
+		[JsonIgnore]
 		public abstract string[] IdFieldNames { get; }
+		[JsonIgnore]
 		public abstract string[] DataFieldNames { get; }
+		[JsonIgnore]
 		public abstract string[] AllFieldNames { get; }
+		[JsonIgnore]
 		public abstract TypeEnum[] IdFieldTypes { get; }
+		[JsonIgnore]
 		public abstract bool IsPersisted { get; }
 
 		public virtual object GetFieldValue(string fieldName)
