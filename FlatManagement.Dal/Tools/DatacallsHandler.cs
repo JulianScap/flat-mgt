@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using FlatManagement.Common.Exceptions;
@@ -86,6 +88,33 @@ namespace FlatManagement.Dal.Tools
 			return result;
 		}
 
+		public int Execute(string command, Parameter[] parameters, Parameter[] outParameters)
+		{
+			SqlConnection sqlConnection = null;
+			SqlCommand sqlCommand = null;
+			int result = 0;
+
+			try
+			{
+				sqlConnection = new SqlConnection(connectionString);
+				sqlCommand = new SqlCommand(command, sqlConnection) { CommandType = CommandType.StoredProcedure };
+
+				SetParameters(sqlCommand, parameters);
+				SetOutParameters(sqlCommand, outParameters);
+
+				sqlConnection.Open();
+				result = sqlCommand.ExecuteNonQuery();
+				PopulateOutParametersValues(sqlCommand, outParameters);
+			}
+			finally
+			{
+				sqlCommand.SafeDispose();
+				sqlConnection.SafeDispose();
+			}
+
+			return result;
+		}
+
 		public int Execute(string command, Parameter[] parameters)
 		{
 			SqlConnection sqlConnection = null;
@@ -115,8 +144,29 @@ namespace FlatManagement.Dal.Tools
 			{
 				foreach (Parameter parameter in parameters)
 				{
-					sqlCommand.Parameters.AddWithValue(parameter.FieldName, parameter.Value);
+					sqlCommand.Parameters.AddWithValue(parameter.Name, parameter.Value);
 				}
+			}
+		}
+
+		private void SetOutParameters(SqlCommand sqlCommand, Parameter[] parameters)
+		{
+			foreach (Parameter parameter in parameters)
+			{
+				SqlParameter sqlParameter = sqlCommand.CreateParameter();
+				sqlParameter.Direction = ParameterDirection.Output;
+				sqlParameter.ParameterName = parameter.Name;
+				sqlParameter.SqlDbType = SqlDbType.Int;
+				sqlCommand.Parameters.Add(sqlParameter);
+			}
+		}
+
+		private void PopulateOutParametersValues(SqlCommand sqlCommand, Parameter[] outParameters)
+		{
+			foreach (Parameter parameter in outParameters)
+			{
+				SqlParameter sqlParameter = sqlCommand.Parameters[parameter.Name];
+				parameter.Value = sqlParameter.Value;
 			}
 		}
 	}

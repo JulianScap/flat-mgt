@@ -53,9 +53,9 @@ namespace FlatManagement.Dto.Entities
 			}
 		}
 
-		public readonly string[] ids = new string[] { "PeriodTypeId" };
-		public readonly string[] fields = new string[] { "Name" };
-		public readonly string[] allFields = new string[] { "PeriodTypeId", "Name" };
+		private readonly string[] ids = new string[] { "PeriodTypeId" };
+		private readonly string[] fields = new string[] { "Name" };
+		private readonly string[] allFields = new string[] { "PeriodTypeId", "Name" };
 
 		public override string[] IdFieldNames { get => ids; }
 		public override string[] DataFieldNames { get => fields; }

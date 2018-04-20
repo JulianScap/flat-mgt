@@ -1,4 +1,5 @@
-﻿using FlatManagement.Common.Dto;
+﻿using System;
+using FlatManagement.Common.Dto;
 using FlatManagement.Common.Exceptions;
 
 namespace FlatManagement.Dal.Tools
@@ -6,10 +7,9 @@ namespace FlatManagement.Dal.Tools
 	internal class ParametersBuilder
 	{
 		// Move somewhere else
-		public static Parameter[] BuildIdParameters<TDto>(object[] ids)
-			where TDto : IDto, new()
+		public static Parameter[] BuildIdParameters(IDto item, params object[] ids)
 		{
-			string[] idFields = new TDto().IdFieldNames;
+			string[] idFields = item.IdFieldNames;
 
 			if (idFields.Length != ids.Length)
 			{
@@ -52,5 +52,18 @@ namespace FlatManagement.Dal.Tools
 			return result;
 		}
 
+		internal static Parameter[] BuildIdOutParameters<TDto>(TDto item) where TDto : IDto, new()
+		{
+			string[] idFields = item.IdFieldNames;
+
+			Parameter[] result = new Parameter[idFields.Length];
+
+			for (int i = 0; i < result.Length; i++)
+			{
+				result[i] = new Parameter() { Name = idFields[i] };
+			}
+
+			return result;
+		}
 	}
 }

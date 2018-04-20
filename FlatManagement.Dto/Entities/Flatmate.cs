@@ -52,9 +52,9 @@ namespace FlatManagement.Dto.Entities
 			return this.FlatmateId;
 		}
 
-		public readonly string[] ids = new string[] { "FlatmateId" };
-		public readonly string[] fields = new string[] { "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant" };
-		public readonly string[] allFields = new string[] { "FlatmateId", "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant" };
+		private readonly string[] ids = new string[] { "FlatmateId" };
+		private readonly string[] fields = new string[] { "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant" };
+		private readonly string[] allFields = new string[] { "FlatmateId", "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant" };
 
 		public override string[] IdFieldNames { get => ids; }
 		public override string[] DataFieldNames { get => fields; }

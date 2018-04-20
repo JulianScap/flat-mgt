@@ -39,7 +39,7 @@ namespace FlatManagement.Dal.Tools
 		{
 			DatacallsHandler handler = new DatacallsHandler(configuration);
 			string command = GetStoredProcedureName(OperationEnum.GetById);
-			Parameter[] parameters = ParametersBuilder.BuildIdParameters<TDto>(ids);
+			Parameter[] parameters = ParametersBuilder.BuildIdParameters(new TDto(), ids);
 			object result = handler.GetOne(command, parameters, converter, true);
 			return (TDto)result;
 		}
@@ -47,9 +47,23 @@ namespace FlatManagement.Dal.Tools
 		public virtual void Update(TDto item)
 		{
 			DatacallsHandler handler = new DatacallsHandler(configuration);
-			string command = GetStoredProcedureName(OperationEnum.Update);
+			string command = GetStoredProcedureName(OperationEnum.Insert);
 			Parameter[] parameters = ParametersBuilder.BuildParametersFromDto(item, update: true);
 			handler.Execute(command, parameters);
+		}
+
+		public virtual void Insert(TDto item)
+		{
+			DatacallsHandler handler = new DatacallsHandler(configuration);
+			string command = GetStoredProcedureName(OperationEnum.Insert);
+			Parameter[] parameters = ParametersBuilder.BuildParametersFromDto(item, update: false);
+			Parameter[] outParameters = ParametersBuilder.BuildIdOutParameters(item);
+			handler.Execute(command, parameters, outParameters);
+
+			foreach (Parameter parameter in outParameters)
+			{
+				item.SetFieldValue(parameter.Name, parameter.Value);
+			}
 		}
 
 		protected virtual string GetStoredProcedureName(OperationEnum operation, string name = null)

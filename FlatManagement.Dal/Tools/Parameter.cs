@@ -5,13 +5,18 @@ namespace FlatManagement.Dal.Tools
 	[DebuggerDisplay("{FieldName}: {Value}")]
 	public class Parameter
 	{
+		public Parameter()
+		{
+
+		}
+
 		public Parameter(string fieldName, object value)
 		{
-			this.FieldName = fieldName;
+			this.Name = fieldName;
 			this.Value = value;
 		}
 
-		public string FieldName { get; private set; }
-		public object Value { get; private set; }
+		public string Name { get; set; }
+		public object Value { get; set; }
 	}
 }

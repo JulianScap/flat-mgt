@@ -67,5 +67,21 @@ namespace FlatManagement.Test.Dal
 
 			Assert.Equal(flat, hydratedFlat);
 		}
+
+		[Fact]
+		public void BeAbleToInsertAFlat()
+		{
+			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
+
+			Flat newFlat = new Flat()
+			{
+				Address = "123 rue Bidon, 74191 Morzine",
+				Name = "Bidon", 
+			};
+
+			da.Insert(newFlat);
+
+			Assert.NotEqual(0, newFlat.FlatId);
+		}
 	}
 }
