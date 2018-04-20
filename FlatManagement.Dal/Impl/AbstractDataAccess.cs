@@ -64,7 +64,7 @@ namespace FlatManagement.Dal.Impl
 				Fill(result, cic.Reader);
 			}
 
-			return result.First();
+			return result.Single();
 		}
 
 		protected virtual int Insert(OperationEnum operation, Parameter[] parameters, string methodName = null)
@@ -97,7 +97,7 @@ namespace FlatManagement.Dal.Impl
 
 		private void AddParameters(ConnectionInfoContainer cic, Parameter[] parameters)
 		{
-			foreach (var parameter in parameters)
+			foreach (Parameter parameter in parameters)
 			{
 				cic.Command.Parameters.AddWithValue(parameter.FieldName, parameter.Value);
 			}
@@ -194,7 +194,7 @@ namespace FlatManagement.Dal.Impl
 
 		protected virtual SqlConnection GetConnection()
 		{
-			return new SqlConnection("Server=(local);Database=FlatManagement;User Id=fm_user;Password=fm_user;");
+			return new SqlConnection(configuration["Database:ConnectionString"]);
 		}
 
 		public TDto GetById(params object[] ids)

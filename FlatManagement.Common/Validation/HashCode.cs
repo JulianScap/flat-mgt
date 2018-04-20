@@ -20,7 +20,7 @@
 			{
 				int hash = 17;
 
-				foreach (var item in args)
+				foreach (object item in args)
 				{
 					hash = hash * 23 + Compute(item);
 				}

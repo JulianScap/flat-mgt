@@ -35,7 +35,7 @@ namespace FlatManagement.Bll.Impl
 		{
 			Type type = ServiceLocator.Instance.GetImplementationType<TBll>();
 
-			var result = (TBll)JsonConvert.DeserializeObject(jsonObject, type);
+			TBll result = (TBll)JsonConvert.DeserializeObject(jsonObject, type);
 
 			result.Configuration = Configuration;
 

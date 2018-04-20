@@ -25,7 +25,7 @@ namespace FlatManagement.Common.Extensions
 
 			List<T> result = new List<T>(that);
 
-			foreach (var collection in collections)
+			foreach (IEnumerable<T> collection in collections)
 			{
 				if (collection != null)
 				{
