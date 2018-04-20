@@ -25,6 +25,11 @@
 				"Interface": "FlatManagement.Bll.Interface.IPeriodTypeModel, FlatManagement.Bll",
 				"Mode": "NewInstance",
 				"ImplementationType": "FlatManagement.Bll.Impl.PeriodTypeModel, FlatManagement.Bll"
+			},
+			{
+				"Interface": "FlatManagement.Bll.Interface.IFlatModel, FlatManagement.Bll",
+				"Mode": "NewInstance",
+				"ImplementationType": "FlatManagement.Bll.Impl.FlatModel, FlatManagement.Bll"
 			}
 		]
 	}

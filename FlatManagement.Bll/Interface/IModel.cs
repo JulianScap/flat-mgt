@@ -11,5 +11,6 @@ namespace FlatManagement.Bll.Interface
 	{
 		void GetAll();
 		void PersistAll();
+		void GetById(params object[] ids);
 	}
 }

@@ -49,5 +49,13 @@ namespace FlatManagement.Bll.Impl
 				}
 			}
 		}
+
+		public void GetById(params object[] ids)
+		{
+			IDataAccess<TDto> dal = GetDal();
+			TDto item = dal.GetById(ids);
+			base.Clear();
+			base.Add(item);
+		}
 	}
 }
