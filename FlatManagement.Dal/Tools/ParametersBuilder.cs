@@ -52,15 +52,17 @@ namespace FlatManagement.Dal.Tools
 			return result;
 		}
 
-		internal static Parameter[] BuildIdOutParameters<TDto>(TDto item) where TDto : IDto, new()
+		internal static Parameter[] BuildIdOutParameters<TDto>(TDto item)
+			where TDto : IDto, new()
 		{
 			string[] idFields = item.IdFieldNames;
+			TypeEnum[] idFieldsTypes = item.IdFieldTypes;
 
 			Parameter[] result = new Parameter[idFields.Length];
 
 			for (int i = 0; i < result.Length; i++)
 			{
-				result[i] = new Parameter() { Name = idFields[i] };
+				result[i] = new Parameter() { Name = idFields[i], Type = idFieldsTypes[i] };
 			}
 
 			return result;

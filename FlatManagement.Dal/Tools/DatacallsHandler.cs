@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
+using FlatManagement.Common.Dto;
 using FlatManagement.Common.Exceptions;
 using FlatManagement.Common.Extensions;
 using Microsoft.Extensions.Configuration;
@@ -156,8 +155,25 @@ namespace FlatManagement.Dal.Tools
 				SqlParameter sqlParameter = sqlCommand.CreateParameter();
 				sqlParameter.Direction = ParameterDirection.Output;
 				sqlParameter.ParameterName = parameter.Name;
-				sqlParameter.SqlDbType = SqlDbType.Int;
+				sqlParameter.SqlDbType = GetAsSqlDbType(parameter.Type);
 				sqlCommand.Parameters.Add(sqlParameter);
+			}
+		}
+
+		private SqlDbType GetAsSqlDbType(TypeEnum type)
+		{
+			switch (type)
+			{
+				case TypeEnum.Int32:
+					return SqlDbType.Int;
+				case TypeEnum.Int64:
+					return SqlDbType.BigInt;
+				case TypeEnum.String:
+					return SqlDbType.NVarChar;
+				case TypeEnum.Guid:
+					return SqlDbType.UniqueIdentifier;
+				default:
+					return SqlDbType.Int;
 			}
 		}
 

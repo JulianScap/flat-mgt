@@ -53,10 +53,12 @@ namespace FlatManagement.Dto.Entities
 		}
 
 		private readonly string[] ids = new string[] { "FlatmateId" };
+		private readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
 		private readonly string[] fields = new string[] { "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant" };
 		private readonly string[] allFields = new string[] { "FlatmateId", "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant" };
 
 		public override string[] IdFieldNames { get => ids; }
+		public override TypeEnum[] IdFieldTypes { get => idsType; }
 		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
 	}

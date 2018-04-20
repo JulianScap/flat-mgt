@@ -15,6 +15,8 @@
 		/// </summary>
 		string[] AllFieldNames { get; }
 
+		TypeEnum[] IdFieldTypes { get; }
+
 		object GetFieldValue(string fieldName);
 
 		void SetFieldValue(string fieldName, object value);

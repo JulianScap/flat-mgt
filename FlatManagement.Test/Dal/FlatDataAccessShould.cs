@@ -76,12 +76,16 @@ namespace FlatManagement.Test.Dal
 			Flat newFlat = new Flat()
 			{
 				Address = "123 rue Bidon, 74191 Morzine",
-				Name = "Bidon", 
+				Name = "Bidon",
 			};
 
 			da.Insert(newFlat);
 
 			Assert.NotEqual(0, newFlat.FlatId);
+
+			Flat hydratedFlat = da.GetById(newFlat.FlatId);
+
+			Assert.Equal(newFlat, hydratedFlat);
 		}
 	}
 }

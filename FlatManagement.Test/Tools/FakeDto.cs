@@ -13,6 +13,7 @@ namespace FlatManagement.Test.Tools
 		public override string[] IdFieldNames { get; }
 		public override string[] DataFieldNames { get; }
 		public override string[] AllFieldNames { get; }
+		public override TypeEnum[] IdFieldTypes { get; }
 
 		public override int GetId()
 		{

@@ -54,10 +54,12 @@ namespace FlatManagement.Dto.Entities
 		}
 
 		private readonly string[] ids = new string[] { "PeriodTypeId" };
+		private readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
 		private readonly string[] fields = new string[] { "Name" };
 		private readonly string[] allFields = new string[] { "PeriodTypeId", "Name" };
 
 		public override string[] IdFieldNames { get => ids; }
+		public override TypeEnum[] IdFieldTypes { get => idsType; }
 		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
 	}

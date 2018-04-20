@@ -7,6 +7,7 @@ namespace FlatManagement.Common.Dto
 		public abstract string[] IdFieldNames { get; }
 		public abstract string[] DataFieldNames { get; }
 		public abstract string[] AllFieldNames { get; }
+		public abstract TypeEnum[] IdFieldTypes { get; }
 
 		public virtual object GetFieldValue(string fieldName)
 		{
