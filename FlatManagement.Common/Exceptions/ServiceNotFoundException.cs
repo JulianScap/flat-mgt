@@ -2,7 +2,6 @@
 
 namespace FlatManagement.Common.Exceptions
 {
-
 	[Serializable]
 	public class ServiceNotFoundException : BaseException
 	{

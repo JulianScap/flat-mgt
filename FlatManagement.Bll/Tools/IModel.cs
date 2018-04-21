@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace FlatManagement.Bll.Interface
+namespace FlatManagement.Bll.Tools
 {
 	public interface IModel
 	{

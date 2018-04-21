@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Dto;
 using FlatManagement.Dal.Interface;
 using Microsoft.Extensions.Configuration;
 
-namespace FlatManagement.Bll.Impl
+namespace FlatManagement.Bll.Tools
 {
 	internal abstract class AbstractModel<TDto> : AbstractDtoList<TDto>, IModel<TDto>
 		where TDto : IDto, new()

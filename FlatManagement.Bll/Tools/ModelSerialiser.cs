@@ -1,10 +1,9 @@
 ﻿using System;
-using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Services;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
-namespace FlatManagement.Bll.Impl
+namespace FlatManagement.Bll.Tools
 {
 	public class ModelSerialiser
 	{
