@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FlatManagement.Common.Dto;
 
-namespace FlatManagement.Dal.Interface
+namespace FlatManagement.Dal.Tools
 {
 	public interface IDataAccess { }
 

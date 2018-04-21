@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FlatManagement.Common.Dto;
-using FlatManagement.Dal.Interface;
+using FlatManagement.Dal.Tools;
 using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Bll.Tools
