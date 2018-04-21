@@ -12,5 +12,6 @@ namespace FlatManagement.Dal.Tools
 		TDto GetById(params object[] ids);
 		void Update(TDto item);
 		void Insert(TDto item);
+		void Delete(IDto item);
 	}
 }

@@ -28,8 +28,8 @@ namespace FlatManagement.Bll.Tools
 			IDataAccess<TDto> dal = GetDal();
 			IEnumerable<TDto> allItems = dal.GetAll();
 
-			base.Clear();
-			base.AddRange(allItems.ToList());
+			Clear();
+			AddRange(allItems.ToList());
 		}
 
 		public virtual void PersistAll()
@@ -53,11 +53,23 @@ namespace FlatManagement.Bll.Tools
 		{
 			IDataAccess<TDto> dal = GetDal();
 			TDto item = dal.GetById(ids);
-			base.Clear();
+			Clear();
 			if (item != null)
 			{
 				base.Add(item);
 			}
+		}
+
+		public void DeleteAll()
+		{
+			IDataAccess<TDto> dal = GetDal();
+
+			foreach (TDto item in this)
+			{
+				dal.Delete(item);
+			}
+
+			Clear();
 		}
 
 		public virtual TDto NewInstance()

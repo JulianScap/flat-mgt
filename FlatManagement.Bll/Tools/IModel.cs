@@ -6,6 +6,7 @@ namespace FlatManagement.Bll.Tools
 	{
 		IConfiguration Configuration { set; }
 		void GetAll();
+		void DeleteAll();
 		void PersistAll();
 		void GetById(params object[] ids);
 	}

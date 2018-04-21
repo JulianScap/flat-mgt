@@ -66,6 +66,14 @@ namespace FlatManagement.Dal.Tools
 			}
 		}
 
+		public virtual void Delete(IDto item)
+		{
+			DatacallsHandler handler = new DatacallsHandler(configuration);
+			string command = GetStoredProcedureName(OperationEnum.Delete);
+			Parameter[] parameters = ParametersBuilder.BuildIdParameters(item);
+			handler.Execute(command, parameters);
+		}
+
 		protected virtual string GetStoredProcedureName(OperationEnum operation, string name = null)
 		{
 			if (operation == OperationEnum.Custom)

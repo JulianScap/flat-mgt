@@ -66,5 +66,24 @@ namespace FlatManagement.Test.Bll
 
 			Assert.NotEmpty(ptm);
 		}
+
+		[Theory]
+		[InlineData("Rue Amelot", "90 rue Amelot, Paris 11")]
+		public void BeAbleToDeleteAFlat(string name, string address)
+		{
+			IFlatModel ptm = ServiceLocator.Instance.GetService<IFlatModel>();
+
+			Flat flat = ptm.NewInstance();
+			flat.Name = name;
+			flat.Address = address;
+
+			ptm.Add(flat);
+			ptm.PersistAll();
+			ptm.DeleteAll();
+			Assert.Empty(ptm);
+
+			ptm.GetById(flat.FlatId);
+			Assert.Empty(ptm);
+		}
 	}
 }
