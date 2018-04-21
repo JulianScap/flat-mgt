@@ -55,7 +55,10 @@ namespace FlatManagement.Bll.Impl
 			IDataAccess<TDto> dal = GetDal();
 			TDto item = dal.GetById(ids);
 			base.Clear();
-			base.Add(item);
+			if (item != null)
+			{
+				base.Add(item);
+			}
 		}
 
 		public virtual TDto NewInstance()

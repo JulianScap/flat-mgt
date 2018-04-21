@@ -1,6 +1,7 @@
 ﻿{
 	"Services": {
 		"Service": [
+			// Tests
 			{
 				"Interface": "FlatManagement.Test.Tools.ITestLocatorInterface, FlatManagement.Test",
 				"Mode": "NewInstance",
@@ -11,6 +12,8 @@
 				"Mode": "Singleton",
 				"ImplementationType": "FlatManagement.Test.Tools.TestLocatorClass, FlatManagement.Test"
 			},
+
+			// DAL
 			{
 				"Interface": "FlatManagement.Dal.Interface.IFlatDataAccess, FlatManagement.Dal",
 				"Mode": "Singleton",
@@ -22,6 +25,17 @@
 				"ImplementationType": "FlatManagement.Dal.Impl.PeriodTypeDataAccess, FlatManagement.Dal"
 			},
 			{
+				"Interface": "FlatManagement.Dal.Interface.IFlatmateDataAccess, FlatManagement.Dal",
+				"Mode": "Singleton",
+				"ImplementationType": "FlatManagement.Dal.Impl.FlatmateDataAccess, FlatManagement.Dal"
+			},
+			{
+				"Interface": "FlatManagement.Dal.Interface.ITaskDataAccess, FlatManagement.Dal",
+				"Mode": "Singleton",
+				"ImplementationType": "FlatManagement.Dal.Impl.TaskDataAccess, FlatManagement.Dal"
+			},
+			// Bll
+			{
 				"Interface": "FlatManagement.Bll.Interface.IPeriodTypeModel, FlatManagement.Bll",
 				"Mode": "NewInstance",
 				"ImplementationType": "FlatManagement.Bll.Impl.PeriodTypeModel, FlatManagement.Bll"
@@ -30,6 +44,16 @@
 				"Interface": "FlatManagement.Bll.Interface.IFlatModel, FlatManagement.Bll",
 				"Mode": "NewInstance",
 				"ImplementationType": "FlatManagement.Bll.Impl.FlatModel, FlatManagement.Bll"
+			},
+			{
+				"Interface": "FlatManagement.Bll.Interface.IFlatmateModel, FlatManagement.Bll",
+				"Mode": "NewInstance",
+				"ImplementationType": "FlatManagement.Bll.Impl.FlatmateModel, FlatManagement.Bll"
+			},
+			{
+				"Interface": "FlatManagement.Bll.Interface.ITaskModel, FlatManagement.Bll",
+				"Mode": "NewInstance",
+				"ImplementationType": "FlatManagement.Bll.Impl.TaskModel, FlatManagement.Bll"
 			}
 		]
 	}
