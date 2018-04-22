@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FlatManagement.Common.Dto;
-using FlatManagement.Dal.Interface;
 using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Dal.Tools
