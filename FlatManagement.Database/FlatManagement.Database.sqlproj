@@ -148,6 +148,7 @@
     <Build Include="dbo\Stored Procedure\Flat\Flat_Insert.sql" />
     <Build Include="dbo\Stored Procedure\PeriodType\PeriodType_GetAll.sql" />
     <Build Include="dbo\Stored Procedure\Flat\Flat_Delete.sql" />
+    <Build Include="dbo\Stored Procedure\PeriodType\PeriodType_GetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />
