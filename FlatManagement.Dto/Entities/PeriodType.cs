@@ -7,7 +7,7 @@ using FlatManagement.Dto.Enums;
 namespace FlatManagement.Dto.Entities
 {
 	[DebuggerDisplay("PeriodType({PeriodTypeId}::{Name})")]
-	public partial class PeriodType : AbstractDto<int>, IEquatable<PeriodType>
+	public partial class PeriodType : AbstractDto<int>, IEquatable<PeriodType>, IEquatable<PeriodTypeEnum>
 	{
 		public PeriodType() { }
 
@@ -53,6 +53,11 @@ namespace FlatManagement.Dto.Entities
 			}
 		}
 
+		public bool Equals(PeriodTypeEnum other)
+		{
+			return this.PeriodTypeId == (int)other;
+		}
+
 		private readonly string[] ids = new string[] { "PeriodTypeId" };
 		private readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
 		private readonly string[] fields = new string[] { "Name" };
@@ -62,5 +67,28 @@ namespace FlatManagement.Dto.Entities
 		public override TypeEnum[] IdFieldTypes { get => idsType; }
 		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
+
+		#region explicit operator
+		public static explicit operator PeriodType(PeriodTypeEnum periodTypeEnum)
+		{
+			return new PeriodType(periodTypeEnum);
+		}
+
+		public static explicit operator PeriodTypeEnum(PeriodType periodType)
+		{
+			if (periodType == null)
+			{
+				throw new ArgumentNullException("periodType");
+			}
+			else if (!Enum.IsDefined(typeof(PeriodTypeEnum), periodType.PeriodTypeId))
+			{
+				throw new ArgumentException($"Invalid period type {periodType.PeriodTypeId}", "periodType");
+			}
+			else
+			{
+				return (PeriodTypeEnum)periodType.PeriodTypeId;
+			}
+		}
+		#endregion
 	}
 }
