@@ -10,5 +10,10 @@ namespace FlatManagement.Dal.Impl
 		protected FlatDataAccess(IConfiguration configuration) : base(configuration)
 		{
 		}
+
+		public Flat GetById(int flatId)
+		{
+			return GetById(new Flat() { FlatId = flatId });
+		}
 	}
 }

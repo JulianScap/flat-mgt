@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Bll.Tools
 {
@@ -6,11 +8,11 @@ namespace FlatManagement.Bll.Tools
 	{
 		IConfiguration Configuration { set; }
 		void GetAll();
-		void GetById(params object[] ids);
 	}
 
-	public interface IReadOnlyModel<TDto> : IReadOnlyModel
+	public interface IReadOnlyModel<TDto> : IReadOnlyModel, ICollection<TDto>, IEnumerable<TDto>, IEnumerable, IList<TDto>, IReadOnlyCollection<TDto>, IReadOnlyList<TDto>, ICollection, IList
 	{
 		TDto NewInstance();
+		void GetById(TDto item);
 	}
 }

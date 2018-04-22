@@ -32,14 +32,14 @@ namespace FlatManagement.Bll.Tools
 			AddRange(allItems.ToList());
 		}
 
-		public virtual void GetById(params object[] ids)
+		public virtual void GetById(TDto item)
 		{
 			IReadOnlyDataAccess<TDto> dal = GetReadOnlyDal();
-			TDto item = dal.GetById(ids);
+			TDto result = dal.GetById(item);
 			Clear();
-			if (item != null)
+			if (result != null)
 			{
-				base.Add(item);
+				base.Add(result);
 			}
 		}
 

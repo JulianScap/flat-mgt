@@ -19,21 +19,21 @@ namespace FlatManagement.Test.WebApi
 			Assert.Equal(10, iptm.Count);
 		}
 
-		//[Fact]
-		//public void ReturnCorrectItemOnValidGetById()
-		//{
-		//	IConfiguration configuration = GetConfiguration();
-		//	PeriodTypeController ptc = new PeriodTypeController(configuration);
-		//	Array periodTypeIds = Enum.GetValues(typeof(PeriodTypeEnum));
+		[Fact]
+		public void ReturnCorrectItemOnValidGetById()
+		{
+			IConfiguration configuration = GetConfiguration();
+			PeriodTypeController ptc = new PeriodTypeController(configuration);
+			Array periodTypeIds = Enum.GetValues(typeof(PeriodTypeEnum));
 
-		//	foreach (int periodTypeId in periodTypeIds)
-		//	{
-		//		IPeriodTypeModel iptm = ptc.Get(periodTypeId);
+			foreach (int periodTypeId in periodTypeIds)
+			{
+				IPeriodTypeModel iptm = ptc.Get(periodTypeId);
 
-		//		Assert.Equal(1, iptm.Count);
-		//		Assert.Equal(periodTypeId, iptm[0].PeriodTypeId);
-		//		Assert.Equal(((PeriodTypeEnum)periodTypeId).ToString(), iptm[0].Name);
-		//	}
-		//}
+				Assert.Equal(1, iptm.Count);
+				Assert.Equal(periodTypeId, iptm[0].PeriodTypeId);
+				Assert.Equal(((PeriodTypeEnum)periodTypeId).ToString(), iptm[0].Name);
+			}
+		}
 	}
 }

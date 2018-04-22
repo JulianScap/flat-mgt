@@ -41,7 +41,7 @@ namespace FlatManagement.Test.Dal
 		public void ReturnById(int periodTypeId)
 		{
 			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
-			PeriodType periodType = da.GetById(periodTypeId);
+			PeriodType periodType = da.GetById(new PeriodType() { PeriodTypeId = periodTypeId });
 			Assert.NotNull(periodType);
 			Assert.Equal(periodTypeId, periodType.PeriodTypeId);
 		}

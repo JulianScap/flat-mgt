@@ -9,6 +9,6 @@ namespace FlatManagement.Dal.Tools
 		where TDto : IDto, new()
 	{
 		IEnumerable<TDto> GetAll();
-		TDto GetById(params object[] ids);
+		TDto GetById(TDto item);
 	}
 }

@@ -34,11 +34,11 @@ namespace FlatManagement.Dal.Tools
 			return result.Cast<TDto>().ToList();
 		}
 
-		public virtual TDto GetById(params object[] ids)
+		public TDto GetById(TDto item)
 		{
 			DatacallsHandler handler = new DatacallsHandler(configuration);
 			string command = GetStoredProcedureName(OperationEnum.GetById);
-			Parameter[] parameters = ParametersBuilder.BuildIdParameters(new TDto(), ids);
+			Parameter[] parameters = ParametersBuilder.BuildIdParameters(item);
 			object result = handler.GetOne(command, parameters, converter, true);
 			return (TDto)result;
 		}

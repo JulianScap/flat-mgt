@@ -24,7 +24,7 @@ namespace FlatManagement.Test.Bll
 		public void BeAbleToGetById(int id)
 		{
 			IFlatModel ptm = ServiceLocator.Instance.GetService<IFlatModel>();
-			ptm.GetById(id);
+			ptm.GetById(new Flat() { FlatId = id });
 
 			Assert.NotEmpty(ptm);
 			Assert.Equal(id, ptm.Single().FlatId);
@@ -82,7 +82,7 @@ namespace FlatManagement.Test.Bll
 			ptm.DeleteAll();
 			Assert.Empty(ptm);
 
-			ptm.GetById(flat.FlatId);
+			ptm.GetById(flat);
 			Assert.Empty(ptm);
 		}
 	}

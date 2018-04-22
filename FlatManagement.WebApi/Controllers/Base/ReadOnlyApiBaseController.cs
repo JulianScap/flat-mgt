@@ -7,8 +7,8 @@ namespace FlatManagement.WebApi.Controllers.Base
 {
 	[Produces("application/json")]
 	[Route("api/[controller]")]
-	public class ReadOnlyApiBaseController<TModel> : Controller
-		where TModel : IReadOnlyModel
+	public class ReadOnlyApiBaseController<TModel, TDto> : Controller
+		where TModel : IReadOnlyModel<TDto>
 	{
 		protected IConfiguration configuration;
 
@@ -25,8 +25,7 @@ namespace FlatManagement.WebApi.Controllers.Base
 			return ipt;
 		}
 
-		[HttpGet]
-		protected virtual TModel Get(params object[] ids)
+		protected virtual TModel Get(TDto ids)
 		{
 			TModel ipt = ServiceLocator.Instance.GetService<TModel>();
 			ipt.GetById(ids);
