@@ -1,18 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
-
-namespace FlatManagement.Bll.Tools
+﻿namespace FlatManagement.Bll.Tools
 {
-	public interface IModel
+	public interface IModel : IReadOnlyModel
 	{
-		IConfiguration Configuration { set; }
-		void GetAll();
 		void DeleteAll();
 		void PersistAll();
-		void GetById(params object[] ids);
 	}
 
-	public interface IModel<TDto> : IModel
+	public interface IModel<TDto> : IReadOnlyModel<TDto>, IModel
 	{
-		TDto NewInstance();
 	}
 }

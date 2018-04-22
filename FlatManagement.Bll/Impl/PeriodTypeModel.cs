@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Bll.Impl
 {
-	internal class PeriodTypeModel : AbstractModel<PeriodType>, IPeriodTypeModel
+	internal class PeriodTypeModel : AbstractReadOnlyModel<PeriodType>, IPeriodTypeModel
 	{
 		public PeriodTypeModel()
 		{
@@ -20,7 +20,7 @@ namespace FlatManagement.Bll.Impl
 
 		}
 
-		protected override IDataAccess<PeriodType> GetDal()
+		protected override IReadOnlyDataAccess<PeriodType> GetReadOnlyDal()
 		{
 			return ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
 		}

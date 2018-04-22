@@ -139,7 +139,6 @@ namespace FlatManagement.Common.Services
 		public Type GetImplementationType<T>()
 		{
 			EnsureInitialised();
-			T result = default(T);
 			if (!services.TryGetValue(typeof(T), out Service service))
 			{
 				throw new ServiceNotFoundException($"Unknown service for {typeof(T).FullName}");

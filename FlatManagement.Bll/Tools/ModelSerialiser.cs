@@ -30,7 +30,7 @@ namespace FlatManagement.Bll.Tools
 		public IConfiguration Configuration { private get; set; }
 
 		public TBll Deserialize<TBll>(string jsonObject)
-			where TBll : IModel
+			where TBll : IReadOnlyModel
 		{
 			Type type = ServiceLocator.Instance.GetImplementationType<TBll>();
 

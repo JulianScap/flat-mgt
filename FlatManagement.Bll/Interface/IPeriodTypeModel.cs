@@ -4,7 +4,7 @@ using FlatManagement.Dto.Entities;
 
 namespace FlatManagement.Bll.Interface
 {
-	public interface IPeriodTypeModel : IModel<PeriodType>, IDtoList<PeriodType>
+	public interface IPeriodTypeModel : IReadOnlyModel<PeriodType>, IDtoList<PeriodType>
 	{
 	}
 }

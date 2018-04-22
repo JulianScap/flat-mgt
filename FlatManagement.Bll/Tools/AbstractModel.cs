@@ -1,35 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using FlatManagement.Common.Dto;
+﻿using FlatManagement.Common.Dto;
 using FlatManagement.Dal.Tools;
 using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Bll.Tools
 {
-	internal abstract class AbstractModel<TDto> : AbstractDtoList<TDto>, IModel<TDto>
+	internal abstract class AbstractModel<TDto> : AbstractReadOnlyModel<TDto>, IModel<TDto>
 		where TDto : IDto, new()
 	{
-		public IConfiguration Configuration { get; set; }
-
 		protected AbstractModel()
 		{
-
 		}
 
-		protected AbstractModel(IConfiguration configuration)
+		protected AbstractModel(IConfiguration configuration) : base(configuration)
 		{
-			this.Configuration = configuration;
 		}
 
 		protected abstract IDataAccess<TDto> GetDal();
 
-		public virtual void GetAll()
+		protected override IReadOnlyDataAccess<TDto> GetReadOnlyDal()
 		{
-			IDataAccess<TDto> dal = GetDal();
-			IEnumerable<TDto> allItems = dal.GetAll();
-
-			Clear();
-			AddRange(allItems.ToList());
+			return GetDal();
 		}
 
 		public virtual void PersistAll()
@@ -49,17 +39,6 @@ namespace FlatManagement.Bll.Tools
 			}
 		}
 
-		public virtual void GetById(params object[] ids)
-		{
-			IDataAccess<TDto> dal = GetDal();
-			TDto item = dal.GetById(ids);
-			Clear();
-			if (item != null)
-			{
-				base.Add(item);
-			}
-		}
-
 		public void DeleteAll()
 		{
 			IDataAccess<TDto> dal = GetDal();
@@ -70,11 +49,6 @@ namespace FlatManagement.Bll.Tools
 			}
 
 			Clear();
-		}
-
-		public virtual TDto NewInstance()
-		{
-			return new TDto();
 		}
 	}
 }

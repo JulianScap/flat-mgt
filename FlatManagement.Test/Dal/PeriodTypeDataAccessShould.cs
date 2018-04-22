@@ -45,32 +45,5 @@ namespace FlatManagement.Test.Dal
 			Assert.NotNull(periodType);
 			Assert.Equal(periodTypeId, periodType.PeriodTypeId);
 		}
-
-		[Fact]
-		public void FailOnDelete()
-		{
-			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
-			PeriodType periodType = da.GetById(1);
-
-			Assert.Throws<DisabledOperationException>(() => da.Delete(periodType));
-		}
-
-		[Fact]
-		public void FailOnUpdate()
-		{
-			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
-			PeriodType periodType = da.GetById(1);
-			periodType.Name = "new name";
-
-			Assert.Throws<DisabledOperationException>(() => da.Update(periodType));
-		}
-
-		[Fact]
-		public void FailOnInsert()
-		{
-			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
-
-			Assert.Throws<DisabledOperationException>(() => da.Insert(new PeriodType() { Name = "new period type" }));
-		}
 	}
 }

@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using FlatManagement.Common.Dto;
+﻿using FlatManagement.Common.Dto;
 
 namespace FlatManagement.Dal.Tools
 {
-	public interface IDataAccess { }
+	public interface IDataAccess : IReadOnlyDataAccess { }
 
-	public interface IDataAccess<TDto> : IDataAccess
+	public interface IDataAccess<TDto> : IReadOnlyDataAccess<TDto>, IDataAccess
 		where TDto : IDto, new()
 	{
-		IEnumerable<TDto> GetAll();
-		TDto GetById(params object[] ids);
 		void Update(TDto item);
 		void Insert(TDto item);
 		void Delete(IDto item);

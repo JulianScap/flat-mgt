@@ -8,7 +8,7 @@ namespace FlatManagement.WebApi.Controllers.Base
 	[Produces("application/json")]
 	[Route("api/[controller]")]
 	public class ApiBaseController<TModel> : Controller
-		where TModel : IModel
+		where TModel : IReadOnlyModel
 	{
 		protected IConfiguration configuration;
 
