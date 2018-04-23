@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FlatManagement.Common.Dal;
 using FlatManagement.Common.Dto;
-using FlatManagement.Dal.Tools;
 using Microsoft.Extensions.Configuration;
 
-namespace FlatManagement.Bll.Tools
+namespace FlatManagement.Common.Bll
 {
 	public abstract class AbstractReadOnlyModel<TDto> : AbstractDtoList<TDto>, IReadOnlyModel<TDto>
 		where TDto : IDto, new()

@@ -1,7 +1,7 @@
 ﻿using FlatManagement.Common.Dto;
 using Microsoft.Extensions.Configuration;
 
-namespace FlatManagement.Dal.Tools
+namespace FlatManagement.Common.Dal
 {
 	public abstract class AbstractDataAccess<TDto> : ReadOnlyAbstractDataAccess<TDto>, IDataAccess<TDto>
 		where TDto : IDto, new()

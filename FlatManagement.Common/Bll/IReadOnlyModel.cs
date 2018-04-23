@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using FlatManagement.Common.Dto;
 using Microsoft.Extensions.Configuration;
 
-namespace FlatManagement.Bll.Tools
+namespace FlatManagement.Common.Bll
 {
 	public interface IReadOnlyModel
 	{

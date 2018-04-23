@@ -6,7 +6,7 @@ using System.Reflection;
 using FlatManagement.Common.Dto;
 using Microsoft.Extensions.Configuration;
 
-namespace FlatManagement.Dal.Tools
+namespace FlatManagement.Common.Dal
 {
 	public abstract class ReadOnlyAbstractDataAccess<TDto> : IReadOnlyDataAccess<TDto>
 		where TDto : IDto, new()

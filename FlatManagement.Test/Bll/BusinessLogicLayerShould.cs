@@ -1,6 +1,6 @@
 ﻿using System;
 using FlatManagement.Bll.Interface;
-using FlatManagement.Bll.Tools;
+using FlatManagement.Common.Bll;
 using FlatManagement.Common.Services;
 using FlatManagement.Test.Tools;
 using Xunit;

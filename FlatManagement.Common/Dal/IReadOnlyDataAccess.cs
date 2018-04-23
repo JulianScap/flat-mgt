@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FlatManagement.Common.Dto;
 
-namespace FlatManagement.Dal.Tools
+namespace FlatManagement.Common.Dal
 {
 	public interface IReadOnlyDataAccess { }
 

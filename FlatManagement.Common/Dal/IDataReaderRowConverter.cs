@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace FlatManagement.Dal.Tools
+namespace FlatManagement.Common.Dal
 {
 	public interface IDataReaderRowConverter
 	{

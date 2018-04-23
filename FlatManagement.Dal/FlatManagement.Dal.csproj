@@ -16,10 +16,4 @@
     <ProjectReference Include="..\FlatManagement.Dto\FlatManagement.Dto.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="System">
-      <HintPath>System</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

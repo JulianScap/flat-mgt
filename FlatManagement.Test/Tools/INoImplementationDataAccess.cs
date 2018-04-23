@@ -1,5 +1,5 @@
 ﻿using FlatManagement.Dal.Interface;
-using FlatManagement.Dal.Tools;
+using FlatManagement.Common.Dal;
 
 namespace FlatManagement.Test.Tools
 {

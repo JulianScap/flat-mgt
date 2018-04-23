@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using FlatManagement.Common.Dto;
 
-namespace FlatManagement.Dal.Tools
+namespace FlatManagement.Common.Dal
 {
 	[DebuggerDisplay("{Name}: {Value}")]
 	public class Parameter

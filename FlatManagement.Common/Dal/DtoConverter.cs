@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using System.Reflection;
 
-namespace FlatManagement.Dal.Tools
+namespace FlatManagement.Common.Dal
 {
 	internal class DtoConverter<TDto> : IDataReaderRowConverter
 		where TDto : new()

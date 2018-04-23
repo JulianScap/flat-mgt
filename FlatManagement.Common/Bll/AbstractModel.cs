@@ -1,10 +1,10 @@
-﻿using FlatManagement.Common.Dto;
-using FlatManagement.Dal.Tools;
+﻿using FlatManagement.Common.Dal;
+using FlatManagement.Common.Dto;
 using Microsoft.Extensions.Configuration;
 
-namespace FlatManagement.Bll.Tools
+namespace FlatManagement.Common.Bll
 {
-	internal abstract class AbstractModel<TDto> : AbstractReadOnlyModel<TDto>, IModel<TDto>
+	public abstract class AbstractModel<TDto> : AbstractReadOnlyModel<TDto>, IModel<TDto>
 		where TDto : IDto, new()
 	{
 		protected AbstractModel()

@@ -1,4 +1,4 @@
-﻿namespace FlatManagement.Dal.Tools
+﻿namespace FlatManagement.Common.Dal
 {
 	public enum OperationEnum
 	{

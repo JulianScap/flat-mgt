@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using FlatManagement.Bll.Tools;
+using FlatManagement.Common.Bll;
 using FlatManagement.Common.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

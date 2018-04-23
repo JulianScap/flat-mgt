@@ -1,6 +1,6 @@
 ﻿using FlatManagement.Common.Dto;
 
-namespace FlatManagement.Bll.Tools
+namespace FlatManagement.Common.Bll
 {
 	public interface IModel : IReadOnlyModel
 	{

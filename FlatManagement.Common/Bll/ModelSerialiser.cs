@@ -3,7 +3,7 @@ using FlatManagement.Common.Services;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
-namespace FlatManagement.Bll.Tools
+namespace FlatManagement.Common.Bll
 {
 	public class ModelSerialiser
 	{

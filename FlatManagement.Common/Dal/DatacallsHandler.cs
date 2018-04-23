@@ -6,7 +6,7 @@ using FlatManagement.Common.Exceptions;
 using FlatManagement.Common.Extensions;
 using Microsoft.Extensions.Configuration;
 
-namespace FlatManagement.Dal.Tools
+namespace FlatManagement.Common.Dal
 {
 	public class DatacallsHandler
 	{
