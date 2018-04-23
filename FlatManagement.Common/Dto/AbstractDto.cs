@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using Newtonsoft.Json;
 
 namespace FlatManagement.Common.Dto
@@ -32,20 +31,6 @@ namespace FlatManagement.Common.Dto
 		private PropertyInfo GetProperty(string name)
 		{
 			return GetType().GetProperty(name);
-		}
-	}
-
-	public abstract class AbstractDto<TId> : AbstractDto, IDto<TId>
-	{
-		public AbstractDto() { }
-
-		public abstract TId GetId();
-
-		public override bool IsPersisted {
-			get
-			{
-				return !EqualityComparer<TId>.Default.Equals(GetId(), default(TId));
-			}
 		}
 	}
 }

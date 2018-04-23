@@ -7,7 +7,7 @@ using FlatManagement.Dto.Enums;
 namespace FlatManagement.Dto.Entities
 {
 	[DebuggerDisplay("PeriodType({PeriodTypeId}::{Name})")]
-	public partial class PeriodType : AbstractDto<int>, IEquatable<PeriodType>, IEquatable<PeriodTypeEnum>
+	public partial class PeriodType : AbstractDto, IEquatable<PeriodType>, IEquatable<PeriodTypeEnum>
 	{
 		public PeriodType() { }
 
@@ -19,11 +19,6 @@ namespace FlatManagement.Dto.Entities
 
 		public int PeriodTypeId { get; set; }
 		public string Name { get; set; }
-
-		public override int GetId()
-		{
-			return this.PeriodTypeId;
-		}
 
 		public override bool Equals(object obj)
 		{
@@ -67,6 +62,8 @@ namespace FlatManagement.Dto.Entities
 		public override TypeEnum[] IdFieldTypes { get => idsType; }
 		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
+
+		public override bool IsPersisted => PeriodTypeId != 0;
 
 		#region explicit operator
 		public static explicit operator PeriodType(PeriodTypeEnum periodTypeEnum)

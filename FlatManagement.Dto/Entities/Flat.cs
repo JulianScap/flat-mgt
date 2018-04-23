@@ -6,16 +6,11 @@ using FlatManagement.Common.Validation;
 namespace FlatManagement.Dto.Entities
 {
 	[DebuggerDisplay("Flat({FlatId}::{Name})")]
-	public partial class Flat : AbstractDto<int>, IEquatable<Flat>
+	public partial class Flat : AbstractDto, IEquatable<Flat>
 	{
 		public int FlatId { get; set; }
 		public string Name { get; set; }
 		public string Address { get; set; }
-
-		public override int GetId()
-		{
-			return this.FlatId;
-		}
 
 		public override bool Equals(object obj)
 		{
@@ -55,5 +50,7 @@ namespace FlatManagement.Dto.Entities
 		public override TypeEnum[] IdFieldTypes { get => idsType; }
 		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
+
+		public override bool IsPersisted => FlatId != 0;
 	}
 }

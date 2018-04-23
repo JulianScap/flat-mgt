@@ -23,9 +23,4 @@
 
 		void SetFieldValue(string fieldName, object value);
 	}
-
-	public interface IDto<TId> : IDto
-	{
-		TId GetId();
-	}
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using FlatManagement.Common.Dto;
+﻿using FlatManagement.Common.Dto;
 
 namespace FlatManagement.Test.Tools
 {
@@ -8,16 +7,12 @@ namespace FlatManagement.Test.Tools
 
 	}
 
-	public class FakeDto : AbstractDto<int>, IFakeDto
+	public class FakeDto : AbstractDto, IFakeDto
 	{
 		public override string[] IdFieldNames { get; }
 		public override string[] DataFieldNames { get; }
 		public override string[] AllFieldNames { get; }
 		public override TypeEnum[] IdFieldTypes { get; }
-
-		public override int GetId()
-		{
-			throw new NotImplementedException();
-		}
+		public override bool IsPersisted { get; }
 	}
 }

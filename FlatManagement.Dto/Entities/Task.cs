@@ -5,7 +5,7 @@ using FlatManagement.Dto.Enums;
 
 namespace FlatManagement.Dto.Entities
 {
-	public partial class Task : AbstractDto<int>, IEquatable<Task>
+	public partial class Task : AbstractDto, IEquatable<Task>
 	{
 		public int TaskId { get; set; }
 		public string Name { get; set; }
@@ -38,11 +38,6 @@ namespace FlatManagement.Dto.Entities
 					PeriodTypeId = null;
 				}
 			}
-		}
-
-		public override int GetId()
-		{
-			return this.TaskId;
 		}
 
 		public override bool Equals(object obj)
@@ -85,5 +80,7 @@ namespace FlatManagement.Dto.Entities
 		public override TypeEnum[] IdFieldTypes { get => idsType; }
 		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
+
+		public override bool IsPersisted => TaskId != 0;
 	}
 }

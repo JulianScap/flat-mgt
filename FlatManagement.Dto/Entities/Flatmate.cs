@@ -6,7 +6,7 @@ using FlatManagement.Common.Validation;
 namespace FlatManagement.Dto.Entities
 {
 	[DebuggerDisplay("Flatmate({FlatmateId}::{FullName})")]
-	public partial class Flatmate : AbstractDto<int>, IEquatable<Flatmate>
+	public partial class Flatmate : AbstractDto, IEquatable<Flatmate>
 	{
 		public int FlatmateId { get; set; }
 		public int FlatId { get; set; }
@@ -47,11 +47,6 @@ namespace FlatManagement.Dto.Entities
 			return HashCode.Compute(this.FlatmateId, this.FlatId, this.FullName, this.Nickname, this.BirthDate, this.FlatTenant);
 		}
 
-		public override int GetId()
-		{
-			return this.FlatmateId;
-		}
-
 		private readonly string[] ids = new string[] { "FlatmateId" };
 		private readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
 		private readonly string[] fields = new string[] { "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant" };
@@ -61,5 +56,7 @@ namespace FlatManagement.Dto.Entities
 		public override TypeEnum[] IdFieldTypes { get => idsType; }
 		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
+
+		public override bool IsPersisted => FlatmateId != 0;
 	}
 }
