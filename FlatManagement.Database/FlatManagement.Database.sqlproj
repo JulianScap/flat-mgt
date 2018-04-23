@@ -117,6 +117,7 @@
     <Folder Include="dbo\Stored Procedure\Flat" />
     <Folder Include="dbo\Stored Procedure\PeriodType" />
     <Folder Include="dbo\Stored Procedure\Task" />
+    <Folder Include="dbo\Stored Procedure\Flatmate" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Flat.sql">
@@ -150,6 +151,11 @@
     <Build Include="dbo\Stored Procedure\PeriodType\PeriodType_GetAll.sql" />
     <Build Include="dbo\Stored Procedure\Flat\Flat_Delete.sql" />
     <Build Include="dbo\Stored Procedure\PeriodType\PeriodType_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_Update.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_Delete.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetAll.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_Insert.sql" />
     <Build Include="dbo\Stored Procedure\Task\Task_Delete.sql" />
     <Build Include="dbo\Stored Procedure\Task\Task_GetAll.sql" />
     <Build Include="dbo\Stored Procedure\Task\Task_GetById.sql" />
