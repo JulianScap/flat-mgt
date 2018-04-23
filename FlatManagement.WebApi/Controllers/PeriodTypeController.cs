@@ -1,5 +1,7 @@
 ﻿using FlatManagement.Bll.Interface;
+using FlatManagement.Common.Services;
 using FlatManagement.Dto.Entities;
+using FlatManagement.Dto.Enums;
 using FlatManagement.WebApi.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,10 +15,12 @@ namespace FlatManagement.WebApi.Controllers
 		{
 		}
 
-		[HttpGet]
+		[HttpGet("{periodTypeId}")]
 		public virtual IPeriodTypeModel Get(int periodTypeId)
 		{
-			return Get(new PeriodType() { PeriodTypeId = periodTypeId });
+			IPeriodTypeModel ipt = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
+			ipt.GetById(new PeriodType((PeriodTypeEnum)periodTypeId));
+			return ipt;
 		}
 	}
 }

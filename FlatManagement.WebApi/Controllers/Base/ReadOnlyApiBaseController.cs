@@ -26,12 +26,5 @@ namespace FlatManagement.WebApi.Controllers.Base
 			ipt.GetAll();
 			return ipt;
 		}
-
-		protected virtual TModel Get(TDto ids)
-		{
-			TModel ipt = ServiceLocator.Instance.GetService<TModel>();
-			ipt.GetById(ids);
-			return ipt;
-		}
 	}
 }

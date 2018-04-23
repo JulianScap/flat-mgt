@@ -1,5 +1,6 @@
 ﻿using System;
 using FlatManagement.Bll.Interface;
+using FlatManagement.Dto.Entities;
 using FlatManagement.Dto.Enums;
 using FlatManagement.Test.Tools;
 using FlatManagement.WebApi.Controllers;
@@ -26,13 +27,13 @@ namespace FlatManagement.Test.WebApi
 			PeriodTypeController ptc = new PeriodTypeController(configuration);
 			Array periodTypeIds = Enum.GetValues(typeof(PeriodTypeEnum));
 
-			foreach (int periodTypeId in periodTypeIds)
+			foreach (PeriodTypeEnum periodTypeId in periodTypeIds)
 			{
-				IPeriodTypeModel iptm = ptc.Get(periodTypeId);
+				IPeriodTypeModel iptm = ptc.Get((int)periodTypeId);
 
 				Assert.Equal(1, iptm.Count);
-				Assert.Equal(periodTypeId, iptm[0].PeriodTypeId);
-				Assert.Equal(((PeriodTypeEnum)periodTypeId).ToString(), iptm[0].Name);
+				Assert.Equal((int)periodTypeId, iptm[0].PeriodTypeId);
+				Assert.Equal(periodTypeId.ToString(), iptm[0].Name);
 			}
 		}
 	}
