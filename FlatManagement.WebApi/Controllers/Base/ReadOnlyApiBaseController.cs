@@ -1,4 +1,5 @@
 ﻿using FlatManagement.Bll.Tools;
+using FlatManagement.Common.Dto;
 using FlatManagement.Common.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +10,7 @@ namespace FlatManagement.WebApi.Controllers.Base
 	[Route("api/[controller]")]
 	public class ReadOnlyApiBaseController<TModel, TDto> : Controller
 		where TModel : IReadOnlyModel<TDto>
+		where TDto : IDto, new()
 	{
 		protected IConfiguration configuration;
 

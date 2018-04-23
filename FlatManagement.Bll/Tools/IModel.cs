@@ -1,4 +1,6 @@
-﻿namespace FlatManagement.Bll.Tools
+﻿using FlatManagement.Common.Dto;
+
+namespace FlatManagement.Bll.Tools
 {
 	public interface IModel : IReadOnlyModel
 	{
@@ -7,6 +9,7 @@
 	}
 
 	public interface IModel<TDto> : IReadOnlyModel<TDto>, IModel
+		where TDto : IDto, new()
 	{
 	}
 }
