@@ -14,5 +14,22 @@ namespace FlatManagement.WebApi.Controllers.Base
 		protected ApiBaseController(IConfiguration configuration) : base(configuration)
 		{
 		}
+
+		[HttpPut]
+		[HttpPost]
+		public TModel PersistAll()
+		{
+			TModel model = DeserialiseBody();
+			model.PersistAll();
+			return model;
+		}
+
+		[HttpDelete]
+		public TModel DeleteAll()
+		{
+			TModel model = DeserialiseBody();
+			model.DeleteAll();
+			return model;
+		}
 	}
 }

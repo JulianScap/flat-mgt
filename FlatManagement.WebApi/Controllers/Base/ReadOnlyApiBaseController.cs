@@ -1,4 +1,5 @@
-﻿using FlatManagement.Common.Bll;
+﻿using System.IO;
+using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dto;
 using FlatManagement.Common.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,17 @@ namespace FlatManagement.WebApi.Controllers.Base
 		protected ReadOnlyApiBaseController(IConfiguration configuration)
 		{
 			this.configuration = configuration;
+		}
+
+		protected TModel DeserialiseBody()
+		{
+			using (StreamReader reader = new StreamReader(this.Request.Body))
+			{
+				string content = reader.ReadToEnd();
+				TModel result = ModelSerialiser.Instance.Deserialize<TModel>(content);
+				result.Configuration = configuration;
+				return result;
+			}
 		}
 
 		[HttpGet]
