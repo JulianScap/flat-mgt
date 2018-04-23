@@ -11,6 +11,10 @@ namespace FlatManagement.Dto.Entities
 	{
 		public PeriodType() { }
 
+		public PeriodType(int periodTypeId) : this((PeriodTypeEnum)periodTypeId)
+		{
+		}
+
 		public PeriodType(PeriodTypeEnum periodTypeEnum)
 		{
 			this.PeriodTypeId = (int)periodTypeEnum;
@@ -53,10 +57,10 @@ namespace FlatManagement.Dto.Entities
 			return this.PeriodTypeId == (int)other;
 		}
 
-		private readonly string[] ids = new string[] { "PeriodTypeId" };
-		private readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
-		private readonly string[] fields = new string[] { "Name" };
-		private readonly string[] allFields = new string[] { "PeriodTypeId", "Name" };
+		private static readonly string[] ids = new string[] { "PeriodTypeId" };
+		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
+		private static readonly string[] fields = new string[] { "Name" };
+		private static readonly string[] allFields = new string[] { "PeriodTypeId", "Name" };
 
 		public override string[] IdFieldNames { get => ids; }
 		public override TypeEnum[] IdFieldTypes { get => idsType; }

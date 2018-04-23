@@ -9,7 +9,7 @@ namespace FlatManagement.WebApi.Controllers.Base
 {
 	[Produces("application/json")]
 	[Route("api/[controller]")]
-	public class ReadOnlyApiBaseController<TModel, TDto> : Controller
+	public abstract class ReadOnlyApiBaseController<TModel, TDto> : Controller
 		where TModel : IReadOnlyModel<TDto>
 		where TDto : IDto, new()
 	{
@@ -26,7 +26,6 @@ namespace FlatManagement.WebApi.Controllers.Base
 			{
 				string content = reader.ReadToEnd();
 				TModel result = ModelSerialiser.Instance.Deserialize<TModel>(content);
-				result.Configuration = configuration;
 				return result;
 			}
 		}
@@ -37,6 +36,13 @@ namespace FlatManagement.WebApi.Controllers.Base
 			TModel ipt = ServiceLocator.Instance.GetService<TModel>();
 			ipt.GetAll();
 			return ipt;
+		}
+
+		protected TModel GetByDto(TDto item)
+		{
+			TModel itm = ServiceLocator.Instance.GetService<TModel>();
+			itm.GetById(item);
+			return itm;
 		}
 	}
 }

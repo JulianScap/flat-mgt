@@ -15,12 +15,10 @@ namespace FlatManagement.WebApi.Controllers
 		{
 		}
 
-		[HttpGet("{periodTypeId}")]
-		public virtual IPeriodTypeModel Get(int periodTypeId)
+		[HttpGet("{id}")]
+		public virtual IPeriodTypeModel Get(int id)
 		{
-			IPeriodTypeModel ipt = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
-			ipt.GetById(new PeriodType((PeriodTypeEnum)periodTypeId));
-			return ipt;
+			return GetByDto(new PeriodType(id));
 		}
 	}
 }

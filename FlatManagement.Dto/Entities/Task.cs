@@ -13,6 +13,13 @@ namespace FlatManagement.Dto.Entities
 		public DateTime? DateStart { get; set; }
 		public int? PeriodTypeId { get; set; }
 
+		public Task() { }
+
+		public Task(int taskId)
+		{
+			this.TaskId = taskId;
+		}
+
 		public PeriodTypeEnum? PeriodTypeIdAsEnum
 		{
 			get
@@ -71,10 +78,10 @@ namespace FlatManagement.Dto.Entities
 			}
 		}
 
-		private readonly string[] ids = new string[] { "TaskId" };
-		private readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
-		private readonly string[] fields = new string[] { "Name", "Description", "DateStart", "PeriodTypeId" };
-		private readonly string[] allFields = new string[] { "TaskId", "Name", "Description", "DateStart", "PeriodTypeId" };
+		private static readonly string[] ids = new string[] { "TaskId" };
+		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
+		private static readonly string[] fields = new string[] { "Name", "Description", "DateStart", "PeriodTypeId" };
+		private static readonly string[] allFields = new string[] { "TaskId", "Name", "Description", "DateStart", "PeriodTypeId" };
 
 		public override string[] IdFieldNames { get => ids; }
 		public override TypeEnum[] IdFieldTypes { get => idsType; }

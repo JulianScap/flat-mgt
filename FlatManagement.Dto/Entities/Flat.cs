@@ -12,6 +12,16 @@ namespace FlatManagement.Dto.Entities
 		public string Name { get; set; }
 		public string Address { get; set; }
 
+		public Flat()
+		{
+
+		}
+
+		public Flat(int flatId)
+		{
+			this.FlatId = flatId;
+		}
+
 		public override bool Equals(object obj)
 		{
 			if (obj is Flat pt)
@@ -41,10 +51,10 @@ namespace FlatManagement.Dto.Entities
 			}
 		}
 
-		private readonly string[] ids = new string[] { "FlatId" };
-		private readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
-		private readonly string[] fields = new string[] { "Name", "Address" };
-		private readonly string[] allFields = new string[] { "FlatId", "Name", "Address" };
+		private static readonly string[] ids = new string[] { "FlatId" };
+		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
+		private static readonly string[] fields = new string[] { "Name", "Address" };
+		private static readonly string[] allFields = new string[] { "FlatId", "Name", "Address" };
 
 		public override string[] IdFieldNames { get => ids; }
 		public override TypeEnum[] IdFieldTypes { get => idsType; }

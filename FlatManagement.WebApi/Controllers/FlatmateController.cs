@@ -7,17 +7,17 @@ using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.WebApi.Controllers
 {
-	public class FlatController : ApiBaseController<IFlatModel, Flat>
+	public class FlatmateController : ApiBaseController<IFlatmateModel, Flatmate>
 	{
-		public FlatController(IConfiguration configuration)
+		public FlatmateController(IConfiguration configuration)
 			: base(configuration)
 		{
 		}
 
 		[HttpGet("{id}")]
-		public virtual IFlatModel Get(int id)
+		public virtual IFlatmateModel Get(int id)
 		{
-			return GetByDto(new Flat(id));
+			return GetByDto(new Flatmate(id));
 		}
 	}
 }
