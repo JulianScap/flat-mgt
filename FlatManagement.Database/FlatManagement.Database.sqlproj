@@ -116,6 +116,7 @@
     <Folder Include="Security\" />
     <Folder Include="dbo\Stored Procedure\Flat" />
     <Folder Include="dbo\Stored Procedure\PeriodType" />
+    <Folder Include="dbo\Stored Procedure\Task" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Flat.sql">
@@ -149,6 +150,11 @@
     <Build Include="dbo\Stored Procedure\PeriodType\PeriodType_GetAll.sql" />
     <Build Include="dbo\Stored Procedure\Flat\Flat_Delete.sql" />
     <Build Include="dbo\Stored Procedure\PeriodType\PeriodType_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_Delete.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_GetAll.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_Insert.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />
