@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Task_Insert]
+	@FlatId int,
 	@Name nvarchar(100),
 	@DateStart date,
 	@Description nvarchar(1000),
@@ -6,7 +7,7 @@
 	@TaskId int output
 AS
 BEGIN
-	INSERT INTO dbo.Task ([Name], [DateStart], [Description], PeriodTypeId) VALUES (@Name, @DateStart, @Description, @PeriodTypeId);
+	INSERT INTO dbo.Task ([FlatId], [Name], [DateStart], [Description], PeriodTypeId) VALUES (@FlatId, @Name, @DateStart, @Description, @PeriodTypeId);
 	SET @TaskId = SCOPE_IDENTITY();
 END
 

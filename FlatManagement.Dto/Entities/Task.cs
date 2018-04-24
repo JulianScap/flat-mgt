@@ -2,12 +2,14 @@
 using FlatManagement.Common.Dto;
 using FlatManagement.Common.Validation;
 using FlatManagement.Dto.Enums;
+using Newtonsoft.Json;
 
 namespace FlatManagement.Dto.Entities
 {
 	public partial class Task : AbstractDto, IEquatable<Task>
 	{
 		public int TaskId { get; set; }
+		public int FlatId { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public DateTime? DateStart { get; set; }
@@ -20,6 +22,7 @@ namespace FlatManagement.Dto.Entities
 			this.TaskId = taskId;
 		}
 
+		[JsonIgnore]
 		public PeriodTypeEnum? PeriodTypeIdAsEnum
 		{
 			get
@@ -59,7 +62,7 @@ namespace FlatManagement.Dto.Entities
 
 		public override int GetHashCode()
 		{
-			return HashCode.Compute(this.TaskId, this.Name, this.Description, this.DateStart, this.PeriodTypeId);
+			return HashCode.Compute(this.TaskId, this.FlatId, this.Name, this.Description, this.DateStart, this.PeriodTypeId);
 		}
 
 		public bool Equals(Task other)
@@ -71,6 +74,7 @@ namespace FlatManagement.Dto.Entities
 			else
 			{
 				return this.TaskId == other.TaskId
+					&& this.FlatId == other.FlatId
 					&& this.Name == other.Name
 					&& this.Description == other.Description
 					&& this.DateStart == other.DateStart
@@ -80,8 +84,8 @@ namespace FlatManagement.Dto.Entities
 
 		private static readonly string[] ids = new string[] { "TaskId" };
 		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
-		private static readonly string[] fields = new string[] { "Name", "Description", "DateStart", "PeriodTypeId" };
-		private static readonly string[] allFields = new string[] { "TaskId", "Name", "Description", "DateStart", "PeriodTypeId" };
+		private static readonly string[] fields = new string[] { "Name", "FlatId", "Description", "DateStart", "PeriodTypeId" };
+		private static readonly string[] allFields = new string[] { "TaskId", "Name", "FlatId", "Description", "DateStart", "PeriodTypeId" };
 
 		public override string[] IdFieldNames { get => ids; }
 		public override TypeEnum[] IdFieldTypes { get => idsType; }

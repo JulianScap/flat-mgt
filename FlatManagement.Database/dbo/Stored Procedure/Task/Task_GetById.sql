@@ -4,6 +4,7 @@ AS
 BEGIN
 	SELECT
 		TaskId,
+		[FlatId],
 		[Name],
 		[Description],
 		[DateStart],
