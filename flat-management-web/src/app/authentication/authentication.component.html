@@ -1,24 +1,35 @@
-<div class="row form-group">
-  <div class="input-group mb-2">
-    <div class="input-group-prepend">
-      <span class="input-group-text">Name</span>
-    </div>
-    <input type="text" class="form-control" placeholder="Your name" [(ngModel)]='name' />
-  </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text">The flat name</span>
-    </div>
-    <input type="text" class="form-control" placeholder="Flat name" [(ngModel)]='flatName' />
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-1">
-    <button type="button" class="btn btn-primary" (click)='login()'>Login</button>
-  </div>
-  <div class="col">
-  </div>
-  <div class="col-sm-1">
-    <button type="button" class="btn btn-outline-danger" (click)='clear()'>Clear</button>
-  </div>
+<div class="panel-body">
+  <form class="form-horizontal" novalidate="novalidate" (ngSubmit)="login()" [formGroup]="loginForm">
+    <fieldset [disabled]="busy">
+
+      <div class="row form-group">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Name</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Your name (required)" formControlName="name"
+            [ngClass]="{'is-invalid': name.dirty && !name.valid }" />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">The flat name</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Flat name (required)" formControlName="flatName"
+            [ngClass]="{'is-invalid': flatName.dirty && !flatName.valid }" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-primary" (click)='login()' [disabled]='busy || !loginForm.valid'>Login</button>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-outline-danger" (click)='clear()' [disabled]='busy'>Clear</button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
 </div>
