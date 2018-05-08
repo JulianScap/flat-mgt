@@ -8,14 +8,14 @@
             <span class="input-group-text">Name</span>
           </div>
           <input type="text" class="form-control" placeholder="Your name (required)" formControlName="name"
-            [ngClass]="{'is-invalid': name.dirty && !name.valid }" />
+            [ngClass]="{'is-invalid': (name.dirty || name.touched) && !name.valid }" />
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">The flat name</span>
           </div>
           <input type="text" class="form-control" placeholder="Flat name (required)" formControlName="flatName"
-            [ngClass]="{'is-invalid': flatName.dirty && !flatName.valid }" />
+            [ngClass]="{'is-invalid': (flatName.dirty || flatName.touched) && !flatName.valid }" />
         </div>
       </div>
 

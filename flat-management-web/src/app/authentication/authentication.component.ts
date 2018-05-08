@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormsModule, FormBuilder, Validators, ValidatorFn } from '@angular/forms';
 
 @Component({
-  templateUrl: './authentication.component.html',
-  styleUrls: ['./authentication.component.css']
+  templateUrl: './authentication.component.html'
 })
-
 export class AuthenticationComponent implements OnInit {
   loginForm: FormGroup;
 
