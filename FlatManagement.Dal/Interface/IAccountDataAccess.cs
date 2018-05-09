@@ -5,5 +5,6 @@ namespace FlatManagement.Dal.Interface
 {
 	public interface IAccountDataAccess : IDataAccess<Account>
 	{
+		Account GetByLogin(string login);
 	}
 }

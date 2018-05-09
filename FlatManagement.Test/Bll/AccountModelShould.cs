@@ -1,17 +1,17 @@
 ﻿using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Services;
-using FlatManagement.Dto.Entities;
+using FlatManagement.Test.Tools;
 using Xunit;
 
 namespace FlatManagement.Test.Bll
 {
-	public class AccountModelShould
+	public class AccountModelShould : TestBase
 	{
 		[Fact]
-		public void ReturnAValidAccountById()
+		public void ReturnAValidAccountByLogin()
 		{
 			IAccountModel iam = ServiceLocator.Instance.GetService<IAccountModel>();
-			iam.GetById(new Account(1));
+			iam.GetByLogin(login: "test");
 
 			Assert.NotEmpty(iam);
 		}

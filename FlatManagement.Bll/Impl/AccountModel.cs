@@ -20,6 +20,13 @@ namespace FlatManagement.Bll.Impl
 
 		}
 
+		public void GetByLogin(string login)
+		{
+			IAccountDataAccess dal = ServiceLocator.Instance.GetService<IAccountDataAccess>();
+			items.Clear();
+			items.Add(dal.GetByLogin(login));
+		}
+
 		protected override IDataAccess<Account> GetDal()
 		{
 			return ServiceLocator.Instance.GetService<IAccountDataAccess>();

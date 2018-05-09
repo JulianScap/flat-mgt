@@ -10,5 +10,16 @@ namespace FlatManagement.Dal.Impl
 		protected AccountDataAccess(IConfiguration configuration) : base(configuration)
 		{
 		}
+
+		public Account GetByLogin(string login)
+		{
+			DatacallsHandler handler = new DatacallsHandler(configuration);
+			string command = GetStoredProcedureName(OperationEnum.Custom, "GetByLogin");
+			Parameter[] parameters = new Parameter[1] {
+				new Parameter("Login", login)
+			};
+			object result = handler.GetOne(command, parameters, converter, true);
+			return (Account)result;
+		}
 	}
 }
