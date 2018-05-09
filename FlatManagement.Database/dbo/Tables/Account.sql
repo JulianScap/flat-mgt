@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Account]
 (
 	[AccountId]    INT IDENTITY(1, 1) NOT NULL,
-	[Login]        NVARCHAR(500) NOT NULL,
-	[Password]     NVARCHAR(500) NOT NULL,
+	[Login]        NVARCHAR(100) NOT NULL,
+	[Password]     NVARCHAR(100) NOT NULL,
 	CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED ([AccountId])
 )
 GO
