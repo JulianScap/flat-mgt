@@ -1,5 +1,4 @@
-﻿using System.IO;
-using FlatManagement.Common.Bll;
+﻿using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dto;
 using FlatManagement.Common.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -9,25 +8,20 @@ namespace FlatManagement.WebApi.Controllers.Base
 {
 	[Produces("application/json")]
 	[Route("api/[controller]")]
-	public abstract class ReadOnlyApiBaseController<TModel, TDto> : Controller
+	public abstract class ReadOnlyApiBaseController<TModel, TDto> : AbstractController
 		where TModel : IReadOnlyModel<TDto>
 		where TDto : IDto, new()
 	{
-		protected IConfiguration configuration;
-
 		protected ReadOnlyApiBaseController(IConfiguration configuration)
+			: base(configuration)
 		{
-			this.configuration = configuration;
 		}
 
 		protected TModel DeserialiseBody()
 		{
-			using (StreamReader reader = new StreamReader(this.Request.Body))
-			{
-				string content = reader.ReadToEnd();
-				TModel result = ModelSerialiser.Instance.Deserialize<TModel>(content);
-				return result;
-			}
+			string content = base.GetBodyAsString();
+			TModel result = ModelSerialiser.Instance.Deserialize<TModel>(content);
+			return result;
 		}
 
 		[HttpGet]

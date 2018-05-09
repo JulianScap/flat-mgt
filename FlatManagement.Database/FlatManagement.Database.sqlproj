@@ -161,7 +161,7 @@
     <Build Include="dbo\Stored Procedure\Task\Task_GetById.sql" />
     <Build Include="dbo\Stored Procedure\Task\Task_Insert.sql" />
     <Build Include="dbo\Stored Procedure\Task\Task_Update.sql" />
-    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByNameAndFlatName.sql" />
+    <Build Include="dbo\Tables\Account.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />
