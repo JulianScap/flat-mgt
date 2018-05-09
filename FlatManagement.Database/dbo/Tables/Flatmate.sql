@@ -8,4 +8,11 @@
     CONSTRAINT [PK_Flatmate] PRIMARY KEY CLUSTERED ([FlatmateId] ASC),
     CONSTRAINT [FK_Flatmate_Flat] FOREIGN KEY ([FlatId]) REFERENCES [dbo].[Flat] ([FlatId])
 );
+GO
+
+CREATE INDEX [IX_Flatmate_Nickname] ON [dbo].[Flatmate] ([Nickname])
+GO
+
+CREATE UNIQUE INDEX [IX_Flatmate_FlatId_Nickname] ON [dbo].[Flatmate] ([FlatId], [Nickname])
+GO
 

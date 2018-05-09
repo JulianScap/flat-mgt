@@ -11,7 +11,7 @@ namespace FlatManagement.Common.Dal
 	public abstract class ReadOnlyAbstractDataAccess<TDto> : IReadOnlyDataAccess<TDto>
 		where TDto : IDto, new()
 	{
-		private static readonly IDataReaderRowConverter converter;
+		protected static readonly IDataReaderRowConverter converter;
 		private static readonly ConcurrentDictionary<string, PropertyInfo> properties;
 		protected IConfiguration configuration;
 
@@ -47,7 +47,7 @@ namespace FlatManagement.Common.Dal
 		{
 			if (operation == OperationEnum.Custom)
 			{
-				return typeof(TDto).Name + "_Custom_" + name;
+				return typeof(TDto).Name + "_" + name;
 			}
 			else
 			{

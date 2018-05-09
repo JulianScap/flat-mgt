@@ -13,7 +13,12 @@ namespace FlatManagement.Common.Dal
 		private readonly string connectionString;
 
 		public DatacallsHandler(IConfiguration configuration)
-			: this(configuration["Database:ConnectionString"])
+			: this(configuration, "Database:ConnectionString")
+		{
+		}
+
+		public DatacallsHandler(IConfiguration configuration, string configurationStringKey)
+			: this(configuration[configurationStringKey])
 		{
 		}
 
