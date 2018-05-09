@@ -10,8 +10,8 @@ BEGIN
 		fm.[Nickname],
 		fm.[BirthDate],
 		fm.[FlatTenant]
-	FROM dbo.Flatmate fm
-	JOIN dbo.Flat f
+	FROM [dbo].[Flatmate] fm
+	JOIN [dbo].[Flat] f
 		ON f.FlatId = fm.FlatId
 	WHERE
 		fm.Nickname = @Nickname

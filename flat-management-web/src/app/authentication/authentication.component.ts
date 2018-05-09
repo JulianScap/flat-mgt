@@ -7,8 +7,8 @@ import { FormGroup, AbstractControl, FormsModule, FormBuilder, Validators, Valid
 export class AuthenticationComponent implements OnInit {
   loginForm: FormGroup;
 
-  name: AbstractControl;
-  flatName: AbstractControl;
+  login: AbstractControl;
+  password: AbstractControl;
 
   busy: boolean;
 
@@ -19,27 +19,30 @@ export class AuthenticationComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      flatName: ['', Validators.required]
+      login: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
-    this.name = this.loginForm.get('name');
-    this.flatName = this.loginForm.get('flatName');
+    this.login = this.loginForm.get('login');
+    this.password = this.loginForm.get('password');
   }
   //#endregion
 
-  login(): void {
+  login_click(): void {
     try {
       this.busy = true;
+
+      console.log(JSON.stringify(this.loginForm.value));
+      
     } finally {
       this.busy = false;
     }
   }
 
-  clear(): void {
+  clear_click(): void {
     this.loginForm.setValue({
-      name: '',
-      flatName: ''
+      login: '',
+      password: ''
     });
   }
 }

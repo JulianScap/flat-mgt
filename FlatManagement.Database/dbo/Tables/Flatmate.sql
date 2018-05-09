@@ -5,6 +5,8 @@
     [Nickname]   NVARCHAR (100) NULL,
     [BirthDate]  DATE           NULL,
     [FlatTenant] BIT            NOT NULL,
+    [Login] NVARCHAR(100) NULL, 
+    [Password] NVARCHAR(100) NULL, 
     CONSTRAINT [PK_Flatmate] PRIMARY KEY CLUSTERED ([FlatmateId] ASC),
     CONSTRAINT [FK_Flatmate_Flat] FOREIGN KEY ([FlatId]) REFERENCES [dbo].[Flat] ([FlatId])
 );

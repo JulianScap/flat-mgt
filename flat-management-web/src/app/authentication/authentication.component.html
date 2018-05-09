@@ -1,32 +1,32 @@
 <div class="panel-body">
-  <form class="form-horizontal" novalidate="novalidate" (ngSubmit)="login()" [formGroup]="loginForm">
+  <form class="form-horizontal" novalidate="novalidate" (ngSubmit)="login_click()" [formGroup]="loginForm">
     <fieldset [disabled]="busy">
 
       <div class="row form-group">
         <div class="input-group mb-2">
           <div class="input-group-prepend">
-            <span class="input-group-text">Name</span>
+            <span class="input-group-text">Login</span>
           </div>
-          <input type="text" class="form-control" placeholder="Your name (required)" formControlName="name"
-            [ngClass]="{'is-invalid': (name.dirty || name.touched) && !name.valid }" />
+          <input type="text" class="form-control" placeholder="Your name (required)" formControlName="login"
+            [ngClass]="{'is-invalid': (login.dirty || login.touched) && !login.valid }" />
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text">The flat name</span>
+            <span class="input-group-text">Password</span>
           </div>
-          <input type="text" class="form-control" placeholder="Flat name (required)" formControlName="flatName"
-            [ngClass]="{'is-invalid': (flatName.dirty || flatName.touched) && !flatName.valid }" />
+          <input type="password" class="form-control" placeholder="Password (required)" formControlName="password"
+            [ngClass]="{'is-invalid': (password.dirty || password.touched) && !password.valid }" />
         </div>
       </div>
 
       <div class="row">
         <div class="col-sm-1">
-          <button type="button" class="btn btn-primary" (click)='login()' [disabled]='busy || !loginForm.valid'>Login</button>
+          <button type="submit" class="btn btn-primary" [disabled]='busy || !loginForm.valid'>Login</button>
         </div>
         <div class="col">
         </div>
         <div class="col-sm-1">
-          <button type="button" class="btn btn-outline-danger" (click)='clear()' [disabled]='busy'>Clear</button>
+          <button type="button" class="btn btn-outline-danger" (click)='clear_click()' [disabled]='busy'>Clear</button>
         </div>
       </div>
 
