@@ -2,6 +2,6 @@
 {
 	public interface IValidable
 	{
-		ValidateResult Validate();
+		ValidationResult Validate();
 	}
 }

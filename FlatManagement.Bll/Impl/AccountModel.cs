@@ -1,10 +1,9 @@
-﻿using System;
-using FlatManagement.Bll.Interface;
-using FlatManagement.Bll.Model;
+﻿using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dal;
 using FlatManagement.Common.Security;
 using FlatManagement.Common.Services;
+using FlatManagement.Common.Validation;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
 using Microsoft.Extensions.Configuration;
@@ -40,16 +39,16 @@ namespace FlatManagement.Bll.Impl
 			return ServiceLocator.Instance.GetService<IAccountDataAccess>();
 		}
 
-		public CheckPasswordResult CheckPassword(string passwordHash)
+		public ValidationResult CheckPassword(string passwordHash)
 		{
 			string decrypted = CryptoTool.Decrypt(passwordHash, Configuration);
 
 			if (items.Count != 1 || items[0].Password != decrypted)
 			{
-				return new CheckPasswordResult { Success = false, Message = "Authentication failed" };
+				return new ValidationResult("Authentication failed");
 			}
 
-			return new CheckPasswordResult { Success = true };
+			return new ValidationResult();
 		}
 	}
 }
