@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Configurations\Security.json" />
     <None Remove="Configurations\Services.json" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Configurations\appsettings.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\Security.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Configurations\Services.json">

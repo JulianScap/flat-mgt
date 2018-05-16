@@ -6,8 +6,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.WebApi.Controllers.Base
 {
-	[Produces("application/json")]
-	[Route("api/[controller]")]
 	public abstract class ReadOnlyApiBaseController<TModel, TDto> : AbstractController
 		where TModel : IReadOnlyModel<TDto>
 		where TDto : IDto, new()

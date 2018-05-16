@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormsModule, FormBuilder, Validators, ValidatorFn } from '@angular/forms';
 
+import { AuthenticationService } from './authentication.service';
+
+
 @Component({
   templateUrl: './authentication.component.html'
 })
@@ -13,7 +16,9 @@ export class AuthenticationComponent implements OnInit {
   busy: boolean;
 
   //#region init methods
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private authenticationService: AuthenticationService
+  ) {
     this.busy = false;
   }
 
@@ -31,9 +36,10 @@ export class AuthenticationComponent implements OnInit {
   login_click(): void {
     try {
       this.busy = true;
+      let now: Date = new Date();
+      let passwordHash: string;
 
-      console.log(JSON.stringify(this.loginForm.value));
-      
+      this.authenticationService.Authenticate(this.login.value, this.password.value);
     } finally {
       this.busy = false;
     }

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using FlatManagement.Common.Dto;
 using FlatManagement.Common.Validation;
+using Newtonsoft.Json;
 
 namespace FlatManagement.Dto.Entities
 {
@@ -10,6 +11,7 @@ namespace FlatManagement.Dto.Entities
 	{
 		public int AccountId { get; set; }
 		public string Login { get; set; }
+		[JsonIgnore]
 		public string Password { get; set; }
 
 		public Account()

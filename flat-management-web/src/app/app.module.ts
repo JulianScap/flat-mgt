@@ -4,19 +4,19 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthenticationComponent } from './authentication/authentication.component';
 import { SharedModule } from './shared/shared.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AuthenticationComponent
+    AppComponent
   ],
-  
+
   imports: [
     BrowserModule,
     SharedModule,
     HttpClientModule,
+    AuthenticationModule,
     AppRoutingModule
   ],
 

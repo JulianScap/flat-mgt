@@ -1,9 +1,12 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace FlatManagement.WebApi.Controllers.Base
 {
+	[Produces("application/json")]
+	[Route("api/[controller]")]
 	public class AbstractController : Controller
 	{
 		protected IConfiguration configuration;
@@ -19,6 +22,12 @@ namespace FlatManagement.WebApi.Controllers.Base
 			{
 				return reader.ReadToEnd();
 			}
+		}
+
+		internal T GetBody<T>()
+		{
+			string body = GetBodyAsString();
+			return JsonConvert.DeserializeObject<T>(body);
 		}
 	}
 }
