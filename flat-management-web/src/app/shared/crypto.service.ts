@@ -26,7 +26,6 @@ KnOHBJFwNqcSn/cZvQIDAQAB
 
     preparePassword(password: string, date: Date): string {
         let hash: string = this.getPasswordHash(password);
-        console.log(hash);
         let result: string = this.encrypt(hash);
 
         return forge.util.encode64(result);
