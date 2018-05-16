@@ -35,13 +35,13 @@ namespace TestCrypto
 			using (FileStream stream = File.OpenWrite(@".\out\public.pem"))
 			using (TextWriter tw = new StreamWriter(stream))
 			{
-				ExportPublicKey(rsa, tw);
+				ExportPublicKey(publicKey, tw);
 			}
 
 			using (FileStream stream = File.OpenWrite(@".\out\private.pem"))
 			using (TextWriter tw = new StreamWriter(stream))
 			{
-				ExportPrivateKey(rsa, tw);
+				ExportPrivateKey(privateKey, tw);
 			}
 		}
 
@@ -102,10 +102,8 @@ namespace TestCrypto
 			}
 		}
 
-		private static void ExportPrivateKey(RSACryptoServiceProvider csp, TextWriter outputStream)
+		private static void ExportPrivateKey(RSAParameters parameters, TextWriter outputStream)
 		{
-			if (csp.PublicOnly) throw new ArgumentException("CSP does not contain a private key", "csp");
-			var parameters = csp.ExportParameters(true);
 			using (var stream = new MemoryStream())
 			{
 				var writer = new BinaryWriter(stream);
@@ -138,9 +136,8 @@ namespace TestCrypto
 			}
 		}
 
-		private static void ExportPublicKey(RSACryptoServiceProvider csp, TextWriter outputStream)
+		private static void ExportPublicKey(RSAParameters parameters, TextWriter outputStream)
 		{
-			var parameters = csp.ExportParameters(false);
 			using (var stream = new MemoryStream())
 			{
 				var writer = new BinaryWriter(stream);
