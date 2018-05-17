@@ -31,7 +31,7 @@ namespace FlatManagement.WebApi
 				options.AddPolicy(CorsPolicyName, builder =>
 					builder.AllowAnyHeader()
 						.AllowAnyMethod()
-						.AllowAnyOrigin()
+						.WithOrigins(origins)
 						.AllowCredentials())
 				);
 
