@@ -47,6 +47,13 @@ export class AuthenticationComponent implements OnInit {
     }
   }
 
+  setDevValues_click(): void {
+    this.loginForm.setValue({
+      login: 'Julian',
+      password: 'Julian'
+    });
+  }
+
   clear_click(): void {
     this.loginForm.setValue({
       login: '',

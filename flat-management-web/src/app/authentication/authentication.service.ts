@@ -18,7 +18,7 @@ export class AuthenticationService {
         let now: Date = new Date();
         let cypheredPassword: string = this.cryptoService.preparePassword(password, now);
 
-        return this.http.post<IResult>('Auth', { "login": login, "password": cypheredPassword })
+        return this.http.post<IResult>('Auth', { "login": login, "passwordHash": cypheredPassword })
             .do(data => console.log(data))
             .catch(this.handleError);
     }
