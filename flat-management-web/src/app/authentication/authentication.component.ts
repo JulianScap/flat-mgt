@@ -17,7 +17,7 @@ export class AuthenticationComponent implements OnInit {
 
   //#region init methods
   constructor(private formBuilder: FormBuilder,
-              private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService
   ) {
     this.busy = false;
   }
@@ -39,7 +39,9 @@ export class AuthenticationComponent implements OnInit {
       let now: Date = new Date();
       let passwordHash: string;
 
-      this.authenticationService.Authenticate(this.login.value, this.password.value);
+      this.authenticationService
+        .Authenticate(this.login.value, this.password.value)
+        .subscribe(test => console.log(test));
     } finally {
       this.busy = false;
     }

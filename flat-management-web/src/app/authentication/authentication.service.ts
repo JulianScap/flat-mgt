@@ -6,22 +6,24 @@ import "rxjs/add/operator/do";
 import "rxjs/add/observable/throw";
 
 import { CryptoService } from "../shared/crypto.service";
+import { IResult } from "../shared/result";
+import { CorsHttpClient } from "../shared/corshttpclient.service";
 
 @Injectable()
 export class AuthenticationService {
     constructor(private cryptoService: CryptoService,
-        private http: HttpClient) { }
+        private http: CorsHttpClient) { }
 
-    Authenticate(login: string, password: string): string {
+    Authenticate(login: string, password: string): Observable<IResult> {
         let now: Date = new Date();
         let cypheredPassword: string = this.cryptoService.preparePassword(password, now);
-        this.http.post('http://fm.api.local/api/Auth', { "login": login, "password": cypheredPassword })
-        .do(data => console.log(data))
-        .catch(this.handleError);
-        return null;
+
+        return this.http.post<IResult>('Auth', { "login": login, "password": cypheredPassword })
+            .do(data => console.log(data))
+            .catch(this.handleError);
     }
 
-    private handleError(err: HttpErrorResponse){
+    private handleError(err: HttpErrorResponse) {
         console.log(err.message);
         return Observable.throw(err.message);
     }
