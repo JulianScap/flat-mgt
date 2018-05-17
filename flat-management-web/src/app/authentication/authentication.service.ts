@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 
 import { CryptoService } from "../shared/crypto.service";
-import { IResult } from "../shared/result";
+import { IResult } from "../shared/entities/result";
 import { CorsHttpClient } from "../shared/corshttpclient.service";
 
 @Injectable()

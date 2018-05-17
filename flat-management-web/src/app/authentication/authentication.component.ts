@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthenticationService } from './authentication.service';
-import { IResult } from '../shared/result';
-
+import { IResult } from '../shared/entities/result';
 
 @Component({
   templateUrl: './authentication.component.html'
