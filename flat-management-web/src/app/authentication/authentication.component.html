@@ -1,35 +1,43 @@
 <div class="panel-body">
   <form class="form-horizontal" novalidate="novalidate" (ngSubmit)="login_click()" [formGroup]="loginForm">
-    <fieldset [disabled]="busy">
+    <fieldset>
+
+      <div class="row mb-3" *ngIf="errorMessages">
+        <div class="col">
+          <ul *ngFor="let message of errorMessages" class="list-group">
+            <li class="list-group-item list-group-item-danger">{{ message }}</li>
+          </ul>
+        </div>
+      </div>
 
       <div class="row form-group">
-        <div class="input-group mb-2">
+        <div class="input-group mb-1">
           <div class="input-group-prepend">
             <span class="input-group-text">Login</span>
           </div>
-          <input type="text" class="form-control" placeholder="Your name (required)" formControlName="login"
-            [ngClass]="{'is-invalid': (login.dirty || login.touched) && !login.valid }" />
+          <input type="text" class="form-control" placeholder="Your name (required)" formControlName="login" [ngClass]="{'is-invalid': (login.dirty || login.touched) && !login.valid }"
+          />
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Password</span>
           </div>
-          <input type="password" class="form-control" placeholder="Password (required)" formControlName="password"
-            [ngClass]="{'is-invalid': (password.dirty || password.touched) && !password.valid }" />
+          <input type="password" class="form-control" placeholder="Password (required)" formControlName="password" [ngClass]="{'is-invalid': (password.dirty || password.touched) && !password.valid }"
+          />
         </div>
       </div>
 
       <div class="row">
         <div class="col-sm-1">
-          <button type="submit" class="btn btn-primary" [disabled]='busy || !loginForm.valid'>Login</button>
+          <button type="submit" class="btn btn-primary">Login</button>
         </div>
         <div class="col-sm-1">
-          <button type="button" class="btn btn-outline-danger" [disabled]='busy' (click)='setDevValues_click()'>Set dev values</button>
+          <button type="button" class="btn btn-outline-danger" (click)='setDevValues_click()'>Set dev values</button>
         </div>
         <div class="col">
         </div>
         <div class="col-sm-1">
-          <button type="button" class="btn btn-outline-danger" (click)='clear_click()' [disabled]='busy'>Clear</button>
+          <button type="button" class="btn btn-outline-danger" (click)='clear_click()'>Clear</button>
         </div>
       </div>
 

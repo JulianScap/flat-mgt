@@ -24,7 +24,7 @@ KnOHBJFwNqcSn/cZvQIDAQAB
         return pub.encrypt(text);
     }
 
-    preparePassword(password: string, date: Date): string {
+    preparePassword(password: string): string {
         let hash: string = this.getPasswordHash(password);
         let result: string = this.encrypt(hash);
 

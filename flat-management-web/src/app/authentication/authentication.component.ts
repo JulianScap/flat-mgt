@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, AbstractControl, FormsModule, FormBuilder, Validators, ValidatorFn } from '@angular/forms';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthenticationService } from './authentication.service';
+import { IResult } from '../shared/result';
 
 
 @Component({
@@ -13,13 +14,12 @@ export class AuthenticationComponent implements OnInit {
   login: AbstractControl;
   password: AbstractControl;
 
-  busy: boolean;
+  errorMessages: string[];
 
   //#region init methods
   constructor(private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService
   ) {
-    this.busy = false;
   }
 
   ngOnInit(): void {
@@ -34,16 +34,21 @@ export class AuthenticationComponent implements OnInit {
   //#endregion
 
   login_click(): void {
-    try {
-      this.busy = true;
-      let now: Date = new Date();
-      let passwordHash: string;
+    let now: Date = new Date();
+    let passwordHash: string;
 
-      this.authenticationService
-        .Authenticate(this.login.value, this.password.value)
-        .subscribe(test => console.log(test));
-    } finally {
-      this.busy = false;
+    this.errorMessages = null;
+
+    this.authenticationService
+      .authenticate(this.login.value, this.password.value)
+      .subscribe(result => this.handleLogin(result));
+  }
+
+  handleLogin(result: IResult): void {
+    if (result.success) {
+      // redirection vers la page de selection d'appart qui n'existe pas encore
+    } else {
+      this.errorMessages = result.messages;
     }
   }
 
