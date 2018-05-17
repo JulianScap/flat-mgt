@@ -1,4 +1,4 @@
 export interface IResult {
-    success: boolean;
+    isValid: boolean;
     messages: string[];
 }

@@ -44,7 +44,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   handleLogin(result: IResult): void {
-    if (result.success) {
+    if (result.isValid) {
       // redirection vers la page de selection d'appart qui n'existe pas encore
     } else {
       this.errorMessages = result.messages;
