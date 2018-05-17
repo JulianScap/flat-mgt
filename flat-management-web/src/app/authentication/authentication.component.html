@@ -2,13 +2,7 @@
   <form class="form-horizontal" novalidate="novalidate" (ngSubmit)="login_click()" [formGroup]="loginForm">
     <fieldset>
 
-      <div class="row mb-3" *ngIf="errorMessages">
-        <div class="col">
-          <ul *ngFor="let message of errorMessages" class="list-group">
-            <li class="list-group-item list-group-item-danger">{{ message }}</li>
-          </ul>
-        </div>
-      </div>
+      <fm-error [messages]='errorMessages'></fm-error>
 
       <div class="row form-group">
         <div class="input-group mb-1">
