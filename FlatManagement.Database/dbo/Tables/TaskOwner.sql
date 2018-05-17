@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[TaskOwner] (
-    [TaskID]     INT NOT NULL,
-    [FlatmateID] INT NOT NULL,
-    CONSTRAINT [PK_TaskOwner] PRIMARY KEY CLUSTERED ([TaskID] ASC, [FlatmateID] ASC),
-    CONSTRAINT [FK_TaskOwner_Flatmate] FOREIGN KEY ([FlatmateID]) REFERENCES [dbo].[Flatmate] ([FlatmateID]),
-    CONSTRAINT [FK_TaskOwner_Task] FOREIGN KEY ([TaskID]) REFERENCES [dbo].[Task] ([TaskID])
+    [TaskId]     INT NOT NULL,
+    [FlatmateId] INT NOT NULL,
+    CONSTRAINT [PK_TaskOwner] PRIMARY KEY CLUSTERED ([TaskId] ASC, [FlatmateId] ASC),
+    CONSTRAINT [FK_TaskOwner_Flatmate] FOREIGN KEY ([FlatmateId]) REFERENCES [dbo].[Flatmate] ([FlatmateId]),
+    CONSTRAINT [FK_TaskOwner_Task] FOREIGN KEY ([TaskId]) REFERENCES [dbo].[Task] ([TaskId])
 );
 

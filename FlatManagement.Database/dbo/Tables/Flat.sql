@@ -1,7 +1,10 @@
 ﻿CREATE TABLE [dbo].[Flat] (
-    [FlatID]   INT            IDENTITY (1, 1) NOT NULL,
-    [Address1] NVARCHAR (100) NULL,
-    [Address2] NVARCHAR (100) NULL,
-    CONSTRAINT [PK_Flat] PRIMARY KEY CLUSTERED ([FlatID] ASC)
+    [FlatId]   INT            IDENTITY (1, 1) NOT NULL,
+    [Name] NVARCHAR (200) NOT NULL,
+    [Address] NVARCHAR (1000) NULL,
+    CONSTRAINT [PK_Flat] PRIMARY KEY CLUSTERED ([FlatId] ASC)
 );
+GO
 
+CREATE INDEX [IX_Flat_Name] ON [dbo].[Flat] ([Name])
+GO

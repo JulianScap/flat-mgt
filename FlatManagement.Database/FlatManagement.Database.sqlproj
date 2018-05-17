@@ -110,6 +110,15 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="OtherScripts" />
+    <Folder Include="ref" />
+    <Folder Include="ref\Tables" />
+    <Folder Include="dbo\Stored Procedure" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Stored Procedure\Flat" />
+    <Folder Include="dbo\Stored Procedure\PeriodType" />
+    <Folder Include="dbo\Stored Procedure\Task" />
+    <Folder Include="dbo\Stored Procedure\Flatmate" />
+    <Folder Include="dbo\Stored Procedure\Account" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Flat.sql">
@@ -132,9 +141,38 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="ref\Tables\PeriodType.sql" />
+    <Build Include="ref\Schema.sql" />
+    <Build Include="Security\fm_user.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Stored Procedure\Flat\Flat_Update.sql" />
+    <Build Include="dbo\Stored Procedure\Flat\Flat_GetAll.sql" />
+    <Build Include="dbo\Stored Procedure\Flat\Flat_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Flat\Flat_Insert.sql" />
+    <Build Include="dbo\Stored Procedure\PeriodType\PeriodType_GetAll.sql" />
+    <Build Include="dbo\Stored Procedure\Flat\Flat_Delete.sql" />
+    <Build Include="dbo\Stored Procedure\PeriodType\PeriodType_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_Update.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_Delete.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetAll.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_Insert.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_Delete.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_GetAll.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_Insert.sql" />
+    <Build Include="dbo\Stored Procedure\Task\Task_Update.sql" />
+    <Build Include="dbo\Tables\Account.sql" />
+    <Build Include="dbo\Stored Procedure\Account\Account_Update.sql" />
+    <Build Include="dbo\Stored Procedure\Account\Account_Delete.sql" />
+    <Build Include="dbo\Stored Procedure\Account\Account_GetAll.sql" />
+    <Build Include="dbo\Stored Procedure\Account\Account_GetById.sql" />
+    <Build Include="dbo\Stored Procedure\Account\Account_Insert.sql" />
+    <Build Include="dbo\Stored Procedure\Account\Account_GetByLogin.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OtherScripts\InitialDraft.sql" />
+    <None Include="OtherScripts\DropAll.sql" />
     <None Include="SqlSchemaCompare.scmp" />
+    <None Include="OtherScripts\InitData.sql" />
   </ItemGroup>
 </Project>
