@@ -46,10 +46,10 @@ export class AuthenticationComponent implements OnInit {
 
   handleLogin(result: IAuthenticationResult): void {
     if (result.validationResult.isValid) {
-      // redirection vers la page de selection d'appart qui n'existe pas encore
-      this.sessionManager.setUser(result.token, result.userInfo);
+      this.sessionManager.setUser(result.token, this.login.value, result.userInfo);
       this._router.navigate(['/flat/list']);
     } else {
+      this.sessionManager.clearSession();
       this.errorMessages = result.validationResult.messages;
     }
   }

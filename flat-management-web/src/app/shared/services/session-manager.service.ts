@@ -5,15 +5,18 @@ import { IUserInfo } from "../entities/user-info";
 export class SessionManager {
     private static sessiontoken: string;
     private static userInfo: IUserInfo;
+    private static login: string;
 
-    public setUser(sessiontoken: string, userInfo: IUserInfo): void {
+    public setUser(sessiontoken: string, login: string, userInfo: IUserInfo): void {
         SessionManager.sessiontoken = sessiontoken;
         SessionManager.userInfo = userInfo;
+        SessionManager.login = login;
     }
 
-    public logout() {
+    public clearSession() {
         SessionManager.userInfo = null;
         SessionManager.sessiontoken = null;
+        SessionManager.login = null;
     }
 
     public isAuthenticated(): boolean {
