@@ -27,7 +27,7 @@ namespace FlatManagement.WebApi.Controllers
 
 			if (result.ValidationResult.IsValid)
 			{
-				result.Token = TokenHelper.GetNewToken(loginRequest.Login, "user");
+				result.Token = TokenHelper.GetNewToken(account[0]);
 			}
 
 			return Json(result);
