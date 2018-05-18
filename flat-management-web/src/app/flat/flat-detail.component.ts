@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './flat-picker.component.html'
+  templateUrl: './flat-detail.component.html'
 })
-export class FlatPickerComponent implements OnInit {
+export class FlatDetailComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
   }
+
 }

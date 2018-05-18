@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlatPickerComponent } from './flat-picker.component';
+import { NgModule } from '@angular/core';
+import { FlatDetailComponent } from './flat-detail.component';
+import { FlatListComponent } from './flat-list.component';
 import { FlatRoutingModule } from './flat-routing.module';
 
 @NgModule({
@@ -9,7 +10,8 @@ import { FlatRoutingModule } from './flat-routing.module';
     FlatRoutingModule
   ],
   declarations: [
-    FlatPickerComponent
+    FlatListComponent,
+    FlatDetailComponent
   ]
 })
 export class FlatModule { }

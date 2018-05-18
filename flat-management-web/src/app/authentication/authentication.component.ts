@@ -48,7 +48,7 @@ export class AuthenticationComponent implements OnInit {
     if (result.validationResult.isValid) {
       // redirection vers la page de selection d'appart qui n'existe pas encore
       this.sessionManager.setUser(result.token, result.userInfo);
-      this._router.navigate(['/flat/picker']);
+      this._router.navigate(['/flat/list']);
     } else {
       this.errorMessages = result.validationResult.messages;
     }
