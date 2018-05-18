@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 
-import { CryptoService } from "../shared/crypto.service";
+import { CryptoService } from "../shared/services/crypto.service";
 import { IResult } from "../shared/entities/result";
-import { CorsHttpClient } from "../shared/corshttpclient.service";
+import { CorsHttpClient } from "../shared/services/corshttpclient.service";
 
 @Injectable()
 export class AuthenticationService {
