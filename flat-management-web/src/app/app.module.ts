@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { FlatModule } from './flat/flat.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
     SharedModule,
     HttpClientModule,
     AuthenticationModule,
+    FlatModule,
     AppRoutingModule
   ],
 

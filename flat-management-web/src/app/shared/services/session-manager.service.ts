@@ -1,14 +1,22 @@
 import { Injectable } from "@angular/core";
-import { UserInfo } from "../entities/user-info";
+import { IUserInfo } from "../entities/user-info";
 
 @Injectable()
 export class SessionManager {
     private static sessiontoken: string;
-    private static userInfo: UserInfo;
+    private static userInfo: IUserInfo;
 
-    public static setUser(sessiontoken: string, userInfo: UserInfo): void {
+    public setUser(sessiontoken: string, userInfo: IUserInfo): void {
         SessionManager.sessiontoken = sessiontoken;
-        // Copy the UserInfo
-        SessionManager.userInfo = new UserInfo(userInfo);
+        SessionManager.userInfo = userInfo;
+    }
+
+    public logout() {
+        SessionManager.userInfo = null;
+        SessionManager.sessiontoken = null;
+    }
+
+    public isAuthenticated(): boolean {
+        return SessionManager.sessiontoken != null && SessionManager.sessiontoken != "";
     }
 }

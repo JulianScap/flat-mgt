@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthenticationService } from './authentication.service';
-import { IValidationResult } from '../shared/entities/validation-result';
+import { IAuthenticationResult } from './authentication-result';
+import { SessionManager } from '../shared/services/session-manager.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './authentication.component.html'
@@ -17,9 +19,9 @@ export class AuthenticationComponent implements OnInit {
 
   //#region init methods
   constructor(private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
-  ) {
-  }
+              private authenticationService: AuthenticationService,
+              private sessionManager: SessionManager,
+              private _router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -43,11 +45,13 @@ export class AuthenticationComponent implements OnInit {
       .subscribe(result => this.handleLogin(result));
   }
 
-  handleLogin(result: IValidationResult): void {
-    if (result.isValid) {
+  handleLogin(result: IAuthenticationResult): void {
+    if (result.validationResult.isValid) {
       // redirection vers la page de selection d'appart qui n'existe pas encore
+      this.sessionManager.setUser(result.token, result.userInfo);
+      this._router.navigate(['/flat']);
     } else {
-      this.errorMessages = result.messages;
+      this.errorMessages = result.validationResult.messages;
     }
   }
 

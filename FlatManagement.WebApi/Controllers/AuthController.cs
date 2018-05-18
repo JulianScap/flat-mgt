@@ -1,6 +1,5 @@
 ﻿using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Services;
-using FlatManagement.Common.Validation;
 using FlatManagement.WebApi.Controllers.Base;
 using FlatManagement.WebApi.Model;
 using FlatManagement.WebApi.Security;
@@ -23,14 +22,12 @@ namespace FlatManagement.WebApi.Controllers
 			IAccountModel account = ServiceLocator.Instance.GetService<IAccountModel>();
 			account.GetByLogin(loginRequest.Login);
 
-			ValidationResult result = account.CheckPassword(loginRequest.PasswordHash);
+			LoginResult result = new LoginResult();
+			result.ValidationResult = account.CheckPassword(loginRequest.PasswordHash);
 
-
-			if (result.IsValid)
+			if (result.ValidationResult.IsValid)
 			{
-				string token = TokenHelper.GetNewToken(loginRequest.Login, "user");
-
-				Response.Cookies.Append("token", token);
+				result.Token = TokenHelper.GetNewToken(loginRequest.Login, "user");
 			}
 
 			return Json(result);
