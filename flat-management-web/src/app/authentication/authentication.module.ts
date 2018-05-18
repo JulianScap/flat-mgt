@@ -3,7 +3,6 @@ import { SharedModule } from "../shared/shared.module";
 import { AuthenticationComponent } from "./authentication.component";
 import { AuthenticationService } from "./authentication.service";
 import { CryptoService } from "../shared/services/crypto.service";
-import { CorsHttpClient } from "../shared/services/corshttpclient.service";
 
 @NgModule({
     imports: [
@@ -14,8 +13,7 @@ import { CorsHttpClient } from "../shared/services/corshttpclient.service";
     ],
     providers: [
         AuthenticationService,
-        CryptoService,
-        CorsHttpClient
+        CryptoService
     ]
 })
 

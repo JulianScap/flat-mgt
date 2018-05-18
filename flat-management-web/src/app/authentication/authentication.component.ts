@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 import { AuthenticationService } from './authentication.service';
-import { IResult } from '../shared/entities/result';
+import { IValidationResult } from '../shared/entities/validation-result';
 
 @Component({
   templateUrl: './authentication.component.html'
@@ -43,7 +43,7 @@ export class AuthenticationComponent implements OnInit {
       .subscribe(result => this.handleLogin(result));
   }
 
-  handleLogin(result: IResult): void {
+  handleLogin(result: IValidationResult): void {
     if (result.isValid) {
       // redirection vers la page de selection d'appart qui n'existe pas encore
     } else {
