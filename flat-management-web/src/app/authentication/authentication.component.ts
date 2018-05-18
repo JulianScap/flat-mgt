@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-
-import { AuthenticationService } from './authentication.service';
-import { IAuthenticationResult } from './authentication-result';
-import { SessionManager } from '../shared/services/session-manager.service';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SessionManager } from '../shared/services/session-manager.service';
+import { IAuthenticationResult } from './authentication-result';
+import { AuthenticationService } from './authentication.service';
 
 @Component({
   templateUrl: './authentication.component.html'
@@ -49,7 +48,7 @@ export class AuthenticationComponent implements OnInit {
     if (result.validationResult.isValid) {
       // redirection vers la page de selection d'appart qui n'existe pas encore
       this.sessionManager.setUser(result.token, result.userInfo);
-      this._router.navigate(['/flat']);
+      this._router.navigate(['/flat/picker']);
     } else {
       this.errorMessages = result.validationResult.messages;
     }

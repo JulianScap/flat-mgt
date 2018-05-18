@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlatComponent } from './flat.component';
+import { FlatPickerComponent } from './flat-picker.component';
+import { FlatRoutingModule } from './flat-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FlatRoutingModule
   ],
   declarations: [
-    FlatComponent
+    FlatPickerComponent
   ]
 })
 export class FlatModule { }

@@ -1,3 +1,3 @@
 export interface IUserInfo {
-   loginName: string;
+    login: string;
 }

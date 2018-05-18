@@ -1,10 +1,10 @@
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-
+import "rxjs/add/observable/throw";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/do";
-import "rxjs/add/observable/throw";
+
 
 @Injectable()
 export class CorsHttpClient {
