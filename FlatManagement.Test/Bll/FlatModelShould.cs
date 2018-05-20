@@ -85,5 +85,16 @@ namespace FlatManagement.Test.Bll
 			ptm.GetById(flat);
 			Assert.Empty(ptm);
 		}
+
+		[Theory]
+		[InlineData("Julian")]
+		public void ListFlatByLogin(string login)
+		{
+			IFlatModel ptm = ServiceLocator.Instance.GetService<IFlatModel>();
+
+			ptm.GetByLogin(login);
+
+			Assert.NotEmpty(ptm);
+		}
 	}
 }

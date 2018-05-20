@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using FlatManagement.Common.Extensions;
+using FlatManagement.Common.Logging;
 using FlatManagement.Dto.Entities;
+using FlatManagement.WebApi.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -22,8 +25,9 @@ namespace FlatManagement.WebApi.Security
 			issuer = configuration["Security:Jwt:Issuer"];
 		}
 
-		internal static bool CheckToken(string token)
+		internal static bool CheckToken(string token, out UserInfo userInfo)
 		{
+			userInfo = null;
 			SymmetricSecurityKey securityKey = new SymmetricSecurityKey(symmetricSecurityKey);
 			JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 			TokenValidationParameters parameters = new TokenValidationParameters()
@@ -40,12 +44,38 @@ namespace FlatManagement.WebApi.Security
 			try
 			{
 				ClaimsPrincipal claims = tokenHandler.ValidateToken(token, parameters, out SecurityToken validatedToken);
+				userInfo = GetUserInfo(claims.Claims);
 			}
-			catch
+			catch (Exception ex)
 			{
+				LogStuff.Log(ex);
+
 				return false;
 			}
 			return true;
+		}
+
+		private static UserInfo GetUserInfo(IEnumerable<Claim> claims)
+		{
+			UserInfo result = new UserInfo();
+
+			foreach (Claim claim in claims)
+			{
+				if (claim.Type == ClaimTypes.Name)
+				{
+					result.Login = claim.Value;
+				}
+				else if (claim.Type == ClaimTypes.Sid)
+				{
+					result.AccountId = Convert.ToInt32(claim.Value);
+				}
+				else if (claim.Type == ClaimTypes.Role)
+				{
+					result.Role = claim.Value;
+				}
+			}
+
+			return result;
 		}
 
 		internal static string GetNewToken(Account account, string profile = "default")

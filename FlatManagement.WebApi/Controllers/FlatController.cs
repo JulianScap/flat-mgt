@@ -1,6 +1,8 @@
 ﻿using FlatManagement.Bll.Interface;
+using FlatManagement.Common.Services;
 using FlatManagement.Dto.Entities;
 using FlatManagement.WebApi.Controllers.Base;
+using FlatManagement.WebApi.Model;
 using FlatManagement.WebApi.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,10 +23,15 @@ namespace FlatManagement.WebApi.Controllers
 			return GetByDto(new Flat(id));
 		}
 
-		[HttpGet("byLogin")]
-		public virtual string GetByLogin()
+		public override IFlatModel Get()
 		{
-			return "hello";
+			IFlatModel model = ServiceLocator.Instance.GetService<IFlatModel>();
+
+			UserInfo userInfo = base.GetUserInfo();
+
+			model.GetByLogin(userInfo.Login);
+
+			return model;
 		}
 	}
 }

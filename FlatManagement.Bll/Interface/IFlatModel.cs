@@ -6,5 +6,6 @@ namespace FlatManagement.Bll.Interface
 {
 	public interface IFlatModel : IModel<Flat>, IDtoList<Flat>
 	{
+		void GetByLogin(string login);
 	}
 }

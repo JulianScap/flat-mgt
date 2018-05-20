@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using FlatManagement.WebApi.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -16,7 +17,7 @@ namespace FlatManagement.WebApi.Controllers.Base
 			this.configuration = configuration;
 		}
 
-		internal string GetBodyAsString()
+		internal virtual string GetBodyAsString()
 		{
 			using (StreamReader reader = new StreamReader(this.Request.Body))
 			{
@@ -24,10 +25,15 @@ namespace FlatManagement.WebApi.Controllers.Base
 			}
 		}
 
-		internal T GetBody<T>()
+		internal virtual T GetBody<T>()
 		{
 			string body = GetBodyAsString();
 			return JsonConvert.DeserializeObject<T>(body);
+		}
+
+		internal virtual UserInfo GetUserInfo()
+		{
+			return HttpContext.Items["token"] as UserInfo;
 		}
 	}
 }
