@@ -10,7 +10,7 @@ export class AuthenticatedCorsHttpClient extends CorsHttpClient {
         super(http);
     }
 
-    getOptions(): { headers?: HttpHeaders; withCredentials?: boolean; } {
+    getOptions(): { headers?: HttpHeaders; withCredentials?: boolean; body?: any; } {
         let result = super.getOptions();
 
         let token: string = this.sessionManager.getToken();

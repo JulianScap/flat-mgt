@@ -10,7 +10,11 @@ export class FlatService {
     constructor(private http: AuthenticatedCorsHttpClient,
         private sessionManager: SessionManager) { }
 
-    getFlats(): Observable<IFlat[]> {
+    get(): Observable<IFlat[]> {
         return this.http.get("Flat");
+    }
+
+    delete(flat: IFlat): Observable<Object> {
+        return this.http.delete(`Flat`, JSON.stringify([flat]));
     }
 }

@@ -12,7 +12,7 @@ export class CorsHttpClient {
 
     constructor(private http: HttpClient) { }
 
-    getOptions(): { headers?: HttpHeaders; withCredentials?: boolean; } {
+    getOptions(): { headers?: HttpHeaders; withCredentials?: boolean; body?: any; } {
         return { withCredentials: true };
     }
 
@@ -26,6 +26,15 @@ export class CorsHttpClient {
     post<T>(controller: string, body?: any): Observable<T> {
         let url: string = this.baseUrl + controller;
         return this.http.post<T>(url, body, this.getOptions())
+            .do(data => console.log(JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    delete(controller: string, body?: any): Observable<Object> {
+        let url: string = this.baseUrl + controller;
+        let options = this.getOptions();
+        options.body = body;
+        return this.http.request('DELETE', url, options)
             .do(data => console.log(JSON.stringify(data)))
             .catch(this.handleError);
     }
