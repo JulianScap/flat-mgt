@@ -20,7 +20,7 @@ export class AuthenticationComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
               private sessionManager: SessionManager,
-              private _router: Router) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -47,7 +47,7 @@ export class AuthenticationComponent implements OnInit {
   handleLogin(result: IAuthenticationResult): void {
     if (result.validationResult.isValid) {
       this.sessionManager.setUser(result.token, this.login.value, result.userInfo);
-      this._router.navigate(['/flat/list']);
+      this.router.navigate(['/flat/list']);
     } else {
       this.sessionManager.clearSession();
       this.errorMessages = result.validationResult.messages;

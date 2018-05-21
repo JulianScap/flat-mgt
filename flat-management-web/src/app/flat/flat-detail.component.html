@@ -1,4 +1,40 @@
-<p>
-  flat-detail works!
-  <a [routerLink]="['/flat/list']">Link</a>
-</p>
+<div class="panel-body">
+  <h3>
+    Please enter the flat details:
+  </h3>
+  <form class="form-horizontal" novalidate="novalidate" (ngSubmit)="save()" [formGroup]="flatForm">
+    <fieldset>
+
+      <fm-error [messages]='errorMessages'></fm-error>
+
+      <div class="row form-group">
+        <div class="input-group mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Flat Name</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Flat name (required)" formControlName="name" [ngClass]="{'is-invalid': (name.dirty || name.touched) && !name.valid }"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Address</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Address (required)" formControlName="address" [ngClass]="{'is-invalid': (address.dirty || address.touched) && !address.valid }"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-1">
+          <button type="submit" class="btn btn-primary" [disabled]='!flatForm.valid'>Save</button>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-outline-danger" (click)='onBack()'>Back</button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+</div>
