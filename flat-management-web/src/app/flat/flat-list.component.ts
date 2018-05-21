@@ -14,4 +14,10 @@ export class FlatListComponent implements OnInit {
   ngOnInit() {
     this.flatService.getFlats().subscribe(result => this.flats = result);
   }
+
+  delete(flat: IFlat): void {
+    if (confirm('Are you sure you want to delete this?')) {
+
+    }
+  }
 }
