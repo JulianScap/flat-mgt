@@ -10,7 +10,7 @@ export class FlatService {
     constructor(private http: AuthenticatedCorsHttpClient,
         private sessionManager: SessionManager) { }
 
-    getFlatsForAccount(): Observable<IFlat[]> {
-        return null;
+    getFlats(): Observable<IFlat[]> {
+        return this.http.get("Flat");
     }
 }

@@ -22,4 +22,8 @@ export class SessionManager {
     public isAuthenticated(): boolean {
         return SessionManager.sessiontoken != null && SessionManager.sessiontoken != "";
     }
+
+    getToken(): string {
+        return SessionManager.sessiontoken;
+    }
 }

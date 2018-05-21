@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/throw";
@@ -8,13 +8,24 @@ import "rxjs/add/operator/do";
 
 @Injectable()
 export class CorsHttpClient {
-    constructor(private http: HttpClient) { }
-
     private baseUrl: string = 'http://fm.api.local/api/';
 
-    post<T>(controller: string, body: any | null): Observable<T> {
+    constructor(private http: HttpClient) { }
+
+    getOptions(): { headers?: HttpHeaders; withCredentials?: boolean; } {
+        return { withCredentials: true };
+    }
+
+    get<T>(controller: string): Observable<T> {
         let url: string = this.baseUrl + controller;
-        return this.http.post<T>(url, body, { withCredentials: true })
+        return this.http.get<T>(url, this.getOptions())
+            .do(data => console.log(JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
+    post<T>(controller: string, body?: any): Observable<T> {
+        let url: string = this.baseUrl + controller;
+        return this.http.post<T>(url, body, this.getOptions())
             .do(data => console.log(JSON.stringify(data)))
             .catch(this.handleError);
     }
