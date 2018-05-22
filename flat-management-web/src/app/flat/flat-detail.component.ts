@@ -87,6 +87,10 @@ export class FlatDetailComponent implements OnInit {
     this.flatmates.push(this.buildFlatmate(false));
   }
 
+  removeFlatmate(index: number): void {
+    this.flatmates.removeAt(index);
+  }
+
   onBack(): void {
     this.router.navigate(['/flat/list']);
   }

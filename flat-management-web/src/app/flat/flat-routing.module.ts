@@ -12,7 +12,7 @@ import { FlatListComponent } from "./flat-list.component";
       component: FlatListComponent
     },
     {
-      path: 'flat/:id',
+      path: 'flat/details/:id',
       canActivate: [AuthenticatedGuard],
       component: FlatDetailComponent
     },

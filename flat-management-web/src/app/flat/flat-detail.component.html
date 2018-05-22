@@ -29,7 +29,8 @@
           <div class="col-3">Fullname</div>
           <div class="col-3">Nickname</div>
           <div class="col-3">Date of birth</div>
-          <div class="col-3"></div>
+          <div class="col-2"></div>
+          <div class="col-1"></div>
         </div>
         <div formArrayName="flatmates" *ngFor="let flatmate of flatmates.controls; let i = index">
           <div class="row form-group" [formGroupName]="i">
@@ -45,12 +46,18 @@
               <input type="date" class="form-control" placeholder="Date of birth (required)" formControlName="birthDate" [ngClass]="{'is-invalid': (flatmate.get('birthDate').dirty || flatmate.get('birthDate').touched) && !flatmate.get('birthDate').valid }"
               />
             </div>
-            <div class="input-group mb-1 col-3">
+            <div class="input-group mb-1 col-2">
               <div class="btn-group-toggle" data-toggle="buttons">
                 <label class="btn" [ngClass]="{'btn-secondary': flatmate.get('flatTenant').value, 'btn-outline-secondary': !flatmate.get('flatTenant').value }">
                   <input type="checkbox" formControlName="flatTenant" autocomplete="off" /> Flat tenant
                 </label>
               </div>
+            </div>
+            <div class="input-group mb-1 col-1">
+              <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-secondary" (click)="addFlatmate()">+</button>
+                  <button type="button" class="btn btn-secondary" (click)="removeFlatmate(i)" *ngIf="i > 0">-</button>
+                </div>
             </div>
           </div>
         </div>
