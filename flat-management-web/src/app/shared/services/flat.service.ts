@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { IFlat } from "../entities/flat";
+import { IFlatmate } from "../entities/flatmate";
 import { AuthenticatedCorsHttpClient } from "./authenticated-cors-http-client.service";
 import { SessionManager } from "./session-manager.service";
 
@@ -21,7 +22,12 @@ export class FlatService {
         return this.http.delete('Flat', JSON.stringify(flats));
     }
 
-    save(flats: IFlat[]): Observable<Object> {
-        return this.http.post('Flat', JSON.stringify(flats));
+    save(flats: IFlat[], flatmates?: IFlatmate[]): Observable<Object> {
+        let flatsJson: string = JSON.stringify(flats);
+        let flatmatesJson: string = JSON.stringify(flatmates);
+
+        let body = JSON.stringify({ flatsJson, flatmatesJson });
+
+        return this.http.post('Flat', body);
     }
 }

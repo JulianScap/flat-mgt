@@ -1,11 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IFlat } from '../shared/entities/flat';
+import { IFlatmate } from '../shared/entities/flatmate';
 import { FlatService } from '../shared/services/flat.service';
 import { FlatmateService } from '../shared/services/flatmate.service';
-import { IFlatmate } from '../shared/entities/flatmate';
-import { DatePipe } from '@angular/common';
 
 @Component({
   templateUrl: './flat-detail.component.html'
@@ -104,7 +104,7 @@ export class FlatDetailComponent implements OnInit {
 
     newFlat = this.flatForm.value;
 
-    this.flatService.save([newFlat])
+    this.flatService.save([newFlat], this.flatmates.value)
       .subscribe(() => this.router.navigate(['/flat/list']),
         error => this.errorMessages = [error]);
   }

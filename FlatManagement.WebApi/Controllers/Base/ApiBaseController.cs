@@ -15,7 +15,7 @@ namespace FlatManagement.WebApi.Controllers.Base
 
 		[HttpPut]
 		[HttpPost]
-		public TModel PersistAll()
+		public virtual TModel PersistAll()
 		{
 			TModel model = DeserialiseBody();
 			model.PersistAll();
@@ -23,7 +23,7 @@ namespace FlatManagement.WebApi.Controllers.Base
 		}
 
 		[HttpDelete]
-		public TModel DeleteAll()
+		public virtual TModel DeleteAll()
 		{
 			TModel model = DeserialiseBody();
 			model.DeleteAll();
