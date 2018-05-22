@@ -5,15 +5,15 @@ using Xunit;
 
 namespace FlatManagement.Test.Bll
 {
-	public class AccountModelShould : TestBase
+	public class FlatmateModelShould : TestBase
 	{
 		[Fact]
 		public void ReturnAValidAccountByLogin()
 		{
-			IAccountModel iam = ServiceLocator.Instance.GetService<IAccountModel>();
-			iam.GetByLogin(login: "test");
+			IFlatmateModel fm = ServiceLocator.Instance.GetService<IFlatmateModel>();
+			fm.GetByLogin(login: "test");
 
-			Assert.NotEmpty(iam);
+			Assert.NotEmpty(fm);
 		}
 	}
 }

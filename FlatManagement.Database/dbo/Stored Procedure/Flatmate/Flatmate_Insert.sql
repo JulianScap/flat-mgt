@@ -4,11 +4,13 @@
 	@Nickname nvarchar(100),
 	@BirthDate date,
 	@FlatTenant bit,
+	@Login nvarchar(100),
+	@Password nvarchar(100),
 	@FlatmateId int output
 AS
 BEGIN
-	INSERT INTO dbo.Flatmate ([FlatId], [FullName], [Nickname], [BirthDate], [FlatTenant])
-		VALUES (@FlatId, @FullName, @Nickname, @BirthDate, @FlatTenant);
+	INSERT INTO dbo.Flatmate ([FlatId], [FullName], [Nickname], [BirthDate], [FlatTenant], [Login], [Password])
+		VALUES (@FlatId, @FullName, @Nickname, @BirthDate, @FlatTenant, @Login, @Password);
 	SET @FlatmateId = SCOPE_IDENTITY();
 END
 

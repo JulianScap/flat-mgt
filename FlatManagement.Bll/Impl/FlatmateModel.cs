@@ -2,7 +2,9 @@
 using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dal;
+using FlatManagement.Common.Security;
 using FlatManagement.Common.Services;
+using FlatManagement.Common.Validation;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,30 @@ namespace FlatManagement.Bll.Impl
 			IEnumerable<Flatmate> flatmates = dal.GetByFlat(flat);
 			items.Clear();
 			items.AddRange(flatmates);
+		}
+
+		public ValidationResult CheckPassword(string passwordHash)
+		{
+			string decrypted = CryptoTool.Decrypt(passwordHash, Configuration);
+
+			if (items.Count != 1 || items[0].Password != decrypted)
+			{
+				return new ValidationResult("Authentication failed");
+			}
+
+			return new ValidationResult();
+		}
+
+		public void GetByLogin(string login)
+		{
+			IFlatmateDataAccess dal = ServiceLocator.Instance.GetService<IFlatmateDataAccess>();
+			items.Clear();
+
+			Flatmate flatmate = dal.GetByLogin(login);
+			if (flatmate != null)
+			{
+				items.Add(flatmate);
+			}
 		}
 
 		protected override IDataAccess<Flatmate> GetDal()

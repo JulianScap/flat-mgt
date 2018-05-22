@@ -10,10 +10,8 @@ BEGIN
 		dbo.Flat f
 	JOIN
 		dbo.Flatmate fm ON fm.FlatId = f.FlatId
-	JOIN
-		dbo.Account a ON a.AccountId = fm.AccountId
 	WHERE
-		a.[Login] = @Login
+		fm.[Login] = @Login
 END
 
 GO

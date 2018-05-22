@@ -22,5 +22,16 @@ namespace FlatManagement.Dal.Impl
 			IEnumerable result = handler.GetMany(command, parameters, converter);
 			return result.Cast<Flatmate>().ToList();
 		}
+
+		public Flatmate GetByLogin(string login)
+		{
+			DatacallsHandler handler = new DatacallsHandler(configuration);
+			string command = GetStoredProcedureName(OperationEnum.Custom, "GetByLogin");
+			Parameter[] parameters = new Parameter[1] {
+				new Parameter("Login", login)
+			};
+			object result = handler.GetOne(command, parameters, converter, true);
+			return (Flatmate)result;
+		}
 	}
 }

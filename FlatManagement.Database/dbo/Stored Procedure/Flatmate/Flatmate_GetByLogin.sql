@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[Flatmate_GetAll]
+﻿CREATE PROCEDURE [dbo].[Flatmate_GetByLogin]
+	@Login nvarchar(100)
 AS
 BEGIN
 	SELECT
@@ -12,10 +13,12 @@ BEGIN
 		[FlatTenant]
 	FROM
 		dbo.Flatmate
+	WHERE
+		[Login] = @Login
 END
 
 GO
 GRANT EXECUTE
-	ON OBJECT::[dbo].[Flatmate_GetAll] TO [fm_user]
+	ON OBJECT::[dbo].[Flatmate_GetByLogin] TO [fm_user]
 	AS [dbo];
 

@@ -78,7 +78,7 @@ namespace FlatManagement.WebApi.Security
 			return result;
 		}
 
-		internal static string GetNewToken(Account account, string profile = "default")
+		internal static string GetNewToken(Flatmate flatmate)
 		{
 			JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
@@ -89,9 +89,9 @@ namespace FlatManagement.WebApi.Security
 			{
 				Subject = new ClaimsIdentity(new Claim[]
 				{
-						new Claim(ClaimTypes.Name, account.Login),
-						new Claim(ClaimTypes.Sid, account.AccountId.ToInvariantString()),
-						new Claim(ClaimTypes.Role, profile)
+					new Claim(ClaimTypes.Name, flatmate.Login),
+					new Claim(ClaimTypes.Sid, flatmate.FlatmateId.ToInvariantString()),
+					new Claim(ClaimTypes.Role, flatmate.FlatTenant ? "tenant" : "default")
 				}),
 				Expires = expires,
 				Audience = audience,

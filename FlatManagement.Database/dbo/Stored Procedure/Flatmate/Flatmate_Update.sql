@@ -4,6 +4,8 @@
 	@FullName nvarchar(500),
 	@Nickname nvarchar(100),
 	@BirthDate date,
+	@Login nvarchar(100),
+	@Password nvarchar(100),
 	@FlatTenant bit
 AS
 BEGIN
@@ -13,7 +15,8 @@ BEGIN
 		[FullName] = @FullName,
 		[Nickname] = @Nickname,
 		[BirthDate] = @BirthDate,
-		[FlatTenant] = @FlatTenant
+		[FlatTenant] = @FlatTenant,
+		[Login] = @Login
 	WHERE FlatmateId = @FlatmateId;
 END
 

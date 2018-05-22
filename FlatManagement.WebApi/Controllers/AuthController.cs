@@ -19,15 +19,15 @@ namespace FlatManagement.WebApi.Controllers
 		public object Login()
 		{
 			var loginRequest = GetBody<LoginRequest>();
-			IAccountModel account = ServiceLocator.Instance.GetService<IAccountModel>();
-			account.GetByLogin(loginRequest.Login);
+			IFlatmateModel flatmate = ServiceLocator.Instance.GetService<IFlatmateModel>();
+			flatmate.GetByLogin(loginRequest.Login);
 
 			LoginResult result = new LoginResult();
-			result.ValidationResult = account.CheckPassword(loginRequest.PasswordHash);
+			result.ValidationResult = flatmate.CheckPassword(loginRequest.PasswordHash);
 
 			if (result.ValidationResult.IsValid)
 			{
-				result.Token = TokenHelper.GetNewToken(account[0]);
+				result.Token = TokenHelper.GetNewToken(flatmate[0]);
 			}
 
 			return Json(result);

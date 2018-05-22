@@ -118,7 +118,6 @@
     <Folder Include="dbo\Stored Procedure\PeriodType" />
     <Folder Include="dbo\Stored Procedure\Task" />
     <Folder Include="dbo\Stored Procedure\Flatmate" />
-    <Folder Include="dbo\Stored Procedure\Account" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Flat.sql">
@@ -162,15 +161,9 @@
     <Build Include="dbo\Stored Procedure\Task\Task_GetById.sql" />
     <Build Include="dbo\Stored Procedure\Task\Task_Insert.sql" />
     <Build Include="dbo\Stored Procedure\Task\Task_Update.sql" />
-    <Build Include="dbo\Tables\Account.sql" />
-    <Build Include="dbo\Stored Procedure\Account\Account_Update.sql" />
-    <Build Include="dbo\Stored Procedure\Account\Account_Delete.sql" />
-    <Build Include="dbo\Stored Procedure\Account\Account_GetAll.sql" />
-    <Build Include="dbo\Stored Procedure\Account\Account_GetById.sql" />
-    <Build Include="dbo\Stored Procedure\Account\Account_Insert.sql" />
-    <Build Include="dbo\Stored Procedure\Account\Account_GetByLogin.sql" />
     <Build Include="dbo\Stored Procedure\Flat\Flat_GetByLogin.sql" />
     <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByFlatId.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByLogin.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />

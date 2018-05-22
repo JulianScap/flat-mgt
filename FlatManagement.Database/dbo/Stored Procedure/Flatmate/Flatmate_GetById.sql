@@ -5,6 +5,8 @@ BEGIN
 	SELECT
 		FlatmateId,
 		[FlatId],
+		[Login],
+		[Password],
 		[FullName],
 		[Nickname],
 		[BirthDate],
