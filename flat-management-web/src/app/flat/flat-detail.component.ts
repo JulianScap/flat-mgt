@@ -28,6 +28,7 @@ export class FlatDetailComponent implements OnInit {
     this.flatmates = this.formBuilder.array([this.buildFlatmate(true)]);
 
     this.flatForm = this.formBuilder.group({
+      flatId: 0,
       name: ['', Validators.required],
       address: ['', Validators.required],
       flatmates: this.flatmates
@@ -50,6 +51,7 @@ export class FlatDetailComponent implements OnInit {
       let flat: IFlat = flats[0];
 
       this.flatForm.patchValue({
+        flatId: flat.flatId,
         name: flat.name,
         address: flat.address
       });
@@ -65,6 +67,7 @@ export class FlatDetailComponent implements OnInit {
 
       this.flatForm.patchValue({
         flatmates: [{
+          flatmateId: flatmate.flatmateId,
           fullName: flatmate.fullName,
           nickname: flatmate.nickname,
           birthDate: dp.transform(flatmate.birthDate, 'y-MM-dd'),
@@ -76,6 +79,7 @@ export class FlatDetailComponent implements OnInit {
 
   buildFlatmate(flatTenant: boolean): FormGroup {
     return this.formBuilder.group({
+      flatmateId: 0,
       fullName: ['', Validators.required],
       nickname: ['', Validators.required],
       birthDate: ['', Validators.required],
