@@ -170,6 +170,7 @@
     <Build Include="dbo\Stored Procedure\Account\Account_Insert.sql" />
     <Build Include="dbo\Stored Procedure\Account\Account_GetByLogin.sql" />
     <Build Include="dbo\Stored Procedure\Flat\Flat_GetByLogin.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByFlatId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />

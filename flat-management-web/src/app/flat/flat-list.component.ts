@@ -18,7 +18,7 @@ export class FlatListComponent implements OnInit {
     let index: number = this.flats.findIndex(f => f.flatId === flat.flatId);
 
     if (confirm(`Are you sure you want to delete the flat ${flat.name} (${flat.address}) and all the flatmates information? (this cannot be undone)`)) {
-      this.flatService.delete(flat)
+      this.flatService.delete([flat])
         .subscribe(() => {
           this.flats.splice(index, 1);
         });

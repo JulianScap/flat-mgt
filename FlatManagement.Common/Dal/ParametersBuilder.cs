@@ -2,9 +2,9 @@
 
 namespace FlatManagement.Common.Dal
 {
-	internal class ParametersBuilder
+	public class ParametersBuilder
 	{
-		internal static Parameter[] BuildIdParameters(IDto item)
+		public static Parameter[] BuildIdParameters(IDto item)
 		{
 			string[] idFields = item.IdFieldNames;
 			Parameter[] result = new Parameter[idFields.Length];
@@ -17,7 +17,7 @@ namespace FlatManagement.Common.Dal
 			return result;
 		}
 
-		internal static Parameter[] BuildParametersFromDto(IDto item, bool update)
+		public static Parameter[] BuildParametersFromDto(IDto item, bool update)
 		{
 			string[] propertiesToSave = null;
 
@@ -42,7 +42,7 @@ namespace FlatManagement.Common.Dal
 			return result;
 		}
 
-		internal static Parameter[] BuildIdOutParameters(IDto item)
+		public static Parameter[] BuildIdOutParameters(IDto item)
 		{
 			string[] idFields = item.IdFieldNames;
 			TypeEnum[] idFieldsTypes = item.IdFieldTypes;

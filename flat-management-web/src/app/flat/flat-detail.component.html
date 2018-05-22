@@ -24,17 +24,47 @@
         </div>
       </div>
 
+      <div *ngIf="flatmates.controls.length != 0">
+        <div class="row">
+          <div class="col-3">Fullname</div>
+          <div class="col-3">Nickname</div>
+          <div class="col-3">Date of birth</div>
+          <div class="col-3"></div>
+        </div>
+        <div formArrayName="flatmates" *ngFor="let flatmate of flatmates.controls; let i = index">
+          <div class="row form-group" [formGroupName]="i">
+            <div class="input-group mb-1 col-3">
+              <input type="text" class="form-control" placeholder="Full name (required)" formControlName="fullName" [ngClass]="{'is-invalid': (flatmate.get('fullName').dirty || flatmate.get('fullName').touched) && !flatmate.get('fullName').valid }"
+              />
+            </div>
+            <div class="input-group mb-1 col-3">
+              <input type="text" class="form-control" placeholder="Nickname (required)" formControlName="nickname" [ngClass]="{'is-invalid': (flatmate.get('nickname').dirty || flatmate.get('nickname').touched) && !flatmate.get('nickname').valid }"
+              />
+            </div>
+            <div class="input-group mb-1 col-3">
+              <input type="date" class="form-control" placeholder="Date of birth (required)" formControlName="birthDate" [ngClass]="{'is-invalid': (flatmate.get('birthDate').dirty || flatmate.get('birthDate').touched) && !flatmate.get('birthDate').valid }"
+              />
+            </div>
+            <div class="input-group mb-1 col-3">
+              <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn" [ngClass]="{'btn-secondary': flatmate.get('flatTenant').value, 'btn-outline-secondary': !flatmate.get('flatTenant').value }">
+                  <input type="checkbox" formControlName="flatTenant" autocomplete="off" /> Flat tenant
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-sm-1">
           <button type="submit" class="btn btn-primary" [disabled]='!flatForm.valid'>Save</button>
         </div>
-        <div class="col">
-        </div>
+        <div class="col"></div>
         <div class="col-sm-1">
           <button type="button" class="btn btn-outline-danger" (click)='onBack()'>Back</button>
         </div>
       </div>
-
     </fieldset>
   </form>
 </div>

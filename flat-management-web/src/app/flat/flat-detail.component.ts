@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IFlat } from '../shared/entities/flat';
+import { FlatService } from '../shared/services/flat.service';
+import { FlatmateService } from '../shared/services/flatmate.service';
+import { IFlatmate } from '../shared/entities/flatmate';
+import { DatePipe } from '@angular/common';
 
 @Component({
   templateUrl: './flat-detail.component.html'
@@ -8,29 +13,91 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class FlatDetailComponent implements OnInit {
   errorMessages: string[];
 
+  flatmates: FormArray;
   flatForm: FormGroup;
   name: AbstractControl;
   address: AbstractControl;
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private formBuilder: FormBuilder) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private flatService: FlatService,
+    private flatmateService: FlatmateService) { }
 
   ngOnInit() {
-    // let id = +this._route.snapshot.paramMap.get('id');
+    this.flatmates = this.formBuilder.array([this.buildFlatmate(true)]);
 
     this.flatForm = this.formBuilder.group({
       name: ['', Validators.required],
-      address: ['', Validators.required]
+      address: ['', Validators.required],
+      flatmates: this.flatmates
     });
 
     this.name = this.flatForm.get('name');
     this.address = this.flatForm.get('address');
+
+    if (this.route.snapshot.paramMap.has('id')) {
+      let id: number = +this.route.snapshot.paramMap.get('id');
+      this.flatService.get(id).subscribe(flat => this.initFlatForm(flat));
+      this.flatmateService.getByFlatId(id).subscribe(flatmates => this.initFlatmateForm(flatmates));
+    }
+  }
+
+  initFlatForm(flats: IFlat[]): void {
+    if (!flats || flats.length != 1) {
+      this.errorMessages = ["Couldn't load the flat"];
+    } else {
+      let flat: IFlat = flats[0];
+
+      this.flatForm.patchValue({
+        name: flat.name,
+        address: flat.address
+      });
+    }
+  }
+
+  initFlatmateForm(flatmates: IFlatmate[]): void {
+    if (!flatmates || flatmates.length != 1) {
+      this.errorMessages = ["Couldn't load the flatmate list"];
+    } else {
+      let flatmate: IFlatmate = flatmates[0];
+      let dp = new DatePipe(navigator.language);
+
+      this.flatForm.patchValue({
+        flatmates: [{
+          fullName: flatmate.fullName,
+          nickname: flatmate.nickname,
+          birthDate: dp.transform(flatmate.birthDate, 'y-MM-dd'),
+          flatTenant: flatmate.flatTenant
+        }]
+      });
+    }
+  }
+
+  buildFlatmate(flatTenant: boolean): FormGroup {
+    return this.formBuilder.group({
+      fullName: ['', Validators.required],
+      nickname: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      flatTenant: flatTenant
+    });
+  }
+
+  addFlatmate(): void {
+    this.flatmates.push(this.buildFlatmate(false));
   }
 
   onBack(): void {
-    this._router.navigate(['/flat/list']);
+    this.router.navigate(['/flat/list']);
   }
 
   save(): void {
-    console.log("saved");
+    let newFlat: IFlat;
+
+    newFlat = this.flatForm.value;
+
+    this.flatService.save([newFlat])
+      .subscribe(() => this.router.navigate(['/flat/list']),
+        error => this.errorMessages = [error]);
   }
 }
