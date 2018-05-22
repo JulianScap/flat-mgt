@@ -69,7 +69,7 @@ export class FlatDetailComponent implements OnInit {
         flatmates: [{
           flatmateId: flatmate.flatmateId,
           fullName: flatmate.fullName,
-          nickname: flatmate.nickname,
+          nickName: flatmate.nickName,
           birthDate: dp.transform(flatmate.birthDate, 'y-MM-dd'),
           flatTenant: flatmate.flatTenant
         }]
@@ -81,7 +81,7 @@ export class FlatDetailComponent implements OnInit {
     return this.formBuilder.group({
       flatmateId: 0,
       fullName: ['', Validators.required],
-      nickname: ['', Validators.required],
+      nickName: ['', Validators.required],
       birthDate: ['', Validators.required],
       flatTenant: flatTenant
     });

@@ -8,7 +8,7 @@ BEGIN
 		[Login],
 		[Password],
 		[FullName],
-		[Nickname],
+		[NickName],
 		[BirthDate],
 		[FlatTenant]
 	FROM

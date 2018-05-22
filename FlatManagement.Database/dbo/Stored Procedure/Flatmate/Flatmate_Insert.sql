@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[Flatmate_Insert]
 	@FlatId int,
 	@FullName nvarchar(500),
-	@Nickname nvarchar(100),
+	@NickName nvarchar(100),
 	@BirthDate date,
 	@FlatTenant bit,
 	@Login nvarchar(100),
@@ -9,8 +9,8 @@
 	@FlatmateId int output
 AS
 BEGIN
-	INSERT INTO dbo.Flatmate ([FlatId], [FullName], [Nickname], [BirthDate], [FlatTenant], [Login], [Password])
-		VALUES (@FlatId, @FullName, @Nickname, @BirthDate, @FlatTenant, @Login, @Password);
+	INSERT INTO dbo.Flatmate ([FlatId], [FullName], [NickName], [BirthDate], [FlatTenant], [Login], [Password])
+		VALUES (@FlatId, @FullName, @NickName, @BirthDate, @FlatTenant, @Login, @Password);
 	SET @FlatmateId = SCOPE_IDENTITY();
 END
 

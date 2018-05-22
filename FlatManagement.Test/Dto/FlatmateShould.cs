@@ -11,8 +11,8 @@ namespace FlatManagement.Test.Common
 		[InlineData(1, 232, "SOE", "Someone Else", false)]
 		public void HaveSameHashCodeForEqualObjects(int id, int flatmateId, string nickname, string fullname, bool isFlatTenant)
 		{
-			Flatmate flatmate1 = new Flatmate() { FlatId = id, BirthDate = DateTime.Today, FlatmateId = flatmateId, Nickname = nickname, FullName = fullname, FlatTenant = isFlatTenant };
-			Flatmate flatmate2 = new Flatmate() { FlatId = id, BirthDate = DateTime.Today, FlatmateId = flatmateId, Nickname = nickname, FullName = fullname, FlatTenant = isFlatTenant };
+			Flatmate flatmate1 = new Flatmate() { FlatId = id, BirthDate = DateTime.Today, FlatmateId = flatmateId, NickName = nickname, FullName = fullname, FlatTenant = isFlatTenant };
+			Flatmate flatmate2 = new Flatmate() { FlatId = id, BirthDate = DateTime.Today, FlatmateId = flatmateId, NickName = nickname, FullName = fullname, FlatTenant = isFlatTenant };
 
 			Assert.Equal(flatmate1, flatmate2);
 			Assert.Equal(flatmate1.GetHashCode(), flatmate2.GetHashCode());
@@ -23,8 +23,8 @@ namespace FlatManagement.Test.Common
 		[InlineData(1, 232, "SOE", "Someone Else", false)]
 		public void HaveDifferentHashCodeForDifferentObjects(int id, int flatmateId, string nickname, string fullname, bool isFlatTenant)
 		{
-			Flatmate flatmate1 = new Flatmate() { FlatId = id, BirthDate = DateTime.Today, FlatmateId = flatmateId, Nickname = nickname, FullName = fullname, FlatTenant = isFlatTenant };
-			Flatmate flatmate2 = new Flatmate() { FlatId = id, BirthDate = DateTime.Today, FlatmateId = flatmateId, Nickname = nickname, FullName = fullname, FlatTenant = !isFlatTenant };
+			Flatmate flatmate1 = new Flatmate() { FlatId = id, BirthDate = DateTime.Today, FlatmateId = flatmateId, NickName = nickname, FullName = fullname, FlatTenant = isFlatTenant };
+			Flatmate flatmate2 = new Flatmate() { FlatId = id, BirthDate = DateTime.Today, FlatmateId = flatmateId, NickName = nickname, FullName = fullname, FlatTenant = !isFlatTenant };
 
 			Assert.NotEqual(flatmate1, flatmate2);
 			Assert.NotEqual(flatmate1.GetHashCode(), flatmate2.GetHashCode());

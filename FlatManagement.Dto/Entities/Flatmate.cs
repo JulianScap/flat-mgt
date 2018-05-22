@@ -12,7 +12,7 @@ namespace FlatManagement.Dto.Entities
 		public int FlatmateId { get; set; }
 		public int? FlatId { get; set; }
 		public string FullName { get; set; }
-		public string Nickname { get; set; }
+		public string NickName { get; set; }
 		public DateTime? BirthDate { get; set; }
 		public bool FlatTenant { get; set; }
 		public string Login { get; set; }
@@ -37,7 +37,7 @@ namespace FlatManagement.Dto.Entities
 				return this.FlatmateId == other.FlatmateId
 					&& this.FlatId == other.FlatId
 					&& this.FullName == other.FullName
-					&& this.Nickname == other.Nickname
+					&& this.NickName == other.NickName
 					&& this.BirthDate == other.BirthDate
 					&& this.FlatTenant == other.FlatTenant
 					&& this.Login == other.Login;
@@ -56,13 +56,13 @@ namespace FlatManagement.Dto.Entities
 
 		public override int GetHashCode()
 		{
-			return HashCode.Compute(this.FlatmateId, this.FlatId, this.FullName, this.Nickname, this.BirthDate, this.FlatTenant, this.Login);
+			return HashCode.Compute(this.FlatmateId, this.FlatId, this.FullName, this.NickName, this.BirthDate, this.FlatTenant, this.Login);
 		}
 
 		private static readonly string[] ids = new string[] { "FlatmateId" };
 		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
-		private static readonly string[] fields = new string[] { "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant", "Login", "Password" };
-		private static readonly string[] allFields = new string[] { "FlatmateId", "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant", "Login", "Password" };
+		private static readonly string[] fields = new string[] { "FlatId", "FullName", "NickName", "BirthDate", "FlatTenant", "Login", "Password" };
+		private static readonly string[] allFields = new string[] { "FlatmateId", "FlatId", "FullName", "NickName", "BirthDate", "FlatTenant", "Login", "Password" };
 
 		public override string[] IdFieldNames { get => ids; }
 		public override TypeEnum[] IdFieldTypes { get => idsType; }
