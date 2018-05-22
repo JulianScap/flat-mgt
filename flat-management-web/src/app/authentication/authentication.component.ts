@@ -60,11 +60,4 @@ export class AuthenticationComponent implements OnInit {
       password: 'Julian'
     });
   }
-
-  clear_click(): void {
-    this.loginForm.setValue({
-      login: '',
-      password: ''
-    });
-  }
 }

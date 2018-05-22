@@ -3,10 +3,12 @@ import { CryptoService } from "../shared/services/crypto.service";
 import { SharedModule } from "../shared/shared.module";
 import { AuthenticationComponent } from "./authentication.component";
 import { AuthenticationService } from "./authentication.service";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
     imports: [
-        SharedModule
+        SharedModule,
+        RouterModule
     ],
     declarations: [
         AuthenticationComponent
