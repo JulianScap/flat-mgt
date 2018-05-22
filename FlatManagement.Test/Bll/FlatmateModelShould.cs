@@ -11,7 +11,7 @@ namespace FlatManagement.Test.Bll
 		public void ReturnAValidAccountByLogin()
 		{
 			IFlatmateModel fm = ServiceLocator.Instance.GetService<IFlatmateModel>();
-			fm.GetByLogin(login: "test");
+			fm.GetByLogin(login: "Julian");
 
 			Assert.NotEmpty(fm);
 		}
