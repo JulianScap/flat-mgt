@@ -7,7 +7,6 @@ import { AuthenticatedGuard } from './shared/guards/authenticated.guard';
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            { path: 'authentication', component: AuthenticationComponent },
             { path: '', redirectTo: 'authentication', pathMatch: 'full' },
             { path: '**', redirectTo: 'authentication', pathMatch: 'full' }
         ],

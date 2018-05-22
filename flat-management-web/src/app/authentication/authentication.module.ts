@@ -4,15 +4,21 @@ import { SharedModule } from "../shared/shared.module";
 import { AuthenticationComponent } from "./authentication.component";
 import { AuthenticationService } from "./authentication.service";
 import { RouterModule } from "@angular/router";
+import { AuthenticationRoutingModule } from "./authentication-routing.module";
+import { AuthenticationNewComponent } from "./authentication-new.component";
 
 @NgModule({
     imports: [
         SharedModule,
-        RouterModule
+        RouterModule,
+        AuthenticationRoutingModule
     ],
+    
     declarations: [
-        AuthenticationComponent
+        AuthenticationComponent,
+        AuthenticationNewComponent
     ],
+
     providers: [
         AuthenticationService,
         CryptoService

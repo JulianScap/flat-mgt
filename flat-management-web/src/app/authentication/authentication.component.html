@@ -11,14 +11,14 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Login</span>
           </div>
-          <input type="text" class="form-control" placeholder="Your name (required)" formControlName="login" [ngClass]="{'is-invalid': (login.dirty || login.touched) && !login.valid }"
+          <input id="login" type="text" class="form-control" placeholder="Your name (required)" formControlName="login" [ngClass]="{'is-invalid': (login.dirty || login.touched) && !login.valid }"
           />
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Password</span>
           </div>
-          <input type="password" class="form-control" placeholder="Password (required)" formControlName="password" [ngClass]="{'is-invalid': (password.dirty || password.touched) && !password.valid }"
+          <input id="password" type="password" class="form-control" placeholder="Password (required)" formControlName="password" [ngClass]="{'is-invalid': (password.dirty || password.touched) && !password.valid }"
           />
         </div>
       </div>
@@ -36,9 +36,9 @@
         New user?
       </h3>
       <div class="row">
-          <div class="col">
-            <button type="button" class="btn btn-link" [routerLink]="['/flatmate/new']">Create a new flat and flatmate</button>
-          </div>
+        <div class="col">
+          <a [routerLink]="['/authentication/new']">Create a new flat and flatmate</a>
+        </div>
       </div>
     </fieldset>
   </form>
