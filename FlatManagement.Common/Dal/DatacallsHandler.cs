@@ -148,7 +148,8 @@ namespace FlatManagement.Common.Dal
 			{
 				foreach (Parameter parameter in parameters)
 				{
-					sqlCommand.Parameters.AddWithValue(parameter.Name, parameter.Value);
+					SqlParameter sqlParameter = sqlCommand.Parameters.AddWithValue(parameter.Name, parameter.Value);
+					sqlParameter.SqlDbType = GetAsSqlDbType(parameter.Type);
 				}
 			}
 		}
@@ -177,6 +178,16 @@ namespace FlatManagement.Common.Dal
 					return SqlDbType.NVarChar;
 				case TypeEnum.Guid:
 					return SqlDbType.UniqueIdentifier;
+				case TypeEnum.Date:
+					return SqlDbType.Date;
+				case TypeEnum.Time:
+					return SqlDbType.Time;
+				case TypeEnum.DateTime:
+					return SqlDbType.DateTime;
+				case TypeEnum.DateTimeOffset:
+					return SqlDbType.DateTimeOffset;
+				case TypeEnum.Boolean:
+					return SqlDbType.Bit;
 				default:
 					return SqlDbType.Int;
 			}

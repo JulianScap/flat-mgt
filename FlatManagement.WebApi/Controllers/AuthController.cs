@@ -1,5 +1,7 @@
-﻿using FlatManagement.Bll.Interface;
+﻿using System.Transactions;
+using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Services;
+using FlatManagement.Common.Transaction;
 using FlatManagement.WebApi.Controllers.Base;
 using FlatManagement.WebApi.Model;
 using FlatManagement.WebApi.Security;
@@ -22,8 +24,10 @@ namespace FlatManagement.WebApi.Controllers
 			IFlatmateModel flatmate = ServiceLocator.Instance.GetService<IFlatmateModel>();
 			flatmate.GetByLogin(loginRequest.Login);
 
-			LoginResult result = new LoginResult();
-			result.ValidationResult = flatmate.CheckPassword(loginRequest.PasswordHash);
+			LoginResult result = new LoginResult()
+			{
+				ValidationResult = flatmate.CheckPassword(loginRequest.PasswordHash)
+			};
 
 			if (result.ValidationResult.IsValid)
 			{
@@ -31,6 +35,29 @@ namespace FlatManagement.WebApi.Controllers
 			}
 
 			return Json(result);
+		}
+
+		[HttpPut]
+		public object Create()
+		{
+			AuthCreateRequest request = GetBody<AuthCreateRequest>();
+			IFlatModel flat = ServiceLocator.Instance.GetService<IFlatModel>();
+			IFlatmateModel flatmate = ServiceLocator.Instance.GetService<IFlatmateModel>();
+
+			using (TransactionScope ts = TransactionUtil.New())
+			{
+				flat.Add(request.Flat);
+				flat.PersistAll();
+
+				request.Flatmate.FlatId = request.Flat.FlatId;
+				flatmate.Add(request.Flatmate);
+				flatmate.PersistAll();
+
+				ts.Complete();
+			}
+
+
+			return request;
 		}
 	}
 }

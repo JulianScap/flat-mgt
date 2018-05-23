@@ -14,5 +14,7 @@ namespace FlatManagement.Test.Tools
 		public override string[] AllFieldNames { get; }
 		public override TypeEnum[] IdFieldTypes { get; }
 		public override bool IsPersisted { get; }
+		public override TypeEnum[] DataFieldTypes { get; }
+		public override TypeEnum[] AllFieldTypes { get; }
 	}
 }

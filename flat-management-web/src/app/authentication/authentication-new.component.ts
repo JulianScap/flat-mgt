@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from './authentication.service';
 
 @Component({
   templateUrl: './authentication-new.component.html'
@@ -8,7 +9,7 @@ export class AuthenticationNewComponent implements OnInit {
   errorMessages: string[];
 
   authForm: FormGroup;
-  userForm: FormGroup;
+  flatmateForm: FormGroup;
   flatForm: FormGroup;
 
   login: AbstractControl;
@@ -22,10 +23,10 @@ export class AuthenticationNewComponent implements OnInit {
   name: AbstractControl;
   address: AbstractControl;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.userForm = this.fb.group({
+    this.flatmateForm = this.fb.group({
       login: ['', [Validators.required, Validators.maxLength(100)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
@@ -35,30 +36,55 @@ export class AuthenticationNewComponent implements OnInit {
       flatTenant: true
     }, { validator: passwordMatcher });
 
-    this.login = this.userForm.get('login');
-    this.password = this.userForm.get('password');
-    this.confirmPassword = this.userForm.get('confirmPassword');
-    this.fullName = this.userForm.get('fullName');
-    this.nickName = this.userForm.get('nickName');
-    this.birthDate = this.userForm.get('birthDate');
-    this.flatTenant = this.userForm.get('flatTenant');
+    this.login = this.flatmateForm.get('login');
+    this.password = this.flatmateForm.get('password');
+    this.confirmPassword = this.flatmateForm.get('confirmPassword');
+    this.fullName = this.flatmateForm.get('fullName');
+    this.nickName = this.flatmateForm.get('nickName');
+    this.birthDate = this.flatmateForm.get('birthDate');
+    this.flatTenant = this.flatmateForm.get('flatTenant');
 
     this.flatForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(200)]],
-      address: ['', [Validators.required, Validators.maxLength(1000)]],
+      address: ['', [Validators.required, Validators.maxLength(1000)]]
     });
 
     this.name = this.flatForm.get('name');
     this.address = this.flatForm.get('address');
 
     this.authForm = this.fb.group({
-      userForm: this.userForm,
+      flatmateForm: this.flatmateForm,
       flatForm: this.flatForm
     });
   }
 
   save(): void {
+    this.flatForm.updateValueAndValidity();
+    this.flatmateForm.updateValueAndValidity();
+    this.authForm.updateValueAndValidity();
 
+    if (this.authForm.valid) {
+      this.authService.createNewUserAndFlat(this.flatForm.value, this.flatmateForm.value)
+        .subscribe(data => this.errorMessages = [JSON.stringify(data)]);
+    }
+  }
+
+  setDevValues_click(): void {
+    this.authForm.setValue({
+      flatmateForm: {
+        login: 'bob',
+        password: 'password123',
+        confirmPassword: 'password123',
+        fullName: 'Bob le bricoleur',
+        nickName: '',
+        birthDate: '',
+        flatTenant: true
+      },
+      flatForm: {
+        name: '4E',
+        address: '4E MacAulay street'
+      }
+    });
   }
 }
 

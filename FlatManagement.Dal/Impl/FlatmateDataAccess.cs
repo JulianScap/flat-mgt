@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FlatManagement.Common.Dal;
+using FlatManagement.Common.Dto;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +29,7 @@ namespace FlatManagement.Dal.Impl
 			DatacallsHandler handler = new DatacallsHandler(configuration);
 			string command = GetStoredProcedureName(OperationEnum.Custom, "GetByLogin");
 			Parameter[] parameters = new Parameter[1] {
-				new Parameter("Login", login)
+				new Parameter("Login", TypeEnum.String, login)
 			};
 			object result = handler.GetOne(command, parameters, converter, true);
 			return (Flatmate)result;

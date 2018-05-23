@@ -61,11 +61,15 @@ namespace FlatManagement.Dto.Entities
 
 		private static readonly string[] ids = new string[] { "FlatmateId" };
 		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
+		private static readonly TypeEnum[] allType = new TypeEnum[] { TypeEnum.Int32, TypeEnum.Int32, TypeEnum.String, TypeEnum.String, TypeEnum.Date, TypeEnum.Boolean, TypeEnum.String, TypeEnum.String };
+		private static readonly TypeEnum[] dataFieldTypes = new TypeEnum[] { TypeEnum.Int32, TypeEnum.String, TypeEnum.String, TypeEnum.Date, TypeEnum.Boolean, TypeEnum.String, TypeEnum.String };
 		private static readonly string[] fields = new string[] { "FlatId", "FullName", "NickName", "BirthDate", "FlatTenant", "Login", "Password" };
 		private static readonly string[] allFields = new string[] { "FlatmateId", "FlatId", "FullName", "NickName", "BirthDate", "FlatTenant", "Login", "Password" };
 
 		public override string[] IdFieldNames { get => ids; }
 		public override TypeEnum[] IdFieldTypes { get => idsType; }
+		public override TypeEnum[] DataFieldTypes { get => dataFieldTypes; }
+		public override TypeEnum[] AllFieldTypes { get => allType; }
 		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
 
