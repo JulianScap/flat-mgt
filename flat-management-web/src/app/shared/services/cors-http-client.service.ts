@@ -30,6 +30,13 @@ export class CorsHttpClient {
             .catch(this.handleError);
     }
 
+    put<T>(controller: string, body?: any): Observable<T> {
+        let url: string = this.baseUrl + controller;
+        return this.http.put<T>(url, body, this.getOptions())
+            .do(data => console.log(JSON.stringify(data)))
+            .catch(this.handleError);
+    }
+
     delete(controller: string, body?: any): Observable<Object> {
         let url: string = this.baseUrl + controller;
         let options = this.getOptions();

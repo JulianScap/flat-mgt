@@ -1,15 +1,13 @@
 <div class="panel-body">
-  <h3>
-    Please enter the flat and main tenant details:
-  </h3>
   <form class="form-horizontal" novalidate="novalidate" (ngSubmit)="save()" [formGroup]="authForm">
     <fieldset>
-
       <fm-error [messages]='errorMessages'></fm-error>
 
-      nickName birthDate
+      <h3>
+        Please enter the flat and main tenant details:
+      </h3>
 
-      <h4>Tenant:</h4>
+      <h4>Tenant</h4>
       <div formGroupName="userForm">
         <div class="form-row">
           <div class="form-group col-6">
@@ -33,8 +31,7 @@
           <div class="form-group col-6">
             <label for="confirmPassword">Confirm Password</label>
             <input id="confirmPassword" type="password" class="form-control form-control-sm" placeholder="Please confirm your password"
-              formControlName="confirmPassword" [ngClass]="{'is-invalid': userForm.errors?.match }"
-            />
+              formControlName="confirmPassword" [ngClass]="{'is-invalid': userForm.errors?.match }" />
           </div>
         </div>
         <div class="form-row">
@@ -50,8 +47,8 @@
           </div>
         </div>
       </div>
-
-      <h4>Flat:</h4>
+      <hr/>
+      <h4>Flat</h4>
       <div formGroupName="flatForm">
         <div class="form-group">
           <label for="flatName">Flat Name</label>

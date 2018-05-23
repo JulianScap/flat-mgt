@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './authentication-new.component.html'
@@ -29,8 +29,8 @@ export class AuthenticationNewComponent implements OnInit {
       login: ['', [Validators.required, Validators.maxLength(100)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      fullName: ['', Validators.required],
-      nickName: ['', Validators.required],
+      fullName: ['', [Validators.required, Validators.maxLength(500)]],
+      nickName: ['', Validators.maxLength(100)],
       birthDate: '',
       flatTenant: true
     }, { validator: passwordMatcher });
@@ -44,9 +44,10 @@ export class AuthenticationNewComponent implements OnInit {
     this.flatTenant = this.userForm.get('flatTenant');
 
     this.flatForm = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(200)]],
+      address: ['', [Validators.required, Validators.maxLength(1000)]],
     });
+
     this.name = this.flatForm.get('name');
     this.address = this.flatForm.get('address');
 
@@ -66,11 +67,11 @@ function passwordMatcher(c: AbstractControl): { [key: string]: boolean } | null 
   const confirmPassword = c.get('confirmPassword');
 
   if (password.pristine || confirmPassword.pristine) {
-      return null;
+    return null;
   }
 
   if (password.value !== confirmPassword.value) {
-      return { 'match': true };
+    return { 'match': true };
   }
 
   return null;
