@@ -1,11 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
-
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './shared/shared.module';
+import { AppComponent } from './app.component';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { FlatModule } from './flat/flat.module';
+import { FlatmateModule } from './flatmate/flatmate.module';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { AuthenticationModule } from './authentication/authentication.module';
     SharedModule,
     HttpClientModule,
     AuthenticationModule,
+    FlatModule,
+    FlatmateModule,
     AppRoutingModule
   ],
 

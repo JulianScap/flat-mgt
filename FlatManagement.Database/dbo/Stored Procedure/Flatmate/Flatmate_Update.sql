@@ -2,8 +2,10 @@
 	@FlatmateId int,
 	@FlatId int,
 	@FullName nvarchar(500),
-	@Nickname nvarchar(100),
+	@NickName nvarchar(100),
 	@BirthDate date,
+	@Login nvarchar(100),
+	@Password nvarchar(100),
 	@FlatTenant bit
 AS
 BEGIN
@@ -11,9 +13,10 @@ BEGIN
 	SET
 		[FlatId] = @FlatId,
 		[FullName] = @FullName,
-		[Nickname] = @Nickname,
+		[NickName] = @NickName,
 		[BirthDate] = @BirthDate,
-		[FlatTenant] = @FlatTenant
+		[FlatTenant] = @FlatTenant,
+		[Login] = @Login
 	WHERE FlatmateId = @FlatmateId;
 END
 

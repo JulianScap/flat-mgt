@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using FlatManagement.Common.Dto;
@@ -148,7 +149,21 @@ namespace FlatManagement.Common.Dal
 			{
 				foreach (Parameter parameter in parameters)
 				{
-					sqlCommand.Parameters.AddWithValue(parameter.Name, parameter.Value);
+					SqlParameter sqlParameter = sqlCommand.CreateParameter();
+					sqlParameter.Direction = ParameterDirection.Input;
+					sqlParameter.ParameterName = parameter.Name;
+					sqlParameter.SqlDbType = GetAsSqlDbType(parameter.Type);
+					if (parameter.Value == null)
+					{
+						sqlParameter.SqlValue = DBNull.Value;
+					}
+					else
+					{
+						sqlParameter.Value = parameter.Value;
+					}
+
+					sqlCommand.Parameters.Add(sqlParameter);
+
 				}
 			}
 		}
@@ -177,6 +192,16 @@ namespace FlatManagement.Common.Dal
 					return SqlDbType.NVarChar;
 				case TypeEnum.Guid:
 					return SqlDbType.UniqueIdentifier;
+				case TypeEnum.Date:
+					return SqlDbType.Date;
+				case TypeEnum.Time:
+					return SqlDbType.Time;
+				case TypeEnum.DateTime:
+					return SqlDbType.DateTime;
+				case TypeEnum.DateTimeOffset:
+					return SqlDbType.DateTimeOffset;
+				case TypeEnum.Boolean:
+					return SqlDbType.Bit;
 				default:
 					return SqlDbType.Int;
 			}

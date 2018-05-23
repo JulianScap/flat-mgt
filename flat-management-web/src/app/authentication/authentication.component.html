@@ -1,40 +1,45 @@
 <div class="panel-body">
   <form class="form-horizontal" novalidate="novalidate" (ngSubmit)="login_click()" [formGroup]="loginForm">
     <fieldset>
-
       <fm-error [messages]='errorMessages'></fm-error>
+      <h3>
+        Please login:
+      </h3>
 
       <div class="row form-group">
         <div class="input-group mb-1">
           <div class="input-group-prepend">
             <span class="input-group-text">Login</span>
           </div>
-          <input type="text" class="form-control" placeholder="Your name (required)" formControlName="login" [ngClass]="{'is-invalid': (login.dirty || login.touched) && !login.valid }"
+          <input id="login" type="text" class="form-control" placeholder="Your name (required)" formControlName="login" [ngClass]="{'is-invalid': (login.dirty || login.touched) && !login.valid }"
           />
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Password</span>
           </div>
-          <input type="password" class="form-control" placeholder="Password (required)" formControlName="password" [ngClass]="{'is-invalid': (password.dirty || password.touched) && !password.valid }"
+          <input id="password" type="password" class="form-control" placeholder="Password (required)" formControlName="password" [ngClass]="{'is-invalid': (password.dirty || password.touched) && !password.valid }"
           />
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-1">
-          <button type="submit" class="btn btn-primary">Login</button>
+        <div class="col-1">
+          <button type="submit" class="btn btn-primary" [disabled]='!loginForm.valid'>Login</button>
         </div>
-        <div class="col-sm-1">
+        <div class="col-1">
           <button type="button" class="btn btn-outline-danger" (click)='setDevValues_click()'>Set dev values</button>
-        </div>
-        <div class="col">
-        </div>
-        <div class="col-sm-1">
-          <button type="button" class="btn btn-outline-danger" (click)='clear_click()'>Clear</button>
         </div>
       </div>
 
+      <h3 class="mt-5">
+        New user?
+      </h3>
+      <div class="row">
+        <div class="col">
+          <a [routerLink]="['/authentication/new']">Create a new flat and flatmate</a>
+        </div>
+      </div>
     </fieldset>
   </form>
 </div>

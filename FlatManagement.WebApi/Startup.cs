@@ -2,6 +2,7 @@
 using FlatManagement.Common.Bll;
 using FlatManagement.Common.Extensions;
 using FlatManagement.Common.Services;
+using FlatManagement.WebApi.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,8 +17,10 @@ namespace FlatManagement.WebApi
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+
 			ServiceLocator.Instance.SetConfiguration(configuration);
 			ModelSerialiser.Instance.Configuration = configuration;
+			TokenHelper.Configure(configuration);
 		}
 
 		public IConfiguration Configuration { get; }

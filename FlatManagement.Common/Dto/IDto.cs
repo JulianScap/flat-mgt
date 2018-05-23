@@ -15,6 +15,19 @@
 		/// </summary>
 		string[] AllFieldNames { get; }
 
+		/// <summary>
+		/// Data and id fields' type
+		/// </summary>
+		TypeEnum[] AllFieldTypes { get; }
+
+		/// <summary>
+		/// Everything except the id fields' type
+		/// </summary>
+		TypeEnum[] DataFieldTypes { get; }
+
+		/// <summary>
+		/// Only the id fields' type
+		/// </summary>
 		TypeEnum[] IdFieldTypes { get; }
 
 		bool IsPersisted { get; }

@@ -1,5 +1,10 @@
 ﻿{
 	"Security": {
+		"Jwt": {
+			"SymmetricSecurityKey": "mLBMceMJwD7uzHKXzk2vA5qmqlx9ms2sTjsuSr6tGCXvefjoZlh0dmKPkCj7U0lXU8sMA23yC7iAJxki0DB0Xk+1lrt5v3+zLZGeY3ZYu7bZ2HWsEBX/SOBAPZGpWwHeGe4MFsdk5tUo2B+0v2cAHbgM/7s0Jw0K9s4iGo1201U=",
+			"Issuer": "http://fm.api.local/",
+			"Audience": "http://fm.web.local:4200/"
+		},
 		"Password": {
 			"Xml": {
 				"PublicKey": "<RSAKeyValue><Modulus>ypAfduI/t0MnjRywg53LxRJopT61SYrEeUHaECzfl9sVt9YJ4W/uzpTl7nnCtrqNkiPZnWC76hIpF98D1wWUrf3w5QJGVZ5Rt2sjKjhdD7stOUJ0hjKTzmz3q4dK0RbXLkZdM/TVSK5mdcr5eHvnjKSzVypzhwSRcDanEp/3Gb0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>",

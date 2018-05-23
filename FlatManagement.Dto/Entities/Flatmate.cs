@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using FlatManagement.Common.Dto;
 using FlatManagement.Common.Validation;
+using Newtonsoft.Json;
 
 namespace FlatManagement.Dto.Entities
 {
@@ -9,11 +10,14 @@ namespace FlatManagement.Dto.Entities
 	public partial class Flatmate : AbstractDto, IEquatable<Flatmate>
 	{
 		public int FlatmateId { get; set; }
-		public int FlatId { get; set; }
+		public int? FlatId { get; set; }
 		public string FullName { get; set; }
-		public string Nickname { get; set; }
+		public string NickName { get; set; }
 		public DateTime? BirthDate { get; set; }
 		public bool FlatTenant { get; set; }
+		public string Login { get; set; }
+		[JsonIgnore]
+		public string Password { get; set; }
 
 		public Flatmate() { }
 
@@ -33,9 +37,10 @@ namespace FlatManagement.Dto.Entities
 				return this.FlatmateId == other.FlatmateId
 					&& this.FlatId == other.FlatId
 					&& this.FullName == other.FullName
-					&& this.Nickname == other.Nickname
+					&& this.NickName == other.NickName
 					&& this.BirthDate == other.BirthDate
-					&& this.FlatTenant == other.FlatTenant;
+					&& this.FlatTenant == other.FlatTenant
+					&& this.Login == other.Login;
 			}
 		}
 
@@ -51,16 +56,20 @@ namespace FlatManagement.Dto.Entities
 
 		public override int GetHashCode()
 		{
-			return HashCode.Compute(this.FlatmateId, this.FlatId, this.FullName, this.Nickname, this.BirthDate, this.FlatTenant);
+			return HashCode.Compute(this.FlatmateId, this.FlatId, this.FullName, this.NickName, this.BirthDate, this.FlatTenant, this.Login);
 		}
 
 		private static readonly string[] ids = new string[] { "FlatmateId" };
 		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
-		private static readonly string[] fields = new string[] { "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant" };
-		private static readonly string[] allFields = new string[] { "FlatmateId", "FlatId", "FullName", "Nickname", "BirthDate", "FlatTenant" };
+		private static readonly TypeEnum[] allType = new TypeEnum[] { TypeEnum.Int32, TypeEnum.Int32, TypeEnum.String, TypeEnum.String, TypeEnum.Date, TypeEnum.Boolean, TypeEnum.String, TypeEnum.String };
+		private static readonly TypeEnum[] dataFieldTypes = new TypeEnum[] { TypeEnum.Int32, TypeEnum.String, TypeEnum.String, TypeEnum.Date, TypeEnum.Boolean, TypeEnum.String, TypeEnum.String };
+		private static readonly string[] fields = new string[] { "FlatId", "FullName", "NickName", "BirthDate", "FlatTenant", "Login", "Password" };
+		private static readonly string[] allFields = new string[] { "FlatmateId", "FlatId", "FullName", "NickName", "BirthDate", "FlatTenant", "Login", "Password" };
 
 		public override string[] IdFieldNames { get => ids; }
 		public override TypeEnum[] IdFieldTypes { get => idsType; }
+		public override TypeEnum[] DataFieldTypes { get => dataFieldTypes; }
+		public override TypeEnum[] AllFieldTypes { get => allType; }
 		public override string[] DataFieldNames { get => fields; }
 		public override string[] AllFieldNames { get => allFields; }
 

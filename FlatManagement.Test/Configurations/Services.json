@@ -34,11 +34,6 @@
 				"Mode": "Singleton",
 				"ImplementationType": "FlatManagement.Dal.Impl.TaskDataAccess, FlatManagement.Dal"
 			},
-			{
-				"Interface": "FlatManagement.Dal.Interface.IAccountDataAccess, FlatManagement.Dal",
-				"Mode": "Singleton",
-				"ImplementationType": "FlatManagement.Dal.Impl.AccountDataAccess, FlatManagement.Dal"
-			},
 			// Bll
 			{
 				"Interface": "FlatManagement.Bll.Interface.IPeriodTypeModel, FlatManagement.Bll",
@@ -59,11 +54,6 @@
 				"Interface": "FlatManagement.Bll.Interface.ITaskModel, FlatManagement.Bll",
 				"Mode": "NewInstance",
 				"ImplementationType": "FlatManagement.Bll.Impl.TaskModel, FlatManagement.Bll"
-			},
-			{
-				"Interface": "FlatManagement.Bll.Interface.IAccountModel, FlatManagement.Bll",
-				"Mode": "NewInstance",
-				"ImplementationType": "FlatManagement.Bll.Impl.AccountModel, FlatManagement.Bll"
 			}
 		]
 	}

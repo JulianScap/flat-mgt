@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
-
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SessionManager } from '../shared/services/session-manager.service';
+import { IAuthenticationResult } from './authentication-result';
 import { AuthenticationService } from './authentication.service';
-import { IResult } from '../shared/result';
-
 
 @Component({
   templateUrl: './authentication.component.html'
@@ -18,9 +18,9 @@ export class AuthenticationComponent implements OnInit {
 
   //#region init methods
   constructor(private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService
-  ) {
-  }
+              private authenticationService: AuthenticationService,
+              private sessionManager: SessionManager,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -44,11 +44,13 @@ export class AuthenticationComponent implements OnInit {
       .subscribe(result => this.handleLogin(result));
   }
 
-  handleLogin(result: IResult): void {
-    if (result.success) {
-      // redirection vers la page de selection d'appart qui n'existe pas encore
+  handleLogin(result: IAuthenticationResult): void {
+    if (result.validationResult.isValid) {
+      this.sessionManager.setUser(result.token, this.login.value, result.userInfo);
+      this.router.navigate(['/flat/list']);
     } else {
-      this.errorMessages = result.messages;
+      this.sessionManager.clearSession();
+      this.errorMessages = result.validationResult.messages;
     }
   }
 
@@ -56,13 +58,6 @@ export class AuthenticationComponent implements OnInit {
     this.loginForm.setValue({
       login: 'Julian',
       password: 'Julian'
-    });
-  }
-
-  clear_click(): void {
-    this.loginForm.setValue({
-      login: '',
-      password: ''
     });
   }
 }

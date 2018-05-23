@@ -1,11 +1,22 @@
 import { Component } from '@angular/core';
+import { SessionManager } from './shared/services/session-manager.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  template: `
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">Flat Management</a>
-</nav>
-<div class='container' style='padding:1.5rem;'><router-outlet></router-outlet></div>`
+  templateUrl: './app.component.html'
 })
-export class AppComponent { }
+export class AppComponent {
+  constructor(private session: SessionManager, private router: Router) {
+
+  }
+
+  logout(): void {
+    this.session.clearSession();
+    this.router.navigate(['/authentication']);
+  }
+
+  isAuthenticated(): boolean {
+    return this.session.isAuthenticated();
+  }
+}

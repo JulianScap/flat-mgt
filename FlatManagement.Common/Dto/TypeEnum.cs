@@ -6,5 +6,10 @@
 		Int64,
 		String,
 		Guid,
+		Date,
+		Time,
+		DateTime,
+		DateTimeOffset,
+		Boolean,
 	}
 }

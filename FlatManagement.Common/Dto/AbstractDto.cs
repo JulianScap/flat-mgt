@@ -14,6 +14,10 @@ namespace FlatManagement.Common.Dto
 		[JsonIgnore]
 		public abstract TypeEnum[] IdFieldTypes { get; }
 		[JsonIgnore]
+		public abstract TypeEnum[] DataFieldTypes { get; }
+		[JsonIgnore]
+		public abstract TypeEnum[] AllFieldTypes { get; }
+		[JsonIgnore]
 		public abstract bool IsPersisted { get; }
 
 		public virtual object GetFieldValue(string fieldName)

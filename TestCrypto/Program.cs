@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Xml;
@@ -9,12 +10,19 @@ namespace TestCrypto
 	{
 		public static void Main(string[] args)
 		{
+			if (Directory.Exists(@".\out"))
+			{
+				Directory.Delete(@".\out", true);
+			}
+
+			Directory.CreateDirectory(@".\out");
+
 			TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
 			des.GenerateIV();
 			des.GenerateKey();
 
-			var iv = Convert.ToBase64String(des.IV);
-			var key = Convert.ToBase64String(des.Key);
+			File.WriteAllText(@".\out\desIV.txt", Convert.ToBase64String(des.IV));
+			File.WriteAllText(@".\out\desKey.txt", Convert.ToBase64String(des.Key));
 
 			RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
 
@@ -22,13 +30,6 @@ namespace TestCrypto
 			RSAParameters privateKey = rsa.ExportParameters(true);
 			string testpriv = ToXmlString(rsa, true);
 			string testpub = ToXmlString(rsa, false);
-
-			if (Directory.Exists(@".\out"))
-			{
-				Directory.Delete(@".\out", true);
-			}
-
-			Directory.CreateDirectory(@".\out");
 			File.WriteAllText(@".\out\public.xml", testpub);
 			File.WriteAllText(@".\out\private.xml", testpriv);
 
@@ -43,6 +44,10 @@ namespace TestCrypto
 			{
 				ExportPrivateKey(privateKey, tw);
 			}
+
+			var hmac = new HMACSHA512();
+			File.WriteAllText(@".\out\HMACSHA512.txt", Convert.ToBase64String(hmac.Key));
+			Process.Start("explorer", ".\\out");
 		}
 
 		public static void FromXmlString(RSACryptoServiceProvider rsa, string xmlString)
