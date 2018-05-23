@@ -63,7 +63,6 @@ namespace FlatManagement.WebApi.Controllers
 						flatmate.SavePassword();
 
 						ts.Complete();
-						return Ok();
 					}
 				}
 			}

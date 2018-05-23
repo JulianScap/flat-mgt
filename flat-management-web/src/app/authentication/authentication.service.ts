@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { IFlat } from "../shared/entities/flat";
 import { IFlatmate } from "../shared/entities/flatmate";
+import { IValidationResult } from "../shared/entities/validation-result";
 import { CorsHttpClient } from "../shared/services/cors-http-client.service";
 import { CryptoService } from "../shared/services/crypto.service";
 import { IAuthenticationResult } from "./authentication-result";
@@ -17,7 +18,7 @@ export class AuthenticationService {
     return this.http.post<IAuthenticationResult>('Auth', { "login": login, "passwordHash": cypheredPassword });
   }
 
-  createNewUserAndFlat(flat: IFlat, flatmate: IFlatmate): Observable<Object> {
+  createNewUserAndFlat(flat: IFlat, flatmate: IFlatmate): Observable<IValidationResult> {
     let cypheredPassword = this.cryptoService.preparePassword(flatmate.password);
 
     let flatmateCloned: IFlatmate = {
@@ -31,7 +32,7 @@ export class AuthenticationService {
       password: undefined
     };
 
-    return this.http.put('Auth', {
+    return this.http.put<IValidationResult>('Auth', {
       flat: flat,
       flatmate: flatmateCloned,
       password: cypheredPassword

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SessionManager } from '../shared/services/session-manager.service';
 import { IAuthenticationResult } from './authentication-result';
 import { AuthenticationService } from './authentication.service';
@@ -18,11 +18,16 @@ export class AuthenticationComponent implements OnInit {
 
   //#region init methods
   constructor(private formBuilder: FormBuilder,
-              private authenticationService: AuthenticationService,
-              private sessionManager: SessionManager,
-              private router: Router) { }
+    private authenticationService: AuthenticationService,
+    private sessionManager: SessionManager,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if (this.route.snapshot.paramMap.has('success')) {
+      this.errorMessages = ['New flat and tenant successfully created'];
+    }
+
     this.loginForm = this.formBuilder.group({
       login: ['', Validators.required],
       password: ['', Validators.required]

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { IValidationResult } from '../shared/entities/validation-result';
 import { AuthenticationService } from './authentication.service';
 
 @Component({
   templateUrl: './authentication-new.component.html'
 })
 export class AuthenticationNewComponent implements OnInit {
+
   errorMessages: string[];
 
   authForm: FormGroup;
@@ -23,7 +26,7 @@ export class AuthenticationNewComponent implements OnInit {
   name: AbstractControl;
   address: AbstractControl;
 
-  constructor(private fb: FormBuilder, private authService: AuthenticationService) { }
+  constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.flatmateForm = this.fb.group({
@@ -65,7 +68,15 @@ export class AuthenticationNewComponent implements OnInit {
 
     if (this.authForm.valid) {
       this.authService.createNewUserAndFlat(this.flatForm.value, this.flatmateForm.value)
-        .subscribe(data => this.errorMessages = [JSON.stringify(data)]);
+        .subscribe(data => this.handleSaveResult(data));
+    }
+  }
+
+  handleSaveResult(validationResult: IValidationResult): any {
+    if (validationResult.isValid) {
+      this.router.navigate(['/authentication', 'success']);
+    } else {
+      this.errorMessages = validationResult.messages;
     }
   }
 
