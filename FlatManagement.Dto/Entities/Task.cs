@@ -82,6 +82,11 @@ namespace FlatManagement.Dto.Entities
 			}
 		}
 
+		public override ValidationResult Validate()
+		{
+			return new ValidationResult(); // TODO
+		}
+
 		private static readonly string[] ids = new string[] { "TaskId" };
 		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
 		private static readonly TypeEnum[] allType = new TypeEnum[] { TypeEnum.Int32, TypeEnum.String, TypeEnum.Int32, TypeEnum.String, TypeEnum.Date, TypeEnum.Int32 };

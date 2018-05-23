@@ -57,6 +57,11 @@ namespace FlatManagement.Dto.Entities
 			return this.PeriodTypeId == (int)other;
 		}
 
+		public override ValidationResult Validate()
+		{
+			return new ValidationResult();
+		}
+
 		private static readonly string[] ids = new string[] { "PeriodTypeId" };
 		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
 		private static readonly TypeEnum[] allType = new TypeEnum[] { TypeEnum.Int32, TypeEnum.String };

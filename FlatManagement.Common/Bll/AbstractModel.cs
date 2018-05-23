@@ -60,7 +60,14 @@ namespace FlatManagement.Common.Bll
 
 		public virtual ValidationResult Validate()
 		{
-			return new ValidationResult();
+			ValidationResult result = new ValidationResult();
+
+			foreach (TDto item in items)
+			{
+				result.Add(item.Validate());
+			}
+
+			return result;
 		}
 	}
 }

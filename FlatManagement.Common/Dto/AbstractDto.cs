@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using FlatManagement.Common.Validation;
 using Newtonsoft.Json;
 
 namespace FlatManagement.Common.Dto
@@ -31,6 +32,8 @@ namespace FlatManagement.Common.Dto
 			PropertyInfo pi = GetProperty(fieldName);
 			pi.SetValue(this, value);
 		}
+
+		public abstract ValidationResult Validate();
 
 		private PropertyInfo GetProperty(string name)
 		{

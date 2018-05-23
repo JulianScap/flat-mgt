@@ -3,6 +3,7 @@ using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dal;
 using FlatManagement.Common.Services;
+using FlatManagement.Common.Validation;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
 using Microsoft.Extensions.Configuration;
@@ -35,5 +36,19 @@ namespace FlatManagement.Bll.Impl
 			items.Clear();
 			items.AddRange(flats);
 		}
+
+		public override ValidationResult Validate()
+		{
+			ValidationResult result = base.Validate();
+
+			foreach (Flat flat in items)
+			{
+				result.Add(flat.Validate());
+			}
+
+			return result;
+		}
+
+
 	}
 }

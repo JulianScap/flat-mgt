@@ -1,4 +1,5 @@
 ﻿using FlatManagement.Common.Dto;
+using FlatManagement.Common.Validation;
 
 namespace FlatManagement.Test.Tools
 {
@@ -16,5 +17,10 @@ namespace FlatManagement.Test.Tools
 		public override bool IsPersisted { get; }
 		public override TypeEnum[] DataFieldTypes { get; }
 		public override TypeEnum[] AllFieldTypes { get; }
+
+		public override ValidationResult Validate()
+		{
+			return null;
+		}
 	}
 }

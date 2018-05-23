@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FlatManagement.Common.Extensions;
 
 namespace FlatManagement.Common.Validation
@@ -27,7 +26,19 @@ namespace FlatManagement.Common.Validation
 		/// <param name="validationResult"></param>
 		public void Add(ValidationResult validationResult)
 		{
-			this.Messages.AddRange(validationResult.Messages);
+			if (validationResult != null)
+			{
+				this.Messages.AddRange(validationResult.Messages);
+			}
+		}
+
+		/// <summary>
+		/// Adds the message to the existing ones
+		/// </summary>
+		/// <param name="validationResult"></param>
+		public void Add(string message)
+		{
+			this.Messages.Add(message);
 		}
 
 		/// <summary>
@@ -36,7 +47,10 @@ namespace FlatManagement.Common.Validation
 		/// <param name="validationResult"></param>
 		public void Add(params string[] messages)
 		{
-			this.Messages.AddRange(messages);
+			if (messages != null && messages.Length != 0)
+			{
+				this.Messages.AddRange(messages);
+			}
 		}
 	}
 }
