@@ -15,6 +15,18 @@ namespace FlatManagement.Dal.Impl
 		{
 		}
 
+		public bool Exists(Flatmate flatmate)
+		{
+			DatacallsHandler handler = new DatacallsHandler(configuration);
+			string command = GetStoredProcedureName(OperationEnum.Custom, "Exists");
+			Parameter[] parameters = new Parameter[2] {
+				new Parameter("Login", TypeEnum.String, flatmate.Login),
+				new Parameter("FlatmateId", TypeEnum.Int32, flatmate.FlatmateId)
+			};
+			bool result = handler.GetBool(command, parameters);
+			return result;
+		}
+
 		public IEnumerable<Flatmate> GetByFlat(Flat flat)
 		{
 			DatacallsHandler handler = new DatacallsHandler(configuration);

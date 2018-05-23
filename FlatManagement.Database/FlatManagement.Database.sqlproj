@@ -118,6 +118,8 @@
     <Folder Include="dbo\Stored Procedure\PeriodType" />
     <Folder Include="dbo\Stored Procedure\Task" />
     <Folder Include="dbo\Stored Procedure\Flatmate" />
+    <Folder Include="dbo\Functions" />
+    <Folder Include="dbo\Functions\Flatmate" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Flat.sql">
@@ -165,6 +167,7 @@
     <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByFlatId.sql" />
     <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByLogin.sql" />
     <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_SavePassword.sql" />
+    <Build Include="dbo\Functions\Flatmate\Flatmate_Exists.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />

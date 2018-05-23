@@ -91,5 +91,25 @@ namespace FlatManagement.Bll.Impl
 				dal.SavePassword(flatmate);
 			}
 		}
+
+		public override ValidationResult Validate()
+		{
+			ValidationResult result = base.Validate();
+			return result;
+		}
+
+		protected override ValidationResult Validate(Flatmate item)
+		{
+			IFlatmateDataAccess dal = ServiceLocator.Instance.GetService<IFlatmateDataAccess>();
+
+			if (dal.Exists(item))
+			{
+				return new ValidationResult("The login already exists.");
+			}
+			else
+			{
+				return null;
+			}
+		}
 	}
 }

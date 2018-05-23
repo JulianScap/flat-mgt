@@ -58,6 +58,44 @@ namespace FlatManagement.Common.Dal
 			return result;
 		}
 
+		public bool GetBool(string command, Parameter[] parameters)
+		{
+			SqlConnection sqlConnection = null;
+			SqlCommand sqlCommand = null;
+			SqlDataReader sqlDataReader = null;
+			bool result = false;
+
+			try
+			{
+				sqlConnection = new SqlConnection(connectionString);
+				sqlCommand = new SqlCommand(command, sqlConnection) { CommandType = CommandType.StoredProcedure };
+				SetParameters(sqlCommand, parameters);
+				SqlParameter returnValue = AddReturnParameter(sqlCommand);
+				sqlConnection.Open();
+				sqlCommand.ExecuteNonQuery();
+				result = (bool)returnValue.Value;
+			}
+			finally
+			{
+				sqlDataReader.SafeDispose();
+				sqlCommand.SafeDispose();
+				sqlConnection.SafeDispose();
+			}
+
+			return result;
+		}
+
+		private SqlParameter AddReturnParameter(SqlCommand sqlCommand)
+		{
+			SqlParameter parameter = sqlCommand.CreateParameter();
+
+			parameter.Direction = ParameterDirection.ReturnValue;
+			parameter.DbType = DbType.Boolean;
+			sqlCommand.Parameters.Add(parameter);
+
+			return parameter;
+		}
+
 		public object GetOne(string command, Parameter[] parameters, IDataReaderRowConverter converter, bool throwIfMultipleResultFound = false)
 		{
 			SqlConnection sqlConnection = null;

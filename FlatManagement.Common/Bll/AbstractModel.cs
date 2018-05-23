@@ -65,9 +65,15 @@ namespace FlatManagement.Common.Bll
 			foreach (TDto item in items)
 			{
 				result.Add(item.Validate());
+				result.Add(Validate(item));
 			}
 
 			return result;
+		}
+
+		protected virtual ValidationResult Validate(TDto item)
+		{
+			return null;
 		}
 	}
 }

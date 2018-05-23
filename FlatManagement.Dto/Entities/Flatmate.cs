@@ -61,7 +61,17 @@ namespace FlatManagement.Dto.Entities
 
 		public override ValidationResult Validate()
 		{
-			return new ValidationResult(); // TODO
+			ValidationResult result = new ValidationResult();
+
+			ValidationTool.Required(result, this.Login, () => String.Format("The login field is mandatory"));
+			ValidationTool.MaxLength(result, this.Login, 100, () => String.Format("The login field is too long"));
+
+			ValidationTool.Required(result, this.FullName, () => String.Format("The full name field is mandatory"));
+			ValidationTool.MaxLength(result, this.FullName, 500, () => String.Format("The full name field is too long"));
+
+			ValidationTool.MaxLength(result, this.NickName, 100, () => String.Format("The nickname field is too long"));
+
+			return result;
 		}
 
 		private static readonly string[] ids = new string[] { "FlatmateId" };
