@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IPassword } from "../entities/password";
 import * as forge from "node-forge";
-//import * as crypto from "crypto";
 
 @Injectable()
 export class CryptoService {
@@ -15,9 +13,10 @@ KnOHBJFwNqcSn/cZvQIDAQAB
 `;
 
   getPasswordHash(password: string): string {
-    let sha1: forge.md.MessageDigest = forge.md.sha1.create();
-    sha1.update(password);
-    return sha1.digest().toHex();
+    let sha256: forge.md.MessageDigest = forge.md.sha256.create();
+    sha256.update(password);
+    let bytes: string = sha256.digest().bytes();
+    return forge.util.encode64(bytes);
   }
 
   encrypt(text: string): string {
@@ -25,20 +24,11 @@ KnOHBJFwNqcSn/cZvQIDAQAB
     return pub.encrypt(text);
   }
 
-  preparePassword(password: string): IPassword {
-    let result: IPassword;
-    
-    let salt: string = "";//crypto.randomBytes(256).toString('hex');
-
-    let hash: string = this.getPasswordHash(password + salt);
+  preparePassword(password: string): string {
+    let hash: string = this.getPasswordHash(password);
     let encryptedHash = this.encrypt(hash);
     let base64EncryptedHash = forge.util.encode64(encryptedHash);
 
-    result = {
-      hash: base64EncryptedHash,
-      salt: salt
-    };
-
-    return result;
+    return base64EncryptedHash;
   }
 }

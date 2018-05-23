@@ -19,7 +19,7 @@ namespace FlatManagement.Common.Security
 			}
 
 			byte[] bytesToHash = Encoding.UTF8.GetBytes(toHash);
-			using (SHA1 sha = SHA1.Create())
+			using (SHA256 sha = SHA256.Create())
 			{
 				byte[] hashed = sha.ComputeHash(bytesToHash);
 				return Convert.ToBase64String(hashed);

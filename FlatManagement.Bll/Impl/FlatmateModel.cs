@@ -38,9 +38,16 @@ namespace FlatManagement.Bll.Impl
 
 		public ValidationResult CheckPassword(string passwordHash)
 		{
-			string decrypted = CryptoTool.Decrypt(passwordHash, Configuration);
+			if (items.Count != 1)
+			{
+				return new ValidationResult("Authentication failed");
+			}
 
-			if (items.Count != 1 || items[0].Password != decrypted)
+			string decrypted = CryptoTool.Decrypt(passwordHash, Configuration);
+			string salted = decrypted + "@" + items[0].FlatmateId;
+			string hashToCheck = CryptoTool.Hash(salted);
+
+			if (items[0].Password != hashToCheck)
 			{
 				return new ValidationResult("Authentication failed");
 			}
