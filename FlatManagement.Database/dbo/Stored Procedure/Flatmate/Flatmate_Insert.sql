@@ -10,7 +10,7 @@
 AS
 BEGIN
 	INSERT INTO dbo.Flatmate ([FlatId], [FullName], [NickName], [BirthDate], [FlatTenant], [Login], [Password])
-		VALUES (@FlatId, @FullName, @NickName, @BirthDate, @FlatTenant, @Login, @Password);
+		VALUES (@FlatId, @FullName, @NickName, @BirthDate, @FlatTenant, @Login, 'To initialise');
 	SET @FlatmateId = SCOPE_IDENTITY();
 END
 

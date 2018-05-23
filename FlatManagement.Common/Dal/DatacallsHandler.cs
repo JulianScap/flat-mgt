@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using FlatManagement.Common.Dto;
@@ -148,8 +149,21 @@ namespace FlatManagement.Common.Dal
 			{
 				foreach (Parameter parameter in parameters)
 				{
-					SqlParameter sqlParameter = sqlCommand.Parameters.AddWithValue(parameter.Name, parameter.Value);
+					SqlParameter sqlParameter = sqlCommand.CreateParameter();
+					sqlParameter.Direction = ParameterDirection.Input;
+					sqlParameter.ParameterName = parameter.Name;
 					sqlParameter.SqlDbType = GetAsSqlDbType(parameter.Type);
+					if (parameter.Value == null)
+					{
+						sqlParameter.SqlValue = DBNull.Value;
+					}
+					else
+					{
+						sqlParameter.Value = parameter.Value;
+					}
+
+					sqlCommand.Parameters.Add(sqlParameter);
+
 				}
 			}
 		}
