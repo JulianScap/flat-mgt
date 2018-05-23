@@ -28,9 +28,13 @@ export class AuthenticationService {
       fullName: flatmate.fullName,
       login: flatmate.login,
       nickName: flatmate.nickName,
-      password: cypheredPassword
+      password: undefined
     };
 
-    return this.http.put('Auth', { flat, flatmate: flatmateCloned });
+    return this.http.put('Auth', {
+      flat: flat,
+      flatmate: flatmateCloned,
+      password: cypheredPassword
+    });
   }
 }

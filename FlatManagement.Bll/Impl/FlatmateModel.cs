@@ -71,5 +71,25 @@ namespace FlatManagement.Bll.Impl
 		{
 			return ServiceLocator.Instance.GetService<IFlatmateDataAccess>();
 		}
+
+		public void PreparePassword()
+		{
+			foreach (Flatmate flatmate in items)
+			{
+				string decrypted = CryptoTool.Decrypt(flatmate.Password, Configuration);
+				string salted = decrypted + "@" + items[0].FlatmateId;
+				string passwordHash = CryptoTool.Hash(salted);
+				flatmate.Password = passwordHash;
+			}
+		}
+
+		public void SavePassword()
+		{
+			IFlatmateDataAccess dal = ServiceLocator.Instance.GetService<IFlatmateDataAccess>();
+			foreach (Flatmate flatmate in items)
+			{
+				dal.SavePassword(flatmate);
+			}
+		}
 	}
 }

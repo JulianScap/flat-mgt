@@ -34,5 +34,16 @@ namespace FlatManagement.Dal.Impl
 			object result = handler.GetOne(command, parameters, converter, true);
 			return (Flatmate)result;
 		}
+
+		public void SavePassword(Flatmate flatmate)
+		{
+			DatacallsHandler handler = new DatacallsHandler(configuration);
+			string command = GetStoredProcedureName(OperationEnum.Custom, "SavePassword");
+			Parameter[] parameters = new Parameter[2] {
+				new Parameter("FlatmateId", TypeEnum.Int32, flatmate.FlatmateId),
+				new Parameter("Password", TypeEnum.String, flatmate.Password),
+			};
+			handler.Execute(command, parameters);
+		}
 	}
 }

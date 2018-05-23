@@ -164,6 +164,7 @@
     <Build Include="dbo\Stored Procedure\Flat\Flat_GetByLogin.sql" />
     <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByFlatId.sql" />
     <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByLogin.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_SavePassword.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />

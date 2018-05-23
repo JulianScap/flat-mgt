@@ -1,11 +1,12 @@
 ﻿using FlatManagement.Common.Dto;
+using FlatManagement.Common.Validation;
 
 namespace FlatManagement.Common.Bll
 {
-	public interface IModel : IReadOnlyModel
+	public interface IModel : IReadOnlyModel, IValidable
 	{
 		void DeleteAll();
-		void PersistAll();
+		ValidationResult PersistAll();
 	}
 
 	public interface IModel<TDto> : IReadOnlyModel<TDto>, IModel

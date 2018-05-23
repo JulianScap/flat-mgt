@@ -2,6 +2,7 @@
 using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Services;
 using FlatManagement.Common.Transaction;
+using FlatManagement.Common.Validation;
 using FlatManagement.WebApi.Controllers.Base;
 using FlatManagement.WebApi.Model;
 using FlatManagement.WebApi.Security;
@@ -40,6 +41,7 @@ namespace FlatManagement.WebApi.Controllers
 		[HttpPut]
 		public object Create()
 		{
+			ValidationResult result = new ValidationResult();
 			AuthCreateRequest request = GetBody<AuthCreateRequest>();
 			IFlatModel flat = ServiceLocator.Instance.GetService<IFlatModel>();
 			IFlatmateModel flatmate = ServiceLocator.Instance.GetService<IFlatmateModel>();
@@ -47,17 +49,26 @@ namespace FlatManagement.WebApi.Controllers
 			using (TransactionScope ts = TransactionUtil.New())
 			{
 				flat.Add(request.Flat);
-				flat.PersistAll();
+				result.Add(flat.PersistAll());
 
-				request.Flatmate.FlatId = request.Flat.FlatId;
-				flatmate.Add(request.Flatmate);
-				flatmate.PersistAll();
+				if (result.IsValid)
+				{
+					request.Flatmate.FlatId = request.Flat.FlatId;
+					flatmate.Add(request.Flatmate);
+					result.Add(flatmate.PersistAll());
+					if (result.IsValid)
+					{
+						request.Flatmate.Password = request.Password;
+						flatmate.PreparePassword();
+						flatmate.SavePassword();
 
-				ts.Complete();
+						ts.Complete();
+						return Ok();
+					}
+				}
 			}
 
-
-			return request;
+			return Json(result);
 		}
 	}
 }

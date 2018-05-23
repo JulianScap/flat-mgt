@@ -8,5 +8,6 @@ namespace FlatManagement.Dal.Interface
 	{
 		IEnumerable<Flatmate> GetByFlat(Flat flat);
 		Flatmate GetByLogin(string login);
+		void SavePassword(Flatmate flatmate);
 	}
 }

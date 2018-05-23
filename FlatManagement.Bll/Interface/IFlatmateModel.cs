@@ -11,5 +11,7 @@ namespace FlatManagement.Bll.Interface
 		void GetByFlat(Flat flat);
 		void GetByLogin(string login);
 		ValidationResult CheckPassword(string passwordHash);
+		void PreparePassword();
+		void SavePassword();
 	}
 }
