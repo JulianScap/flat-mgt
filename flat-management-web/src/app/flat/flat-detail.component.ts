@@ -39,7 +39,7 @@ export class FlatDetailComponent implements OnInit {
 
     if (this.route.snapshot.paramMap.has('id')) {
       let id: number = +this.route.snapshot.paramMap.get('id');
-      this.flatService.get(id).subscribe(flat => this.initFlatForm(flat));
+      //this.flatService.get(id).subscribe(flat => this.initFlatForm(flat));
       this.flatmateService.getByFlatId(id).subscribe(flatmates => this.initFlatmateForm(flatmates));
     }
   }

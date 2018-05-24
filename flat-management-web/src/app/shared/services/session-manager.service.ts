@@ -5,7 +5,7 @@ import { IUserInfo } from "../entities/user-info";
 export class SessionManager {
     private static sessiontoken: string;
     private static userInfo: IUserInfo;
-    private static login: string;
+    static login: string;
 
     public setUser(sessiontoken: string, login: string, userInfo: IUserInfo): void {
         SessionManager.sessiontoken = sessiontoken;

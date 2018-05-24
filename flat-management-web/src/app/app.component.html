@@ -4,7 +4,7 @@
             <a class="navbar-brand">Flat Management</a>
         </li>
     </ul>
-    <button class='btn btn-outline-danger' (click)='logout()' *ngIf='isAuthenticated()'>Logout</button>
+    <button class='btn btn-outline-danger' (click)='logout()' *ngIf='isAuthenticated()'>Logout ({{ login }})</button>
 </nav>
 <div class='container' style='padding:1.5rem;'>
     <router-outlet></router-outlet>
