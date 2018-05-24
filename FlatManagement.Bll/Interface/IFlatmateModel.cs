@@ -7,7 +7,6 @@ namespace FlatManagement.Bll.Interface
 {
 	public interface IFlatmateModel : IModel<Flatmate>, IDtoList<Flatmate>
 	{
-		void GetByLogin(string login);
 		ValidationResult CheckPassword(string passwordHash);
 		void PreparePassword();
 		void SavePassword();

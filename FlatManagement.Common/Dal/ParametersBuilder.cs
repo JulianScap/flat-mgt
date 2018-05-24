@@ -1,4 +1,6 @@
-﻿using FlatManagement.Common.Dto;
+﻿using System;
+using FlatManagement.Common.Dto;
+using FlatManagement.Common.WebApi;
 
 namespace FlatManagement.Common.Dal
 {
@@ -59,6 +61,14 @@ namespace FlatManagement.Common.Dal
 			}
 
 			return result;
+		}
+
+		public static Parameter[] BuildUserParameters(UserInfo userInfo)
+		{
+			return new Parameter[1]
+			{
+				new Parameter("Login", TypeEnum.String, userInfo.Login)
+			};
 		}
 	}
 }

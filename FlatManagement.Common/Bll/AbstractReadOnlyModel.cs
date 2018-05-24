@@ -2,6 +2,7 @@
 using System.Linq;
 using FlatManagement.Common.Dal;
 using FlatManagement.Common.Dto;
+using FlatManagement.Common.WebApi;
 using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Common.Bll
@@ -29,7 +30,7 @@ namespace FlatManagement.Common.Bll
 			IEnumerable<TDto> allItems = dal.GetAll();
 
 			Clear();
-			AddRange(allItems.ToList());
+			AddRange(allItems);
 		}
 
 		public virtual void GetById(TDto item)
@@ -46,6 +47,15 @@ namespace FlatManagement.Common.Bll
 		public virtual TDto NewInstance()
 		{
 			return new TDto();
+		}
+
+		public virtual void GetForUser(UserInfo userInfo)
+		{
+			IReadOnlyDataAccess<TDto> dal = GetReadOnlyDal();
+			IEnumerable<TDto> items = dal.GetForUser(userInfo);
+
+			Clear();
+			AddRange(items);
 		}
 	}
 }

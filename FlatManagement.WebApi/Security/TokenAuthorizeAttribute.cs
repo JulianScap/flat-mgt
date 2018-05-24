@@ -1,5 +1,5 @@
 ﻿using System;
-using FlatManagement.WebApi.Model;
+using FlatManagement.Common.WebApi;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 

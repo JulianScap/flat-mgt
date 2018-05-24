@@ -1,15 +1,11 @@
-﻿using System.Transactions;
-using FlatManagement.Bll.Interface;
-using FlatManagement.Common.Bll;
+﻿using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Services;
-using FlatManagement.Common.Transaction;
+using FlatManagement.Common.WebApi;
 using FlatManagement.Dto.Entities;
 using FlatManagement.WebApi.Controllers.Base;
-using FlatManagement.WebApi.Model;
 using FlatManagement.WebApi.Security;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 
 namespace FlatManagement.WebApi.Controllers
 {
@@ -25,6 +21,17 @@ namespace FlatManagement.WebApi.Controllers
 		public virtual IFlatModel Get(int id)
 		{
 			return GetByDto(new Flat(id));
+		}
+
+		public override IFlatModel Get()
+		{
+			UserInfo userInfo = base.GetUserInfo();
+
+			IFlatModel model = ServiceLocator.Instance.GetService<IFlatModel>();
+
+			model.GetForUser(userInfo);
+
+			return model;
 		}
 	}
 }

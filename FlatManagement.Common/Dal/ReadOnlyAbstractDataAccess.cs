@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FlatManagement.Common.Dto;
+using FlatManagement.Common.WebApi;
 using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Common.Dal
@@ -41,6 +42,15 @@ namespace FlatManagement.Common.Dal
 			Parameter[] parameters = ParametersBuilder.BuildIdParameters(item);
 			object result = handler.GetOne(command, parameters, converter, true);
 			return (TDto)result;
+		}
+
+		public IEnumerable<TDto> GetForUser(UserInfo userInfo)
+		{
+			DatacallsHandler handler = new DatacallsHandler(configuration);
+			string command = GetStoredProcedureName(OperationEnum.GetForUser);
+			Parameter[] parameters = ParametersBuilder.BuildUserParameters(userInfo);
+			IEnumerable result = handler.GetMany(command, parameters, converter);
+			return result.Cast<TDto>().ToList();
 		}
 
 		protected virtual string GetStoredProcedureName(OperationEnum operation, string name = null)

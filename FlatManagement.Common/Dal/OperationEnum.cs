@@ -9,5 +9,6 @@
 		Update,
 		Insert,
 		Delete,
+		GetForUser,
 	}
 }

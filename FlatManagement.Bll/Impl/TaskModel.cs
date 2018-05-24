@@ -1,8 +1,8 @@
 ﻿using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Bll;
+using FlatManagement.Common.Dal;
 using FlatManagement.Common.Services;
 using FlatManagement.Dal.Interface;
-using FlatManagement.Common.Dal;
 using FlatManagement.Dto.Entities;
 using Microsoft.Extensions.Configuration;
 
