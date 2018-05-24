@@ -52,7 +52,7 @@ export class AuthenticationComponent implements OnInit {
   handleLogin(result: IAuthenticationResult): void {
     if (result.validationResult.isValid) {
       this.sessionManager.setUser(result.token, this.login.value, result.userInfo);
-      this.router.navigate(['/flat/list']);
+      this.router.navigate(['/home']);
     } else {
       this.sessionManager.clearSession();
       this.errorMessages = result.validationResult.messages;

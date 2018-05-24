@@ -50,20 +50,11 @@
       <hr/>
       <h4>Flat</h4>
       <div formGroupName="flatForm">
-        <div class="form-group">
-          <label for="flatName">Flat Name</label>
-          <input id="flatName" type="text" class="form-control form-control-sm" placeholder="Flat name (required)" formControlName="name"
-            [ngClass]="{'is-invalid': (name.dirty || name.touched) && !name.valid }" />
-        </div>
-        <div class="form-group">
-          <label for="address">Address</label>
-          <input id="address" type="text" class="form-control form-control-sm" placeholder="Address (required)" formControlName="address"
-            [ngClass]="{'is-invalid': (address.dirty || address.touched) && !address.valid }" />
-        </div>
+        <fm-flat-form [editMode]='true' [flatForm]='flatForm'></fm-flat-form>
       </div>
       <div class="row">
         <div class="col-1">
-          <button type="submit" class="btn btn-primary" [disabled]='!flatForm.valid'>Save</button>
+          <button type="submit" class="btn btn-primary" [disabled]='!authForm.valid'>Save</button>
         </div>
         <div class="col-1">
           <button type="button" class="btn btn-outline-danger" (click)='setDevValues_click()'>Set dev values</button>

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
+import { FlatFormComponent } from './flat/flat-form.components';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 import { AuthenticatedCorsHttpClient } from './services/authenticated-cors-http-client.service';
 import { CorsHttpClient } from './services/cors-http-client.service';
@@ -15,12 +16,14 @@ import { SessionManager } from './services/session-manager.service';
     ReactiveFormsModule
   ],
   declarations: [
-    ErrorComponent
+    ErrorComponent,
+    FlatFormComponent
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
-    ErrorComponent
+    ErrorComponent,
+    FlatFormComponent
   ],
   providers:[
     CorsHttpClient,

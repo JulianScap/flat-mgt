@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { FlatModule } from './flat/flat.module';
 import { FlatmateModule } from './flatmate/flatmate.module';
+import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
-
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
     AuthenticationModule,
     FlatModule,
     FlatmateModule,
+    HomeModule,
     AppRoutingModule
   ],
 

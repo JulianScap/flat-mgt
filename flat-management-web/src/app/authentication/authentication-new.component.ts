@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { IValidationResult } from '../shared/entities/validation-result';
 import { AuthenticationService } from './authentication.service';
+import { IFlat } from '../shared/entities/flat';
 
 @Component({
   templateUrl: './authentication-new.component.html'
@@ -11,9 +12,9 @@ export class AuthenticationNewComponent implements OnInit {
 
   errorMessages: string[];
 
+  flatForm: FormGroup;
   authForm: FormGroup;
   flatmateForm: FormGroup;
-  flatForm: FormGroup;
 
   login: AbstractControl;
   password: AbstractControl;
@@ -23,13 +24,11 @@ export class AuthenticationNewComponent implements OnInit {
   birthDate: AbstractControl;
   flatTenant: AbstractControl;
 
-  name: AbstractControl;
-  address: AbstractControl;
-
-  constructor(private fb: FormBuilder, private authService: AuthenticationService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private router: Router) {
+  }
 
   ngOnInit(): void {
-    this.flatmateForm = this.fb.group({
+    this.flatmateForm = this.formBuilder.group({
       login: ['', [Validators.required, Validators.maxLength(100)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
@@ -47,25 +46,18 @@ export class AuthenticationNewComponent implements OnInit {
     this.birthDate = this.flatmateForm.get('birthDate');
     this.flatTenant = this.flatmateForm.get('flatTenant');
 
-    this.flatForm = this.fb.group({
+    this.flatForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(200)]],
       address: ['', [Validators.required, Validators.maxLength(1000)]]
     });
 
-    this.name = this.flatForm.get('name');
-    this.address = this.flatForm.get('address');
-
-    this.authForm = this.fb.group({
+    this.authForm = this.formBuilder.group({
       flatmateForm: this.flatmateForm,
       flatForm: this.flatForm
     });
   }
 
   save(): void {
-    this.flatForm.updateValueAndValidity();
-    this.flatmateForm.updateValueAndValidity();
-    this.authForm.updateValueAndValidity();
-
     if (this.authForm.valid) {
       this.authService.createNewUserAndFlat(this.flatForm.value, this.flatmateForm.value)
         .subscribe(data => this.handleSaveResult(data));
