@@ -48,7 +48,7 @@ export class AuthenticationNewComponent implements OnInit {
 
     this.flatForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(200)]],
-      address: ['', [Validators.required, Validators.maxLength(1000)]]
+      address: ['', [Validators.maxLength(1000)]]
     });
 
     this.authForm = this.formBuilder.group({

@@ -1,14 +1,14 @@
 <div [formGroup]="flatForm">
   <div class="form-group">
     <label for="flatName">Flat Name</label>
-    <input id="flatName" type="text" class="form-control form-control-sm" placeholder="Flat name (required)" formControlName="name"
-      [ngClass]="{'is-invalid': (name.dirty || name.touched) && !name.valid, 'form-control-plaintext': !editMode }" [readOnly]='!editMode'
-    />
+    <input id="flatName" type="text" class="form-control form-control-sm fm" placeholder="Flat name (required)" formControlName="name"
+      [ngClass]="{'is-invalid': (name.dirty || name.touched) && !name.valid && editMode, 'form-control-plaintext': !editMode }"
+      [readOnly]='!editMode' />
   </div>
   <div class="form-group">
     <label for="address">Address</label>
-    <input id="address" type="text" class="form-control form-control-sm" placeholder="Address (required)" formControlName="address"
-      [ngClass]="{'is-invalid': (address.dirty || address.touched) && !address.valid, 'form-control-plaintext': !editMode }"
+    <input id="address" type="text" class="form-control form-control-sm fm" placeholder="Address" formControlName="address"
+      [ngClass]="{'is-invalid': (address.dirty || address.touched) && !address.valid && editMode, 'form-control-plaintext': !editMode }"
       [readOnly]='!editMode' />
   </div>
 </div>

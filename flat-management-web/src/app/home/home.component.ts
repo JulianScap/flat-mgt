@@ -7,13 +7,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class HomeComponent implements OnInit {
   errorMessages: string[];
   flatForm: FormGroup;
+  editFlat: boolean;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {
+    this.editFlat = false;
+  }
 
   ngOnInit() {
     this.flatForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(200)]],
-      address: ['', [Validators.required, Validators.maxLength(1000)]]
+      address: ['', [Validators.maxLength(1000)]]
     });
+  }
+
+  saveFlatEdit(): void {
+
+  }
+
+  undoFlatEdit(): void {
+
   }
 }

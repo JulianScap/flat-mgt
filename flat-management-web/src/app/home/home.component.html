@@ -1,0 +1,12 @@
+<form [formGroup]="flatForm">
+  <fm-flat-form [editMode]='editFlat' [flatForm]='flatForm'></fm-flat-form>
+  <div class="row">
+    <div class="col">
+    </div>
+    <div>
+      <button type="button" class="btn btn-secondary" (click)="editFlat = true" *ngIf="!editFlat">Edit</button>
+      <button type="button" class="btn btn-primary" (click)="saveFlatEdit()" *ngIf="editFlat">Save</button>
+      <button type="button" class="btn btn-outline-danger" (click)="undoFlatEdit()" *ngIf="editFlat">Cancel</button>
+    </div>
+  </div>
+</form>
