@@ -44,12 +44,11 @@ namespace FlatManagement.Common.Dal
 			return (TDto)result;
 		}
 
-		public IEnumerable<TDto> GetForUser(UserInfo userInfo)
+		public IEnumerable<TDto> GetForUser()
 		{
 			DatacallsHandler handler = new DatacallsHandler(configuration);
 			string command = GetStoredProcedureName(OperationEnum.GetForUser);
-			Parameter[] parameters = ParametersBuilder.BuildUserParameters(userInfo);
-			IEnumerable result = handler.GetMany(command, parameters, converter);
+			IEnumerable result = handler.GetMany(command, null, converter);
 			return result.Cast<TDto>().ToList();
 		}
 

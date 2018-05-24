@@ -1,7 +1,8 @@
 ﻿CREATE FUNCTION dbo.[Flatmate_Exists]
 (
 	@FlatmateId int,
-	@Login nvarchar(100)
+	@Login nvarchar(100),
+	@UserLogin nvarchar(100)
 )
 RETURNS bit
 AS

@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[Task_Delete]
-	@TaskId int
+	@TaskId int,
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	DELETE FROM

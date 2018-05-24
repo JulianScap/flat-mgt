@@ -111,6 +111,19 @@ namespace FlatManagement.Common.Services
 			}
 		}
 
+		public void AddService<T>(Func<object> function)
+		{
+			EnsureInitialised();
+			services.TryAdd(typeof(T), new Service(function));
+		}
+
+		public void AddService<T>(T instance)
+		{
+			EnsureInitialised();
+			services.TryAdd(typeof(T), new Service(instance));
+		}
+
+
 		public T GetService<T>()
 		{
 			EnsureInitialised();
@@ -128,6 +141,9 @@ namespace FlatManagement.Common.Services
 					break;
 				case ServiceMode.Singleton:
 					result = (T)service.Instance;
+					break;
+				case ServiceMode.Function:
+					result = (T)service.Function();
 					break;
 				default:
 					throw new ServiceNotFoundException($"Invalid service mode for {typeof(T).FullName}");

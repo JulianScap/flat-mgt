@@ -10,5 +10,6 @@ namespace FlatManagement.Bll.Interface
 		ValidationResult CheckPassword(string passwordHash);
 		void PreparePassword();
 		void SavePassword();
+		void GetByLogin(string login);
 	}
 }

@@ -49,10 +49,10 @@ namespace FlatManagement.Common.Bll
 			return new TDto();
 		}
 
-		public virtual void GetForUser(UserInfo userInfo)
+		public virtual void GetForUser()
 		{
 			IReadOnlyDataAccess<TDto> dal = GetReadOnlyDal();
-			IEnumerable<TDto> items = dal.GetForUser(userInfo);
+			IEnumerable<TDto> items = dal.GetForUser();
 
 			Clear();
 			AddRange(items);

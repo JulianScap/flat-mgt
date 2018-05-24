@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Task_GetAll]
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	SELECT

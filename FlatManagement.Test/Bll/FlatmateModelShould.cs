@@ -13,7 +13,7 @@ namespace FlatManagement.Test.Bll
 		{
 			IFlatmateModel fm = ServiceLocator.Instance.GetService<IFlatmateModel>();
 
-			fm.GetForUser(new UserInfo() { Login = "Julian" });
+			fm.GetForUser();
 
 			Assert.NotEmpty(fm);
 		}

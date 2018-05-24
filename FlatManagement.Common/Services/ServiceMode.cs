@@ -4,5 +4,6 @@
 	{
 		NewInstance,
 		Singleton,
+		Function
 	}
 }

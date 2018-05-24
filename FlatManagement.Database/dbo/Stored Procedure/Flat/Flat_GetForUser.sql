@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Flat_GetForUser]
-	@Login nvarchar(100)
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	SELECT
@@ -11,7 +11,7 @@ BEGIN
 	JOIN dbo.Flatmate fm
 		ON fm.FlatId = f.FlatId
 	WHERE
-		fm.[Login] = @Login
+		fm.[Login] = @UserLogin
 END
 
 GO

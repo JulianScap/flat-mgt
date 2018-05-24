@@ -4,6 +4,7 @@
 	@DateStart date,
 	@Description nvarchar(1000),
 	@PeriodTypeId int,
+	@UserLogin nvarchar(100),
 	@TaskId int output
 AS
 BEGIN

@@ -3,7 +3,6 @@ using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Services;
 using FlatManagement.Common.Transaction;
 using FlatManagement.Common.Validation;
-using FlatManagement.Common.WebApi;
 using FlatManagement.WebApi.Controllers.Base;
 using FlatManagement.WebApi.Model;
 using FlatManagement.WebApi.Security;
@@ -24,7 +23,7 @@ namespace FlatManagement.WebApi.Controllers
 		{
 			var loginRequest = GetBody<LoginRequest>();
 			IFlatmateModel flatmate = ServiceLocator.Instance.GetService<IFlatmateModel>();
-			flatmate.GetForUser(new UserInfo() { Login = loginRequest.Login });
+			flatmate.GetByLogin(loginRequest.Login);
 
 			LoginResult result = new LoginResult()
 			{

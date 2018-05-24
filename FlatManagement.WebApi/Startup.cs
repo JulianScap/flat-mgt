@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FlatManagement.Common.Bll;
 using FlatManagement.Common.Extensions;
 using FlatManagement.Common.Services;
+using FlatManagement.Common.WebApi;
 using FlatManagement.WebApi.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,14 +40,17 @@ namespace FlatManagement.WebApi
 						.WithOrigins(origins)
 						.AllowCredentials())
 				);
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddMvc();
 			services.Add(new ServiceDescriptor(typeof(IConfiguration), Configuration));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
 		{
+			ServiceLocator.Instance.AddService<UserInfo>(() => GetUserInfo(svp));
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
@@ -59,6 +65,12 @@ namespace FlatManagement.WebApi
 			app.UseStaticFiles();
 
 			app.UseMvc();
+		}
+
+		private UserInfo GetUserInfo(IServiceProvider svp)
+		{
+			IHttpContextAccessor accessor = svp.GetService<IHttpContextAccessor>();
+			return accessor.HttpContext.Items["token"] as UserInfo;
 		}
 	}
 }

@@ -167,6 +167,7 @@
     <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_SavePassword.sql" />
     <Build Include="dbo\Functions\Flatmate\Flatmate_Exists.sql" />
     <Build Include="dbo\Stored Procedure\Flat\Flat_GetForUser.sql" />
+    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByLogin.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OtherScripts\DropAll.sql" />

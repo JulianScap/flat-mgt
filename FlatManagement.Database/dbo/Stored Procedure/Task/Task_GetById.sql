@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[Task_GetById]
-	@TaskId int
+	@TaskId int,
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	SELECT

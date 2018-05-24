@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[Flatmate_SavePassword]
 	@FlatmateId int,
-	@Password nvarchar(100)
+	@Password nvarchar(100),
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	UPDATE dbo.Flatmate

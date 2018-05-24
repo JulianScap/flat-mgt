@@ -1,6 +1,5 @@
 ﻿using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Services;
-using FlatManagement.Common.WebApi;
 using FlatManagement.Dto.Entities;
 using FlatManagement.WebApi.Controllers.Base;
 using FlatManagement.WebApi.Security;
@@ -25,11 +24,9 @@ namespace FlatManagement.WebApi.Controllers
 
 		public override IFlatModel Get()
 		{
-			UserInfo userInfo = base.GetUserInfo();
-
 			IFlatModel model = ServiceLocator.Instance.GetService<IFlatModel>();
 
-			model.GetForUser(userInfo);
+			model.GetForUser();
 
 			return model;
 		}

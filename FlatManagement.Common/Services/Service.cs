@@ -10,9 +10,22 @@ namespace FlatManagement.Common.Services
 			this.Mode = mode;
 		}
 
+		public Service(Func<object> function)
+		{
+			this.Function = function;
+			Mode = ServiceMode.Function;
+		}
+
+		public Service(object instance)
+		{
+			this.Instance = instance;
+			Mode = ServiceMode.Singleton;
+		}
+
 		public Type ImplementationType { get; set; }
 		public ServiceMode Mode { get; set; }
 		public object Instance { get; set; }
+		public Func<object> Function { get; set; }
 
 		internal void SetMode(string modeAsString)
 		{

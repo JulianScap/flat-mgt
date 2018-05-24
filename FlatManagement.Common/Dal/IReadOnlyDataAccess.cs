@@ -11,6 +11,6 @@ namespace FlatManagement.Common.Dal
 	{
 		IEnumerable<TDto> GetAll();
 		TDto GetById(TDto item);
-		IEnumerable<TDto> GetForUser(UserInfo userInfo);
+		IEnumerable<TDto> GetForUser();
 	}
 }
