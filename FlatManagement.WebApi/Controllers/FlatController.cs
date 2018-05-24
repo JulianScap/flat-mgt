@@ -26,38 +26,5 @@ namespace FlatManagement.WebApi.Controllers
 		{
 			return GetByDto(new Flat(id));
 		}
-
-		public override IFlatModel Get()
-		{
-			IFlatModel model = ServiceLocator.Instance.GetService<IFlatModel>();
-
-			UserInfo userInfo = base.GetUserInfo();
-
-			model.GetByLogin(userInfo.Login);
-
-			return model;
-		}
-
-		public override IFlatModel PersistAll()
-		{
-			string content = base.GetBodyAsString();
-			SaveFlatRequest sfr = JsonConvert.DeserializeObject<SaveFlatRequest>(content);
-
-			IFlatmateModel flatmates = ModelSerialiser.Instance.Deserialize<IFlatmateModel>(sfr.FlatmatesJson);
-			IFlatModel flats = ModelSerialiser.Instance.Deserialize<IFlatModel>(sfr.FlatsJson);
-
-			using (TransactionScope scope = TransactionUtil.New())
-			{
-				flats.PersistAll();
-				foreach (Flatmate flatmate in flatmates)
-				{
-					flatmate.FlatId = flats[0].FlatId;
-				}
-				flatmates.PersistAll();
-				scope.Complete();
-			}
-
-			return flats;
-		}
 	}
 }

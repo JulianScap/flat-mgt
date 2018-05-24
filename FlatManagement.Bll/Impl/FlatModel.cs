@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FlatManagement.Bll.Interface;
+﻿using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dal;
 using FlatManagement.Common.Services;
@@ -27,16 +26,6 @@ namespace FlatManagement.Bll.Impl
 			return ServiceLocator.Instance.GetService<IFlatDataAccess>();
 		}
 
-		public void GetByLogin(string login)
-		{
-			IFlatDataAccess dal = ServiceLocator.Instance.GetService<IFlatDataAccess>();
-
-			IEnumerable<Flat> flats = dal.GetByLogin(login);
-
-			items.Clear();
-			items.AddRange(flats);
-		}
-
 		public override ValidationResult Validate()
 		{
 			ValidationResult result = base.Validate();
@@ -48,7 +37,5 @@ namespace FlatManagement.Bll.Impl
 
 			return result;
 		}
-
-
 	}
 }

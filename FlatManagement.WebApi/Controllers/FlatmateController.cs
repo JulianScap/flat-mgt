@@ -21,15 +21,5 @@ namespace FlatManagement.WebApi.Controllers
 		{
 			return GetByDto(new Flatmate(id));
 		}
-
-		[HttpGet("byFlat/{flatId}")]
-		public virtual IFlatmateModel GetByFlat(int flatId)
-		{
-			IFlatmateModel model = ServiceLocator.Instance.GetService<IFlatmateModel>();
-
-			model.GetByFlatId(flatId);
-
-			return model;
-		}
 	}
 }

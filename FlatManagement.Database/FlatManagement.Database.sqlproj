@@ -163,8 +163,6 @@
     <Build Include="dbo\Stored Procedure\Task\Task_GetById.sql" />
     <Build Include="dbo\Stored Procedure\Task\Task_Insert.sql" />
     <Build Include="dbo\Stored Procedure\Task\Task_Update.sql" />
-    <Build Include="dbo\Stored Procedure\Flat\Flat_GetByLogin.sql" />
-    <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByFlatId.sql" />
     <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_GetByLogin.sql" />
     <Build Include="dbo\Stored Procedure\Flatmate\Flatmate_SavePassword.sql" />
     <Build Include="dbo\Functions\Flatmate\Flatmate_Exists.sql" />

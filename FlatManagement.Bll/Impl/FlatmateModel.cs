@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FlatManagement.Bll.Interface;
+﻿using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dal;
 using FlatManagement.Common.Security;
@@ -21,19 +20,6 @@ namespace FlatManagement.Bll.Impl
 		public FlatmateModel(IConfiguration configuration) : base(configuration)
 		{
 
-		}
-
-		public void GetByFlatId(int flatId)
-		{
-			GetByFlat(new Flat(flatId));
-		}
-
-		public void GetByFlat(Flat flat)
-		{
-			IFlatmateDataAccess dal = ServiceLocator.Instance.GetService<IFlatmateDataAccess>();
-			IEnumerable<Flatmate> flatmates = dal.GetByFlat(flat);
-			items.Clear();
-			items.AddRange(flatmates);
 		}
 
 		public ValidationResult CheckPassword(string passwordHash)

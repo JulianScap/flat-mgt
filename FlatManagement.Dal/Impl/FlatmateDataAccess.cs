@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using FlatManagement.Common.Dal;
+﻿using FlatManagement.Common.Dal;
 using FlatManagement.Common.Dto;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
@@ -25,15 +22,6 @@ namespace FlatManagement.Dal.Impl
 			};
 			bool result = handler.GetBool(command, parameters);
 			return result;
-		}
-
-		public IEnumerable<Flatmate> GetByFlat(Flat flat)
-		{
-			DatacallsHandler handler = new DatacallsHandler(configuration);
-			string command = GetStoredProcedureName(OperationEnum.Custom, "GetByFlatId");
-			Parameter[] parameters = ParametersBuilder.BuildIdParameters(flat);
-			IEnumerable result = handler.GetMany(command, parameters, converter);
-			return result.Cast<Flatmate>().ToList();
 		}
 
 		public Flatmate GetByLogin(string login)
