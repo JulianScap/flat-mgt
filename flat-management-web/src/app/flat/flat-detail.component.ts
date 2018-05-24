@@ -104,7 +104,7 @@ export class FlatDetailComponent implements OnInit {
 
     newFlat = this.flatForm.value;
 
-    this.flatService.save([newFlat], this.flatmates.value)
+    this.flatService.saveNew([newFlat], this.flatmates.value)
       .subscribe(() => this.router.navigate(['/flat/list']),
         error => this.errorMessages = [error]);
   }

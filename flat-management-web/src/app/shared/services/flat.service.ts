@@ -10,7 +10,7 @@ export class FlatService {
   constructor(private http: AuthenticatedCorsHttpClient,
     private sessionManager: SessionManager) { }
 
-  get(): Observable<IFlat[]> {
+  getAll(): Observable<IFlat[]> {
     return this.http.get('Flat');
   }
 
@@ -18,12 +18,16 @@ export class FlatService {
     return this.http.delete('Flat', JSON.stringify(flats));
   }
 
-  save(flats: IFlat[], flatmates?: IFlatmate[]): Observable<Object> {
+  saveNew(flats: IFlat[], flatmates?: IFlatmate[]): Observable<Object> {
     let flatsJson: string = JSON.stringify(flats);
     let flatmatesJson: string = JSON.stringify(flatmates);
 
     let body = JSON.stringify({ flatsJson, flatmatesJson });
 
     return this.http.post('Flat', body);
+  }
+
+  save(flats: IFlat[]): Observable<Object> {
+    return this.http.post('Flat', flats);
   }
 }

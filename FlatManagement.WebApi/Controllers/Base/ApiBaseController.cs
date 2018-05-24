@@ -1,5 +1,6 @@
 ﻿using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dto;
+using FlatManagement.Common.Validation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -15,11 +16,18 @@ namespace FlatManagement.WebApi.Controllers.Base
 
 		[HttpPut]
 		[HttpPost]
-		public virtual TModel PersistAll()
+		public virtual object PersistAll()
 		{
 			TModel model = DeserialiseBody();
-			model.PersistAll();
-			return model;
+			ValidationResult result = model.PersistAll();
+			if (result.IsValid)
+			{
+				return model;
+			}
+			else
+			{
+				return result;
+			}
 		}
 
 		[HttpDelete]

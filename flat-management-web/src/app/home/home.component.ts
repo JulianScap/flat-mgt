@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadFlat(): Observable<IFlat[]> {
-    let result: Observable<IFlat[]> = this.flatService.get();
+    let result: Observable<IFlat[]> = this.flatService.getAll();
     result.subscribe(flats => this.initFlatForm(flats[0]));
     return result;
   }
@@ -46,7 +46,11 @@ export class HomeComponent implements OnInit {
   }
 
   saveFlatEdit(): void {
-    this.editFlat = false;
+    this.flatService.save([this.flatForm.value])
+      .subscribe(
+        null,
+        null,
+        () => this.editFlat = false)
   }
 
   undoFlatEdit(): void {
