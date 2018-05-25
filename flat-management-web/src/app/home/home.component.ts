@@ -2,40 +2,33 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { IFlat } from '../shared/entities/flat';
 import { IFlatmate } from '../shared/entities/flatmate';
 import { IMessage } from '../shared/entities/message';
-import { FlatService } from '../shared/services/flat.service';
 import { FlatmateService } from '../shared/services/flatmate.service';
 
 @Component({
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-  messages: IMessage[];
-
   homeForm: FormGroup;
   flatForm: FormGroup;
   flatmateForm: FormArray;
 
-  editFlat: boolean;
   editFlatmates: boolean;
+  messages: IMessage[];
 
   constructor(private formBuilder: FormBuilder,
-    private flatService: FlatService,
     private flatmateService: FlatmateService
   ) {
-    this.editFlat = false;
     this.editFlatmates = false;
+
+  }
+
+  onMessage(messages: IMessage[]) {
+    this.messages = messages;
   }
 
   ngOnInit() {
-    this.flatForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(200)]],
-      address: ['', [Validators.maxLength(1000)]],
-      flatId: 0
-    });
-
     this.flatmateForm = this.formBuilder.array([]);
 
     this.homeForm = this.formBuilder.group(
@@ -44,7 +37,6 @@ export class HomeComponent implements OnInit {
         flatmateForm: this.flatmateForm
       });
 
-    this.loadFlat();
     this.loadFlatmate();
   }
 
@@ -68,7 +60,7 @@ export class HomeComponent implements OnInit {
 
   buildFlatmate(flatmate?: IFlatmate): FormGroup {
     let dp = new DatePipe(navigator.language);
-    
+
     return this.formBuilder.group({
       fullName: [flatmate ? flatmate.fullName : '', [Validators.required, Validators.maxLength(500)]],
       nickName: [flatmate ? flatmate.nickName : '', Validators.maxLength(100)],
@@ -80,48 +72,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  saveFlatmatesEdit():void{
+  saveFlatmatesEdit(): void {
 
   }
 
-  undoFlatmatesEdit():void{
+  undoFlatmatesEdit(): void {
     this.editFlatmates = false;
     this.loadFlatmate();
   }
   //#endregion
 
-  //#region Flat
-  loadFlat(): Observable<IFlat[]> {
-    let result: Observable<IFlat[]> = this.flatService.getAll();
-    result.subscribe(flats => this.initFlatForm(flats[0]));
-    return result;
-  }
-
-  initFlatForm(flat: IFlat): void {
-    this.flatForm.setValue({
-      name: flat.name,
-      address: flat.address,
-      flatId: flat.flatId
-    });
-  }
-
-  saveFlatEdit(): void {
-    this.flatService.save([this.flatForm.value])
-      .subscribe(
-        data => {
-          if (data[0].validationResult.isValid) {
-            this.messages = [{ isError: false, text: "Flat successfully updated" }];
-          } else {
-            this.messages = data[0].validationResult.messages;
-          }
-        },
-        () => this.messages = [{ isError: true, text: "A server error occured" }],
-        () => this.editFlat = false)
-  }
-
-  undoFlatEdit(): void {
-    this.editFlat = false;
-    this.loadFlat();
-  }
-  //#endregion
 }

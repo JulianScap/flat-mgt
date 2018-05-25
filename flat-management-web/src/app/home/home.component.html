@@ -1,18 +1,7 @@
 <fm-message [messages]='messages'></fm-message>
 <form [formGroup]="homeForm">
   <h3>Flat details</h3>
-  <form [formGroup]="flatForm">
-    <fm-flat-form [editMode]='editFlat' [flatForm]='flatForm'></fm-flat-form>
-    <div class="row mb-3">
-      <div class="col">
-      </div>
-      <div>
-        <button type="button" class="btn btn-secondary" (click)="editFlat = true" *ngIf="!editFlat">Edit</button>
-        <button type="button" class="btn btn-primary" (click)="saveFlatEdit()" [disabled]="!flatForm.valid" *ngIf="editFlat">Save</button>
-        <button type="button" class="btn btn-outline-danger" (click)="undoFlatEdit()" *ngIf="editFlat">Cancel</button>
-      </div>
-    </div>
-  </form>
+  <fm-flat-form (messageOut)="onMessage($event)" [loadUserData]="true" [showControls]="true"></fm-flat-form>
   <hr />
   <h3>Flatmates details</h3>
   <form [formGroup]="flatmateForm">

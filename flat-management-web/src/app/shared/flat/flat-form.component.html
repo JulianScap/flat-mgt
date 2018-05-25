@@ -1,4 +1,4 @@
-<div [formGroup]="flatForm">
+<form [formGroup]="flatForm">
   <div class="form-group">
     <label for="flatName">Flat Name</label>
     <input id="flatName" type="text" class="form-control form-control-sm fm" placeholder="Flat name (required)" formControlName="name"
@@ -7,8 +7,16 @@
   </div>
   <div class="form-group">
     <label for="address">Address</label>
-    <input id="address" type="text" class="form-control form-control-sm fm" placeholder="Address" formControlName="address"
-      [ngClass]="{'is-invalid': (address.dirty || address.touched) && !address.valid && editMode, 'form-control-plaintext': !editMode }"
+    <input id="address" type="text" class="form-control form-control-sm fm" placeholder="Address" formControlName="address" [ngClass]="{'is-invalid': (address.dirty || address.touched) && !address.valid && editMode, 'form-control-plaintext': !editMode }"
       [readOnly]='!editMode' />
   </div>
-</div>
+  <div class="row mb-3" *ngIf="showControls">
+    <div class="col">
+    </div>
+    <div>
+      <button type="button" class="btn btn-secondary" (click)="editMode = true" *ngIf="!editMode">Edit</button>
+      <button type="button" class="btn btn-primary" (click)="saveFlatEdit()" [disabled]="!flatForm.valid" *ngIf="editMode">Save</button>
+      <button type="button" class="btn btn-outline-danger" (click)="undoFlatEdit()" *ngIf="editMode">Cancel</button>
+    </div>
+  </div>
+</form>
