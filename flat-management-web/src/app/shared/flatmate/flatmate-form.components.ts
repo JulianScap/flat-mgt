@@ -15,18 +15,20 @@ export class FlatmateFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  buildFlatmate(flatTenant: boolean): FormGroup {
+  buildFlatmate(): FormGroup {
     return this.formBuilder.group({
-      flatmateId: 0,
-      fullName: ['', Validators.required],
-      nickName: ['', Validators.required],
-      birthDate: ['', Validators.required],
-      flatTenant: flatTenant
+      fullName: ['', [Validators.required, Validators.maxLength(500)]],
+      nickName: ['', Validators.maxLength(100)],
+      birthDate: '',
+      flatTenant:  '',
+      login: ['', [Validators.required, Validators.maxLength(100)]],
+      flatId: 0,
+      flatmateId: 0
     });
   }
 
   addFlatmate(): void {
-    this.flatmateForm.push(this.buildFlatmate(false));
+    this.flatmateForm.push(this.buildFlatmate());
   }
 
   removeFlatmate(index: number): void {

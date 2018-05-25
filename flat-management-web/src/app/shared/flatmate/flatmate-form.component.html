@@ -15,18 +15,18 @@
       </div>
       <div class="input-group mb-1 col-2">
         <input type="text" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Nickname (required)" formControlName="nickName"
-          [ngClass]="{'is-invalid': (flatmate.get('nickName').dirty || flatmate.get('nickName').touched) && !flatmate.get('nickName').valid, 'form-control-plaintext': !editMode  }"
+          [ngClass]="{'is-invalid': (flatmate.get('nickName').dirty || flatmate.get('nickName').touched) && !flatmate.get('nickName').valid, 'form-control-plaintext': !editMode }"
         />
       </div>
       <div class="input-group mb-1 col-2">
         <input type="date" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Date of birth (required)"
-          formControlName="birthDate" [ngClass]="{'is-invalid': (flatmate.get('birthDate').dirty || flatmate.get('birthDate').touched) && !flatmate.get('birthDate').valid, 'form-control-plaintext': !editMode  }"
+          formControlName="birthDate" [ngClass]="{'is-invalid': (flatmate.get('birthDate').dirty || flatmate.get('birthDate').touched) && !flatmate.get('birthDate').valid, 'form-control-plaintext': !editMode }"
         />
       </div>
       <div class="input-group mb-1 col-2">
-        <!-- <input type="text" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Login (required)" formControlName="login"
-          [ngClass]="{'is-invalid': (flatmate.get('login').dirty || flatmate.get('login').touched) && !flatmate.get('login').valid, 'form-control-plaintext': !editMode  }"
-        /> -->
+        <input type="text" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Login (required)" formControlName="login"
+          [ngClass]="{ 'is-invalid': (flatmate.get('login').dirty || flatmate.get('login').touched) && !flatmate.get('login').valid,'form-control-plaintext': !editMode }"
+        />
       </div>
       <div class="input-group mb-1 col">
         <div class="btn-group-toggle" data-toggle="buttons">
