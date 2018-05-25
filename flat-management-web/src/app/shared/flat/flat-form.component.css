@@ -1,4 +1,0 @@
-.form-control.fm:disabled, .form-control.fm[readonly] {
-  background-color: inherit;
-  opacity: 1;
-}

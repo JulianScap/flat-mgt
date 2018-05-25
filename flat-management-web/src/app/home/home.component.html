@@ -1,14 +1,29 @@
 <h3>Flat details</h3>
 <fm-message [messages]='messages'></fm-message>
-<form [formGroup]="flatForm">
-  <fm-flat-form [editMode]='editFlat' [flatForm]='flatForm'></fm-flat-form>
-  <div class="row">
-    <div class="col">
+<form [formGroup]="homeForm">
+
+  <form [formGroup]="flatForm">
+    <fm-flat-form [editMode]='editFlat' [flatForm]='flatForm'></fm-flat-form>
+    <div class="row">
+      <div class="col">
+      </div>
+      <div>
+        <button type="button" class="btn btn-secondary" (click)="editFlat = true" *ngIf="!editFlat">Edit</button>
+        <button type="button" class="btn btn-primary" (click)="saveFlatEdit()" [disabled]="!flatForm.valid" *ngIf="editFlat">Save</button>
+        <button type="button" class="btn btn-outline-danger" (click)="undoFlatEdit()" *ngIf="editFlat">Cancel</button>
+      </div>
     </div>
-    <div>
-      <button type="button" class="btn btn-secondary" (click)="editFlat = true" *ngIf="!editFlat">Edit</button>
-      <button type="button" class="btn btn-primary" (click)="saveFlatEdit()" [disabled]="!flatForm.valid" *ngIf="editFlat">Save</button>
-      <button type="button" class="btn btn-outline-danger" (click)="undoFlatEdit()" *ngIf="editFlat">Cancel</button>
+  </form>
+  <form [formGroup]="flatmateForm">
+    <div *ngIf="flatmateForm.controls.length != 0">
+      <div class="row">
+        <div class="col-3">Fullname</div>
+        <div class="col-3">Nickname</div>
+        <div class="col-3">Date of birth</div>
+        <div class="col-2"></div>
+        <div class="col-1"></div>
+      </div>
+      <fm-flatmate-form [editMode]="editFlatmates" [flatmateForm]="flatmateForm" [parentForm]="homeForm"></fm-flatmate-form>
     </div>
-  </div>
+  </form>
 </form>

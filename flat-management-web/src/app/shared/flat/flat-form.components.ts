@@ -3,8 +3,7 @@ import { AbstractControl, FormGroup } from "@angular/forms";
 
 @Component({
   selector: 'fm-flat-form',
-  templateUrl: './flat-form.component.html',
-  styleUrls: ['./flat-form.component.css']
+  templateUrl: './flat-form.component.html'
 })
 export class FlatFormComponent implements OnInit {
   @Input() flatForm: FormGroup;
