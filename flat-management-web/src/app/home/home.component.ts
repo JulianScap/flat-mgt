@@ -49,10 +49,10 @@ export class HomeComponent implements OnInit {
     this.flatService.save([this.flatForm.value])
       .subscribe(
         data => {
-          if (data.validationResult.isValid) {
+          if (data[0].validationResult.isValid) {
             this.messages = [{ isError: false, text: "Flat successfully updated" }];
           } else {
-            this.messages = data.validationResult.messages;
+            this.messages = data[0].validationResult.messages;
           }
         },
         () => this.messages = [{ isError: true, text: "A server error occured" }],
