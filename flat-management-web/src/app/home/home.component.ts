@@ -70,11 +70,11 @@ export class HomeComponent implements OnInit {
     let dp = new DatePipe(navigator.language);
     
     return this.formBuilder.group({
-      fullName: [flatmate ? flatmate.fullName : '', Validators.required],
-      nickName: [flatmate ? flatmate.nickName : '', Validators.required],
-      birthDate: [flatmate ? dp.transform(flatmate.birthDate, 'y-MM-dd') : '', Validators.required],
+      fullName: [flatmate ? flatmate.fullName : '', [Validators.required, Validators.maxLength(500)]],
+      nickName: [flatmate ? flatmate.nickName : '', Validators.maxLength(100)],
+      birthDate: flatmate ? dp.transform(flatmate.birthDate, 'y-MM-dd') : '',
       flatTenant: flatmate ? flatmate.flatTenant : '',
-      login: [flatmate ? flatmate.login : '', Validators.required],
+      login: [flatmate ? flatmate.login : '', [Validators.required, Validators.maxLength(100)]],
       flatId: flatmate ? flatmate.flatId : 0,
       flatmateId: flatmate ? flatmate.flatmateId : 0
     });

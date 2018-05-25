@@ -1,4 +1,11 @@
 <div [formGroup]="parentForm">
+  <div class="row">
+    <div class="col-3">Fullname</div>
+    <div class="col-2">Nickname</div>
+    <div class="col-2">Date of birth</div>
+    <div class="col-2">Login</div>
+    <div class="col"></div>
+  </div>
   <div formArrayName="flatmateForm" *ngFor="let flatmate of flatmateForm.controls; let i = index">
     <div class="row form-group" [formGroupName]="i">
       <div class="input-group mb-1 col-3">
@@ -17,9 +24,9 @@
         />
       </div>
       <div class="input-group mb-1 col-2">
-        <input type="text" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Login (required)" formControlName="login"
+        <!-- <input type="text" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Login (required)" formControlName="login"
           [ngClass]="{'is-invalid': (flatmate.get('login').dirty || flatmate.get('login').touched) && !flatmate.get('login').valid, 'form-control-plaintext': !editMode  }"
-        />
+        /> -->
       </div>
       <div class="input-group mb-1 col">
         <div class="btn-group-toggle" data-toggle="buttons">
@@ -32,8 +39,8 @@
         </div>
         <button class="btn btn-sm ml-2" *ngIf="!editMode">Reset password</button>
         <div class="btn-group ml-2" role="group" *ngIf="editMode">
-          <button type="button" class="btn btn-warning btn-sm" (click)="addFlatmate()" *ngIf="i == 0">+</button>
-          <button type="button" class="btn btn-warning btn-sm" (click)="removeFlatmate(i)" *ngIf="i != 0">-</button>
+          <button type="button" class="btn btn-warning btn-sm fm-add-remove" (click)="addFlatmate()" *ngIf="i == 0">+</button>
+          <button type="button" class="btn btn-warning btn-sm fm-add-remove" (click)="removeFlatmate(i)" *ngIf="i != 0">-</button>
         </div>
       </div>
     </div>
