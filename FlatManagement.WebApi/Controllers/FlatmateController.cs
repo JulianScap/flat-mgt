@@ -21,5 +21,12 @@ namespace FlatManagement.WebApi.Controllers
 		{
 			return GetByDto(new Flatmate(id));
 		}
+
+		public override IFlatmateModel Get()
+		{
+			IFlatmateModel ipt = ServiceLocator.Instance.GetService<IFlatmateModel>();
+			ipt.GetForUser();
+			return ipt;
+		}
 	}
 }

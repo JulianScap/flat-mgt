@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { AbstractControl, FormGroup, FormBuilder, Validators, FormArray } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'fm-flatmate-form',

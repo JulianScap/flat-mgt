@@ -1,5 +1,5 @@
 <div [formGroup]="parentForm">
-  <div formArrayName="flatmates" *ngFor="let flatmate of flatmateForm.controls; let i = index">
+  <div formArrayName="flatmateForm" *ngFor="let flatmate of flatmateForm.controls; let i = index">
     <div class="row form-group" [formGroupName]="i">
       <div class="input-group mb-1 col-3">
         <input type="text" class="form-control" placeholder="Full name (required)" formControlName="fullName" [ngClass]="{'is-invalid': (flatmate.get('fullName').dirty || flatmate.get('fullName').touched) && !flatmate.get('fullName').valid }"

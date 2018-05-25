@@ -1,11 +1,12 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { IFlat } from '../shared/entities/flat';
+import { IFlatmate } from '../shared/entities/flatmate';
 import { IMessage } from '../shared/entities/message';
 import { FlatService } from '../shared/services/flat.service';
 import { FlatmateService } from '../shared/services/flatmate.service';
-import { IFlatmate } from '../shared/entities/flatmate';
 
 @Component({
   templateUrl: './home.component.html'
@@ -66,10 +67,12 @@ export class HomeComponent implements OnInit {
   }
 
   buildFlatmate(flatmate?: IFlatmate): FormGroup {
+    let dp = new DatePipe(navigator.language);
+    
     return this.formBuilder.group({
       fullName: [flatmate ? flatmate.fullName : '', Validators.required],
       nickName: [flatmate ? flatmate.nickName : '', Validators.required],
-      birthDate: [flatmate ? flatmate.birthDate : '', Validators.required],
+      birthDate: [flatmate ? dp.transform(flatmate.birthDate, 'y-MM-dd') : '', Validators.required],
       flatTenant: flatmate ? flatmate.flatTenant : '',
       login: [flatmate ? flatmate.login : '', Validators.required],
       flatId: flatmate ? flatmate.flatId : 0,

@@ -4,7 +4,7 @@
 
   <form [formGroup]="flatForm">
     <fm-flat-form [editMode]='editFlat' [flatForm]='flatForm'></fm-flat-form>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col">
       </div>
       <div>
@@ -15,7 +15,7 @@
     </div>
   </form>
   <form [formGroup]="flatmateForm">
-    <div *ngIf="flatmateForm.controls.length != 0">
+    <div *ngIf="flatmateForm.length != 0">
       <div class="row">
         <div class="col-3">Fullname</div>
         <div class="col-3">Nickname</div>
