@@ -2,3 +2,7 @@
   background-color: inherit;
   opacity: 1;
 }
+
+label.btn.btn-sm.fm{
+  height: 33px;
+}
