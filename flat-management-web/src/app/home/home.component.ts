@@ -79,6 +79,15 @@ export class HomeComponent implements OnInit {
       flatmateId: flatmate ? flatmate.flatmateId : 0
     });
   }
+
+  saveFlatmatesEdit():void{
+
+  }
+
+  undoFlatmatesEdit():void{
+    this.editFlatmates = false;
+    this.loadFlatmate();
+  }
   //#endregion
 
   //#region Flat

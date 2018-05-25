@@ -2,28 +2,31 @@
   <div formArrayName="flatmateForm" *ngFor="let flatmate of flatmateForm.controls; let i = index">
     <div class="row form-group" [formGroupName]="i">
       <div class="input-group mb-1 col-3">
-        <input type="text" class="form-control" placeholder="Full name (required)" formControlName="fullName" [ngClass]="{'is-invalid': (flatmate.get('fullName').dirty || flatmate.get('fullName').touched) && !flatmate.get('fullName').valid }"
+        <input type="text" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Full name (required)" formControlName="fullName"
+          [ngClass]="{'is-invalid': (flatmate.get('fullName').dirty || flatmate.get('fullName').touched) && !flatmate.get('fullName').valid, 'form-control-plaintext': !editMode }"
         />
       </div>
       <div class="input-group mb-1 col-3">
-        <input type="text" class="form-control" placeholder="Nickname (required)" formControlName="nickName" [ngClass]="{'is-invalid': (flatmate.get('nickName').dirty || flatmate.get('nickName').touched) && !flatmate.get('nickName').valid }"
+        <input type="text" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Nickname (required)" formControlName="nickName"
+          [ngClass]="{'is-invalid': (flatmate.get('nickName').dirty || flatmate.get('nickName').touched) && !flatmate.get('nickName').valid, 'form-control-plaintext': !editMode  }"
         />
       </div>
       <div class="input-group mb-1 col-3">
-        <input type="date" class="form-control" placeholder="Date of birth (required)" formControlName="birthDate" [ngClass]="{'is-invalid': (flatmate.get('birthDate').dirty || flatmate.get('birthDate').touched) && !flatmate.get('birthDate').valid }"
+        <input type="date" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Date of birth (required)"
+          formControlName="birthDate" [ngClass]="{'is-invalid': (flatmate.get('birthDate').dirty || flatmate.get('birthDate').touched) && !flatmate.get('birthDate').valid, 'form-control-plaintext': !editMode  }"
         />
       </div>
       <div class="input-group mb-1 col-2">
         <div class="btn-group-toggle" data-toggle="buttons">
           <label class="btn" [ngClass]="{'btn-secondary': flatmate.get('flatTenant').value, 'btn-outline-secondary': !flatmate.get('flatTenant').value }">
-            <input type="checkbox" formControlName="flatTenant" autocomplete="off" /> Flat tenant
+            <input type="checkbox" [disabled]='!editMode' formControlName="flatTenant" autocomplete="off" /> Flat tenant
           </label>
         </div>
       </div>
       <div class="input-group mb-1 col-1">
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-light" (click)="addFlatmate()">+</button>
-          <button type="button" class="btn btn-light" (click)="removeFlatmate(i)" *ngIf="i > 0">-</button>
+        <div class="btn-group" role="group" *ngIf="editMode">
+          <button type="button" class="btn btn-light" (click)="addFlatmate()" *ngIf="i == 0">+</button>
+          <button type="button" class="btn btn-light" (click)="removeFlatmate(i)" *ngIf="i != 0">-</button>
         </div>
       </div>
     </div>

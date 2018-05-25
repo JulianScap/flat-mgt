@@ -1,7 +1,6 @@
-<h3>Flat details</h3>
 <fm-message [messages]='messages'></fm-message>
 <form [formGroup]="homeForm">
-
+  <h3>Flat details</h3>
   <form [formGroup]="flatForm">
     <fm-flat-form [editMode]='editFlat' [flatForm]='flatForm'></fm-flat-form>
     <div class="row mb-3">
@@ -14,6 +13,8 @@
       </div>
     </div>
   </form>
+  <hr />
+  <h3>Flatmates details</h3>
   <form [formGroup]="flatmateForm">
     <div *ngIf="flatmateForm.length != 0">
       <div class="row">
@@ -24,6 +25,15 @@
         <div class="col-1"></div>
       </div>
       <fm-flatmate-form [editMode]="editFlatmates" [flatmateForm]="flatmateForm" [parentForm]="homeForm"></fm-flatmate-form>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+      </div>
+      <div>
+        <button type="button" class="btn btn-secondary" (click)="editFlatmates = true" *ngIf="!editFlatmates">Edit</button>
+        <button type="button" class="btn btn-primary" (click)="saveFlatmatesEdit()" [disabled]="!flatmateForm.valid" *ngIf="editFlatmates">Save</button>
+        <button type="button" class="btn btn-outline-danger" (click)="undoFlatmatesEdit()" *ngIf="editFlatmates">Cancel</button>
+      </div>
     </div>
   </form>
 </form>
