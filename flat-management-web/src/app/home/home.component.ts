@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { IFlat } from '../shared/entities/flat';
+import { IMessage } from '../shared/entities/message';
 import { FlatService } from '../shared/services/flat.service';
 import { FlatmateService } from '../shared/services/flatmate.service';
-import { IFlat } from '../shared/entities/flat';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
-
-  errorMessages: string[];
+  messages: IMessage[];
   flatForm: FormGroup;
   editFlat: boolean;
 
@@ -48,8 +48,14 @@ export class HomeComponent implements OnInit {
   saveFlatEdit(): void {
     this.flatService.save([this.flatForm.value])
       .subscribe(
-        null,
-        null,
+        data => {
+          if (data.validationResult.isValid) {
+            this.messages = [{ isError: false, text: "Flat successfully updated" }];
+          } else {
+            this.messages = data.validationResult.messages;
+          }
+        },
+        () => this.messages = [{ isError: true, text: "A server error occured" }],
         () => this.editFlat = false)
   }
 

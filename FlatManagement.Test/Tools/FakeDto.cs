@@ -18,9 +18,9 @@ namespace FlatManagement.Test.Tools
 		public override TypeEnum[] DataFieldTypes { get; }
 		public override TypeEnum[] AllFieldTypes { get; }
 
-		public override ValidationResult Validate()
+		public override void Validate()
 		{
-			return null;
+			ValidationResult = new ValidationResult();
 		}
 	}
 }

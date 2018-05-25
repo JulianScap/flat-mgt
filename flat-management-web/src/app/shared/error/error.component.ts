@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { IMessage } from "../entities/message";
 
 @Component({
     selector: 'fm-error',
@@ -6,5 +7,5 @@ import { Component, Input } from "@angular/core";
 })
 
 export class ErrorComponent {
-    @Input() messages: string[];
+    @Input() messages: IMessage[];
 }

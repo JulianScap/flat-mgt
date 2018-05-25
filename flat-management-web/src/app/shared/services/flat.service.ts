@@ -4,6 +4,8 @@ import { IFlat } from "../entities/flat";
 import { IFlatmate } from "../entities/flatmate";
 import { AuthenticatedCorsHttpClient } from "./authenticated-cors-http-client.service";
 import { SessionManager } from "./session-manager.service";
+import { IValidationResult } from "../entities/validation-result";
+import { IModel } from "../entities/model";
 
 @Injectable()
 export class FlatService {
@@ -27,7 +29,7 @@ export class FlatService {
     return this.http.post('Flat', body);
   }
 
-  save(flats: IFlat[]): Observable<Object> {
-    return this.http.post('Flat', flats);
+  save(flats: IFlat[]): Observable<IModel> {
+    return this.http.post<IModel>('Flat', flats);
   }
 }

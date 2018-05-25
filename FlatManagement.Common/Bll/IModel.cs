@@ -6,7 +6,7 @@ namespace FlatManagement.Common.Bll
 	public interface IModel : IReadOnlyModel, IValidable
 	{
 		void DeleteAll();
-		ValidationResult PersistAll();
+		void PersistAll();
 	}
 
 	public interface IModel<TDto> : IReadOnlyModel<TDto>, IModel

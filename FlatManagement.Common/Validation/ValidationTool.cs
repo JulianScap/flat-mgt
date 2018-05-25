@@ -8,7 +8,7 @@ namespace FlatManagement.Common.Validation
 		{
 			if (String.IsNullOrWhiteSpace(fieldValue))
 			{
-				result.Add(getMessage());
+				result.AddError(getMessage());
 			}
 		}
 
@@ -18,11 +18,11 @@ namespace FlatManagement.Common.Validation
 			{
 				if (addLengthInfo)
 				{
-					result.Add($"{getMessage()} (Maximum: {maxLength})");
+					result.AddError($"{getMessage()} (Maximum: {maxLength})");
 				}
 				else
 				{
-					result.Add(getMessage());
+					result.AddError(getMessage());
 				}
 			}
 		}
@@ -33,11 +33,11 @@ namespace FlatManagement.Common.Validation
 			{
 				if (addLengthInfo)
 				{
-					result.Add($"{getMessage()} (Minimum: {minLength})");
+					result.AddError($"{getMessage()} (Minimum: {minLength})");
 				}
 				else
 				{
-					result.Add(getMessage());
+					result.AddError(getMessage());
 				}
 			}
 		}

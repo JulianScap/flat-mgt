@@ -59,19 +59,17 @@ namespace FlatManagement.Dto.Entities
 			return HashCode.Compute(this.FlatmateId, this.FlatId, this.FullName, this.NickName, this.BirthDate, this.FlatTenant, this.Login);
 		}
 
-		public override ValidationResult Validate()
+		public override void Validate()
 		{
-			ValidationResult result = new ValidationResult();
+			ValidationResult = new ValidationResult();
 
-			ValidationTool.Required(result, this.Login, () => String.Format("The login field is mandatory"));
-			ValidationTool.MaxLength(result, this.Login, 100, () => String.Format("The login field is too long"));
+			ValidationTool.Required(ValidationResult, this.Login, () => String.Format("The login field is mandatory"));
+			ValidationTool.MaxLength(ValidationResult, this.Login, 100, () => String.Format("The login field is too long"));
 
-			ValidationTool.Required(result, this.FullName, () => String.Format("The full name field is mandatory"));
-			ValidationTool.MaxLength(result, this.FullName, 500, () => String.Format("The full name field is too long"));
+			ValidationTool.Required(ValidationResult, this.FullName, () => String.Format("The full name field is mandatory"));
+			ValidationTool.MaxLength(ValidationResult, this.FullName, 500, () => String.Format("The full name field is too long"));
 
-			ValidationTool.MaxLength(result, this.NickName, 100, () => String.Format("The nickname field is too long"));
-
-			return result;
+			ValidationTool.MaxLength(ValidationResult, this.NickName, 100, () => String.Format("The nickname field is too long"));
 		}
 
 		private static readonly string[] ids = new string[] { "FlatmateId" };

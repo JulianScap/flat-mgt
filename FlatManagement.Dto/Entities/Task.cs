@@ -82,16 +82,14 @@ namespace FlatManagement.Dto.Entities
 			}
 		}
 
-		public override ValidationResult Validate()
+		public override void Validate()
 		{
-			ValidationResult result = new ValidationResult();
+			ValidationResult = new ValidationResult();
 
-			ValidationTool.Required(result, this.Name, () => String.Format("The name field is mandatory"));
-			ValidationTool.MaxLength(result, this.Name, 100, () => String.Format("The name field is too long"));
-			ValidationTool.Required(result, this.Description, () => String.Format("The description field is mandatory"));
-			ValidationTool.MaxLength(result, this.Description, 1000, () => String.Format("The description field is too long"));
-
-			return result;
+			ValidationTool.Required(ValidationResult, this.Name, () => String.Format("The name field is mandatory"));
+			ValidationTool.MaxLength(ValidationResult, this.Name, 100, () => String.Format("The name field is too long"));
+			ValidationTool.Required(ValidationResult, this.Description, () => String.Format("The description field is mandatory"));
+			ValidationTool.MaxLength(ValidationResult, this.Description, 1000, () => String.Format("The description field is too long"));
 		}
 
 		private static readonly string[] ids = new string[] { "TaskId" };

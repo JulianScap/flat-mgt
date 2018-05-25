@@ -1,4 +1,5 @@
-﻿using FlatManagement.Common.Dal;
+﻿using System;
+using FlatManagement.Common.Dal;
 using FlatManagement.Common.Dto;
 using FlatManagement.Common.Validation;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,7 @@ namespace FlatManagement.Common.Bll
 	public abstract class AbstractModel<TDto> : AbstractReadOnlyModel<TDto>, IModel<TDto>
 		where TDto : IDto, new()
 	{
+		public ValidationResult ValidationResult { get { return AggregateValidationResult(); } }
 
 		protected AbstractModel()
 		{
@@ -24,11 +26,11 @@ namespace FlatManagement.Common.Bll
 			return GetDal();
 		}
 
-		public virtual ValidationResult PersistAll()
+		public virtual void PersistAll()
 		{
-			ValidationResult result = Validate();
+			Validate();
 			IDataAccess<TDto> dal = GetDal();
-			if (result.IsValid)
+			if (this.ValidationResult.IsValid)
 			{
 				foreach (TDto item in this)
 				{
@@ -43,7 +45,6 @@ namespace FlatManagement.Common.Bll
 				}
 
 			}
-			return result;
 		}
 
 		public virtual void DeleteAll()
@@ -58,22 +59,29 @@ namespace FlatManagement.Common.Bll
 			Clear();
 		}
 
-		public virtual ValidationResult Validate()
+		public virtual void Validate()
+		{
+			foreach (TDto item in items)
+			{
+				item.Validate();
+				Validate(item);
+			}
+		}
+
+		protected virtual ValidationResult AggregateValidationResult()
 		{
 			ValidationResult result = new ValidationResult();
 
-			foreach (TDto item in items)
+			foreach (TDto item in this.items)
 			{
-				result.Add(item.Validate());
-				result.Add(Validate(item));
+				result.Add(item.ValidationResult);
 			}
 
 			return result;
 		}
 
-		protected virtual ValidationResult Validate(TDto item)
+		protected virtual void Validate(TDto item)
 		{
-			return null;
 		}
 	}
 }

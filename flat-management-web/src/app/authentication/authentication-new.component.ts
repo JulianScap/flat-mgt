@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IMessage } from '../shared/entities/message';
 import { IValidationResult } from '../shared/entities/validation-result';
 import { AuthenticationService } from './authentication.service';
-import { IFlat } from '../shared/entities/flat';
 
 @Component({
   templateUrl: './authentication-new.component.html'
 })
 export class AuthenticationNewComponent implements OnInit {
 
-  errorMessages: string[];
+  messages: IMessage[];
 
   flatForm: FormGroup;
   authForm: FormGroup;
@@ -68,7 +68,7 @@ export class AuthenticationNewComponent implements OnInit {
     if (validationResult.isValid) {
       this.router.navigate(['/authentication', 'success']);
     } else {
-      this.errorMessages = validationResult.messages;
+      this.messages = validationResult.messages;
     }
   }
 

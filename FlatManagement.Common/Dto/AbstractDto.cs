@@ -21,6 +21,14 @@ namespace FlatManagement.Common.Dto
 		[JsonIgnore]
 		public abstract bool IsPersisted { get; }
 
+		public ValidationResult ValidationResult { get; protected set; }
+
+		public AbstractDto()
+		{
+			ValidationResult = new ValidationResult();
+		}
+
+
 		public virtual object GetFieldValue(string fieldName)
 		{
 			PropertyInfo pi = GetProperty(fieldName);
@@ -33,7 +41,7 @@ namespace FlatManagement.Common.Dto
 			pi.SetValue(this, value);
 		}
 
-		public abstract ValidationResult Validate();
+		public abstract void Validate();
 
 		private PropertyInfo GetProperty(string name)
 		{

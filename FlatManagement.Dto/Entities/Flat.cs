@@ -51,15 +51,13 @@ namespace FlatManagement.Dto.Entities
 			}
 		}
 
-		public override ValidationResult Validate()
+		public override void Validate()
 		{
-			ValidationResult result = new ValidationResult();
+			ValidationResult = new ValidationResult();
 
-			ValidationTool.Required(result, this.Name, () => String.Format("The name field is mandatory"));
-			ValidationTool.MaxLength(result, this.Name, 200, () => String.Format("The name field is too long"));
-			ValidationTool.MaxLength(result, this.Address, 1000, () => String.Format("The address field is too long"));
-
-			return result;
+			ValidationTool.Required(ValidationResult, this.Name, () => String.Format("The name field is mandatory"));
+			ValidationTool.MaxLength(ValidationResult, this.Name, 200, () => String.Format("The name field is too long"));
+			ValidationTool.MaxLength(ValidationResult, this.Address, 1000, () => String.Format("The address field is too long"));
 		}
 
 		private static readonly string[] ids = new string[] { "FlatId" };

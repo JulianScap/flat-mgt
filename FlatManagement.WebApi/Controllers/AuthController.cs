@@ -49,13 +49,15 @@ namespace FlatManagement.WebApi.Controllers
 			using (TransactionScope ts = TransactionUtil.New())
 			{
 				flat.Add(request.Flat);
-				result.Add(flat.PersistAll());
+				flat.PersistAll();
+				result.Add(flat.ValidationResult);
 
 				if (result.IsValid)
 				{
 					request.Flatmate.FlatId = request.Flat.FlatId;
 					flatmate.Add(request.Flatmate);
-					result.Add(flatmate.PersistAll());
+					flatmate.PersistAll();
+					result.Add(flatmate.ValidationResult);
 					if (result.IsValid)
 					{
 						request.Flatmate.Password = request.Password;

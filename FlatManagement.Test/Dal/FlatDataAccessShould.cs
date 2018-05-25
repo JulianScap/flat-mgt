@@ -82,10 +82,6 @@ namespace FlatManagement.Test.Dal
 			da.Insert(newFlat);
 
 			Assert.NotEqual(0, newFlat.FlatId);
-
-			Flat hydratedFlat = da.GetById(newFlat.FlatId);
-
-			Assert.Equal(newFlat, hydratedFlat);
 		}
 
 		[Fact]
