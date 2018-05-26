@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { IMessage } from '../shared/entities/message';
 import { IValidationResult } from '../shared/entities/validation-result';
 import { AuthenticationService } from './authentication.service';
+import { FlatComponentMode } from '../shared/flat/flatComponentMode.enum';
 
 @Component({
   templateUrl: './authentication-new.component.html'
 })
 export class AuthenticationNewComponent implements OnInit {
-
   messages: IMessage[];
 
   flatForm: FormGroup;
@@ -22,6 +22,8 @@ export class AuthenticationNewComponent implements OnInit {
   nickName: AbstractControl;
   birthDate: AbstractControl;
   flatTenant: AbstractControl;
+
+  flatFormMode: FlatComponentMode = FlatComponentMode.Create;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private router: Router) {
   }

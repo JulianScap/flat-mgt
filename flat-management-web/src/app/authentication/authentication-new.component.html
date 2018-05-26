@@ -47,7 +47,7 @@
       </div>
       <hr/>
       <h4>Flat</h4>
-      <fm-flat-form (flatFormReadyOut)="onFlatFormReady($event)" (messageOut)="onMessage($event)" [loadUserData]="false" [showControls]="false"></fm-flat-form>
+      <fm-flat-form (flatFormReadyOut)="onFlatFormReady($event)" (messageOut)="onMessage($event)" [mode]="flatFormMode"></fm-flat-form>
       <div class="row">
         <div class="col-1">
           <button type="submit" class="btn btn-primary" [disabled]='!(flatmateForm.valid && flatForm.valid)'>Save</button>

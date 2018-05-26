@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Observable";
 import { IFlat } from "../entities/flat";
 import { IMessage } from "../entities/message";
 import { FlatService } from "../services/flat.service";
+import { FlatComponentMode } from "./flatComponentMode.enum";
 
 @Component({
   selector: 'fm-flat-form',
@@ -12,8 +13,11 @@ import { FlatService } from "../services/flat.service";
 export class FlatFormComponent implements OnInit {
   @Output() messageOut: EventEmitter<IMessage[]>;
   @Output() flatFormReadyOut: EventEmitter<FormGroup>;
-  @Input() loadUserData: boolean
-  @Input() showControls: boolean;
+  @Input() mode: FlatComponentMode;
+
+  get showControls(): boolean {
+    return this.mode == FlatComponentMode.Edit;
+  }
 
   flatForm: FormGroup;
   editMode: boolean;
@@ -26,7 +30,7 @@ export class FlatFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.showControls) {
+    if (this.mode == FlatComponentMode.Create) {
       this.editMode = true;
     }
 
@@ -41,7 +45,7 @@ export class FlatFormComponent implements OnInit {
 
     this.flatFormReadyOut.emit(this.flatForm);
 
-    if (this.loadUserData) {
+    if (this.mode == FlatComponentMode.Edit) {
       this.loadFlat();
     }
   }
@@ -76,7 +80,7 @@ export class FlatFormComponent implements OnInit {
 
   undoFlatEdit(): void {
     this.editMode = false;
-    if (this.loadUserData) {
+    if (this.mode == FlatComponentMode.Edit) {
       this.loadFlat();
     }
   }
