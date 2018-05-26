@@ -1,4 +1,4 @@
-<div [formGroup]="parentForm">
+<form [formGroup]="flatmateFormGroup">
   <div class="row">
     <div class="col-3">Fullname</div>
     <div class="col-2">Nickname</div>
@@ -6,7 +6,7 @@
     <div class="col-2">Login</div>
     <div class="col"></div>
   </div>
-  <div formArrayName="flatmateForm" *ngFor="let flatmate of flatmateForm.controls; let i = index">
+  <div formArrayName="flatmateFormArray" *ngFor="let flatmate of flatmateFormArray.controls; let i = index">
     <div class="row form-group" [formGroupName]="i">
       <div class="input-group mb-1 col-3">
         <input type="text" [readOnly]='!editMode' class="form-control form-control-sm fm" placeholder="Full name (required)" formControlName="fullName"
@@ -45,4 +45,13 @@
       </div>
     </div>
   </div>
-</div>
+  <div class="row mb-3">
+    <div class="col">
+    </div>
+    <div>
+      <button type="button" class="btn btn-secondary" (click)="editMode = true" *ngIf="!editMode">Edit</button>
+      <button type="button" class="btn btn-primary" (click)="saveFlatmatesEdit()" [disabled]="!flatmateFormGroup.valid" *ngIf="editMode">Save</button>
+      <button type="button" class="btn btn-outline-danger" (click)="undoFlatmatesEdit()" *ngIf="editMode">Cancel</button>
+    </div>
+  </div>
+</form>
