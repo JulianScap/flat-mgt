@@ -1,6 +1,5 @@
 ﻿using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Bll;
-using FlatManagement.Common.Dal;
 using FlatManagement.Common.Security;
 using FlatManagement.Common.Validation;
 using FlatManagement.Dal.Interface;
@@ -11,13 +10,13 @@ namespace FlatManagement.Bll.Impl
 {
 	public class FlatmateService : AbstractService<Flatmate>, IFlatmateService
 	{
-		protected override IDataAccess<Flatmate> Dal { get => flatmateDataAccess; }
-		private IFlatmateDataAccess flatmateDataAccess;
+		private readonly IFlatmateDataAccess flatmateDataAccess;
+		private readonly ICryptoHelper cryptoHelper;
 
-		public FlatmateService(IFlatmateDataAccess flatmateDataAccess, IConfiguration configuration)
-			: base(configuration)
+		public FlatmateService(IFlatmateDataAccess flatmateDataAccess, IConfiguration configuration, ICryptoHelper cryptoHelper) : base(flatmateDataAccess, configuration)
 		{
 			this.flatmateDataAccess = flatmateDataAccess;
+			this.cryptoHelper = cryptoHelper;
 		}
 
 		public ValidationResult CheckPassword(Flatmate flatmate, string passwordHash)
@@ -27,9 +26,9 @@ namespace FlatManagement.Bll.Impl
 				return new ValidationResult("Authentication failed");
 			}
 
-			string decrypted = CryptoTool.Decrypt(passwordHash, Configuration);
+			string decrypted = cryptoHelper.Decrypt(passwordHash);
 			string salted = decrypted + "@" + flatmate.FlatmateId;
-			string hashToCheck = CryptoTool.Hash(salted);
+			string hashToCheck = cryptoHelper.Hash(salted);
 
 			if (flatmate.Password != hashToCheck)
 			{
@@ -46,9 +45,9 @@ namespace FlatManagement.Bll.Impl
 
 		public void PreparePassword(Flatmate flatmate)
 		{
-			string decrypted = CryptoTool.Decrypt(flatmate.Password, Configuration);
+			string decrypted = cryptoHelper.Decrypt(flatmate.Password);
 			string salted = decrypted + "@" + flatmate.FlatmateId;
-			string passwordHash = CryptoTool.Hash(salted);
+			string passwordHash = cryptoHelper.Hash(salted);
 			flatmate.Password = passwordHash;
 		}
 

@@ -8,10 +8,16 @@ using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Common.Security
 {
-	public class CryptoTool
+	public class CryptoHelper : ICryptoHelper
 	{
-		#region Hash
-		public static string Hash(string toHash)
+		private readonly IConfiguration configuration;
+
+		public CryptoHelper(IConfiguration configuration)
+		{
+			this.configuration = configuration;
+		}
+
+		public string Hash(string toHash)
 		{
 			if (toHash == null)
 			{
@@ -25,15 +31,8 @@ namespace FlatManagement.Common.Security
 				return Convert.ToBase64String(hashed);
 			}
 		}
-		#endregion
 
-		#region Encrypt
-		public static string Encrypt(string clearTextValue, IConfiguration configuration)
-		{
-			return Encrypt(clearTextValue, configuration["Security:Password:Xml:PublicKey"]);
-		}
-
-		private static string Encrypt(string clearTextValue, string publicKey)
+		public string Encrypt(string clearTextValue)
 		{
 			if (clearTextValue == null)
 			{
@@ -45,7 +44,7 @@ namespace FlatManagement.Common.Security
 
 				using (RSACryptoServiceProvider provider = new RSACryptoServiceProvider())
 				{
-					provider.FromXmlStringOverride(publicKey);
+					provider.FromXmlStringOverride(configuration["Security:Password:Xml:PublicKey"]);
 					byte[] encrypted = provider.Encrypt(toEncrypt, false);
 					return Convert.ToBase64String(encrypted);
 				}
@@ -56,15 +55,8 @@ namespace FlatManagement.Common.Security
 				throw new SecurityException();
 			}
 		}
-		#endregion
 
-		#region Decrypt
-		public static string Decrypt(string encryptedBase64, IConfiguration configuration)
-		{
-			return Decrypt(encryptedBase64, configuration["Security:Password:Xml:PrivateKey"]);
-		}
-
-		private static string Decrypt(string encryptedBase64, string privateKey)
+		public string Decrypt(string encryptedBase64)
 		{
 			if (encryptedBase64 == null)
 			{
@@ -76,7 +68,7 @@ namespace FlatManagement.Common.Security
 
 				using (RSACryptoServiceProvider provider = new RSACryptoServiceProvider())
 				{
-					provider.FromXmlStringOverride(privateKey);
+					provider.FromXmlStringOverride(configuration["Security:Password:Xml:PrivateKey"]);
 					byte[] decrypted = provider.Decrypt(toDecrypt, false);
 					return Encoding.UTF8.GetString(decrypted);
 				}
@@ -87,6 +79,5 @@ namespace FlatManagement.Common.Security
 				throw new SecurityException();
 			}
 		}
-		#endregion
 	}
 }

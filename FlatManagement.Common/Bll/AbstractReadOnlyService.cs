@@ -8,29 +8,29 @@ namespace FlatManagement.Common.Bll
 	public abstract class AbstractReadOnlyService<TDto> : IReadOnlyService<TDto>
 		where TDto : IDto, new()
 	{
-		public IConfiguration Configuration { get; set; }
+		protected readonly IConfiguration configuration;
 
-		protected abstract IReadOnlyDataAccess<TDto> ReadOnlyDal { get; }
+		protected readonly IReadOnlyDataAccess<TDto> readOnlyDal;
 
-		protected AbstractReadOnlyService(IConfiguration configuration)
+		protected AbstractReadOnlyService(IReadOnlyDataAccess<TDto> readOnlyDal, IConfiguration configuration)
 		{
-			this.Configuration = configuration;
+			this.configuration = configuration;
+			this.readOnlyDal = readOnlyDal;
 		}
 
 		public virtual IEnumerable<TDto> GetAll()
 		{
-			return ReadOnlyDal.GetAll();
+			return readOnlyDal.GetAll();
 		}
 
 		public virtual TDto GetById(TDto item)
 		{
-			return ReadOnlyDal.GetById(item);
+			return readOnlyDal.GetById(item);
 		}
 
 		public virtual IEnumerable<TDto> GetForUser()
 		{
-			return ReadOnlyDal.GetForUser();
-
+			return readOnlyDal.GetForUser();
 		}
 	}
 }

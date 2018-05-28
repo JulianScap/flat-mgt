@@ -4,6 +4,7 @@ using FlatManagement.Bll.Impl;
 using FlatManagement.Bll.Interface;
 using FlatManagement.Common.Dal;
 using FlatManagement.Common.Extensions;
+using FlatManagement.Common.Security;
 using FlatManagement.Dal.Impl;
 using FlatManagement.Dal.Interface;
 using FlatManagement.WebApi.Security;
@@ -62,6 +63,8 @@ namespace FlatManagement.WebApi
 			services.AddSingleton<IUserInfoProvider, UserInfoProvider>();
 
 			services.AddSingleton<IDatacallsHandler, DatacallsHandler>();
+
+			services.AddSingleton<ICryptoHelper, CryptoHelper>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

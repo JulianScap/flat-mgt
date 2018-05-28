@@ -9,27 +9,22 @@ namespace FlatManagement.Common.Bll
 	public abstract class AbstractService<TDto> : AbstractReadOnlyService<TDto>, IService<TDto>
 		where TDto : IDto, new()
 	{
-		protected AbstractService(IConfiguration configuration) : base(configuration)
+		protected readonly IDataAccess<TDto> dal;
+		protected AbstractService(IDataAccess<TDto> dal, IConfiguration configuration) : base(dal, configuration)
 		{
-		}
-
-		protected abstract IDataAccess<TDto> Dal { get; }
-		protected override IReadOnlyDataAccess<TDto> ReadOnlyDal => Dal;
-
-		public virtual void PersistAll()
-		{
+			this.dal = dal;
 		}
 
 		public void Delete(TDto item)
 		{
-			Dal.Delete(item);
+			dal.Delete(item);
 		}
 
 		public void Delete(IEnumerable<TDto> items)
 		{
 			foreach (TDto item in items)
 			{
-				Dal.Delete(item);
+				dal.Delete(item);
 			}
 		}
 
@@ -52,11 +47,11 @@ namespace FlatManagement.Common.Bll
 			{
 				if (item.IsPersisted)
 				{
-					Dal.Update(item);
+					dal.Update(item);
 				}
 				else
 				{
-					Dal.Insert(item);
+					dal.Insert(item);
 				}
 			}
 			return result;
