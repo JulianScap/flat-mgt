@@ -46,13 +46,14 @@ namespace FlatManagement.Test.Bll
 		public void ValidatePassword()
 		{
 			IFlatmateService fs = GetFlatmateService();
+			ICryptoHelper cryptoHelper = GetCryptoHelper();
 
 			Flatmate flatmate = new Flatmate(123)
 			{
-				Password = GetCryptoHelper().Encrypt("Julian123")
+				Password = cryptoHelper.Encrypt("Julian123")
 			};
 			fs.PreparePassword(flatmate);
-			var password = GetCryptoHelper().Encrypt("Julian123");
+			var password = cryptoHelper.Encrypt("Julian123");
 			var result = fs.CheckPassword(flatmate, password);
 
 			Assert.True(result.IsValid);
