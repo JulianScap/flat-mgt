@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using FlatManagement.Bll.Impl;
+using FlatManagement.Bll.Interface;
+using FlatManagement.Common.Dal;
 using FlatManagement.Common.Extensions;
-using FlatManagement.Common.WebApi;
+using FlatManagement.Dal.Impl;
+using FlatManagement.Dal.Interface;
 using FlatManagement.WebApi.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,9 +41,27 @@ namespace FlatManagement.WebApi
 						.AllowCredentials())
 				);
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			AddCustom(services);
 
 			services.AddMvc();
 			services.Add(new ServiceDescriptor(typeof(IConfiguration), Configuration));
+		}
+
+		private void AddCustom(IServiceCollection services)
+		{
+			services.AddSingleton<IFlatService, FlatService>();
+			services.AddSingleton<ITaskService, TaskService>();
+			services.AddSingleton<IFlatmateService, FlatmateService>();
+			services.AddSingleton<IPeriodTypeService, PeriodTypeService>();
+
+			services.AddSingleton<IFlatDataAccess, FlatDataAccess>();
+			services.AddSingleton<ITaskDataAccess, TaskDataAccess>();
+			services.AddSingleton<IFlatmateDataAccess, FlatmateDataAccess>();
+			services.AddSingleton<IPeriodTypeDataAccess, PeriodTypeDataAccess>();
+
+			services.AddSingleton<IUserInfoProvider, UserInfoProvider>();
+
+			services.AddSingleton<IDatacallsHandler, DatacallsHandler>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,12 +81,6 @@ namespace FlatManagement.WebApi
 			app.UseStaticFiles();
 
 			app.UseMvc();
-		}
-
-		private UserInfo GetUserInfo(IServiceProvider svp)
-		{
-			IHttpContextAccessor accessor = svp.GetService<IHttpContextAccessor>();
-			return accessor.HttpContext.Items["token"] as UserInfo;
 		}
 	}
 }
