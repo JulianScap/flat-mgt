@@ -15,7 +15,8 @@ namespace FlatManagement.Test.Bll
 			var conf = GetConfiguration();
 			var uip = new TestUserInfoProvider();
 			var dh = new DatacallsHandler(conf, uip);
-			var dal = new FlatDataAccess(conf, dh);
+			var pb = new ParametersBuilder();
+			var dal = new FlatDataAccess(conf, dh, pb);
 			return new FlatService(dal, conf);
 		}
 

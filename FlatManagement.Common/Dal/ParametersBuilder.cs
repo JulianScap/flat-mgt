@@ -1,12 +1,11 @@
-﻿using System;
-using FlatManagement.Common.Dto;
+﻿using FlatManagement.Common.Dto;
 using FlatManagement.Common.WebApi;
 
 namespace FlatManagement.Common.Dal
 {
-	public class ParametersBuilder
+	public class ParametersBuilder : IParametersBuilder
 	{
-		public static Parameter[] BuildIdParameters(IDto item)
+		public Parameter[] BuildIdParameters(IDto item)
 		{
 			string[] idFields = item.IdFieldNames;
 			TypeEnum[] idTypes = item.IdFieldTypes;
@@ -20,7 +19,7 @@ namespace FlatManagement.Common.Dal
 			return result;
 		}
 
-		public static Parameter[] BuildParametersFromDto(IDto item, bool update)
+		public Parameter[] BuildParametersFromDto(IDto item, bool update)
 		{
 			string[] propertiesToSave = null;
 			TypeEnum[] typesToSave = null;
@@ -48,7 +47,7 @@ namespace FlatManagement.Common.Dal
 			return result;
 		}
 
-		public static Parameter[] BuildIdOutParameters(IDto item)
+		public Parameter[] BuildIdOutParameters(IDto item)
 		{
 			string[] idFields = item.IdFieldNames;
 			TypeEnum[] idFieldsTypes = item.IdFieldTypes;
@@ -63,7 +62,7 @@ namespace FlatManagement.Common.Dal
 			return result;
 		}
 
-		public static Parameter[] BuildUserParameters(UserInfo userInfo)
+		public Parameter[] BuildUserParameters(UserInfo userInfo)
 		{
 			return new Parameter[1]
 			{

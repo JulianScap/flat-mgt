@@ -20,7 +20,8 @@ namespace FlatManagement.Test.WebApi
 
 			var uip = new TestUserInfoProvider();
 			var dh = new DatacallsHandler(conf, uip);
-			var dal = new PeriodTypeDataAccess(conf, dh);
+			var pb = new ParametersBuilder();
+			var dal = new PeriodTypeDataAccess(conf, dh, pb);
 			var service = new PeriodTypeService(dal, conf);
 
 			return new PeriodTypeController(service, conf);

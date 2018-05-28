@@ -13,7 +13,8 @@ namespace FlatManagement.Test.Dal
 			var conf = GetConfiguration();
 			var uip = new TestUserInfoProvider();
 			var dh = new DatacallsHandler(conf, uip);
-			return new TaskDataAccess(conf, dh);
+			var pb = new ParametersBuilder();
+			return new TaskDataAccess(conf, dh, pb);
 		}
 
 		[Fact]

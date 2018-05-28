@@ -63,8 +63,8 @@ namespace FlatManagement.WebApi
 			services.AddSingleton<IUserInfoProvider, UserInfoProvider>();
 
 			services.AddSingleton<IDatacallsHandler, DatacallsHandler>();
-
 			services.AddSingleton<ICryptoHelper, CryptoHelper>();
+			services.AddSingleton<IParametersBuilder, ParametersBuilder>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

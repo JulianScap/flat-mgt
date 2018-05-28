@@ -8,7 +8,7 @@ namespace FlatManagement.Dal.Impl
 {
 	public class FlatmateDataAccess : AbstractDataAccess<Flatmate>, IFlatmateDataAccess
 	{
-		public FlatmateDataAccess(IConfiguration configuration, IDatacallsHandler handler) : base(configuration, handler)
+		public FlatmateDataAccess(IConfiguration configuration, IDatacallsHandler handler, IParametersBuilder parametersBuilder) : base(configuration, handler, parametersBuilder)
 		{
 		}
 

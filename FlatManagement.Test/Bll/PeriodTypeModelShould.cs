@@ -17,7 +17,8 @@ namespace FlatManagement.Test.Bll
 			var conf = GetConfiguration();
 			var uip = new TestUserInfoProvider();
 			var dh = new DatacallsHandler(conf, uip);
-			var dal = new PeriodTypeDataAccess(conf, dh);
+			var pb = new ParametersBuilder();
+			var dal = new PeriodTypeDataAccess(conf, dh, pb);
 			return new PeriodTypeService(dal, conf);
 		}
 

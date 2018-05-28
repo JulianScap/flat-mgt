@@ -7,7 +7,7 @@ namespace FlatManagement.Dal.Impl
 {
 	public class PeriodTypeDataAccess : ReadOnlyAbstractDataAccess<PeriodType>, IPeriodTypeDataAccess
 	{
-		public PeriodTypeDataAccess(IConfiguration configuration, IDatacallsHandler handler) : base(configuration, handler)
+		public PeriodTypeDataAccess(IConfiguration configuration, IDatacallsHandler handler, IParametersBuilder parametersBuilder) : base(configuration, handler, parametersBuilder)
 		{
 
 		}

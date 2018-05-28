@@ -17,7 +17,8 @@ namespace FlatManagement.Test.Bll
 			var conf = GetConfiguration();
 			var uip = new TestUserInfoProvider();
 			var dh = new DatacallsHandler(conf, uip);
-			var dal = new FlatmateDataAccess(conf, dh);
+			var pb = new ParametersBuilder();
+			var dal = new FlatmateDataAccess(conf, dh, pb);
 			var ch = new CryptoHelper(conf);
 			return new FlatmateService(dal, conf, ch);
 		}

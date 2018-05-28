@@ -13,7 +13,6 @@ namespace FlatManagement.Test.Tools
 			ConfigurationBuilder builder = new ConfigurationBuilder();
 
 			builder.AddJsonFile("Configurations\\appsettings.json");
-			builder.AddJsonFile("Configurations\\Services.json");
 			builder.AddJsonFile("Configurations\\Security.json");
 
 			return builder.Build();

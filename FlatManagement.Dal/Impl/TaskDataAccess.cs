@@ -7,7 +7,7 @@ namespace FlatManagement.Dal.Impl
 {
 	public class TaskDataAccess : AbstractDataAccess<Task>, ITaskDataAccess
 	{
-		public TaskDataAccess(IConfiguration configuration, IDatacallsHandler handler) : base(configuration, handler)
+		public TaskDataAccess(IConfiguration configuration, IDatacallsHandler handler, IParametersBuilder parametersBuilder) : base(configuration, handler, parametersBuilder)
 		{
 		}
 	}
