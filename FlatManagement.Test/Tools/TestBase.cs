@@ -1,6 +1,4 @@
-﻿using FlatManagement.Common.Services;
-using FlatManagement.Common.WebApi;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Test.Tools
 {
@@ -8,8 +6,6 @@ namespace FlatManagement.Test.Tools
 	{
 		public TestBase()
 		{
-			ServiceLocator.Instance.SetConfiguration(GetConfiguration());
-			ServiceLocator.Instance.AddService<UserInfo>(() => new UserInfo() { Login = "Julian" });
 		}
 
 		public IConfiguration GetConfiguration()

@@ -59,7 +59,7 @@ namespace FlatManagement.Dto.Entities
 			return HashCode.Compute(this.FlatmateId, this.FlatId, this.FullName, this.NickName, this.BirthDate, this.FlatTenant, this.Login);
 		}
 
-		public override void Validate()
+		public override ValidationResult Validate()
 		{
 			ValidationResult = new ValidationResult();
 
@@ -70,6 +70,8 @@ namespace FlatManagement.Dto.Entities
 			ValidationTool.MaxLength(ValidationResult, this.FullName, 500, () => String.Format("The full name field is too long"));
 
 			ValidationTool.MaxLength(ValidationResult, this.NickName, 100, () => String.Format("The nickname field is too long"));
+
+			return ValidationResult;
 		}
 
 		private static readonly string[] ids = new string[] { "FlatmateId" };

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FlatManagement.Common.Exceptions;
-using FlatManagement.Common.Services;
+using FlatManagement.Common.Dal;
 using FlatManagement.Dal.Impl;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
@@ -12,10 +11,18 @@ namespace FlatManagement.Test.Dal
 {
 	public class PeriodTypeDataAccessShould : TestBase
 	{
+		private IPeriodTypeDataAccess GetPeriodTypeService()
+		{
+			var conf = GetConfiguration();
+			var uip = new TestUserInfoProvider();
+			var dh = new DatacallsHandler(conf, uip);
+			return new PeriodTypeDataAccess(conf, dh);
+		}
+
 		[Fact]
 		public void ReturnAValidDataAccessObject()
 		{
-			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
+			IPeriodTypeDataAccess da = GetPeriodTypeService();
 
 			Assert.NotNull(da);
 			Assert.IsType<PeriodTypeDataAccess>(da);
@@ -24,7 +31,7 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void ReturnAllRows()
 		{
-			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
+			IPeriodTypeDataAccess da = GetPeriodTypeService();
 			IEnumerable<PeriodType> items = da.GetAll();
 
 			Assert.NotEmpty(items);
@@ -40,7 +47,7 @@ namespace FlatManagement.Test.Dal
 		[InlineData(5)]
 		public void ReturnById(int periodTypeId)
 		{
-			IPeriodTypeDataAccess da = ServiceLocator.Instance.GetService<IPeriodTypeDataAccess>();
+			IPeriodTypeDataAccess da = GetPeriodTypeService();
 			PeriodType periodType = da.GetById(new PeriodType() { PeriodTypeId = periodTypeId });
 			Assert.NotNull(periodType);
 			Assert.Equal(periodTypeId, periodType.PeriodTypeId);

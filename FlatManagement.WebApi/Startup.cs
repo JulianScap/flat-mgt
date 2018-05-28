@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FlatManagement.Common.Bll;
 using FlatManagement.Common.Extensions;
-using FlatManagement.Common.Services;
 using FlatManagement.Common.WebApi;
 using FlatManagement.WebApi.Security;
 using Microsoft.AspNetCore.Builder;
@@ -21,8 +19,6 @@ namespace FlatManagement.WebApi
 		{
 			Configuration = configuration;
 
-			ServiceLocator.Instance.SetConfiguration(configuration);
-			ModelSerialiser.Instance.Configuration = configuration;
 			TokenHelper.Configure(configuration);
 		}
 
@@ -49,8 +45,6 @@ namespace FlatManagement.WebApi
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
 		{
-			ServiceLocator.Instance.AddService<UserInfo>(() => GetUserInfo(svp));
-
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

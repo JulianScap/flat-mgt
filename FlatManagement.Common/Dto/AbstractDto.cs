@@ -41,7 +41,7 @@ namespace FlatManagement.Common.Dto
 			pi.SetValue(this, value);
 		}
 
-		public abstract void Validate();
+		public abstract ValidationResult Validate();
 
 		private PropertyInfo GetProperty(string name)
 		{

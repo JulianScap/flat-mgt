@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using FlatManagement.Common.Services;
+using FlatManagement.Common.Dal;
 using FlatManagement.Dal.Impl;
 using FlatManagement.Dal.Interface;
 using FlatManagement.Dto.Entities;
@@ -10,10 +10,18 @@ namespace FlatManagement.Test.Dal
 {
 	public class FlatDataAccessShould : TestBase
 	{
+		private IFlatDataAccess GetPeriodTypeService()
+		{
+			var conf = GetConfiguration();
+			var uip = new TestUserInfoProvider();
+			var dh = new DatacallsHandler(conf, uip);
+			return new FlatDataAccess(conf, dh);
+		}
+
 		[Fact]
 		public void ReturnAValidDataAccessObject()
 		{
-			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
+			IFlatDataAccess da = GetPeriodTypeService();
 
 			Assert.NotNull(da);
 			Assert.IsType<FlatDataAccess>(da);
@@ -22,7 +30,7 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToReturnAllTheTableContent()
 		{
-			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
+			IFlatDataAccess da = GetPeriodTypeService();
 			IEnumerable<Flat> flats = da.GetAll();
 
 			Assert.NotEmpty(flats);
@@ -31,8 +39,8 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToReturnASingleFlatById()
 		{
-			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
-			Flat flat = da.GetById(22);
+			IFlatDataAccess da = GetPeriodTypeService();
+			Flat flat = da.GetById(new Flat(22));
 
 			Assert.NotNull(flat);
 		}
@@ -40,8 +48,8 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToUpdateAFlat()
 		{
-			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
-			Flat flat = da.GetById(22);
+			IFlatDataAccess da = GetPeriodTypeService();
+			Flat flat = da.GetById(new Flat(22));
 
 			if (flat.Address == "4E MacAulay Street")
 			{
@@ -63,7 +71,7 @@ namespace FlatManagement.Test.Dal
 
 			da.Update(flat);
 
-			Flat hydratedFlat = da.GetById(22);
+			Flat hydratedFlat = da.GetById(new Flat(22));
 
 			Assert.Equal(flat, hydratedFlat);
 		}
@@ -71,7 +79,7 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToInsertAFlat()
 		{
-			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
+			IFlatDataAccess da = GetPeriodTypeService();
 
 			Flat newFlat = new Flat()
 			{
@@ -87,7 +95,7 @@ namespace FlatManagement.Test.Dal
 		[Fact]
 		public void BeAbleToDeleteAFlat()
 		{
-			IFlatDataAccess da = ServiceLocator.Instance.GetService<IFlatDataAccess>();
+			IFlatDataAccess da = GetPeriodTypeService();
 
 			Flat newFlat = new Flat()
 			{
@@ -99,7 +107,7 @@ namespace FlatManagement.Test.Dal
 
 			da.Delete(newFlat);
 
-			Flat hydratedFlat = da.GetById(newFlat.FlatId);
+			Flat hydratedFlat = da.GetById(newFlat);
 
 			Assert.Null(hydratedFlat);
 		}

@@ -5,29 +5,20 @@ using System.Data.SqlClient;
 using FlatManagement.Common.Dto;
 using FlatManagement.Common.Exceptions;
 using FlatManagement.Common.Extensions;
-using FlatManagement.Common.Services;
 using FlatManagement.Common.WebApi;
 using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Common.Dal
 {
-	public class DatacallsHandler
+	public class DatacallsHandler : IDatacallsHandler
 	{
 		private readonly string connectionString;
+		private readonly IUserInfoProvider userInfoProvider;
 
-		public DatacallsHandler(IConfiguration configuration)
-			: this(configuration, "Database:ConnectionString")
+		public DatacallsHandler(IConfiguration configuration, IUserInfoProvider userInfoProvider)
 		{
-		}
-
-		public DatacallsHandler(IConfiguration configuration, string configurationStringKey)
-			: this(configuration[configurationStringKey])
-		{
-		}
-
-		public DatacallsHandler(string connectionString)
-		{
-			this.connectionString = connectionString;
+			this.userInfoProvider = userInfoProvider;
+			this.connectionString = configuration["Database:ConnectionString"];
 		}
 
 		public IEnumerable GetMany(string command, Parameter[] parameters, IDataReaderRowConverter converter)
@@ -219,7 +210,7 @@ namespace FlatManagement.Common.Dal
 			sqlParameter.Direction = ParameterDirection.Input;
 			sqlParameter.ParameterName = "UserLogin";
 			sqlParameter.SqlDbType = SqlDbType.NVarChar;
-			UserInfo userInfo = ServiceLocator.Instance.GetService<UserInfo>();
+			UserInfo userInfo = userInfoProvider.GetUserInfo();
 			if (userInfo == null)
 			{
 				sqlParameter.SqlValue = DBNull.Value;

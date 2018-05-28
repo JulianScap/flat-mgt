@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Dal.Impl
 {
-	internal class PeriodTypeDataAccess : ReadOnlyAbstractDataAccess<PeriodType>, IPeriodTypeDataAccess
+	public class PeriodTypeDataAccess : ReadOnlyAbstractDataAccess<PeriodType>, IPeriodTypeDataAccess
 	{
-		public PeriodTypeDataAccess(IConfiguration configuration) : base(configuration)
+		public PeriodTypeDataAccess(IConfiguration configuration, IDatacallsHandler handler) : base(configuration, handler)
 		{
 
 		}

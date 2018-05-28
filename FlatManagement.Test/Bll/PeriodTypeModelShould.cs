@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using FlatManagement.Bll.Impl;
 using FlatManagement.Bll.Interface;
-using FlatManagement.Common.Services;
+using FlatManagement.Common.Dal;
+using FlatManagement.Dal.Impl;
+using FlatManagement.Dto.Entities;
 using FlatManagement.Test.Tools;
 using Xunit;
 
@@ -9,24 +12,24 @@ namespace FlatManagement.Test.Bll
 {
 	public class PeriodTypeModelShould : TestBase
 	{
-		[Fact]
-		public void ReturnAValidModelObject()
+		private IPeriodTypeService GetPeriodTypeService()
 		{
-			IPeriodTypeModel ptm = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
-
-			Assert.NotNull(ptm);
-			Assert.IsType<PeriodTypeModel>(ptm);
+			var conf = GetConfiguration();
+			var uip = new TestUserInfoProvider();
+			var dh = new DatacallsHandler(conf, uip);
+			var dal = new PeriodTypeDataAccess(conf, dh);
+			return new PeriodTypeService(dal, conf);
 		}
 
 		[Fact]
 		public void BeAbleToGetAllDbItems()
 		{
-			IPeriodTypeModel ptm = ServiceLocator.Instance.GetService<IPeriodTypeModel>();
-			ptm.GetAll();
+			IPeriodTypeService periodTypeService = GetPeriodTypeService();
+			IEnumerable<PeriodType> periodTypes = periodTypeService.GetAll();
 
-			Assert.NotEmpty(ptm);
-			Assert.All(ptm, item => Assert.False(String.IsNullOrEmpty(item.Name)));
-			Assert.All(ptm, item => Assert.NotEqual(0, item.PeriodTypeId));
+			Assert.NotEmpty(periodTypes);
+			Assert.All(periodTypes, item => Assert.False(String.IsNullOrEmpty(item.Name)));
+			Assert.All(periodTypes, item => Assert.NotEqual(0, item.PeriodTypeId));
 		}
 	}
 }

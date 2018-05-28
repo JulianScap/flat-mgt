@@ -1,40 +1,38 @@
-﻿using FlatManagement.Common.Bll;
+﻿using System.Collections.Generic;
+using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dto;
-using FlatManagement.Common.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace FlatManagement.WebApi.Controllers.Base
 {
-	public abstract class ReadOnlyApiBaseController<TModel, TDto> : AbstractController
-		where TModel : IReadOnlyModel<TDto>
+	public abstract class ReadOnlyApiBaseController<TDto> : AbstractController
 		where TDto : IDto, new()
 	{
-		protected ReadOnlyApiBaseController(IConfiguration configuration)
+		private readonly IReadOnlyService<TDto> service;
+
+		protected ReadOnlyApiBaseController(IReadOnlyService<TDto> service, IConfiguration configuration)
 			: base(configuration)
 		{
+			this.service = service;
 		}
 
-		protected TModel DeserialiseBody()
+		protected IEnumerable<TDto> DeserialiseBody()
 		{
 			string content = base.GetBodyAsString();
-			TModel result = ModelSerialiser.Instance.Deserialize<TModel>(content);
-			return result;
+			return JsonConvert.DeserializeObject<IEnumerable<TDto>>(content);
 		}
 
 		[HttpGet]
-		public virtual TModel Get()
+		public virtual IEnumerable<TDto> Get()
 		{
-			TModel ipt = ServiceLocator.Instance.GetService<TModel>();
-			ipt.GetAll();
-			return ipt;
+			return service.GetForUser();
 		}
 
-		protected TModel GetByDto(TDto item)
+		protected IEnumerable<TDto> GetByDto(TDto item)
 		{
-			TModel itm = ServiceLocator.Instance.GetService<TModel>();
-			itm.GetById(item);
-			return itm;
+			return new TDto[1] { service.GetById(item) };
 		}
 	}
 }

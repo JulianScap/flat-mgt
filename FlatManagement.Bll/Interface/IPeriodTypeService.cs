@@ -1,10 +1,9 @@
 ﻿using FlatManagement.Common.Bll;
-using FlatManagement.Common.Dto;
 using FlatManagement.Dto.Entities;
 
 namespace FlatManagement.Bll.Interface
 {
-	public interface ITaskModel : IModel<Task>, IDtoList<Task>
+	public interface IPeriodTypeService : IReadOnlyService<PeriodType>
 	{
 	}
 }

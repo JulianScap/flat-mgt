@@ -15,6 +15,7 @@ namespace FlatManagement.Common.Dal
 		protected static readonly IDataReaderRowConverter converter;
 		private static readonly ConcurrentDictionary<string, PropertyInfo> properties;
 		protected IConfiguration configuration;
+		protected IDatacallsHandler handler;
 
 		static ReadOnlyAbstractDataAccess()
 		{
@@ -22,14 +23,14 @@ namespace FlatManagement.Common.Dal
 			properties = new ConcurrentDictionary<string, PropertyInfo>();
 		}
 
-		protected ReadOnlyAbstractDataAccess(IConfiguration configuration)
+		protected ReadOnlyAbstractDataAccess(IConfiguration configuration, IDatacallsHandler handler)
 		{
 			this.configuration = configuration;
+			this.handler = handler;
 		}
 
 		public virtual IEnumerable<TDto> GetAll()
 		{
-			DatacallsHandler handler = new DatacallsHandler(configuration);
 			string command = GetStoredProcedureName(OperationEnum.GetAll);
 			IEnumerable result = handler.GetMany(command, null, converter);
 			return result.Cast<TDto>().ToList();
@@ -37,7 +38,6 @@ namespace FlatManagement.Common.Dal
 
 		public TDto GetById(TDto item)
 		{
-			DatacallsHandler handler = new DatacallsHandler(configuration);
 			string command = GetStoredProcedureName(OperationEnum.GetById);
 			Parameter[] parameters = ParametersBuilder.BuildIdParameters(item);
 			object result = handler.GetOne(command, parameters, converter, true);
@@ -46,7 +46,6 @@ namespace FlatManagement.Common.Dal
 
 		public IEnumerable<TDto> GetForUser()
 		{
-			DatacallsHandler handler = new DatacallsHandler(configuration);
 			string command = GetStoredProcedureName(OperationEnum.GetForUser);
 			IEnumerable result = handler.GetMany(command, null, converter);
 			return result.Cast<TDto>().ToList();

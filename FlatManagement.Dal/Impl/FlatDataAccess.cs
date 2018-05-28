@@ -5,15 +5,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Dal.Impl
 {
-	internal class FlatDataAccess : AbstractDataAccess<Flat>, IFlatDataAccess
+	public class FlatDataAccess : AbstractDataAccess<Flat>, IFlatDataAccess
 	{
-		protected FlatDataAccess(IConfiguration configuration) : base(configuration)
+		public FlatDataAccess(IConfiguration configuration, IDatacallsHandler handler) : base(configuration, handler)
 		{
-		}
-
-		public Flat GetById(int flatId)
-		{
-			return GetById(new Flat() { FlatId = flatId });
 		}
 	}
 }

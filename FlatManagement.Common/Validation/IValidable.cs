@@ -3,6 +3,6 @@
 	public interface IValidable
 	{
 		ValidationResult ValidationResult { get; }
-		void Validate();
+		ValidationResult Validate();
 	}
 }

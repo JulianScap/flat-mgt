@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using FlatManagement.Bll.Impl;
+﻿using FlatManagement.Bll.Impl;
 using FlatManagement.Bll.Interface;
-using FlatManagement.Common.Services;
+using FlatManagement.Common.Dal;
+using FlatManagement.Dal.Impl;
 using FlatManagement.Dto.Entities;
 using FlatManagement.Test.Tools;
 using Xunit;
@@ -10,40 +10,41 @@ namespace FlatManagement.Test.Bll
 {
 	public class FlatModelShould : TestBase
 	{
-		[Fact]
-		public void ReturnAValidModelObject()
+		private IFlatService GetFlatService()
 		{
-			IFlatModel ptm = ServiceLocator.Instance.GetService<IFlatModel>();
-
-			Assert.NotNull(ptm);
-			Assert.IsType<FlatModel>(ptm);
+			var conf = GetConfiguration();
+			var uip = new TestUserInfoProvider();
+			var dh = new DatacallsHandler(conf, uip);
+			var dal = new FlatDataAccess(conf, dh);
+			return new FlatService(dal, conf);
 		}
 
 		[Theory]
 		[InlineData(22)]
 		public void BeAbleToGetById(int id)
 		{
-			IFlatModel ptm = ServiceLocator.Instance.GetService<IFlatModel>();
-			ptm.GetById(new Flat() { FlatId = id });
+			IFlatService flatService = GetFlatService();
 
-			Assert.NotEmpty(ptm);
-			Assert.Equal(id, ptm.Single().FlatId);
+			Flat flat = flatService.GetById(new Flat() { FlatId = id });
+
+			Assert.NotNull(flat);
+			Assert.Equal(id, flat.FlatId);
 		}
 
 		[Theory]
 		[InlineData("Rue Amelot", "90 rue Amelot, Paris 11")]
 		public void BeAbleToSaveANewFlat(string name, string address)
 		{
-			IFlatModel ptm = ServiceLocator.Instance.GetService<IFlatModel>();
+			IFlatService flatService = GetFlatService();
 
-			Flat flat = ptm.NewInstance();
-			flat.Name = name;
-			flat.Address = address;
+			Flat flat = new Flat()
+			{
+				Name = name,
+				Address = address
+			};
 
-			ptm.Add(flat);
-			ptm.PersistAll();
+			flatService.Save(flat);
 
-			Assert.NotEmpty(ptm);
 			Assert.NotEqual(0, flat.FlatId);
 		}
 
@@ -51,39 +52,40 @@ namespace FlatManagement.Test.Bll
 		[InlineData("Rue Amelo", "90 rue Amelot, Paris 1", "Rue Amelot fixed", "90 rue Amelot, Paris 11 fixed")]
 		public void BeAbleToUpdateAFlat(string name, string address, string otherName, string otherAddress)
 		{
-			IFlatModel ptm = ServiceLocator.Instance.GetService<IFlatModel>();
+			IFlatService flatService = GetFlatService();
+			Flat flat = new Flat()
+			{
+				Name = name,
+				Address = address
+			};
 
-			Flat flat = ptm.NewInstance();
-			flat.Name = name;
-			flat.Address = address;
-
-			ptm.Add(flat);
-			ptm.PersistAll();
+			flatService.Save(flat);
 
 			flat.Name = otherName;
 			flat.Address = otherAddress;
-			ptm.PersistAll();
 
-			Assert.NotEmpty(ptm);
+			flatService.Save(flat);
+
+			// TODO User identity issue
+			//Flat hydratedFlat = flatService.GetById(flat);
+			//Assert.Equal(flat, hydratedFlat);
 		}
 
 		[Theory]
 		[InlineData("Rue Amelot", "90 rue Amelot, Paris 11")]
 		public void BeAbleToDeleteAFlat(string name, string address)
 		{
-			IFlatModel ptm = ServiceLocator.Instance.GetService<IFlatModel>();
+			IFlatService flatService = GetFlatService();
+			Flat flat = new Flat()
+			{
+				Name = name,
+				Address = address
+			};
+			flatService.Save(flat);
+			flatService.Delete(flat);
 
-			Flat flat = ptm.NewInstance();
-			flat.Name = name;
-			flat.Address = address;
-
-			ptm.Add(flat);
-			ptm.PersistAll();
-			ptm.DeleteAll();
-			Assert.Empty(ptm);
-
-			ptm.GetById(flat);
-			Assert.Empty(ptm);
+			Flat deletedFlat = flatService.GetById(flat);
+			Assert.Null(deletedFlat);
 		}
 	}
 }

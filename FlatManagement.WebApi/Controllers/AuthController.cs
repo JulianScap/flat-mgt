@@ -1,8 +1,8 @@
 ﻿using System.Transactions;
 using FlatManagement.Bll.Interface;
-using FlatManagement.Common.Services;
 using FlatManagement.Common.Transaction;
 using FlatManagement.Common.Validation;
+using FlatManagement.Dto.Entities;
 using FlatManagement.WebApi.Controllers.Base;
 using FlatManagement.WebApi.Model;
 using FlatManagement.WebApi.Security;
@@ -13,26 +13,29 @@ namespace FlatManagement.WebApi.Controllers
 {
 	public class AuthController : AbstractController
 	{
-		public AuthController(IConfiguration configuration) : base(configuration)
-		{
+		private readonly IFlatmateService flatmateService;
+		private readonly IFlatService flatService;
 
+		public AuthController(IFlatService flatService, IFlatmateService flatmateService, IConfiguration configuration) : base(configuration)
+		{
+			this.flatService = flatService;
+			this.flatmateService = flatmateService;
 		}
 
 		[HttpPost]
 		public object Login()
 		{
 			var loginRequest = GetBody<LoginRequest>();
-			IFlatmateModel flatmate = ServiceLocator.Instance.GetService<IFlatmateModel>();
-			flatmate.GetByLogin(loginRequest.Login);
+			var flatmate = flatmateService.GetByLogin(loginRequest.Login);
 
 			LoginResult result = new LoginResult()
 			{
-				ValidationResult = flatmate.CheckPassword(loginRequest.PasswordHash)
+				ValidationResult = flatmateService.CheckPassword(flatmate, loginRequest.PasswordHash)
 			};
 
 			if (result.ValidationResult.IsValid)
 			{
-				result.Token = TokenHelper.GetNewToken(flatmate[0]);
+				result.Token = TokenHelper.GetNewToken(flatmate);
 			}
 
 			return Json(result);
@@ -43,26 +46,21 @@ namespace FlatManagement.WebApi.Controllers
 		{
 			ValidationResult result = new ValidationResult();
 			AuthCreateRequest request = GetBody<AuthCreateRequest>();
-			IFlatModel flat = ServiceLocator.Instance.GetService<IFlatModel>();
-			IFlatmateModel flatmate = ServiceLocator.Instance.GetService<IFlatmateModel>();
 
 			using (TransactionScope ts = TransactionUtil.New())
 			{
-				flat.Add(request.Flat);
-				flat.PersistAll();
-				result.Add(flat.ValidationResult);
+				result.Add(flatService.Save(request.Flat));
 
 				if (result.IsValid)
 				{
 					request.Flatmate.FlatId = request.Flat.FlatId;
-					flatmate.Add(request.Flatmate);
-					flatmate.PersistAll();
-					result.Add(flatmate.ValidationResult);
+					result.Add(flatmateService.Save(request.Flatmate));
+
 					if (result.IsValid)
 					{
 						request.Flatmate.Password = request.Password;
-						flatmate.PreparePassword();
-						flatmate.SavePassword();
+						flatmateService.PreparePassword(request.Flatmate);
+						flatmateService.SavePassword(request.Flatmate);
 
 						ts.Complete();
 					}

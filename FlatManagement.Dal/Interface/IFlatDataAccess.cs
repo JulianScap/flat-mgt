@@ -5,6 +5,5 @@ namespace FlatManagement.Dal.Interface
 {
 	public interface IFlatDataAccess : IDataAccess<Flat>
 	{
-		Flat GetById(int flatId);
 	}
 }
