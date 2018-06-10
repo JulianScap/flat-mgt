@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { IMessage } from '../shared/entities/message';
+import { IValidationResult } from '../shared/entities/validation-result';
 import { AuthenticationService } from './authentication.service';
+import { FlatComponentMode } from '../shared/flat/flatComponentMode.enum';
 
 @Component({
   templateUrl: './authentication-new.component.html'
 })
 export class AuthenticationNewComponent implements OnInit {
-  errorMessages: string[];
+  messages: IMessage[];
 
-  authForm: FormGroup;
-  flatmateForm: FormGroup;
   flatForm: FormGroup;
+  flatmateForm: FormGroup;
 
   login: AbstractControl;
   password: AbstractControl;
@@ -20,13 +23,21 @@ export class AuthenticationNewComponent implements OnInit {
   birthDate: AbstractControl;
   flatTenant: AbstractControl;
 
-  name: AbstractControl;
-  address: AbstractControl;
+  flatFormMode: FlatComponentMode = FlatComponentMode.Create;
 
-  constructor(private fb: FormBuilder, private authService: AuthenticationService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthenticationService, private router: Router) {
+  }
+
+  onMessage(messages: IMessage[]) {
+    this.messages = messages;
+  }
+
+  onFlatFormReady(flatForm: FormGroup) {
+    this.flatForm = flatForm;
+  }
 
   ngOnInit(): void {
-    this.flatmateForm = this.fb.group({
+    this.flatmateForm = this.formBuilder.group({
       login: ['', [Validators.required, Validators.maxLength(100)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
@@ -43,47 +54,32 @@ export class AuthenticationNewComponent implements OnInit {
     this.nickName = this.flatmateForm.get('nickName');
     this.birthDate = this.flatmateForm.get('birthDate');
     this.flatTenant = this.flatmateForm.get('flatTenant');
-
-    this.flatForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(200)]],
-      address: ['', [Validators.required, Validators.maxLength(1000)]]
-    });
-
-    this.name = this.flatForm.get('name');
-    this.address = this.flatForm.get('address');
-
-    this.authForm = this.fb.group({
-      flatmateForm: this.flatmateForm,
-      flatForm: this.flatForm
-    });
   }
 
   save(): void {
-    this.flatForm.updateValueAndValidity();
-    this.flatmateForm.updateValueAndValidity();
-    this.authForm.updateValueAndValidity();
-
-    if (this.authForm.valid) {
+    if (this.flatmateForm.valid && this.flatForm.valid) {
       this.authService.createNewUserAndFlat(this.flatForm.value, this.flatmateForm.value)
-        .subscribe(data => this.errorMessages = [JSON.stringify(data)]);
+        .subscribe(data => this.handleSaveResult(data));
+    }
+  }
+
+  handleSaveResult(validationResult: IValidationResult): any {
+    if (validationResult.isValid) {
+      this.router.navigate(['/authentication', 'success']);
+    } else {
+      this.messages = validationResult.messages;
     }
   }
 
   setDevValues_click(): void {
-    this.authForm.setValue({
-      flatmateForm: {
-        login: 'bob',
-        password: 'password123',
-        confirmPassword: 'password123',
-        fullName: 'Bob le bricoleur',
-        nickName: '',
-        birthDate: '',
-        flatTenant: true
-      },
-      flatForm: {
-        name: '4E',
-        address: '4E MacAulay street'
-      }
+    this.flatmateForm.setValue({
+      login: 'bob',
+      password: 'password123',
+      confirmPassword: 'password123',
+      fullName: 'Bob le bricoleur',
+      nickName: '',
+      birthDate: '',
+      flatTenant: true
     });
   }
 }

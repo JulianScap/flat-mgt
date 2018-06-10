@@ -19,4 +19,8 @@ export class AppComponent {
   isAuthenticated(): boolean {
     return this.session.isAuthenticated();
   }
+
+  get login(): string {
+    return SessionManager.login;
+  }
 }

@@ -1,0 +1,6 @@
+<fm-message [messages]='messages'></fm-message>
+<h3>Flat details</h3>
+<fm-flat-form (messageOut)="onMessage($event)" [mode]="flatFormMode"></fm-flat-form>
+<hr />
+<h3>Flatmates details</h3>
+<fm-flatmate-form (messageOut)="onMessage($event)" ></fm-flatmate-form>

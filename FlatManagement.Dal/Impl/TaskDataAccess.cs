@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Dal.Impl
 {
-	internal class TaskDataAccess : AbstractDataAccess<Task>, ITaskDataAccess
+	public class TaskDataAccess : AbstractDataAccess<Task>, ITaskDataAccess
 	{
-		protected TaskDataAccess(IConfiguration configuration) : base(configuration)
+		public TaskDataAccess(IConfiguration configuration, IDatacallsHandler handler, IParametersBuilder parametersBuilder) : base(configuration, handler, parametersBuilder)
 		{
 		}
 	}

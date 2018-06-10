@@ -8,46 +8,56 @@ import "rxjs/add/operator/do";
 
 @Injectable()
 export class CorsHttpClient {
-    private baseUrl: string = 'http://fm.api.local/api/';
+  logReponse(data: any): void {
+    console.log("Reponse: " + JSON.stringify(data));
+  }
 
-    constructor(private http: HttpClient) { }
+  logBody(body: any): void {
+    console.log("Body: " + JSON.stringify(body));
+  }
+  private baseUrl: string = 'http://fm.api.local/api/';
 
-    getOptions(): { headers?: HttpHeaders; withCredentials?: boolean; body?: any; } {
-        return { withCredentials: true };
-    }
+  constructor(private http: HttpClient) { }
 
-    get<T>(controller: string): Observable<T> {
-        let url: string = this.baseUrl + controller;
-        return this.http.get<T>(url, this.getOptions())
-            .do(data => console.log(JSON.stringify(data)))
-            .catch(this.handleError);
-    }
+  getOptions(): { headers?: HttpHeaders; withCredentials?: boolean; body?: any; } {
+    return { withCredentials: true };
+  }
 
-    post<T>(controller: string, body?: any): Observable<T> {
-        let url: string = this.baseUrl + controller;
-        return this.http.post<T>(url, body, this.getOptions())
-            .do(data => console.log(JSON.stringify(data)))
-            .catch(this.handleError);
-    }
+  get<T>(controller: string): Observable<T> {
+    let url: string = this.baseUrl + controller;
+    return this.http.get<T>(url, this.getOptions())
+      .do(data => this.logReponse(data))
+      .catch(this.handleError);
+  }
 
-    put<T>(controller: string, body?: any): Observable<T> {
-        let url: string = this.baseUrl + controller;
-        return this.http.put<T>(url, body, this.getOptions())
-            .do(data => console.log(JSON.stringify(data)))
-            .catch(this.handleError);
-    }
+  post<T>(controller: string, body?: any): Observable<T> {
+    let url: string = this.baseUrl + controller;
+    this.logBody(body);
+    return this.http.post<T>(url, body, this.getOptions())
+      .do(data => this.logReponse(data))
+      .catch(this.handleError);
+  }
 
-    delete(controller: string, body?: any): Observable<Object> {
-        let url: string = this.baseUrl + controller;
-        let options = this.getOptions();
-        options.body = body;
-        return this.http.request('DELETE', url, options)
-            .do(data => console.log(JSON.stringify(data)))
-            .catch(this.handleError);
-    }
+  put<T>(controller: string, body?: any): Observable<T> {
+    let url: string = this.baseUrl + controller;
+    this.logBody(body);
+    return this.http.put<T>(url, body, this.getOptions())
+      .do(data => this.logReponse(data))
+      .catch(this.handleError);
+  }
 
-    private handleError(err: HttpErrorResponse) {
-        console.log(err.message);
-        return Observable.throw(err.message);
-    }
+  delete(controller: string, body?: any): Observable<Object> {
+    let url: string = this.baseUrl + controller;
+    let options = this.getOptions();
+    options.body = body;
+    this.logBody(body);
+    return this.http.request('DELETE', url, options)
+      .do(data => this.logReponse(data))
+      .catch(this.handleError);
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    console.log(err.message);
+    return Observable.throw(err.message);
+  }
 }

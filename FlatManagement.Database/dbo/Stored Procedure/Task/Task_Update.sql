@@ -4,7 +4,8 @@
 	@Name nvarchar(100),
 	@DateStart date,
 	@Description nvarchar(1000),
-	@PeriodTypeId int
+	@PeriodTypeId int,
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	UPDATE dbo.Task

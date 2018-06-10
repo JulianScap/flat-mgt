@@ -6,12 +6,23 @@
 	@FlatTenant bit,
 	@Login nvarchar(100),
 	@Password nvarchar(100),
+	@UserLogin nvarchar(100),
 	@FlatmateId int output
 AS
 BEGIN
-	INSERT INTO dbo.Flatmate ([FlatId], [FullName], [NickName], [BirthDate], [FlatTenant], [Login], [Password])
-		VALUES (@FlatId, @FullName, @NickName, @BirthDate, @FlatTenant, @Login, 'To initialise');
-	SET @FlatmateId = SCOPE_IDENTITY();
+	--DECLARE @UserFlatId int;
+	--SELECT @UserFlatId = [FlatId] FROM dbo.Flatmate where [Login] = @UserLogin
+
+	--IF @UserFlatId = @FlatId
+	--BEGIN
+		INSERT INTO dbo.Flatmate ([FlatId], [FullName], [NickName], [BirthDate], [FlatTenant], [Login], [Password])
+			VALUES (@FlatId, @FullName, @NickName, @BirthDate, @FlatTenant, @Login, 'To initialise');
+		SET @FlatmateId = SCOPE_IDENTITY();
+	--END
+	--ELSE
+	--BEGIN
+	--	SET @FlatmateId = 0;
+	--END
 END
 
 GO

@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[PeriodType_GetById]
-	@PeriodTypeId int
+	@PeriodTypeId int,
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	SELECT

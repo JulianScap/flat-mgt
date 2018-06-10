@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FlatManagement.Common.Dto;
+using FlatManagement.Common.WebApi;
 
 namespace FlatManagement.Common.Dal
 {
@@ -10,5 +11,6 @@ namespace FlatManagement.Common.Dal
 	{
 		IEnumerable<TDto> GetAll();
 		TDto GetById(TDto item);
+		IEnumerable<TDto> GetForUser();
 	}
 }

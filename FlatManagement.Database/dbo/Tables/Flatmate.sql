@@ -12,8 +12,5 @@
 );
 GO
 
-CREATE UNIQUE INDEX [IX_Flatmate_FlatId_Nickname] ON [dbo].[Flatmate] ([FlatId], [Nickname])
-GO
-
 CREATE UNIQUE INDEX [IX_Flatmate_Login] ON [dbo].[Flatmate] ([Login])
 GO

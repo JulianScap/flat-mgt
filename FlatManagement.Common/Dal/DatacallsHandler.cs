@@ -5,27 +5,20 @@ using System.Data.SqlClient;
 using FlatManagement.Common.Dto;
 using FlatManagement.Common.Exceptions;
 using FlatManagement.Common.Extensions;
+using FlatManagement.Common.WebApi;
 using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.Common.Dal
 {
-	public class DatacallsHandler
+	public class DatacallsHandler : IDatacallsHandler
 	{
 		private readonly string connectionString;
+		private readonly IUserInfoProvider userInfoProvider;
 
-		public DatacallsHandler(IConfiguration configuration)
-			: this(configuration, "Database:ConnectionString")
+		public DatacallsHandler(IConfiguration configuration, IUserInfoProvider userInfoProvider)
 		{
-		}
-
-		public DatacallsHandler(IConfiguration configuration, string configurationStringKey)
-			: this(configuration[configurationStringKey])
-		{
-		}
-
-		public DatacallsHandler(string connectionString)
-		{
-			this.connectionString = connectionString;
+			this.userInfoProvider = userInfoProvider;
+			this.connectionString = configuration["Database:ConnectionString"];
 		}
 
 		public IEnumerable GetMany(string command, Parameter[] parameters, IDataReaderRowConverter converter)
@@ -40,6 +33,7 @@ namespace FlatManagement.Common.Dal
 				sqlConnection = new SqlConnection(connectionString);
 				sqlCommand = new SqlCommand(command, sqlConnection) { CommandType = CommandType.StoredProcedure };
 				SetParameters(sqlCommand, parameters);
+				SetUserInfoParameter(sqlCommand);
 				sqlConnection.Open();
 				sqlDataReader = sqlCommand.ExecuteReader();
 
@@ -58,6 +52,45 @@ namespace FlatManagement.Common.Dal
 			return result;
 		}
 
+		public bool GetBool(string command, Parameter[] parameters)
+		{
+			SqlConnection sqlConnection = null;
+			SqlCommand sqlCommand = null;
+			SqlDataReader sqlDataReader = null;
+			bool result = false;
+
+			try
+			{
+				sqlConnection = new SqlConnection(connectionString);
+				sqlCommand = new SqlCommand(command, sqlConnection) { CommandType = CommandType.StoredProcedure };
+				SetParameters(sqlCommand, parameters);
+				SetUserInfoParameter(sqlCommand);
+				SqlParameter returnValue = AddReturnParameter(sqlCommand);
+				sqlConnection.Open();
+				sqlCommand.ExecuteNonQuery();
+				result = (bool)returnValue.Value;
+			}
+			finally
+			{
+				sqlDataReader.SafeDispose();
+				sqlCommand.SafeDispose();
+				sqlConnection.SafeDispose();
+			}
+
+			return result;
+		}
+
+		private SqlParameter AddReturnParameter(SqlCommand sqlCommand)
+		{
+			SqlParameter parameter = sqlCommand.CreateParameter();
+
+			parameter.Direction = ParameterDirection.ReturnValue;
+			parameter.DbType = DbType.Boolean;
+			sqlCommand.Parameters.Add(parameter);
+
+			return parameter;
+		}
+
 		public object GetOne(string command, Parameter[] parameters, IDataReaderRowConverter converter, bool throwIfMultipleResultFound = false)
 		{
 			SqlConnection sqlConnection = null;
@@ -70,6 +103,7 @@ namespace FlatManagement.Common.Dal
 				sqlConnection = new SqlConnection(connectionString);
 				sqlCommand = new SqlCommand(command, sqlConnection) { CommandType = CommandType.StoredProcedure };
 				SetParameters(sqlCommand, parameters);
+				SetUserInfoParameter(sqlCommand);
 				sqlConnection.Open();
 				sqlDataReader = sqlCommand.ExecuteReader();
 
@@ -105,6 +139,7 @@ namespace FlatManagement.Common.Dal
 				sqlCommand = new SqlCommand(command, sqlConnection) { CommandType = CommandType.StoredProcedure };
 
 				SetParameters(sqlCommand, parameters);
+				SetUserInfoParameter(sqlCommand);
 				SetOutParameters(sqlCommand, outParameters);
 
 				sqlConnection.Open();
@@ -131,6 +166,7 @@ namespace FlatManagement.Common.Dal
 				sqlConnection = new SqlConnection(connectionString);
 				sqlCommand = new SqlCommand(command, sqlConnection) { CommandType = CommandType.StoredProcedure };
 				SetParameters(sqlCommand, parameters);
+				SetUserInfoParameter(sqlCommand);
 				sqlConnection.Open();
 				result = sqlCommand.ExecuteNonQuery();
 			}
@@ -166,6 +202,24 @@ namespace FlatManagement.Common.Dal
 
 				}
 			}
+		}
+
+		private void SetUserInfoParameter(SqlCommand sqlCommand)
+		{
+			SqlParameter sqlParameter = sqlCommand.CreateParameter();
+			sqlParameter.Direction = ParameterDirection.Input;
+			sqlParameter.ParameterName = "UserLogin";
+			sqlParameter.SqlDbType = SqlDbType.NVarChar;
+			UserInfo userInfo = userInfoProvider.GetUserInfo();
+			if (userInfo == null)
+			{
+				sqlParameter.SqlValue = DBNull.Value;
+			}
+			else
+			{
+				sqlParameter.Value = userInfo.Login;
+			}
+			sqlCommand.Parameters.Add(sqlParameter);
 		}
 
 		private void SetOutParameters(SqlCommand sqlCommand, Parameter[] parameters)

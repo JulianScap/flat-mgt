@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+.form-control.fm:disabled, .form-control.fm[readonly] {
+  background-color: inherit;
+  opacity: 1;
+}
+
+label.btn.btn-sm.fm{
+  height: 33px;
+}
+
+button.fm-add-remove{
+  width: 28px;
+}

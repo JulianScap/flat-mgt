@@ -13,7 +13,9 @@ namespace FlatManagement.Common.Dal
 	{
 		protected static readonly IDataReaderRowConverter converter;
 		private static readonly ConcurrentDictionary<string, PropertyInfo> properties;
-		protected IConfiguration configuration;
+		protected readonly IConfiguration configuration;
+		protected readonly IDatacallsHandler handler;
+		protected readonly IParametersBuilder parametersBuilder;
 
 		static ReadOnlyAbstractDataAccess()
 		{
@@ -21,14 +23,15 @@ namespace FlatManagement.Common.Dal
 			properties = new ConcurrentDictionary<string, PropertyInfo>();
 		}
 
-		protected ReadOnlyAbstractDataAccess(IConfiguration configuration)
+		protected ReadOnlyAbstractDataAccess(IConfiguration configuration, IDatacallsHandler handler, IParametersBuilder parametersBuilder)
 		{
 			this.configuration = configuration;
+			this.handler = handler;
+			this.parametersBuilder = parametersBuilder;
 		}
 
 		public virtual IEnumerable<TDto> GetAll()
 		{
-			DatacallsHandler handler = new DatacallsHandler(configuration);
 			string command = GetStoredProcedureName(OperationEnum.GetAll);
 			IEnumerable result = handler.GetMany(command, null, converter);
 			return result.Cast<TDto>().ToList();
@@ -36,11 +39,17 @@ namespace FlatManagement.Common.Dal
 
 		public TDto GetById(TDto item)
 		{
-			DatacallsHandler handler = new DatacallsHandler(configuration);
 			string command = GetStoredProcedureName(OperationEnum.GetById);
-			Parameter[] parameters = ParametersBuilder.BuildIdParameters(item);
+			Parameter[] parameters = parametersBuilder.BuildIdParameters(item);
 			object result = handler.GetOne(command, parameters, converter, true);
 			return (TDto)result;
+		}
+
+		public IEnumerable<TDto> GetForUser()
+		{
+			string command = GetStoredProcedureName(OperationEnum.GetForUser);
+			IEnumerable result = handler.GetMany(command, null, converter);
+			return result.Cast<TDto>().ToList();
 		}
 
 		protected virtual string GetStoredProcedureName(OperationEnum operation, string name = null)

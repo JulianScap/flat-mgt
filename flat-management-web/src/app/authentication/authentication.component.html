@@ -1,7 +1,7 @@
 <div class="panel-body">
   <form class="form-horizontal" novalidate="novalidate" (ngSubmit)="login_click()" [formGroup]="loginForm">
     <fieldset>
-      <fm-error [messages]='errorMessages'></fm-error>
+      <fm-message [messages]='message'></fm-message>
       <h3>
         Please login:
       </h3>

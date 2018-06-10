@@ -1,33 +1,36 @@
-﻿using FlatManagement.Common.Bll;
+﻿using System.Collections.Generic;
+using FlatManagement.Common.Bll;
 using FlatManagement.Common.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace FlatManagement.WebApi.Controllers.Base
 {
-	public abstract class ApiBaseController<TModel, TDto> : ReadOnlyApiBaseController<TModel, TDto>
-		where TModel : IModel<TDto>
+	public abstract class ApiBaseController<TDto> : ReadOnlyApiBaseController<TDto>
 		where TDto : IDto, new()
 	{
-		protected ApiBaseController(IConfiguration configuration) : base(configuration)
+		private readonly IService<TDto> service;
+
+		protected ApiBaseController(IService<TDto> service, IConfiguration configuration) : base(service, configuration)
 		{
+			this.service = service;
 		}
 
 		[HttpPut]
 		[HttpPost]
-		public virtual TModel PersistAll()
+		public virtual IEnumerable<TDto> PersistAll()
 		{
-			TModel model = DeserialiseBody();
-			model.PersistAll();
-			return model;
+			IEnumerable<TDto> items = DeserialiseBody();
+			service.Save(items);
+			return items;
 		}
 
 		[HttpDelete]
-		public virtual TModel DeleteAll()
+		public virtual IEnumerable<TDto> DeleteAll()
 		{
-			TModel model = DeserialiseBody();
-			model.DeleteAll();
-			return model;
+			IEnumerable<TDto> items = DeserialiseBody();
+			service.Delete(items);
+			return items;
 		}
 	}
 }

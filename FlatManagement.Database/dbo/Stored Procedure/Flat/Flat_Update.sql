@@ -1,7 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[Flat_Update]
 	@FlatId int,
 	@Name nvarchar(200),
-	@Address nvarchar(1000)
+	@Address nvarchar(1000),
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	UPDATE dbo.Flat

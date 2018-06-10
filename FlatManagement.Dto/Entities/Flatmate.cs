@@ -59,6 +59,21 @@ namespace FlatManagement.Dto.Entities
 			return HashCode.Compute(this.FlatmateId, this.FlatId, this.FullName, this.NickName, this.BirthDate, this.FlatTenant, this.Login);
 		}
 
+		public override ValidationResult Validate()
+		{
+			ValidationResult = new ValidationResult();
+
+			ValidationTool.Required(ValidationResult, this.Login, () => String.Format("The login field is mandatory"));
+			ValidationTool.MaxLength(ValidationResult, this.Login, 100, () => String.Format("The login field is too long"));
+
+			ValidationTool.Required(ValidationResult, this.FullName, () => String.Format("The full name field is mandatory"));
+			ValidationTool.MaxLength(ValidationResult, this.FullName, 500, () => String.Format("The full name field is too long"));
+
+			ValidationTool.MaxLength(ValidationResult, this.NickName, 100, () => String.Format("The nickname field is too long"));
+
+			return ValidationResult;
+		}
+
 		private static readonly string[] ids = new string[] { "FlatmateId" };
 		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
 		private static readonly TypeEnum[] allType = new TypeEnum[] { TypeEnum.Int32, TypeEnum.Int32, TypeEnum.String, TypeEnum.String, TypeEnum.Date, TypeEnum.Boolean, TypeEnum.String, TypeEnum.String };

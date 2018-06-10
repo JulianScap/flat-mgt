@@ -1,15 +1,19 @@
 ﻿CREATE PROCEDURE [dbo].[Flat_GetById]
-	@FlatId int
+	@FlatId int,
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	SELECT
-		FlatId,
-		[Name],
-		[Address]
+		f.FlatId,
+		f.[Name],
+		f.[Address]
 	FROM
-		dbo.Flat
+		dbo.Flat f
+	JOIN dbo.Flatmate fm
+		ON fm.FlatId = f.FlatId
 	WHERE
-		FlatId = @FlatId
+		fm.[Login] = @UserLogin
+		AND f.FlatId = @FlatId
 END
 
 GO

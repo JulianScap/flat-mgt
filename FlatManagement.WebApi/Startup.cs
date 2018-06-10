@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
-using FlatManagement.Common.Bll;
+﻿using System;
+using System.Collections.Generic;
+using FlatManagement.Bll.Impl;
+using FlatManagement.Bll.Interface;
+using FlatManagement.Common.Dal;
 using FlatManagement.Common.Extensions;
-using FlatManagement.Common.Services;
+using FlatManagement.Common.Security;
+using FlatManagement.Dal.Impl;
+using FlatManagement.Dal.Interface;
 using FlatManagement.WebApi.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,8 +24,6 @@ namespace FlatManagement.WebApi
 		{
 			Configuration = configuration;
 
-			ServiceLocator.Instance.SetConfiguration(configuration);
-			ModelSerialiser.Instance.Configuration = configuration;
 			TokenHelper.Configure(configuration);
 		}
 
@@ -37,13 +41,34 @@ namespace FlatManagement.WebApi
 						.WithOrigins(origins)
 						.AllowCredentials())
 				);
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			AddCustom(services);
 
 			services.AddMvc();
 			services.Add(new ServiceDescriptor(typeof(IConfiguration), Configuration));
 		}
 
+		private void AddCustom(IServiceCollection services)
+		{
+			services.AddSingleton<IFlatService, FlatService>();
+			services.AddSingleton<ITaskService, TaskService>();
+			services.AddSingleton<IFlatmateService, FlatmateService>();
+			services.AddSingleton<IPeriodTypeService, PeriodTypeService>();
+
+			services.AddSingleton<IFlatDataAccess, FlatDataAccess>();
+			services.AddSingleton<ITaskDataAccess, TaskDataAccess>();
+			services.AddSingleton<IFlatmateDataAccess, FlatmateDataAccess>();
+			services.AddSingleton<IPeriodTypeDataAccess, PeriodTypeDataAccess>();
+
+			services.AddSingleton<IUserInfoProvider, UserInfoProvider>();
+
+			services.AddSingleton<IDatacallsHandler, DatacallsHandler>();
+			services.AddSingleton<ICryptoHelper, CryptoHelper>();
+			services.AddSingleton<IParametersBuilder, ParametersBuilder>();
+		}
+
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
 		{
 			if (env.IsDevelopment())
 			{

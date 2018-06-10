@@ -1,6 +1,8 @@
-﻿namespace FlatManagement.Common.Dto
+﻿using FlatManagement.Common.Validation;
+
+namespace FlatManagement.Common.Dto
 {
-	public interface IDto
+	public interface IDto : IValidable
 	{
 		/// <summary>
 		/// Only the id fields

@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[Flatmate_GetByLogin]
-	@Login nvarchar(100)
+	@Login nvarchar(100),
+	@UserLogin nvarchar(100)
 AS
 BEGIN
 	SELECT

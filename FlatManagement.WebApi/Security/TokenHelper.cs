@@ -4,8 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using FlatManagement.Common.Extensions;
 using FlatManagement.Common.Logging;
+using FlatManagement.Common.WebApi;
 using FlatManagement.Dto.Entities;
-using FlatManagement.WebApi.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -64,10 +64,6 @@ namespace FlatManagement.WebApi.Security
 				if (claim.Type == ClaimTypes.Name)
 				{
 					result.Login = claim.Value;
-				}
-				else if (claim.Type == ClaimTypes.Sid)
-				{
-					result.AccountId = Convert.ToInt32(claim.Value);
 				}
 				else if (claim.Type == ClaimTypes.Role)
 				{

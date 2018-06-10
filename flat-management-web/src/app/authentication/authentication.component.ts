@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SessionManager } from '../shared/services/session-manager.service';
 import { IAuthenticationResult } from './authentication-result';
 import { AuthenticationService } from './authentication.service';
+import { IMessage } from '../shared/entities/message';
 
 @Component({
   templateUrl: './authentication.component.html'
@@ -14,15 +15,20 @@ export class AuthenticationComponent implements OnInit {
   login: AbstractControl;
   password: AbstractControl;
 
-  errorMessages: string[];
+  message: IMessage[];
 
   //#region init methods
   constructor(private formBuilder: FormBuilder,
-              private authenticationService: AuthenticationService,
-              private sessionManager: SessionManager,
-              private router: Router) { }
+    private authenticationService: AuthenticationService,
+    private sessionManager: SessionManager,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if (this.route.snapshot.paramMap.has('success')) {
+      this.message = [{ text: 'New flat and tenant successfully created', isError: false }];
+    }
+
     this.loginForm = this.formBuilder.group({
       login: ['', Validators.required],
       password: ['', Validators.required]
@@ -37,7 +43,7 @@ export class AuthenticationComponent implements OnInit {
     let now: Date = new Date();
     let passwordHash: string;
 
-    this.errorMessages = null;
+    this.message = null;
 
     this.authenticationService
       .authenticate(this.login.value, this.password.value)
@@ -47,10 +53,10 @@ export class AuthenticationComponent implements OnInit {
   handleLogin(result: IAuthenticationResult): void {
     if (result.validationResult.isValid) {
       this.sessionManager.setUser(result.token, this.login.value, result.userInfo);
-      this.router.navigate(['/flat/list']);
+      this.router.navigate(['/home']);
     } else {
       this.sessionManager.clearSession();
-      this.errorMessages = result.validationResult.messages;
+      this.message = result.validationResult.messages;
     }
   }
 

@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[Flat_Insert]
 	@Name nvarchar(200),
 	@Address nvarchar(1000),
+	@UserLogin nvarchar(100),
 	@FlatId int output
 AS
 BEGIN

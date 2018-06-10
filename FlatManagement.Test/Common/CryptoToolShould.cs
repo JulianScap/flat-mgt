@@ -6,14 +6,20 @@ namespace FlatManagement.Test.Common
 {
 	public class CryptoToolShould : TestBase
 	{
+		public ICryptoHelper GetCryptoHelper()
+		{
+			return new CryptoHelper(GetConfiguration());
+		}
+
 		[Theory]
 		[InlineData(null)]
 		[InlineData("")]
 		[InlineData("short")]
 		public void DecryptAndEncryptSuccessfully(string text)
 		{
-			string encrypted = CryptoTool.Encrypt(text, GetConfiguration());
-			string decrypted = CryptoTool.Decrypt(encrypted, GetConfiguration());
+			var ch = GetCryptoHelper();
+			string encrypted = ch.Encrypt(text);
+			string decrypted = ch.Decrypt(encrypted);
 			Assert.Equal(text, decrypted);
 		}
 
@@ -24,8 +30,9 @@ namespace FlatManagement.Test.Common
 		[InlineData("longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong")]
 		public void HashValuesSuccessfully(string text)
 		{
-			string hashed1 = CryptoTool.Hash(text);
-			string hashed2 = CryptoTool.Hash(text);
+			var ch = GetCryptoHelper();
+			string hashed1 = ch.Hash(text);
+			string hashed2 = ch.Hash(text);
 			Assert.Equal(hashed1, hashed2);
 		}
 
@@ -38,7 +45,8 @@ namespace FlatManagement.Test.Common
 		[InlineData("6101c2d56a4970fce9fa60f0748032b93d6401eb|2018-05-16T02:16:37.839Z", "I29xANnF9Chy8rkddipSs2LmXncOFgRRJpSUvVtlEtbn87+xYmfStyzBanioPkj4Pvoad3bQwemuVuieO/1CX9ieANXrpt0yjiJ4bsVBFLERfZ5LeTrIjTorb1GIsPyLrLL248oW3rO2hFCJvbFaQg+9CzDz1RNTj+FiRN+r6mM=")]
 		public void CryptoToolShouldDecryptJavascriptGeneratedPasswords(string clearText, string encrypted)
 		{
-			string decrypted = CryptoTool.Decrypt(encrypted, GetConfiguration());
+			var ch = GetCryptoHelper();
+			string decrypted = ch.Decrypt(encrypted);
 			Assert.Equal(clearText, decrypted);
 		}
 	}

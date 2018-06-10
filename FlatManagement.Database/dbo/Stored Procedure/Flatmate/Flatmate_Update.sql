@@ -6,18 +6,25 @@
 	@BirthDate date,
 	@Login nvarchar(100),
 	@Password nvarchar(100),
-	@FlatTenant bit
+	@FlatTenant bit,
+	@UserLogin nvarchar(100)
 AS
 BEGIN
-	UPDATE dbo.Flatmate
-	SET
-		[FlatId] = @FlatId,
-		[FullName] = @FullName,
-		[NickName] = @NickName,
-		[BirthDate] = @BirthDate,
-		[FlatTenant] = @FlatTenant,
-		[Login] = @Login
-	WHERE FlatmateId = @FlatmateId;
+	DECLARE @UserFlatId int;
+	SELECT @UserFlatId = [FlatId] FROM dbo.Flatmate where [Login] = @UserLogin
+
+	IF @UserFlatId = @FlatId
+	BEGIN
+		UPDATE dbo.Flatmate
+		SET
+			[FlatId] = @FlatId,
+			[FullName] = @FullName,
+			[NickName] = @NickName,
+			[BirthDate] = @BirthDate,
+			[FlatTenant] = @FlatTenant,
+			[Login] = @Login
+		WHERE FlatmateId = @FlatmateId;
+	END
 END
 
 GO

@@ -51,6 +51,17 @@ namespace FlatManagement.Dto.Entities
 			}
 		}
 
+		public override ValidationResult Validate()
+		{
+			ValidationResult = new ValidationResult();
+
+			ValidationTool.Required(ValidationResult, this.Name, () => String.Format("The name field is mandatory"));
+			ValidationTool.MaxLength(ValidationResult, this.Name, 200, () => String.Format("The name field is too long"));
+			ValidationTool.MaxLength(ValidationResult, this.Address, 1000, () => String.Format("The address field is too long"));
+
+			return ValidationResult;
+		}
+
 		private static readonly string[] ids = new string[] { "FlatId" };
 		private static readonly TypeEnum[] idsType = new TypeEnum[] { TypeEnum.Int32 };
 		private static readonly TypeEnum[] allType = new TypeEnum[] { TypeEnum.Int32, TypeEnum.String, TypeEnum.String };
